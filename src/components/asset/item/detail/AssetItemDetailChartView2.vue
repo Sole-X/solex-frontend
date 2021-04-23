@@ -90,8 +90,6 @@ export default {
             callbacks: {
 
               label: function(tooltipItem, data) {
-                console.log('tooltipItem',tooltipItem);
-                console.log('data',data)
                   var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
                   if (label) {

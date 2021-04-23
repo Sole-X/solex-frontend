@@ -3,14 +3,13 @@ import { kip7JsonInterface, kip17JsonInterface, kip7ByteCode, kip17ByteCode } fr
 
 import Store from '@/store'
 
-const isDev = process.env.VUE_APP_PROFILE === 'dev'
 const $wallet = new OzysWallet({
   chain: 'KLAYTN',
-  network: isDev ? 1001 : 8217,
+  network: process.env.VUE_APP_NETWORK,
   providerType: 1,
   providerUrl: {
-    8217: isDev ? 'wss://cypress-rpc.klaytn.ozys.net:8652' : 'wss://api.cypress.ozys.net:8652',
-    1001: 'wss://api.baobab.klaytn.net:8652'
+    8217: process.env.VUE_APP_PROVIDER_URL_CYPRESS,
+    1001: process.env.VUE_APP_PROVIDER_URL_BAOBAB
   },
   otherOptions: {
     siteName: 'SOLE-X'
@@ -57,7 +56,7 @@ export default class WalletPlugin {
   }
 
   checkWalletDisable() {
-    return !this.isMainNet() && !this.isDev()
+    return !this.isMainNet() && process.env.VUE_APP_PROFILE !== 'dev'
   }
 
   async setSelectedService(service) {
