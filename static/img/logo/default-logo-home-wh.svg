@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="508" height="320" viewBox="0 0 508 320">
+    <defs>
+        <path id="dka2h7zbia" d="M0 0L314 0 314 439 0 439z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g>
+                    <g transform="translate(-842 -160) translate(0 160) translate(839 -114) translate(105)">
+                        <mask id="msh0fl4asb" fill="#fff">
+                            <use xlink:href="#dka2h7zbia"/>
+                        </mask>
+                        <path fill="#FFF" stroke="#FFF" stroke-width="2" d="M65.858 229.272H49.48l39.892 72.055L1.828 438h16.987l10.21-15.896 77.022-120.241-40.19-72.591zm246.24-133.295l-17.044.074-135.129 204.674 68.054 122.92h-54.507l-42.79-77.285-33.996 53.075h17.017l16.085-25.112L165.043 438h87.26L176.59 301.244 312.097 95.977z" mask="url(#msh0fl4asb)"/>
+                    </g>
+                    <path stroke="#FFF" stroke-width="2" d="M467.471 95.977l-17.048.074L316.17 300.719l83.852 148.898 24.284 14.33-91.475-162.697 134.64-205.273z" transform="translate(-842 -160) translate(0 160) translate(839 -114)"/>
+                    <path fill="#FFF" fill-opacity=".1" d="M388.001 301.29L522.633 94.969 503.186 95.053 369 300.679 453.283 450.342 481 466.697z" transform="translate(-842 -160) translate(0 160) translate(839 -114)"/>
+                    <path stroke="#FFF" stroke-width="2" d="M118.858 229H102.48l39.892 72.055-87.545 136.673h16.987l10.21-15.895 77.022-120.242L118.857 229z" transform="translate(-842 -160) translate(0 160) translate(839 -114)"/>
+                    <path fill="#FFF" fill-opacity=".1" d="M29.867 422.373L107.211 301.628 66.447 228 47.784 228 88.21 301.018 0 438.728 19.361 438.728z" transform="translate(-842 -160) translate(0 160) translate(839 -114)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

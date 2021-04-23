@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="464" height="238" viewBox="0 0 464 238">
+    <defs>
+        <filter id="15ab4gubwa" width="117.5%" height="114%" x="-8.8%" y="-5%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+        </filter>
+        <filter id="iei5ex446c" width="121.5%" height="122.2%" x="-10.8%" y="-7.9%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <filter id="4gdn12c91e" width="121.7%" height="120.4%" x="-10.8%" y="-7.3%" filterUnits="objectBoundingBox">
+            <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+            <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+        </filter>
+        <path id="duejfdarmd" d="M259.5 121c15.188 0 27.5 12.312 27.5 27.5 0 5.98-1.909 11.515-5.15 16.027l14.255 14.257c1.193 1.193 1.193 3.128 0 4.321-1.193 1.193-3.128 1.193-4.321 0l-14.035-14.033c-4.855 4.31-11.246 6.928-18.249 6.928-15.188 0-27.5-12.312-27.5-27.5s12.312-27.5 27.5-27.5zm0 6c-11.874 0-21.5 9.626-21.5 21.5s9.626 21.5 21.5 21.5 21.5-9.626 21.5-21.5-9.626-21.5-21.5-21.5z"/>
+        <path id="3pqsz958nf" d="M24 40.8l-5.867 4.112c-.905.634-2.152.414-2.786-.49-.134-.192-.234-.405-.294-.631L13.2 36.87l-7.138-.622c-1.1-.096-1.914-1.066-1.819-2.166.02-.233.082-.46.18-.672l3.031-6.493-5.068-5.064c-.781-.78-.782-2.047-.001-2.828.165-.166.358-.3.57-.4L9.451 15.6l-.628-7.137c-.096-1.1.717-2.071 1.818-2.168.233-.02.467 0 .693.061l6.92 1.857 4.107-5.87c.633-.906 1.88-1.126 2.785-.493.192.134.359.3.493.492l4.107 5.871 6.92-1.857c1.067-.286 2.164.346 2.45 1.413.06.226.081.46.06.694L38.55 15.6l6.495 3.025c1.001.467 1.435 1.657.968 2.658-.098.212-.233.405-.399.57l-5.068 5.064 3.03 6.493c.468 1 .035 2.19-.966 2.658-.212.099-.44.16-.672.18l-7.138.622-1.852 6.921c-.285 1.067-1.382 1.7-2.449 1.415-.226-.06-.44-.16-.63-.294L24 40.8z"/>
+        <rect id="lnqvv5vsjb" width="80" height="100" x="0" y="0" rx="8"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g transform="translate(-121 -581) translate(121 581)">
+                <path fill="#E2EFF3" d="M0 0H464V238H0z"/>
+                <g>
+                    <g transform="translate(273 60) rotate(15 11.82 100.075)">
+                        <rect width="79" height="99" x=".5" y=".5" fill="#FFF" stroke="#00B2E3" stroke-opacity=".5" rx="8"/>
+                        <rect width="64" height="48" x="8.5" y="8.5" fill="#FAFBFC" stroke="#E8E8E8" rx="4"/>
+                        <path fill="#DEE3EB" d="M7.805 65.413H45.805V69.413H7.805zM7.805 73.413H27.805V77.413H7.805z"/>
+                    </g>
+                    <g fill="#00B2E3">
+                        <path d="M9.991 0L6.43 3.561 9.991 7.123 13.553 3.561zM6.43 16.421L9.991 19.982 13.553 16.421 9.991 12.859zM0 9.991L3.561 13.553 7.123 9.991 3.561 6.43zM19.982 9.991L16.421 13.553 12.859 9.991 16.421 6.43z" transform="translate(273 60) rotate(15 -91.032 206.309)"/>
+                    </g>
+                </g>
+                <g>
+                    <g transform="translate(96 59) rotate(-15 80.18 8.925)">
+                        <rect width="79" height="99" x=".5" y=".5" fill="#FFF" stroke="#00B2E3" stroke-opacity=".5" rx="8"/>
+                        <rect width="64" height="48" x="8.5" y="8.5" fill="#FAFBFC" stroke="#E8E8E8" rx="4"/>
+                        <path fill="#DEE3EB" d="M7.805 65.413H45.805V69.413H7.805zM7.805 73.413H27.805V77.413H7.805z"/>
+                    </g>
+                    <g fill="#00B2E3">
+                        <path d="M9.991 0L6.43 3.561 9.991 7.123 13.553 3.561zM6.43 16.421L9.991 19.982 13.553 16.421 9.991 12.859zM0 9.991L3.561 13.553 7.123 9.991 3.561 6.43zM19.982 9.991L16.421 13.553 12.859 9.991 16.421 6.43z" transform="translate(96 59) rotate(-15 152.032 -120.309)"/>
+                    </g>
+                </g>
+                <g>
+                    <g transform="translate(187 69)">
+                        <g>
+                            <use fill="#000" filter="url(#15ab4gubwa)" xlink:href="#lnqvv5vsjb"/>
+                            <rect width="79" height="99" x=".5" y=".5" fill="#FFF" stroke="#00B2E3" stroke-linejoin="square" stroke-opacity=".5" rx="8"/>
+                        </g>
+                        <rect width="64" height="48" x="8.5" y="8.5" fill="#FAFBFC" stroke="#E8E8E8" rx="4"/>
+                        <path fill="#DEE3EB" d="M7.805 65.413H45.805V69.413H7.805zM7.805 73.413H27.805V77.413H7.805z"/>
+                    </g>
+                    <g fill="#00B2E3">
+                        <path d="M9.991 0L6.43 3.561 9.991 7.123 13.553 3.561zM6.43 16.421L9.991 19.982 13.553 16.421 9.991 12.859zM0 9.991L3.561 13.553 7.123 9.991 3.561 6.43zM19.982 9.991L16.421 13.553 12.859 9.991 16.421 6.43z" transform="translate(187 69) translate(31 23)"/>
+                    </g>
+                </g>
+                <circle cx="260" cy="149" r="25" fill="#FFF"/>
+                <g fill-rule="nonzero">
+                    <use fill="#000" filter="url(#iei5ex446c)" xlink:href="#duejfdarmd"/>
+                    <use fill="#00B2E3" xlink:href="#duejfdarmd"/>
+                </g>
+                <text fill="#231F20" font-family="SpoqaHanSansNeo-Bold, Spoqa Han Sans Neo" font-size="14" font-weight="bold">
+                    <tspan x="246" y="154">NFT</tspan>
+                </text>
+                <g>
+                    <g transform="translate(171 49)">
+                        <use fill="#000" filter="url(#4gdn12c91e)" xlink:href="#3pqsz958nf"/>
+                        <use fill="#66A1FF" xlink:href="#3pqsz958nf"/>
+                    </g>
+                    <text fill="#FFF" font-family="MuseoSans-900, Museo Sans" font-size="12" font-weight="bold" transform="translate(171 49)">
+                        <tspan x="11" y="29">BUY</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

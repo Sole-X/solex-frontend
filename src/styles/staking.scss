@@ -1,0 +1,582 @@
+@import './head';
+
+.staking-page {
+  margin: 0 auto;
+  padding: 50px 0;
+  max-width: $max_width;
+
+  .staking__title {
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .staking__description {
+    font-size: 14px;
+    font-weight: 500;
+    color: #999999;
+  }
+
+  .staking-page__staking-container {
+    display: flex;
+    align-items: center;
+    background-color: #fafbfc;
+    padding: 16px 20px;
+    margin-top: 20px;
+    white-space: nowrap;
+    overflow: auto;
+
+    * {
+      float: left;
+    }
+
+    .staking-page__staking-container__dot {
+      width: 4px;
+      height: 4px;
+      margin: 0 10px;
+      background-color: #c1c5cc;
+      border-radius: 4px;
+    }
+    .staking-page__staking-container__item {
+      display: flex;
+      align-items: center;
+      .staking-page__staking-container__item-title {
+        margin: 0 10px 0 0;
+        font-size: 12px;
+        font-weight: 500;
+        color: #666666;
+      }
+
+      .staking-page__staking-container__item-description {
+        color: $primary_color;
+        font-weight: 500;
+      }
+
+      span:last-child {
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .staking-page__inner-nav {
+    margin-top: 60px;
+
+    ul {
+      width: 100%;
+      height: 48px;
+      display: flex;
+      border-bottom: 1px solid #231f20;
+
+      .staking-page__nav__tab {
+        width: 150px;
+        height: calc(100% - 1px);
+        margin-top: -1px;
+        background: #fafbfc;
+        border: 1px solid transparent;
+        border-bottom: none;
+        position: relative;
+        overflow: hidden;
+        font-weight: 700;
+
+        >a, >button, >div {
+          @include square(100%);
+          @include center-align-flex;
+        }
+
+        &::after {
+          content: ' ';
+          width: 100%;
+          height: 4px;
+          top: 0;
+          left: 0;
+          position: absolute;
+          background: $primary_color;
+          opacity: 0;
+        }
+
+        &--selected {
+          height: 100%;
+          margin-top: 1px;
+          background: #fff;
+          border-color: #231f20;
+          border-top-color: $primary_color;
+          // transition: all 0.2s ease-out;
+
+          a {
+            color: $gen_black;
+            transition: all 0.2s ease-out;
+          }
+
+          &::after {
+            animation: fadeInLeft 0.4s ease-out forwards;
+          }
+        }
+      }
+    }
+  }
+}
+
+.staking-trix-page {
+  .staking-trix-amount {
+    margin-top: 40px;
+    .staking-trix-amount-container {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      height: 234px;
+
+      .staking-trix-amount-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 48%;
+        height: 100%;
+        border: 1px solid $melange_gray;
+        padding: 30px 40px;
+
+        .staking-trix-amount-item__title {
+          display: block;
+          color: $gen_lightblack;
+          font-size: 14px;
+          font-weight: bold;
+
+          .staking-trix-amount-item__title-tooltip {
+            position: relative;
+            cursor: pointer;
+            margin-left: 10px;
+
+            &:after {
+              content: attr(data-tooltip-text);
+
+              opacity: 0;
+              position: absolute;
+              top: 40px;
+              left: -20px;
+              width: 300px;
+              border-radius: 10px;
+              background-color: $primary_color;
+              padding: 10px 20px;
+              color: white;
+              z-index: -1;
+              cursor: default;
+              transition: opacity 0.3s;
+            }
+
+            &:before {
+              content: '';
+
+              opacity: 0;
+              position: absolute;
+              top: 10px;
+              left: -5px;
+              width: 0px;
+              height: 0px;
+              border-top: 15px solid transparent;
+              border-bottom: 15px solid $primary_color;
+              border-right: 15px solid transparent;
+              border-left: 15px solid transparent;
+              z-index: -1;
+              cursor: default;
+              transition: opacity 0.3s;
+            }
+
+            &:hover:after, &:hover:before {
+              opacity: 1;
+              z-index: 1;
+            }
+
+            span {
+              display: inline-flex;
+              justify-content: center;
+              align-items: center;
+              background-color: $primary_color;
+              color: white;
+              font-size: small;
+              width: 16px;
+              height: 16px;
+              border-radius: 15px;
+            }
+          }
+
+          div {
+            display: inline-block;
+
+            .staking-account {
+              cursor: pointer;
+
+              &:hover {
+                color: $primary_color;
+                text-decoration: underline;
+              }
+            }
+          }
+        }
+
+        .staking-trix-amount-item__balance-container {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .staking-trix-amount-item__balance-info {
+            line-height: 25px;
+            .top {
+              font-weight: bold;
+
+              span:first-child {
+                font-size: 24px;
+              }
+              span:first-child::after {
+                content: ' '
+              }
+              span:last-child {
+                font-size: 16px;
+              }
+            }
+
+            .bottom {
+              color: $gen_gray;
+
+              span::after {
+                content: ' '
+              }
+            }
+          }
+
+          .staking-trix-amount-item__balance-image {
+            position: relative;
+            .staking-trix-amount-item__balance-image-sub {
+              position: absolute;
+              bottom: 0px;
+              left: -9px;
+            }
+          }
+        }
+
+        .common-submit-button {
+          width: 100%;
+          height: 40px;
+        }
+      }
+    }
+  }
+
+  .staking-trix-balance {
+    padding: 30px 37px;
+    background-color: #fafbfc;
+    margin-top: 40px;
+    .staking-trix-balance-container {
+      min-width: 100%;
+      min-height: 237px;
+      white-space: nowrap;
+      overflow-x: auto;
+
+      &::-webkit-scrollbar-track {background-color: #fafbfc;}
+
+      .staking-trix-balance-item {
+        display: inline-block;
+        width: 240px;
+        height: 214px;
+        margin-right: 13px;
+        border: 1px solid $melange_gray;
+        padding: 20px 24px;
+        background-color: white;
+
+        .staking-trix-balance-item-title {
+          display: flex;
+          font-size: 14px;
+          font-weight: bold;
+          align-items: center;
+          margin-bottom: 20px;
+          height: 40px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+          span {
+            position: relative;
+            left: 8px;
+          }
+        }
+
+        .staking-trix-balance-item-content {
+          .claim-section {
+            .top {
+              color: $gen_gray;
+              font-size: 12px;
+            }
+            .bottom {
+              display: flex;
+              justify-content: flex-end;
+              align-items: flex-end;
+              position: relative;
+              span:first-child {
+                font-size: 20px;
+                font-weight: bold;
+                margin-right: 6px;
+              }
+
+              span:first-child::after {
+                content: ' '
+              }
+            }
+
+            .common-loader {
+
+              .common-loader__spinner {
+
+              }
+            }
+          }
+
+          hr {
+            background-color: #e8e8e8;
+            height: 1px;
+            border: 0;
+            margin: 10px 0;
+          }
+        }
+      }
+
+      .staking-trix-balance-item::after {
+        margin-right: 13px;
+      }
+    }
+    .staking-trix-balance-footer {
+      display: flex;
+      justify-content: space-between;
+
+      .staking-trix-balance-footer-policy {
+        margin-top: 20px;
+        line-height: 25px;
+        div {
+          display: flex;
+          align-items: center;
+          font-size: 12px;
+          color: #666666;
+
+          img {
+            width: 14px;
+            position: relative;
+            margin-right: 8px;
+            top: -1.5px;
+          }
+        }
+      }
+      button {
+        padding: 16px 40px;
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+.staking-activity-page {
+  .staking-activity__amount {
+    margin-top: 40px;
+    .staking-activity__amount-container {
+      display: flex;
+      justify-content: space-between;
+      height: 116px;
+
+      .staking-activity__amount-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 33%;
+        height: 100%;
+        border: 1px solid $melange_gray;
+        padding: 30px 24px;
+
+        div.left {
+          line-height: 30px;
+          div.left-top {
+            color: $gen-lightblack;
+            font-weight: bold;
+          }
+          div.left-bottom {
+            span:first-child {
+              font-size: 24px;
+              font-weight: bold;
+            }
+            span:last-child {
+              font-size: 16px;
+            }
+            span::after {
+              content: ' '
+            }
+          }
+        }
+
+        div.right{
+
+        }
+      }
+    }
+  }
+
+  .staking-activity__table {
+    margin-top: 80px;
+    margin-bottom: 70px;
+
+    .staking-activity__table__head {
+      width: 100%;
+      height: 25px;
+      padding: 0 10px;
+      background: #fafbfc;
+      @include vertical-align-flex;
+
+      .staking-activity__table__col {
+        @include vertical-align-flex;
+
+        .staking-activity__table__sort {
+          margin-left: 7px;
+
+          button {
+            height: auto;
+            line-height: 0;
+            display: block;
+
+            &:nth-child(1) {
+              margin-bottom: 1.5px;
+            }
+          }
+        }
+      }
+    }
+
+    .staking-activity__table__body {
+      min-height: 600px;
+    }
+
+    .staking-activity__table__col {
+      font-size: 12px;
+      &--idx {
+        width: 5%;
+      }
+
+      &--date {
+        width: 20%;
+      }
+
+      &--coin_token {
+        width: 20%;
+      }
+
+      &--amount {
+        width: 20%;
+      }
+
+      &--type {
+        width: 20%;
+      }
+
+      &--state {
+        display: flex;
+        justify-content: center;
+        width: 15%;
+      }
+    }
+
+    .staking-activity__table__row {
+      height: 60px;
+      padding: 0 10px;
+
+      @include vertical-align-flex;
+
+      &:nth-child(even) {
+        background-color: #fafbfc;
+      }
+
+      .staking-activity__table__col {
+
+      }
+
+      button {
+        font-family: MuseoSans spoqaHanSans;
+        font-weight: 500;
+        cursor: default;
+        &.table-state-complete {
+          color: #47cc7f;
+        }
+        &.table-state-claimable {
+          color: $primary_color;
+          cursor: pointer;
+        }
+        &.table-state-left {
+          color: $secondary_color;
+        }
+      }
+    }
+  }
+
+  .staking-activity__footer {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.staking-activity-no-data-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 50vh;
+  .staking-activity-no-data-page__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .staking-activity-no-data-page__main-image-container {
+      margin-bottom: 10px;
+    }
+
+    span.no_items_found {
+      margin: 10px 0 7px 0;
+      font-size: 16px;
+    }
+    span.sorry_no_items_message {
+      font-size: 12px;
+      color: $gen_gray;
+    }
+    staking-activity-no-data-page__main-wallet {
+
+      text-align: center;
+      button {
+        margin-top: 40px;
+        padding: 16px 82px;
+      }
+    }
+  }
+}
+
+.staking-pager {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    margin: 0 8.5px;
+    cursor: pointer;
+
+    &:hover {
+      g {
+        stroke: #333;
+      }
+    }
+  }
+
+  .staking-pager__pages {
+    margin: 0 7px;
+
+    span {
+      position: relative;
+      top: -1px;
+      cursor: pointer;
+      margin: 0 6px;
+      color: #cccccc;
+    }
+
+    .page-selected {
+      color: #333333;
+    }
+  }
+}

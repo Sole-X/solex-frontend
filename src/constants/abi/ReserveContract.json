@@ -1,0 +1,1064 @@
+[
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_newImp",
+				"type": "address"
+			}
+		],
+		"name": "_setImplementation",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "hash",
+				"type": "bytes32"
+			},
+			{
+				"name": "bridgeAddr",
+				"type": "address"
+			},
+			{
+				"name": "toAddr",
+				"type": "address"
+			},
+			{
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"name": "isSendingToOrigin",
+				"type": "bool"
+			},
+			{
+				"name": "toChain",
+				"type": "string"
+			}
+		],
+		"name": "bridgeWithdrawNft",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "hash",
+				"type": "bytes32"
+			},
+			{
+				"name": "bridgeAddr",
+				"type": "address"
+			},
+			{
+				"name": "toAddr",
+				"type": "address"
+			},
+			{
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"name": "isSendingToOrigin",
+				"type": "bool"
+			},
+			{
+				"name": "toChain",
+				"type": "string"
+			}
+		],
+		"name": "bridgeWithdrawToken",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "deposit",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "depositNft",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"name": "amount",
+				"type": "uint256"
+			}
+		],
+		"name": "depositToken",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_token",
+				"type": "address"
+			},
+			{
+				"name": "_tokenId",
+				"type": "uint256"
+			},
+			{
+				"name": "_data",
+				"type": "bytes"
+			}
+		],
+		"name": "onNFTBridgeReceived",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_token",
+				"type": "address"
+			},
+			{
+				"name": "_value",
+				"type": "uint256"
+			},
+			{
+				"name": "_data",
+				"type": "bytes"
+			}
+		],
+		"name": "onTokenBridgeReceived",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "b",
+				"type": "bool"
+			}
+		],
+		"name": "setActive",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "addr",
+				"type": "address"
+			},
+			{
+				"name": "b",
+				"type": "bool"
+			}
+		],
+		"name": "setAllowed",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "executorAddr",
+				"type": "address"
+			},
+			{
+				"name": "b",
+				"type": "bool"
+			}
+		],
+		"name": "setExecutor",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_feeReceiver",
+				"type": "address"
+			}
+		],
+		"name": "setFeeReceiver",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "numer",
+				"type": "uint256"
+			},
+			{
+				"name": "denom",
+				"type": "uint256"
+			}
+		],
+		"name": "setFeeVariables",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_hashCheckerContract",
+				"type": "address"
+			}
+		],
+		"name": "setHashCheckerContract",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "senderAddr",
+				"type": "address"
+			}
+		],
+		"name": "setSender",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"name": "b",
+				"type": "bool"
+			}
+		],
+		"name": "setWhiteListNft",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"name": "b",
+				"type": "bool"
+			}
+		],
+		"name": "setWhiteListToken",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "transferType",
+				"type": "uint256"
+			},
+			{
+				"name": "fromAddr",
+				"type": "address"
+			},
+			{
+				"name": "toAddr",
+				"type": "address"
+			},
+			{
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"name": "id",
+				"type": "bytes32"
+			}
+		],
+		"name": "transferNft",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "transferType",
+				"type": "uint256"
+			},
+			{
+				"name": "fromAddr",
+				"type": "address"
+			},
+			{
+				"name": "toAddr",
+				"type": "address"
+			},
+			{
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"name": "id",
+				"type": "bytes32"
+			}
+		],
+		"name": "transferToken",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "hash",
+				"type": "bytes32"
+			},
+			{
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"name": "withdrawAddr",
+				"type": "address"
+			}
+		],
+		"name": "withdraw",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "hash",
+				"type": "bytes32"
+			},
+			{
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"name": "withdrawAddr",
+				"type": "address"
+			}
+		],
+		"name": "withdrawNft",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "fromAddr",
+				"type": "address"
+			}
+		],
+		"name": "DepositNft",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "fromAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "totalAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "DepositToken",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "hash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "fromAddr",
+				"type": "address"
+			}
+		],
+		"name": "BridgeDepositNft",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "hash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "fromAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "totalAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "BridgeDepositToken",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "hash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "toAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "fromAddr",
+				"type": "address"
+			}
+		],
+		"name": "WithdrawNft",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "hash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "toAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "leftAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "fromAddr",
+				"type": "address"
+			}
+		],
+		"name": "WithdrawToken",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "hash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "userAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "toAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "toChain",
+				"type": "string"
+			}
+		],
+		"name": "BridgeWithdrawNft",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "hash",
+				"type": "bytes32"
+			},
+			{
+				"indexed": false,
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "userAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "toAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "leftAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "toChain",
+				"type": "string"
+			}
+		],
+		"name": "BridgeWithdrawToken",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "transferType",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "fromAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "toAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "fromAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "toAmount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "id",
+				"type": "bytes32"
+			}
+		],
+		"name": "TransferToken",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "transferType",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"name": "fromAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "toAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "id",
+				"type": "bytes32"
+			}
+		],
+		"name": "TransferNft",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"name": "tokenAddr",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"name": "value",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"name": "isNft",
+				"type": "bool"
+			}
+		],
+		"name": "WhiteListSet",
+		"type": "event"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "allowed",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "feeDenom",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "feeNumer",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "feeReceiver",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "hashCheckerContract",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "implementation",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "isActive",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "isExecutor",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "nftOwnership",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "tokenBalance",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "whiteListNfts",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "whiteListTokens",
+		"outputs": [
+			{
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

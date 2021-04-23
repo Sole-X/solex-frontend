@@ -1,0 +1,299 @@
+@import './head';
+@import './font';
+
+* {
+  background-repeat: no-repeat !important;
+}
+
+body, html, div, h1, h2, h3, h4, h5, h6, ul, li, ol, dl, dt, dd, p, hr, button, input, form, fieldset,table, caption, th, td,
+header, nav, section, article, aside, footer {
+  margin: 0;
+  padding: 0;
+  // font-family: museo-sans, 'SpoqaHanSans', 'MuseoSans', 'JSDongkang', 'Roboto', sans-serif;
+  font-family: 'MuseoSans', 'SpoqaHanSans', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  box-sizing: border-box;
+  letter-spacing: -0.03em;
+  color: $gen_black;
+}
+
+html, body{
+  width: 100%;
+  height: 100%;
+}
+
+html, body {
+  background-color: #fff;
+}
+
+header, nav, section, article, aside, footer {
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: normal;
+}
+
+ol, ul {
+  list-style: none
+}
+
+img {
+  border: 0;
+  vertical-align: top;
+}
+
+span > img, h6 > img {
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+input::-ms-clear, input::-ms-reveal {
+  display: none !important;
+}
+
+input[type=number] {
+  -moz-appearance: textfield !important;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: none;
+  text-align: left;
+}
+
+th, label {
+  font-weight:normal;
+}
+
+address {
+  font-style:normal;
+}
+
+button, input {
+  border: none;
+  background: none;
+}
+
+button:focus, input:focus {
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+a {
+  color: $gen_black;
+  text-decoration: none;
+
+  &.underline {
+    &:hover, &:active {
+      text-decoration: underline;
+    }
+  }
+}
+
+label {
+  display: block;
+}
+
+textarea {
+  resize: none;
+  box-sizing: border-box;
+  border-color: transparent;
+
+  &::placeholder {
+    font: {
+      size: 12px;
+      weight: 300;
+    }
+    color: $gen_gray;
+  }
+}
+
+#app > main {
+  width: 100%;
+  min-width: 1200px;
+
+  &.home .router-view {
+    padding-top: 0;
+  }
+}
+
+.router-view {
+  min-height: 100vh;
+  padding-top: 150px;
+  position: relative;
+}
+
+.text-black {
+  color: $gen_black;
+}
+
+.text-primary {
+  color: $primary_color;
+}
+
+.text-secondary {
+  color: $secondary_color;
+}
+
+.text-gray {
+  color: $gen_gray;
+}
+
+.text-lightblack {
+  color: $gen_lightblack;
+}
+
+.v-m {
+  vertical-align: middle;
+}
+
+.carousel-arrow {
+  position: relative;
+
+  .swiper-button-prev, .swiper-button-next {
+    height: 28px;
+    top: calc(50% - 28px);
+
+    &::after {
+      font-size: 28px;
+      color: $melange_gray;
+    }
+
+    &:hover, &:active {
+      &::after {
+        color: $primary_color;
+      }
+    }
+
+    &.swiper-button-disabled {
+      display: none;
+    }
+  }
+
+  .swiper-button-prev {
+    left: -40px;
+  }
+
+  .swiper-button-next {
+    right: -40px;
+  }
+}
+
+.common-search-bar {
+  height: 40px;
+  @include vertical-align-flex;
+  border: 1px solid #e8e8e8;
+  transition: all 0.2s ease-out;
+  padding: 11px 21px;
+
+  .common-search-bar__input-container {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1;
+
+    .common-search-bar__input {
+      @include square(100%);
+      @include vertical-align-flex;
+      width: 100%;
+      flex: 1;
+
+      input {
+        font-size: 12px;
+        @include square(100%);
+
+        &:disabled, &::placeholder {
+          font-weight: 300;
+          color: #c1c5cc;
+        }
+      }
+    }
+
+    img {
+      flex: 0;
+      margin-right: 20px;
+    }
+  }
+
+  &--dirty, &:hover, &:active {
+    border-color: $primary_color;
+  }
+}
+
+.common-pager {
+  padding-top: 35px;
+  @include center-align-flex;
+
+  .common-pager__button {
+    color: #ccc;
+    margin-right: 12px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &--current {
+      color: $gen_black;
+    }
+  }
+
+  .common-pager__button__prev {
+    @include square(10px);
+    margin-right: 20px;
+    background-image: url($public_path + "/img/icon/ic-page-prev-off.svg");
+
+    &:hover, &:active {
+      background-image: url($public_path + "/img/icon/ic-page-prev-on.svg");
+    }
+  }
+
+  .common-pager__button__next {
+    @include square(10px);
+    margin-left: 20px;
+    background-image: url($public_path + "/img/icon/ic-page-next-off.svg");
+
+    &:hover, &:active {
+      background-image: url($public_path + "/img/icon/ic-page-next-on.svg");
+    }
+  }
+
+  .common-pager__button__first {
+    width: 14px;
+    height: 10px;
+    margin-right: 15px;
+    background-image: url($public_path + "/img/icon/ic-page-first-off.svg");
+
+    &:hover, &:active {
+      background-image: url($public_path + "/img/icon/ic-page-first-on.svg");
+    }
+  }
+
+  .common-pager__button__last {
+    width: 14px;
+    height: 10px;
+    margin-left: 15px;
+    background-image: url($public_path + "/img/icon/ic-page-last-off.svg");
+
+    &:hover, &:active {
+      background-image: url($public_path + "/img/icon/ic-page-last-on.svg");
+    }
+  }
+}

@@ -1,0 +1,1 @@
+{"version":3,"file":"WalletProvider.js","sourceRoot":"","sources":["../../../src/core/wallet/WalletProvider.ts"],"names":[],"mappings":";;AAIA;IAAA;IAOA,CAAC;IAAD,qBAAC;AAAD,CAAC,AAPD,IAOC;AAPqB,wCAAc;AASpC,SAAgB,oBAAoB,CAChC,OAAuB,EACvB,OAAe,EACf,QAAgB;IAEhB,OAAO;QACH,OAAO,EAAE,eAAe;QACxB,WAAW,EAAE,OAAO,CAAC,aAAa,CAAC,OAAO,EAAE,QAAQ,CAAC;KACxD,CAAC;AACN,CAAC;AATD,oDASC"}

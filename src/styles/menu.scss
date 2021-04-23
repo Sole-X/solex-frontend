@@ -1,0 +1,454 @@
+@import './head';
+
+.main-menu {
+  min-width: 1080px;
+  width: 100%;
+  height: 150px;
+  top: 0;
+  left: 0;
+  position: fixed;
+  background: #fff;
+  z-index: 99;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.main-header {
+  width: 100%;
+  height: 90px;
+  position: relative;
+
+  >div {
+    @include square(100%);
+    margin: 0 auto;
+    max-width: $max_width;
+    @include vertical-align-flex;
+  }
+
+  .main-header__title {
+    width: calc(50% + 55px);
+    text-align: right;
+    margin-right: auto;
+  }
+
+  .main-header__language {
+    width: 115px;
+
+    .main-header__language__selected {
+      width: 100%;
+      text-align: center;
+      color: $gen_lightblack;
+      cursor: pointer;
+
+      img {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .main-header__wallet {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 32px;
+    color: white;
+    position: relative;
+    cursor: pointer;
+    transition: width 0.2s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+    border: 1px solid $primary_color;
+
+    img {
+      @include full-circle(16px);
+    }
+
+    &:active {
+      background-color: $secondary_color;
+    }
+
+    &.disabled {
+      width: 96px;
+      background-color: $primary_color;
+
+      &:hover {
+        background-color: white;
+        color: $primary_color;
+        border: 1px solid $primary_color;
+      }
+
+      &:active {
+        background-color: skyblue;
+      }
+
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.main-nav {
+  height: 60px;
+  margin: 0 auto;
+  max-width: $max_width;
+  @include vertical-align-flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  ul {
+    position: relative;
+
+    li {
+      @include gen-inline-left;
+      margin-right: 60px;
+      font-size: 16px;
+      transition: all 0.2s ease-out;
+
+      >span {
+        cursor: pointer;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  div.main-nav-items {
+    align-self: flex-end;
+  }
+  .main-nav__tab {
+    height: 50px;
+    &--selected{
+      span { 
+        color: #000;
+        font-weight: bold;
+        padding-bottom: 1px;
+
+      }
+      border-bottom: 4px solid $primary_color;
+    }
+
+    &:hover{
+      span { 
+        transition: all 0.12s ease-in-out 0s;
+        color: #000;
+        font-weight: bold;
+      }
+    }    
+  }
+
+  .common-search-bar {
+    width: 400px;
+    display: flex;
+    border-radius: 40px;
+    margin-left: auto;
+
+    .common-search-bar__option {
+      width: 60px;
+      height: 100%;
+      @include center-align-flex;
+      color: $gen_gray;
+      background: {
+        position: right center;
+        image: url($public_path + "/img/icon/ic-chevron-bottom-gray.svg");
+      }
+    }
+
+    .common-search-bar__input {
+      width: calc(100% - 60px);
+      height: 100%;
+      @include vertical-align-flex;
+
+      input {
+        font-size: 12px;
+        @include square(100%);
+
+        &::placeholder {
+          font-weight: 300;
+          color: #c1c5cc;
+        }
+      }
+    }
+
+    &--dirty, &:hover, &:active {
+      border-color: $primary_color;
+
+      .common-search-bar__option {
+        color: $gen_black;
+        background: {
+          position: right center;
+          image: url($public_path + "/img/icon/ic-chevron-bottom-black.svg");
+        }
+      }
+    }
+  }
+}
+
+.main-footer {
+  min-width: 1080px;
+  width: 100%;
+  margin: 40px auto 0 auto;
+  padding: 50px 0;
+  max-width: $max_width;
+
+  &--marketplace {
+    max-width: 1200px;
+  }
+
+  .main-footer__title {
+    @include vertical-align-flex;
+    margin-bottom: 10px;
+
+    h4 {
+      font-size: 20px;
+    }
+
+    div {
+      margin-left: auto;
+
+      a {
+        margin-right: 10px;
+
+        img {
+          @include square(24px);
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  .main-footer__writing {
+    display: flex;
+    justify-content: space-between;
+
+    .main-footer__description {
+      font-weight: 300;
+      color: $gen_gray;
+      margin-bottom: 20px;
+    }
+
+    .main-footer__audit {
+      font-weight: 300;
+      font-size: 12px;
+      color: $gen_gray;
+    }
+  }
+
+
+  .main-footer__others {
+    @include vertical-align-flex;
+
+    * {
+      font: {
+        size: 12px;
+        weight: 300;
+      }
+      color: $gen_lightblack;
+    }
+
+    .main-footer__links {
+      @include vertical-align-flex;
+
+      a {
+        font-weight: 300;
+        color: $gen_lightblack;
+        margin-right: 20px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .main-footer__copyright {
+      margin-left: auto;
+    }
+  }
+}
+
+.main-menu--home {
+  border-bottom: none;
+}
+
+.main-user-setting {
+  width: 240px;
+  height: 340px;
+  top: calc(100% + 10px);
+  right: 0;
+  position: absolute;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+
+  .main-user-setting__header {
+    display: flex;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $melange_gray;
+
+    .main-user-setting__header__icon {
+      @include full-circle(32px);
+      @include center-align-flex;
+
+      img {
+        width: 24px;
+        height: 24px;
+        border-radius: 24px;
+      }
+    }
+
+    .main-user-setting__header__info {
+      width: calc(100% - 32px);
+      padding-left: 10px;
+
+      .main-user-setting__header__info__address {
+        @include vertical-align-flex;
+        margin-bottom: 10px;
+
+        p {
+          width: 125px;
+        }
+
+        button {
+          @include square(14px);
+          margin-left: 20px;
+        }
+      }
+
+      .main-user-setting__header__info__nickname {
+        @include vertical-align-flex;
+
+        span {
+          font-size: 12px;
+        }
+
+        a {
+          margin-left: 8px;
+
+          img {
+            @include square(14px);
+          }
+        }
+      }
+    }
+  }
+
+  .main-user-setting__menu {
+    padding: 20px 0;
+
+    li {
+      height: 30px;
+      cursor: pointer;
+
+      a {
+        @include square(100%);
+        @include vertical-align-flex;
+
+        img {
+          display: block;
+          margin-left: auto;
+        }
+      }
+    }
+  }
+
+  .main-user-setting__action {
+    .common-submit-button {
+      width: 100%;
+      height: 40px;
+    }
+  }
+}
+
+.main-connect-wallet {
+  padding-top: 210px;
+
+  .main-connect-wallet__title {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 50px;
+
+    h4 {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+  }
+
+  .main-connect-wallet__select {
+    width: 380px;
+    margin: 0 auto 80px auto;
+  }
+
+  .main-connect-wallet__warning {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 700px;
+  }
+}
+
+.main-page__inner-nav {
+  margin-top: 60px;
+
+  ul {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    border-bottom: 1px solid #231f20;
+
+    .main-page__inner-nav__tab {
+      width: 150px;
+      height: calc(100% - 1px);
+      margin-top: -1px;
+      background: #fafbfc;
+      border: 1px solid transparent;
+      border-bottom: none;
+      position: relative;
+      overflow: hidden;
+
+      >a, >button, >div {
+        @include square(100%);
+        @include center-align-flex;
+      }
+
+      &::after {
+        content: ' ';
+        width: 100%;
+        height: 4px;
+        top: 0;
+        left: 0;
+        position: absolute;
+        background: $primary_color;
+        opacity: 0;
+      }
+
+      &--selected {
+        height: 100%;
+        margin-top: 1px;
+        background: #fff;
+        border-color: #231f20;
+        border-top-color: $primary_color;
+        // transition: all 0.2s ease-out;
+
+        a {
+          color: $gen_black;
+          transition: all 0.2s ease-out;
+        }
+
+        &::after {
+          animation: fadeInLeft 0.4s ease-out forwards;
+        }
+      }
+    }
+  }
+}
