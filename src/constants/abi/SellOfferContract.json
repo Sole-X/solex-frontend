@@ -1,0 +1,759 @@
+[
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "executorAddr",
+        "type": "address"
+      },
+      {
+        "name": "b",
+        "type": "bool"
+      }
+    ],
+    "name": "setExecutor",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "isActive",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "name": "wantedToken",
+        "type": "address"
+      },
+      {
+        "name": "maxAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "isNegotiable",
+        "type": "bool"
+      }
+    ],
+    "name": "editSellOffer",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "addr",
+        "type": "address"
+      },
+      {
+        "name": "b",
+        "type": "bool"
+      }
+    ],
+    "name": "setAllowed",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "offers",
+    "outputs": [
+      {
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "name": "offerOwner",
+        "type": "address"
+      },
+      {
+        "name": "nftAddr",
+        "type": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "name": "wantedToken",
+        "type": "address"
+      },
+      {
+        "name": "maxAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "status",
+        "type": "uint256"
+      },
+      {
+        "name": "startTime",
+        "type": "uint256"
+      },
+      {
+        "name": "endTime",
+        "type": "uint256"
+      },
+      {
+        "name": "negoCount",
+        "type": "uint256"
+      },
+      {
+        "name": "isNegotiable",
+        "type": "bool"
+      },
+      {
+        "name": "isNegoAccepted",
+        "type": "bool"
+      },
+      {
+        "name": "acceptedUser",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "escrowedNfts",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_reserveContract",
+        "type": "address"
+      }
+    ],
+    "name": "setReserveContract",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "implementation",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "name": "offerId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "buyNft",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "hashCheckerContract",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "escrowedTokens",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "name": "negoUserAddr",
+        "type": "address"
+      }
+    ],
+    "name": "acceptNego",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "name": "offerId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "cancelNego",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "name": "offerId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "cancelSellOffer",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "reserveContractAddr",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newImp",
+        "type": "address"
+      }
+    ],
+    "name": "_setImplementation",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "b",
+        "type": "bool"
+      }
+    ],
+    "name": "_setActive",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "name": "negoUserAddr",
+        "type": "address"
+      }
+    ],
+    "name": "rejectNego",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "senderAddr",
+        "type": "address"
+      }
+    ],
+    "name": "setSender",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_hashCheckerContract",
+        "type": "address"
+      }
+    ],
+    "name": "setHashCheckerContract",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "allowed",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "isExecutor",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "name": "tokenAddr",
+        "type": "address"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "addNego",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "name": "nftAddr",
+        "type": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "name": "wantedToken",
+        "type": "address"
+      },
+      {
+        "name": "maxAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "isNegotiable",
+        "type": "bool"
+      }
+    ],
+    "name": "addSellOffer",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "offerOwner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "nftAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "wantedToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "maxAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "isNegotiable",
+        "type": "bool"
+      }
+    ],
+    "name": "SellOfferAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "nftReceiverAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "tokenReceiverAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "isNegoAccepted",
+        "type": "bool"
+      }
+    ],
+    "name": "SellOfferCompleted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "offerOwner",
+        "type": "address"
+      }
+    ],
+    "name": "SellOfferCanceled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "offerOwner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "wantedToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "maxAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "isNegotiable",
+        "type": "bool"
+      }
+    ],
+    "name": "SellOfferEdited",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "negoUser",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "tokenAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "NegoAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "negoUser",
+        "type": "address"
+      }
+    ],
+    "name": "NegoCanceled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "offerId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "negoUser",
+        "type": "address"
+      }
+    ],
+    "name": "NegoRejected",
+    "type": "event"
+  }
+]

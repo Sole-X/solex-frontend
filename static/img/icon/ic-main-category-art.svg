@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="51" height="51" viewBox="0 0 51 51">
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <path fill="#E57285" fill-opacity=".4" d="M25.5 24c3.333-3.582 5-7.582 5-12s-1.667-8.418-5-12c-3.333 3.582-5 7.582-5 12s1.667 8.418 5 12z" transform="translate(-973 -556) translate(973 556)"/>
+                <path fill="#FE306F" d="M35.046 27.954c3.333-3.582 5-7.582 5-12s-1.667-8.418-5-12c-3.333 3.582-5 7.582-5 12s1.667 8.418 5 12z" transform="translate(-973 -556) translate(973 556) rotate(45 35.046 15.954)"/>
+                <path fill="#E57285" fill-opacity=".4" d="M39 37.5c3.333-3.582 5-7.582 5-12s-1.667-8.418-5-12c-3.333 3.582-5 7.582-5 12s1.667 8.418 5 12z" transform="translate(-973 -556) translate(973 556) rotate(90 39 25.5)"/>
+                <path fill="#FE306F" d="M35.046 47.046c3.333-3.582 5-7.582 5-12s-1.667-8.418-5-12c-3.333 3.582-5 7.582-5 12s1.667 8.418 5 12z" transform="translate(-973 -556) translate(973 556) rotate(135 35.046 35.046)"/>
+                <path fill="#E57285" fill-opacity=".4" d="M25.5 51c3.333-3.582 5-7.582 5-12s-1.667-8.418-5-12c-3.333 3.582-5 7.582-5 12s1.667 8.418 5 12z" transform="translate(-973 -556) translate(973 556) rotate(180 25.5 39)"/>
+                <path fill="#FE306F" d="M15.954 47.046c3.333-3.582 5-7.582 5-12s-1.667-8.418-5-12c-3.333 3.582-5 7.582-5 12s1.667 8.418 5 12z" transform="translate(-973 -556) translate(973 556) rotate(-135 15.954 35.046)"/>
+                <path fill="#E57285" fill-opacity=".4" d="M12 37.5c3.333-3.582 5-7.582 5-12s-1.667-8.418-5-12c-3.333 3.582-5 7.582-5 12s1.667 8.418 5 12z" transform="translate(-973 -556) translate(973 556) rotate(-90 12 25.5)"/>
+                <path fill="#FE306F" d="M15.954 27.954c3.333-3.582 5-7.582 5-12s-1.667-8.418-5-12c-3.333 3.582-5 7.582-5 12s1.667 8.418 5 12z" transform="translate(-973 -556) translate(973 556) rotate(-45 15.954 15.954)"/>
+            </g>
+        </g>
+    </g>
+</svg>

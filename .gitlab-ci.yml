@@ -1,0 +1,8 @@
+stages: 
+- build
+
+build&start: 
+  stage: build    
+  script:    
+  - yarn install
+  - yarn vue-cli-service build --dest /home/deploy/nft-market-front/dist

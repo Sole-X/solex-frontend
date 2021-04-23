@@ -1,0 +1,249 @@
+@import './head';
+
+.explorer-page__content {
+  padding: 50px 0;
+
+  >section {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+}
+
+.explorer-main__title {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.explorer-main-history-page {
+  .main-item-search {
+    @include vertical-flex-end;
+
+    .main-item-search__notice {
+      width: calc(100% - 160px);
+    }
+
+    .main-item-search__filter {
+      width: 160px;
+    }
+  }
+
+  .explorer-main__table {
+    .explorer-main__table__col {
+      &--event, &--user, &--time {
+        width: 15%;
+      }
+
+      &--token {
+        width: 22.5%;
+      }
+
+      &--price {
+        width: 17.5%;
+      }
+    }
+
+    .explorer-main__table__row {
+      .explorer-main__table__col {
+        &--user, &--time {
+          color: #5e94eb;
+        }
+
+        &--time {
+          a {
+            cursor: pointer;
+
+            img {
+              margin-left: 3px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.explorer-main-ranking-page {
+  .main-item-search {
+    @include vertical-flex-end;
+
+    .main-item-search__notice {
+      width: calc(100% - 160px);
+    }
+
+    .main-item-search__filter {
+      width: 160px;
+    }
+  }
+
+  .explorer-main-ranking__featured {
+    width: 100%;
+    padding: 30px 0;
+    background: #fafbfc;
+    @include center-align-flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+
+    h4 {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .explorer-main-ranking__list {
+      display: flex;
+
+      .asset-item-card {
+        margin-right: 20px;
+        border: 1px solid $melange_gray;
+
+        &:last-child {
+          margin-right: 0;
+        }
+
+        &:hover, &:active {
+          border-color: $primary_color;
+          transition: all 0.2s ease-out;
+        }
+
+        .asset-item-card__detail {
+          padding: 12px;
+          background: #fff;
+        }
+      }
+    }
+  }
+
+  .explorer-main__table {
+    .explorer-main__table__col {
+      text-align: right;
+      display: inline-flex;
+      justify-content: center;
+
+      &--rank {
+        width: 7%;
+        text-align: left;
+      }
+
+      &--token {
+        width: 19%;
+        text-align: left;
+      }
+
+      &--volume, &--change, &--price {
+        width: 19%;
+      }
+
+      &--owner {
+        width: 9%;
+      }
+
+      &--asset {
+        width: 9%;
+      }
+    }
+  }
+}
+
+.explorer-main__table {
+  .explorer-main__table__head {
+    width: 100%;
+    height: 25px;
+    padding: 0 10px;
+    background: #fafbfc;
+    @include vertical-align-flex;
+
+    .explorer-main__table__col {
+      @include vertical-align-flex;
+
+      .explorer-main__table__sort {
+        margin-left: 7px;
+
+        button {
+          height: auto;
+          line-height: 0;
+          display: block;
+
+          &:nth-child(1) {
+            margin-bottom: 1.5px;
+          }
+        }
+      }
+    }
+  }
+
+  .explorer-main__table__row {
+    width: 100%;
+    height: 60px;
+    padding: 0 10px;
+    @include vertical-align-flex;
+
+    &:nth-child(even) {
+      background: #fafbfc;
+    }
+
+    .explorer-main__table__col {
+      @include vertical-align-flex;
+
+      &--token {
+        @include vertical-align-flex;
+        @include text-ellipsis;
+
+        .explorer-main__table__col__icon {
+          @include square(40px);
+          background: $melange_gray;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center
+        }
+
+        .explorer-main__table__col__token-name {
+          width: calc(100% - 40px);
+          padding-left: 10px;
+
+          p {
+            @include text-ellipsis;
+
+            span {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      &--user {
+        @include vertical-align-flex;
+
+        >div:nth-child(1) {
+          @include full-circle(16px);
+          background: $melange_gray;
+        }
+
+        >div:nth-child(2) {
+          width: calc(100% - 16px);
+          padding-left: 10px;
+
+          span {
+            cursor: pointer;
+
+            &:hover {
+              color: $primary_hover;
+            }
+
+            &:active {
+              color: $primary_active;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .explorer-main__table__col {
+    font-size: 12px;
+
+    * {
+      font-size: 12px;
+    }
+  }
+}

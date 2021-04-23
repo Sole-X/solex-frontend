@@ -1,0 +1,206 @@
+// Buy, Sell, Explorer 등 기본 템플릿
+@import './head';
+
+.main-page {
+  display: flex;
+
+  .common-loader {
+    height: 120px;
+  }
+}
+
+.main-page__sidebar {
+  width: 270px;
+  height: calc(100vh - 150px);
+  border-right: 1px solid #f2f2f2;
+  padding: 50px 40px;
+  overflow-y: scroll;
+
+  .main-page__filter {
+    margin-bottom: 80px;
+
+    &--status {
+      margin-bottom: 40px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .main-page__filter__title {
+      @include vertical-align-flex;
+      margin-bottom: 20px;
+
+      h5 {
+        font-size: 16px;
+      }
+
+      button {
+        margin-left: auto;
+      }
+    }
+
+    .main-page__filter__reset {
+      display: inline-flex;
+      align-items: center;
+      color: $gen_gray;
+
+      img {
+        position: relative;
+        top: 1px;
+        margin-left: 8px;
+        width: 12px;
+      }
+    }
+
+    .main-page__selected-filter {
+      overflow: hidden;
+      position: relative;
+
+      button {
+        @include gen-inline-left;
+        padding: 3px 8px;
+        border-radius: 2px;
+        border: 1px solid $primary_color;
+        margin: 0 10px 10px 0;
+
+        &:last-child {
+          margin: 0;
+        }
+
+        img {
+          margin-left: 13px;
+        }
+      }
+    }
+
+    .main-page__filter__options {
+      li {
+        margin-bottom: 20px;
+        cursor: pointer;
+        padding-left: 20px;
+        @include vertical-align-flex;
+
+        p:nth-child(1) {
+          width: calc(100% - 50px);
+          text-transform: uppercase;
+          color: $gen_lightblack;
+        }
+
+        p:nth-child(2) {
+          width: 50px;
+          text-align: right;
+          color: $gen_gray;
+        }
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &.selected {
+          position: relative;
+
+          p:nth-child(1) {
+            font-weight: bold;
+          }
+
+          p:nth-child(1), p:nth-child(2) {
+            color: $gen_black;
+          }
+
+          &::after {
+            @include full-circle(8px);
+            background: $primary_color;
+            top: 3px;
+            left: 0;
+            position: absolute;
+            content: ' ';
+          }
+        }
+      }
+    }
+
+    .main-page__filter__collection {
+      button {
+        width: 200px;
+        height: 40px;
+        border: 1px solid #e8e8e8;
+        color: $gen_lightblack;
+        margin-bottom: 10px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+
+        &.selected {
+          color: $gen_black;
+          font-weight: bold;
+          border-color: $primary_color;
+        }
+      }
+    }
+
+    .main-page__filter__price {
+      ul {
+        padding: 20px 0;
+      }
+
+      .main-page__filter__price__input {
+        @include vertical-align-flex;
+
+        &__box {
+          width: 80px;
+          height: 30px;
+          padding: 0 10px;
+          border: 1px solid #ccc;
+          @include vertical-align-flex;
+
+          input {
+            @include square(100%);
+            padding-right: 10px;
+          }
+
+          &::placeholder {
+            color: $gen_gray;
+          }
+        }
+
+        .divider {
+          margin: 0 10px;
+          color: $gen_gray;
+        }
+      }
+    }
+  }
+}
+
+.main-page__content {
+  width: calc(100% - 270px);
+  height: calc(100vh - 150px);
+  overflow-y: scroll;
+  padding: 35px 0;
+
+  .main-item-search {
+    margin: 0 auto 20px auto;
+    @include vertical-flex-end;
+
+    .main-item-search__filter {
+      width: calc(100% - 160px);
+
+      h6 {
+        margin-bottom: 10px;
+      }
+
+      .common-search-dropdown {
+        width: 160px;
+        height: 32px;
+        border-color: #e8e8e8;
+      }
+    }
+
+    .common-submit-button {
+      width: 160px;
+      height: 40px;
+    }
+  }
+}

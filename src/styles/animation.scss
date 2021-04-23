@@ -1,0 +1,32 @@
+@import 'loader';
+
+.solex-modal-enter-active,
+.solex-modal-leave-active {
+  transition: opacity 0.4s ease-out;
+}
+
+.solex-modal-enter,
+.solex-modal-leave-active {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: transform 0.5s;
+}
+
+.fade-enter-from {
+
+}
+
+.fade-enter-to {
+
+}
+
+.fade-leave-from {
+  transform: translateY(-80px);
+}
+
+.fade-leave-to {
+  transform: translateY(80px);
+}

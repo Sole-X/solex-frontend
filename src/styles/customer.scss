@@ -1,0 +1,315 @@
+@import './head';
+
+.customer-page {
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 200px;
+  max-width: $max_width;
+
+  .customer-page__header {
+    .customer-page__header__title {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .customer-page__header__option {
+      @include horizon-flex-end;
+      margin-bottom: 16px;
+    }
+  }
+
+  .customer-page__article {
+    padding: 20px 0;
+  }
+}
+
+.customer-faq-page {
+  a {
+    color: $primary_color;
+
+    &:hover {
+      color: $primary_hover;
+      text-decoration: underline;
+    }
+
+    &:active {
+      color: $primary_active;
+    }
+  }
+
+  .customer-page__header {
+    .common-search-bar {
+      margin-top: 40px;
+    }
+
+    .main-page__header__nav {
+      display: table;
+      width: 100%;
+      margin-bottom: 40px;
+      border-collapse: collapse;
+      .main-page__header__nav__item-container {
+        display: table-row;
+        .main-page__header__nav__item {
+          display: table-cell;
+          width: 25%;
+          text-align: center;
+          font-size: 16px;
+          font-weight: bold;
+          border: 1px solid #dee3eb;
+          padding: 18px 0;
+          cursor: pointer;
+          transition: background-color 0.1s;
+          &:hover {
+            background-color: $primary_hover;
+          }
+
+          &:active {
+            background-color: $primary_active;
+          }
+        }
+
+        .tab-selected {
+          background-color: $primary_color;
+          color: white;
+        }
+      }
+    }
+  }
+
+  .customer-faq-page__content {
+
+  }
+}
+
+.customer-faq-tab {
+  .customer-faq-tab__header {
+    margin-bottom: 10px;
+    span.count {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ee4136;
+    }
+
+    span.desc {
+      font-size: 14px;
+      font-weight: 500;
+      color: #666666;
+    }
+  }
+
+  .customer-faq-tab__items {
+    width: 100%;
+    .customer-faq-tab__item {
+      border-top: 1px solid #dee3eb;
+      border-left: 1px solid #dee3eb;
+      border-right: 1px solid #dee3eb;
+
+      &:last-child {
+        border-bottom: 1px solid #dee3eb;
+      }
+      .customer-faq-tab__item-title-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        cursor: pointer;
+        .customer-faq-tab__item-title {
+          font-size: 16px;
+          font-weight: bold;
+          color: #333333;
+          cursor: pointer;
+        }
+      }
+
+      .customer-faq-tab__item-description {
+        z-index: -1;
+        overflow: hidden;
+        transition: height .5s;
+
+        hr {
+          border-top: 1px solid #dee3eb;
+          border-bottom: 0px;
+          margin-left: 20px;
+          margin-right: 20px;
+        }
+
+        .customer-faq-tab__item-description-container {
+          padding: 20px;
+          line-height: 28px;
+          p {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333333;
+          }
+        }
+      }
+    }
+  }
+
+  .customer-faq-tab__no-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    hr {
+      border-top: 1px solid #dee3eb;
+      border-bottom: 0px;
+      margin-bottom: 60px;
+    }
+
+    img.no-item-image {
+      margin-bottom: 40px;
+    }
+
+    div {
+      text-align: center;
+
+      .customer-faq-tab__no-item__title {
+        font-size: 18px;
+        font-family: MuseoSans;
+        font-weight: 900;
+        color: #333333;
+        margin-bottom: 20px;
+      }
+
+      .customer-faq-tab__no-item__description {
+        font-size: 14px;
+        font-family: MuseoSans;
+        font-weight: 500;
+        color: #666666;
+        margin-bottom: 40px;
+      }
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      border: 1px solid #dee3eb;
+      padding: 11px 22px;
+
+      img {
+        margin-right: 22px;
+      }
+
+      span {
+        font-family: MuseoSans;
+        font-weight: bold;
+        color: #333333;
+      }
+    }
+  }
+}
+
+.customer-search-bar {
+  margin-bottom: 79px;
+  .customer-search-bar__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #e8e8e8;
+    padding: 10px 20px;
+    max-width: 100%;
+    transition: border 0.5s;
+
+    &:hover {
+      border: 1px solid $primary_color;
+    }
+
+    &:focus-within {
+      border: 1px solid $primary_color;
+    }
+
+    input {
+      color: #666666;
+      width: 96%;
+
+      &::placeholder {
+        font-family: MuseoSans;
+        font-size: 12px;
+        font-weight: 500;
+        color: #c1c5cc;
+      }
+    }
+
+    img {
+      cursor: pointer;
+    }
+  }
+}
+
+.customer-privacy-policy, .customer-usage-terms {
+  margin: 0 auto;
+  max-width: 1080px;
+
+  .customer-privacy-policy-header, .customer-usage-terms-header {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 0 34px 0;
+
+    .customer-privacy-policy-header-up, .customer-usage-terms-header-up {
+      font-size: 28px;
+      font-weight: 900;
+      color: #333333;
+    }
+
+    .customer-privacy-policy-header-down, .customer-usage-terms-header-down {
+      align-self: flex-end;
+
+      select {
+        border: 1px solid #e8e8e8;
+        padding: 7px 16px;
+        color: #999999;
+      }
+    }
+  }
+
+  .customer-privacy-policy-main, .customer-usage-terms-main {
+    .customer-privacy-policy-content, .customer-usage-terms-content {
+      div {
+        margin-bottom: 34px;
+
+        h4 {
+          font-weight: bold;
+          font-size: 16px;
+          margin-bottom: 18px;
+        }
+
+        p {
+          margin-bottom: 15px;
+          line-height: 26px;
+
+          &::first-letter {
+            margin-left: 10px;
+          }
+        }
+
+        ul {
+          list-style: disc;
+          line-height: 26px;
+          margin-left: 24px;
+          li {
+            span.email {
+              cursor: pointer;
+              color: blue;
+              text-decoration: underline;
+            }
+
+            span.highlight {
+              font-weight: bold;
+            }
+          }
+        }
+
+        ol {
+          list-style: decimal;
+          line-height: 26px;
+          margin-left: 24px;
+          li {
+            span.highlight {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,856 @@
+[
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "denom",
+        "type": "uint256"
+      }
+    ],
+    "name": "setPriceIncrDenom",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "numer",
+        "type": "uint256"
+      }
+    ],
+    "name": "setPriceIncrNumer",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_minDuration",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMinDuration",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_extendingTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "setExtendingTime",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "executorAddr",
+        "type": "address"
+      },
+      {
+        "name": "b",
+        "type": "bool"
+      }
+    ],
+    "name": "setExecutor",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
+    "name": "auctions",
+    "outputs": [
+      {
+        "name": "auctionId",
+        "type": "bytes32"
+      },
+      {
+        "name": "auctionOwner",
+        "type": "address"
+      },
+      {
+        "name": "nftAddr",
+        "type": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "name": "biddingToken",
+        "type": "address"
+      },
+      {
+        "name": "minAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "maxAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "currentBidder",
+        "type": "address"
+      },
+      {
+        "name": "currentBidding",
+        "type": "uint256"
+      },
+      {
+        "name": "status",
+        "type": "uint256"
+      },
+      {
+        "name": "startTime",
+        "type": "uint256"
+      },
+      {
+        "name": "endTime",
+        "type": "uint256"
+      },
+      {
+        "name": "biddingCount",
+        "type": "uint256"
+      },
+      {
+        "name": "isInstantTrade",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "isActive",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "addr",
+        "type": "address"
+      },
+      {
+        "name": "b",
+        "type": "bool"
+      }
+    ],
+    "name": "setAllowed",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "escrowedNfts",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_reserveContract",
+        "type": "address"
+      }
+    ],
+    "name": "setReserveContract",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "minDuration",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "implementation",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "extendingTime",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "maxDuration",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "priceIncrNumer",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "name": "auctionId",
+        "type": "bytes32"
+      },
+      {
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "placeBid",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "hashCheckerContract",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "owner",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "bytes32"
+      },
+      {
+        "name": "",
+        "type": "address"
+      },
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "escrowedTokens",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "name": "auctionId",
+        "type": "bytes32"
+      },
+      {
+        "name": "biddingToken",
+        "type": "address"
+      },
+      {
+        "name": "minAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "maxAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "duration",
+        "type": "uint256"
+      },
+      {
+        "name": "isInstantTrade",
+        "type": "bool"
+      }
+    ],
+    "name": "editAuction",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "reserveContractAddr",
+    "outputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "priceIncrDenom",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_newImp",
+        "type": "address"
+      }
+    ],
+    "name": "_setImplementation",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "auctionId",
+        "type": "bytes32"
+      },
+      {
+        "name": "nftAddr",
+        "type": "address"
+      },
+      {
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "name": "biddingToken",
+        "type": "address"
+      },
+      {
+        "name": "minAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "maxAmount",
+        "type": "uint256"
+      },
+      {
+        "name": "duration",
+        "type": "uint256"
+      },
+      {
+        "name": "isInstantTrade",
+        "type": "bool"
+      }
+    ],
+    "name": "addAuction",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "b",
+        "type": "bool"
+      }
+    ],
+    "name": "_setActive",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "senderAddr",
+        "type": "address"
+      }
+    ],
+    "name": "setSender",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_maxDuration",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMaxDuration",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "_hashCheckerContract",
+        "type": "address"
+      }
+    ],
+    "name": "setHashCheckerContract",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "allowed",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "name": "auctionId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "cancelAuction",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "isExecutor",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "name": "auctionId",
+        "type": "bytes32"
+      }
+    ],
+    "name": "closeAuction",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "constant": false,
+    "inputs": [
+      {
+        "name": "newOwner",
+        "type": "address"
+      }
+    ],
+    "name": "transferOwnership",
+    "outputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "payable": false,
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "payable": true,
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "auctionId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "auctionOwner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "nftAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "tokenId",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "biddingToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "minAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "maxAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "endTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "isInstantTrade",
+        "type": "bool"
+      }
+    ],
+    "name": "AuctionAdded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "auctionId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "nftReceiverAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "tokenReceiverAddr",
+        "type": "address"
+      }
+    ],
+    "name": "AuctionCompleted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "auctionId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "auctionOwner",
+        "type": "address"
+      }
+    ],
+    "name": "AuctionCanceled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "auctionId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "auctionOwner",
+        "type": "address"
+      }
+    ],
+    "name": "AuctionExpired",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "auctionId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "auctionOwner",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "biddingToken",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "minAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "maxAmount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "endTime",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "isInstantTrade",
+        "type": "bool"
+      }
+    ],
+    "name": "AuctionEdited",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "name": "hash",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "auctionId",
+        "type": "bytes32"
+      },
+      {
+        "indexed": false,
+        "name": "tokenAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "bidderAddr",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "name": "biddingCount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "name": "endTime",
+        "type": "uint256"
+      }
+    ],
+    "name": "BiddingUpdated",
+    "type": "event"
+  }
+]
