@@ -13,7 +13,7 @@
       <div
         v-for="service in getAvailableService"
         :key="service.type"
-        class="select-wallet__option"
+        :class="service.className"
         @click="handleSelectService(service)"
       >
         <img :src="service.icon" :alt="service.name" />
@@ -68,7 +68,6 @@
     methods: {
       async handleSelectService(service) {
         const res = await this.$_UserWalletMixin_handleConnect(service)
-        Log('d res', res);
 
         if(!res.success) {
           return

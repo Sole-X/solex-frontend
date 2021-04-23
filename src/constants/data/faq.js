@@ -36,11 +36,13 @@ export default {
             },
             {
                 title: 'How much is the transaction fee?',
-                description: ['5% transaction fee is charged, which is the same applies to all transactions.', '- Sales fee: Final price (ETH/USDT/TRIX/KLAY) × transaction fee rate (%)\n' +
-                'Fee deducted from selling price\n' +
-                'Example) When selling a specific NFT at 0.5 KLAY, earn 0.475 ETH excluding 5% fee (0.025 KLAY)', '- Purchase fee: Final price (ETH/USDT/TRIX/KLAY) × transaction fee rate (%)\n' +
-                'Fee Charged for payment\n' +
-                'Example) When purchasing a specific NFT for 0.1 ETH, paying 0.105 ETH including 5% fee (0.005 ETH)']
+                description: [
+                    '5% transaction fee is charged, which is applied only to sellers.',
+                    '<br>',
+                    '- Transaction fee: Final price (ETH/USDT/TRIX/KLAY) x transaction fee rate(%)',
+                    'Fee deducted from selling price',
+                    'Example) When selling a specific NFT at 0.5 KLAY, earn 0.475 KLAY excluding 5% fee (0.0025 KLAY)'
+                ]
             },
             {
                 title: 'How to list an item for sale?',
@@ -112,10 +114,13 @@ export default {
             },
             {
                 title: '거래 수수료는 얼마인가요?',
-                description: ['Sole-X의 거래 수수료는 5%로, 모든 거래에 동일하게 적용되고 있습니다.', '',
-                    '- 판매 수수료 : 최종 가격(ETH/USDT/TRIX/KLAY) × 거래 수수료율(%)',
-                    '판매 금액에서 수수료 차감', '예시) 특정 NFT를 0.5 KLAY로 판매 시 수수료 5%(0.025 KLAY)를 제외한 0.475 ETH 취득', '',
-                    '- 구매 수수료 : 최종 가격(ETH/USDT/TRIX/KLAY) × 거래 수수료율(%)', '결제 금액에 수수료 부과', '예시) 특정 NFT를 0.1 ETH로 구매 시 수수료 5%(0.005 ETH)가 추가된 0.105 ETH 결제']
+                description: [
+                    'Sole-X의 거래 수수료는 5%로, 모든 거래에 동일하게 적용되고 있습니다.',
+                    '<br>',
+                    '- 거래 수수료: 최종 가격(ETH/USDT/TRIX/KLAY) x 거래 수수료율(%)',
+                    '판매 가격에서 수수료 차감',
+                    '예시) 특정 NFT를 0.5 KLAY로 판매 시 수수료 5%(0.0025 KLAY)를 제외한 0.475 KLAY 취득'
+                ]
             },
             {
                 title: '판매 등록 방법을 알고 싶어요.',
@@ -268,15 +273,11 @@ export default {
             {
                 title: 'How much is the transaction fee?',
                 description: [
-                    '5% transaction fee is charged, which is the same applies to all transactions.',
+                    '5% transaction fee is charged, which is applied only to sellers.',
                     '<br>',
-                    '- Sales fee: Final price (ETH/USDT/TRIX/KLAY) × transaction fee rate (%)',
+                    '- Transaction fee: Final price (ETH/USDT/TRIX/KLAY) x transaction fee rate(%)',
                     'Fee deducted from selling price',
-                    'Example) When selling a specific NFT at 0.5 KLAY, earn 0.475 ETH excluding 5% fee (0.025 KLAY)',
-                    '<br>',
-                    '- Purchase fee: Final price (ETH/USDT/TRIX/KLAY) × transaction fee rate (%)',
-                    'Fee Charged for payment',
-                    'Example) When purchasing a specific NFT for 0.1 ETH, paying 0.105 ETH including 5% fee (0.005 ETH)'
+                    'Example) When selling a specific NFT at 0.5 KLAY, earn 0.475 KLAY excluding 5% fee (0.0025 KLAY)'
                 ]
             },
         ],
@@ -374,13 +375,9 @@ export default {
                 description: [
                     'Sole-X의 거래 수수료는 5%로, 모든 거래에 동일하게 적용되고 있습니다.',
                     '<br>',
-                    '- 판매 수수료 : 최종 가격(ETH/USDT/TRIX/KLAY) × 거래 수수료율(%)',
-                    '판매 금액에서 수수료 차감',
-                    '예시) 특정 NFT를 0.5 KLAY로 판매 시 수수료 5%(0.025 KLAY)를 제외한 0.475 ETH 취득',
-                    '<br>',
-                    '- 구매 수수료 : 최종 가격(ETH/USDT/TRIX/KLAY) × 거래 수수료율(%)',
-                    '결제 금액에 수수료 부과',
-                    '예시) 특정 NFT를 0.1 ETH로 구매 시 수수료 5%(0.005 ETH)가 추가된 0.105 ETH 결제'
+                    '- 거래 수수료: 최종 가격(ETH/USDT/TRIX/KLAY) x 거래 수수료율(%)',
+                    '판매 가격에서 수수료 차감',
+                    '예시) 특정 NFT를 0.5 KLAY로 판매 시 수수료 5%(0.0025 KLAY)를 제외한 0.475 KLAY 취득'
                 ]
             },
         ]

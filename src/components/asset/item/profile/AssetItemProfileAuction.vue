@@ -130,8 +130,6 @@
 
     mounted() {
       this.$_AssetAuctionTimer_initAuctionTimer(this.info)
-
-      setTimeout(() => Log('d remain period', this.remainPeriod), 1000);
     },
 
     beforeDestroy() {

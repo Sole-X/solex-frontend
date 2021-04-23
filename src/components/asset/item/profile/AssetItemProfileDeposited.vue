@@ -31,7 +31,7 @@
           <div>
             <p>
               <strong class="text-secondary">
-                {{$bn.toMaxUnit(info.price, (info.currencyInfo ? info.currencyInfo.decimal : 18), 4) | addComma}}
+                {{ getItemPrice | addComma}}
               </strong> {{info.currencyInfo ? info.currencyInfo.symbol : ''}}
             </p>
             <p>
@@ -111,22 +111,16 @@
 
       getPriceLabel() {
         let label = $t('Market.AveragePrice');
+        /*
         if (this.info.exchange && this.info.exchange.status === 7) {
           label = $t('Market.LastPrice');
         }
+        */
         return label;
       },
 
       getItemPrice() {
-        let basePrice = "0";
-
-        if (this.info.isBuy) {
-          basePrice = this.info.buy.basePrice;
-        } else if (this.info.isSell) {
-          basePrice = this.info.sell.currentPrice;
-        } else if (this.info.isAuction) {
-          basePrice = this.info.auction.basePrice;
-        }
+        let basePrice = this.info.price ? this.info.price : '0';
 
         const currency = this.getCurrency;
         if (currency.symbol !== 'null') {
@@ -138,7 +132,7 @@
 
       getCurrency() {
         const supportCurrency = this.getSupportCurrency;
-        const itemCurrencyAddress = this.item ? this.item.currency : null;
+        const itemCurrencyAddress = this.info ? this.info.currency : null;
 
         if (itemCurrencyAddress) {
           const itemCurrency = _.find(supportCurrency, { tokenAddress: itemCurrencyAddress });
@@ -151,6 +145,16 @@
           symbol: 'Symbol'
         }
       },
+
+      getUsdPrice() {
+        let usdPrice = this.info.usdPrice;
+
+        const currency = this.getCurrency;
+        if (currency.symbol !== 'Symbol') {
+          usdPrice = currency.toFiat(this.getItemPrice);
+        }
+        return usdPrice;
+      }
     },
 
     watch: {},
