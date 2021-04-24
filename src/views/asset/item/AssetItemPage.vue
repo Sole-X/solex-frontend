@@ -122,8 +122,9 @@
               :like="getLike"
           />
 
+          <!--v-else-if="!getItemInfo.isCollected || !getItemInfo.isOnTrade"-->
           <asset-item-profile-deposited
-              v-else-if="!getItemInfo.isCollected || !getItemInfo.isOnTrade"
+              v-else
               :info="getItemInfo"
               :buttonProps="getButtonProps"
               @onClickLike="handleToggleItem"
@@ -602,9 +603,9 @@
         return {
           leftButton: {
             title: $t('Market.DoBuy'),
-            classes: ['outline-primary'],
+            classes: ['outline-primary', 'full'],
             click: () => {
-              return this.handleMakeExchange(false)
+              return this.handleMakeExchange(false);
             }
           }
         }
@@ -1111,9 +1112,9 @@
               },
               rightButton: {
                 title: $t('Market.BuyItNow'),
-                classes: ['primary'],
+                classes: [isNormalAuction ? 'disabled' : 'primary'],
                 click: () => {
-                  if (!isInstantTrade) {
+                  if (isNormalAuction) {
                     return
                   }
                   return this.handleDirectTrade()
@@ -1133,9 +1134,9 @@
               },
               rightButton: {
                 title: $t('Market.BuyItNow'),
-                classes: ['primary'],
+                classes: [isNormalAuction ? 'disabled' : 'primary'],
                 click: () => {
-                  if (!isInstantTrade) {
+                  if (isNormalAuction) {
                     return
                   }
                   return this.handleDirectTrade()

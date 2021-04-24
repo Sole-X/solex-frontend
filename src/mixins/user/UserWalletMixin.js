@@ -9,6 +9,10 @@ export default {
     ]),
 
     async $_UserWalletMixin_handleConnect(service) {
+      if (service.className.includes('disabled')) {
+        return;
+      }
+
       if(this.getUserInfo.address) {
         return
       }

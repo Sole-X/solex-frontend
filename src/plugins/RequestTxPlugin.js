@@ -30,7 +30,8 @@ export default class RequestTxPlugin {
 
   initReserveCaver() {
     const isMainNet = this._wallet.isMainNet()
-    const rpcUrl = isMainNet ? 'wss://cypress-rpc.klaytn.ozys.net:8652' : 'wss://api.cypress.ozys.net:8652'
+    // const rpcUrl = isMainNet ? 'wss://cypress-rpc.klaytn.ozys.net:8652' : 'wss://api.cypress.ozys.net:8652'
+    const rpcUrl = isMainNet ? process.env.VUE_APP_PROVIDER_URL_CYPRESS : process.env.VUE_APP_PROVIDER_URL_BAOBAB;
 
     this._caver = new Caver(new Caver.providers.WebsocketProvider(rpcUrl))
   }
