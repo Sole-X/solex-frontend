@@ -62,10 +62,18 @@
               </div>
 
               <div class="checkout-modal__order__info__value">
-                <p>
-                  <strong>{{$bn.toMaxUnit(estimateFee, data.info.currencyInfo.decimal, 4) | addComma}} </strong> {{data.info.currencyInfo.symbol}}
-                </p>
-                <p class="checkout-modal__order__info__value__fiat">$ {{data.info.currencyInfo.toFiat($bn.toMaxUnit(estimateFee, data.info.currencyInfo.decimal)).dprec(4) | addComma}}</p>
+                <template v-if="getItemType === 'buy'">
+                  <p>
+                    <strong>{{$bn.toMaxUnit(estimateFee, data.info.currencyInfo.decimal, 4) | addComma}} </strong> {{data.info.currencyInfo.symbol}}
+                  </p>
+                  <p class="checkout-modal__order__info__value__fiat">$ {{data.info.currencyInfo.toFiat($bn.toMaxUnit(estimateFee, data.info.currencyInfo.decimal)).dprec(4) | addComma}}</p>
+                </template>
+                <template v-else>
+                  <p>
+                    <strong>{{ '0.0000' }}</strong> {{ data.info.currencyInfo.symbol }}
+                  </p>
+                  <p class="checkout-modal__order__info__value__fiat">$ 0.0000</p>
+                </template>
               </div>
             </div>
           </div>
@@ -82,7 +90,7 @@
                 <strong>{{ $bn.toMaxUnit(Number(data.checkoutPrice) - Number(estimateFee) , data.info.currencyInfo.decimal, 4) }}</strong> {{data.info.currencyInfo.symbol}}
               </template>
               <template v-else>
-                <strong>{{ $bn.toMaxUnit(Number(data.checkoutPrice) + Number(estimateFee) , data.info.currencyInfo.decimal, 4) }}</strong> {{ data.info.currencyInfo.symbol }}
+                <strong>{{ $bn.toMaxUnit(Number(data.checkoutPrice) , data.info.currencyInfo.decimal, 4) }}</strong> {{ data.info.currencyInfo.symbol }}
               </template>
             </div>
           </div>
