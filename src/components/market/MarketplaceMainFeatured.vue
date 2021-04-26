@@ -1,17 +1,27 @@
 <template>
   <section class="market-home__featured">
     <swiper :options="swiperOptions">
-      <swiper-slide v-for="(banner, i) in getBannerList" :key="i" :style="banner.slideStyle">
-        <div class="market-home__featured__default" :style="banner.contentStyle" :class="banner.classes || []">
-          <h1 v-html="banner.title"></h1>
-          <p v-html="banner.desc"></p>
+      <swiper-slide
+        v-for="(banner, i) in getBannerList"
+        :key="i"
+        :style="banner.slideStyle"
+      >
+        <router-link :to="{ path: '/sell' }">
+          <div
+            class="market-home__featured__default"
+            :style="banner.contentStyle"
+            :class="banner.classes || []"
+          >
+            <!-- <h1 v-html="banner.title"></h1>
+          <p v-html="banner.desc"></p> -->
 
-          <router-link :to="{ path: '/sell' }">
+            <!-- <router-link :to="{ path: '/sell' }">
             <button :class="$bem('common-submit-button', '', ['primary'])">
-              {{ $t('Market.BrowseItem') }}
+              {{ $t("Market.BrowseItem") }}
             </button>
-          </router-link>
-        </div>
+          </router-link> -->
+          </div>
+        </router-link>
       </swiper-slide>
 
       <div class="swiper-pagination" slot="pagination"></div>
@@ -20,72 +30,96 @@
 </template>
 
 <script>
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'MarketplaceMainFeatured',
-    created() {
-      component = this
-      $t = this.$t.bind(this)
-    },
+export default {
+  name: "MarketplaceMainFeatured",
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
 
-    mounted() {
+  mounted() {},
 
-    },
+  beforeDestroy() {},
 
-    beforeDestroy() {
+  data() {
+    return {
+      swiperOptions: {
+        pagination: {
+          type: "bullets",
+          clickable: true,
+          el: ".swiper-pagination",
+        },
+        allowTouchMove: false,
+        loop: false,
+        autoplay: {
+          delay: 5000,
+        },
+      },
+    };
+  },
 
-    },
-
-    data() {
-      return {
-        swiperOptions: {
-          pagination: {
-            type: 'bullets',
-            clickable: true,
-            el: '.swiper-pagination'
+  computed: {
+    getBannerList() {
+      return [
+        {
+          title: $t("Market.TopFeatured1Title"),
+          desc: $t("Market.TopFeatured1Desc"),
+          slideStyle: {
+            backgroundColor: "#202020",
           },
-          allowTouchMove: false,
-          loop: true,
-          autoplay: {
-            delay: 5000
-          }
-        }
-      }
-    },
-
-    computed: {
-      getBannerList() {
-        return [
-          {
-            title: $t('Market.TopFeatured1Title'),
-            desc: $t('Market.TopFeatured1Desc'),
-            slideStyle: {
-              backgroundColor: "rgb(199, 219, 225)"
-            },
-            contentStyle: {
-              backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-1.png')}`
-            }
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL(
+              "img/article/article-market-home-top-1.jpg"
+            )}`,
           },
-          {
-            title: $t('Market.TopFeatured3Title'),
-            desc: $t('Market.TopFeatured3Desc'),
-            slideStyle: {
-              backgroundColor: '#231f20'
-            },
-            contentStyle: {
-              backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-2.png')}`
-            },
-            classes: ['bg-black']
-          }
-        ]
-      }
+        },
+        {
+          title: $t("Market.TopFeatured3Title"),
+          desc: $t("Market.TopFeatured3Desc"),
+          slideStyle: {
+            backgroundColor: "#feb0c0",
+          },
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL(
+              "img/article/article-market-home-top-2.jpg"
+            )}`,
+          },
+          // classes: ["bg-black"],
+        },
+        {
+          title: $t("Market.TopFeatured1Title"),
+          desc: $t("Market.TopFeatured1Desc"),
+          slideStyle: {
+            backgroundColor: "#fefef6",
+          },
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL(
+              "img/article/article-market-home-top-3.jpg"
+            )}`,
+          },
+        },
+        {
+          title: $t("Market.TopFeatured1Title"),
+          desc: $t("Market.TopFeatured1Desc"),
+          slideStyle: {
+            backgroundColor: "#202342",
+          },
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL(
+              "img/article/article-market-home-top-4.jpg"
+            )}`,
+          },
+        },
+      ];
     },
+  },
 
-    watch: {},
+  watch: {},
 
-    methods: {},
+  methods: {},
 
-    components: {}
-  }
+  components: {},
+};
 </script>

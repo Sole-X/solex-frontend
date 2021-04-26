@@ -1,4 +1,4 @@
-@import './head';
+@import "./head";
 
 .market-home-page {
   height: 100%;
@@ -27,7 +27,7 @@
       @include square(100%);
       padding-top: 70px;
       margin: 0 auto;
-      max-width: $max_width;
+      max-width: 1440px; /*$max_width;*/
       background: {
         size: contain;
         position: right;
@@ -97,7 +97,8 @@
       position: relative;
       transition: all 0.2s ease-out;
 
-      &:hover, &:active {
+      &:hover,
+      &:active {
         h2 {
           color: #fff;
         }
@@ -113,70 +114,79 @@
 
       &--all {
         .marketplace__category__icon {
-          background-image: url($public_path + "/img/icon/ic-main-category-all.svg");
+          background-image: url($public_path+"/img/icon/ic-main-category-all.svg");
         }
 
-        &:hover, &:active {
-          background-image: linear-gradient(344deg, $secondary_color 15%, #00b2e3);
+        &:hover,
+        &:active {
+          background-image: linear-gradient(
+            344deg,
+            $secondary_color 15%,
+            #00b2e3
+          );
 
           .marketplace__category__icon {
-            background-image: url($public_path + "/img/icon/ic-main-category-all-wh.svg");
+            background-image: url($public_path+"/img/icon/ic-main-category-all-wh.svg");
           }
         }
       }
 
       &--ethereum {
         .marketplace__category__icon {
-          background-image: url($public_path + "/img/icon/ic-chain-ethereum.svg");
+          background-image: url($public_path+"/img/icon/ic-chain-ethereum.svg");
         }
 
-        &:hover, &:active {
+        &:hover,
+        &:active {
           background-image: linear-gradient(114deg, #454a75, #656ac6 100%);
 
           .marketplace__category__icon {
-            background-image: url($public_path + "/img/icon/ic-chain-ethereum-wh.svg");
+            background-image: url($public_path+"/img/icon/ic-chain-ethereum-wh.svg");
           }
         }
       }
 
       &--klaytn {
         .marketplace__category__icon {
-          background-image: url($public_path + "/img/icon/ic-chain-klaytn.svg");
+          background-image: url($public_path+"/img/icon/ic-chain-klaytn.svg");
         }
 
-        &:hover, &:active {
+        &:hover,
+        &:active {
           background-image: linear-gradient(294deg, #a39481, #6f6558);
 
           .marketplace__category__icon {
-            background-image: url($public_path + "/img/icon/ic-chain-klaytn-wh.svg");
+            background-image: url($public_path+"/img/icon/ic-chain-klaytn-wh.svg");
           }
         }
       }
 
       &--art {
         .marketplace__category__icon {
-          background-image: url($public_path + "/img/icon/ic-main-category-art.svg");
+          background-image: url($public_path+"/img/icon/ic-main-category-art.svg");
         }
 
-        &:hover, &:active {
+        &:hover,
+        &:active {
           background-image: linear-gradient(294deg, #eb9083 100%, #e78091 0%);
 
           .marketplace__category__icon {
-            background-image: url($public_path + "/img/icon/ic-main-category-art-wh.svg");
+            background-image: url($public_path+"/img/icon/ic-main-category-art-wh.svg");
           }
         }
       }
 
       &--game {
         .marketplace__category__icon {
-          background-image: url($public_path + "/img/icon/ic-main-category-game.svg");
+          background-image: url($public_path+"/img/icon/ic-main-category-game.svg");
         }
 
-        &:hover, &:active {
+        &:hover,
+        &:active {
           background-image: linear-gradient(114deg, #231f20, #525366);
 
           .marketplace__category__icon {
-            background-image: url($public_path + "/img/icon/ic-main-category-game-wh.svg");
+            background-image: url($public_path+"/img/icon/ic-main-category-game-wh.svg");
           }
         }
       }
@@ -242,7 +252,8 @@
         width: 220px !important;
       }
 
-      .swiper-button-prev, .swiper-button-next {
+      .swiper-button-prev,
+      .swiper-button-next {
         @include square(24px);
         top: 75px;
         margin-top: 0;
@@ -315,13 +326,13 @@
       width: calc(100% - 480px);
       padding: 40px;
 
-      >h5 {
+      > h5 {
         font-weight: bold;
         font-size: 16px;
         color: $primary_color;
       }
 
-      >article {
+      > article {
         height: calc(100% - 20px);
         @include vertical-flex-end;
       }
@@ -380,15 +391,19 @@
 
             .market-home__banner__item-content-link {
               font-size: 14px;
-              color: #666666
+              color: #666666;
             }
           }
 
           img {
-            width: 120px;
+            // width: 120px;
+            // position: absolute;
+            // top: 32px;
+            // right: 30px;
+            width: 100%;
             position: absolute;
-            top: 32px;
-            right: 30px;
+            top: 0;
+            right: 0;
           }
         }
 
@@ -416,10 +431,14 @@
           }
 
           img {
-            width: 110px;
+            // width: 110px;
+            // position: absolute;
+            // top: 30.9px;
+            // right: 32.6px;
+            width: 100%;
             position: absolute;
-            top: 30.9px;
-            right: 32.6px;
+            top: 0;
+            right: 0;
           }
         }
 
@@ -447,10 +466,15 @@
           }
 
           img {
-            width: 120px;
+            // width: 120px;
+            // position: absolute;
+            // top: 35px;
+            // right: 30px;
+
+            width: 100%;
             position: absolute;
-            top: 35px;
-            right: 30px;
+            top: 0;
+            right: 0;
           }
         }
       }
@@ -468,7 +492,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     align-self: flex-start;
-    border-right : 1px solid #f2f2f2;
+    border-right: 1px solid #f2f2f2;
     border-bottom: 1px solid #f2f2f2;
   }
 
@@ -614,7 +638,8 @@
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
-          background: url($public_path + '/img/icon/ic-select-arrow.svg') no-repeat 92% 50%;
+          background: url($public_path+"/img/icon/ic-select-arrow.svg")
+            no-repeat 92% 50%;
         }
 
         .marketplace-filter-popover-price-input-section {
@@ -674,7 +699,8 @@
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
-          background: url($public_path + '/img/icon/ic-select-arrow.svg') no-repeat 85% 50%;
+          background: url($public_path+"/img/icon/ic-select-arrow.svg")
+            no-repeat 85% 50%;
         }
 
         button {
@@ -685,7 +711,7 @@
           overflow: hidden;
 
           &::before {
-            content: '';
+            content: "";
             position: absolute;
             top: 0px;
             left: 0px;
@@ -693,12 +719,11 @@
             height: 100%;
             background-color: #8592ad;
             opacity: 0;
-            -webkit-transition: .2s opacity ease-in-out;
-            transition: .2s opacity ease-in-out;
+            -webkit-transition: 0.2s opacity ease-in-out;
+            transition: 0.2s opacity ease-in-out;
           }
 
           &:hover::before {
-
           }
 
           &:hover {
@@ -718,7 +743,13 @@
             left: 0px;
             width: 100%;
             height: 3px;
-            background: -webkit-gradient(linear, right top, left top, from(#3fffd4), to($primary_color));
+            background: -webkit-gradient(
+              linear,
+              right top,
+              left top,
+              from(#3fffd4),
+              to($primary_color)
+            );
             background: linear-gradient(to left, #3fffd4, $primary_color);
             -webkit-animation: 2s animateTop linear infinite;
             animation: 2s animateTop linear infinite;
@@ -751,7 +782,13 @@
             right: 0px;
             height: 100%;
             width: 3px;
-            background: -webkit-gradient(linear, left bottom, left top, from(#3fffd4), to($primary_color));
+            background: -webkit-gradient(
+              linear,
+              left bottom,
+              left top,
+              from(#3fffd4),
+              to($primary_color)
+            );
             background: linear-gradient(to top, #3fffd4, $primary_color);
             -webkit-animation: 2s animateRight linear -1s infinite;
             animation: 2s animateRight linear -1s infinite;
@@ -784,7 +821,13 @@
             left: 0px;
             width: 100%;
             height: 3px;
-            background: -webkit-gradient(linear, left top, right top, from(#3fffd4), to($primary_color));
+            background: -webkit-gradient(
+              linear,
+              left top,
+              right top,
+              from(#3fffd4),
+              to($primary_color)
+            );
             background: linear-gradient(to right, #3fffd4, $primary_color);
             -webkit-animation: 2s animateBottom linear infinite;
             animation: 2s animateBottom linear infinite;
@@ -817,7 +860,13 @@
             left: 0px;
             height: 100%;
             width: 3px;
-            background: -webkit-gradient(linear, left top, left bottom, from(#3fffd4), to($primary_color));
+            background: -webkit-gradient(
+              linear,
+              left top,
+              left bottom,
+              from(#3fffd4),
+              to($primary_color)
+            );
             background: linear-gradient(to bottom, #3fffd4, $primary_color);
             -webkit-animation: 2s animateLeft linear -1s infinite;
             animation: 2s animateLeft linear -1s infinite;
