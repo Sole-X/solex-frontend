@@ -1,4 +1,4 @@
-@import './head';
+@import "./head";
 
 .main-menu {
   min-width: 1080px;
@@ -17,7 +17,7 @@
   height: 90px;
   position: relative;
 
-  >div {
+  > div {
     @include square(100%);
     margin: 0 auto;
     max-width: $max_width;
@@ -28,6 +28,10 @@
     width: calc(50% + 55px);
     text-align: right;
     margin-right: auto;
+
+    img {
+      height: 32px;
+    }
   }
 
   .main-header__language {
@@ -113,7 +117,7 @@
       font-size: 16px;
       transition: all 0.2s ease-out;
 
-      >span {
+      > span {
         cursor: pointer;
       }
 
@@ -127,23 +131,22 @@
   }
   .main-nav__tab {
     height: 50px;
-    &--selected{
-      span { 
+    &--selected {
+      span {
         color: #000;
         font-weight: bold;
         padding-bottom: 1px;
-
       }
       border-bottom: 4px solid $primary_color;
     }
 
-    &:hover{
-      span { 
+    &:hover {
+      span {
         transition: all 0.12s ease-in-out 0s;
         color: #000;
         font-weight: bold;
       }
-    }    
+    }
   }
 
   .common-search-bar {
@@ -159,7 +162,7 @@
       color: $gen_gray;
       background: {
         position: right center;
-        image: url($public_path + "/img/icon/ic-chevron-bottom-gray.svg");
+        image: url($public_path+"/img/icon/ic-chevron-bottom-gray.svg");
       }
     }
 
@@ -179,14 +182,16 @@
       }
     }
 
-    &--dirty, &:hover, &:active {
+    &--dirty,
+    &:hover,
+    &:active {
       border-color: $primary_color;
 
       .common-search-bar__option {
         color: $gen_black;
         background: {
           position: right center;
-          image: url($public_path + "/img/icon/ic-chevron-bottom-black.svg");
+          image: url($public_path+"/img/icon/ic-chevron-bottom-black.svg");
         }
       }
     }
@@ -245,7 +250,6 @@
       color: $gen_gray;
     }
   }
-
 
   .main-footer__others {
     @include vertical-align-flex;
@@ -416,13 +420,15 @@
       position: relative;
       overflow: hidden;
 
-      >a, >button, >div {
+      > a,
+      > button,
+      > div {
         @include square(100%);
         @include center-align-flex;
       }
 
       &::after {
-        content: ' ';
+        content: " ";
         width: 100%;
         height: 4px;
         top: 0;
