@@ -38,7 +38,7 @@
       </div>
 
       <div class="main-footer__copyright">
-        Copyright© 2021 Ozys. All Rights Reserved.
+        Copyright© 2021 TriumphX. All Rights Reserved.
       </div>
     </div>
   </footer>
