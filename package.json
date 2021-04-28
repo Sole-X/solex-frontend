@@ -7,10 +7,9 @@
     "serve-dev": "vue-cli-service serve --mode dev",
     "serve-live": "vue-cli-service serve --mode live",
     "serve-prod": "vue-cli-service serve --mode prod",
-    "build": "vue-cli-service build --mode dev",
-    "build-dev": "vue-cli-service build --mode dev",
-    "build-live": "vue-cli-service build --mode live",
-    "build-prod": "vue-cli-service build --mode prod"
+    "build": "vue-cli-service build --mode local.dev",
+    "build-dev": "vue-cli-service build --mode jenkins.dev",
+    "build-live": "vue-cli-service build --mode jenkins.live"
   },
   "dependencies": {
     "axios": "^0.21.1",
