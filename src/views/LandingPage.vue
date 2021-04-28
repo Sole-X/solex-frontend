@@ -15,7 +15,7 @@
         <article>
           <div>
             <div>
-              <img :src="$static.getFileURL('img/logo/default-logo.svg')" />
+              <img :src="$static.getFileURL('img/logo/default-logo-no-text.svg')" />
             </div>
 
             <h1>

@@ -210,7 +210,7 @@
           image = item.nftDesc.image;
         }
         if (image) return image;
-        return this.$static.getFileURL('img/logo/default-logo.svg');
+        return this.$static.getFileURL('img/logo/default-logo-no-text.svg');
       },
 
       getItemFromAccount(item) {

@@ -23,7 +23,16 @@
   z-index: 999;
 
   .ui-focus-container__content {
+    cursor: pointer;
     @include square(100%);
+
+    ul {
+      li {
+        &:hover {
+          background-color: $background_hover;
+        }
+      }
+    }
   }
 
   &.common-search-bar__select {
@@ -137,8 +146,7 @@
 
       &--selected, &:hover, &:active {
         a {
-          color: #fff;
-          background: $primary_color;
+          background: $background_hover;
         }
       }
 

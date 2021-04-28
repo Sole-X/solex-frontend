@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
     <g fill="none" fill-rule="evenodd">
         <g>
-            <g transform="translate(-1198 -2159) translate(1198 2159)">
-                <circle cx="12" cy="12" r="12" fill="#E8E8E8"/>
+            <g transform="translate(-1194 -2170) translate(1194 2170)">
+                <circle cx="12" cy="12" r="12" fill="#00B2E3"/>
                 <rect width="12" height="13.5" x="6" y="5.25" fill="#FFF" rx="2"/>
-                <path fill="#E8E8E8" d="M8.25 9H14.25V10H8.25zM8.25 11.25H14.25V12.25H8.25zM8.25 13.5H11.25V14.5H8.25z"/>
+                <path fill="#00B2E3" d="M8.25 9H14.25V10H8.25zM8.25 11.25H14.25V12.25H8.25zM8.25 13.5H11.25V14.5H8.25z"/>
             </g>
         </g>
     </g>

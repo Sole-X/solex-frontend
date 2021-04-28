@@ -77,6 +77,16 @@
               backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-2.png')}`
             },
             classes: ['bg-black']
+          },
+          {
+            title: $t('Market.TopFeatured2Title'),
+            desc: $t('Market.TopFeatured2Desc'),
+            slideStyle: {
+              backgroundColor: "rgb(199, 219, 225)"
+            },
+            contentStyle: {
+              backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-3.png')}`
+            }
           }
         ]
       }

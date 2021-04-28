@@ -17,12 +17,14 @@
     <section class="asset-item__collection">
       <article class="asset-item__collection__description">
         <div class="asset-item__collection__description__links">
+          <!--
           <button :class="$bem('asset-item__collection__description__link', '', ['primary'])" v-clipboard:copy="'collection url'" v-clipboard:success="$_GlobalValueMixin_showCopyTooltip">
             <img :src="$static.getFileURL('img/icon/ic-copy-wh.svg')" alt="copy" />
           </button>
+          -->
 
           <button class="asset-item__collection__description__link" v-for="option in getItemExternalLinks" :key="option.type" @click="handleClickExternalLink(option)">
-            <img :src="option.image" :alt="option.type" />
+            <img :src="option.image" :alt="option.type" @click="option.onclick" />
           </button>
         </div>
       </article>
@@ -62,20 +64,39 @@
 
         return [
           {
+            type: 'link',
+            image: getFileURL('img/icon/ic-copy-wh.svg'),
+            onclick: () => {
+              // TODO: Link to collection url
+            }
+          },
+          {
             type: 'website',
-            image: getFileURL('img/icon/ic-website-wh.svg')
+            image: getFileURL('img/icon/ic-website-wh.svg'),
+            onclick: () => {
+              // TODO: Link to website
+            }
           },
           {
             type: 'discord',
-            image: getFileURL('img/icon/ic-sns-discord-wh.svg')
+            image: getFileURL('img/icon/ic-sns-discord-wh.svg'),
+            onclick: () => {
+              // TODO: Link to triumphx's discord channel. (about this collection.)
+            }
           },
           {
             type: 'medium',
-            image: getFileURL('img/icon/ic-medium.svg')
+            image: getFileURL('img/icon/ic-medium-collection.svg'),
+            onclick: () => {
+              // TODO: Link to tirumphx's Medium post. (about this collection.)
+            }
           },
           {
             type: 'twitter',
-            image: getFileURL('img/icon/ic-sns-twitter-wh.svg')
+            image: getFileURL('img/icon/ic-sns-twitter-wh.svg'),
+            onclick: () => {
+              // TODO: Link to triumphx's twitter message. (about this collection.)
+            }
           }
         ]
       }

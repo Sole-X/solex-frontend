@@ -1,3 +1,5 @@
+import { prepare, request, getResult } from 'klip-sdk';
+
 export const getDefaultState = () => ({
     isAccessing: false,
     requestKey: null
@@ -19,6 +21,78 @@ export default {
     },
 
     actions: {
+        async prepareKlip(store, payload) {
+            const {type, body} = payload;
+            const res = await prepare[type]({
+                ...body
+            });
+
+            if (res.err) {
+                // 에러 처리
+            } else if (res.request_key) {
+                this.$app.$eventBus.$emit('prepareKlipSuccess', res.request_key);
+            }
+        },
+
+        requestKlip(store, payload) {
+            const {requestKey} = payload;
+
+            if (!requestKey) {
+                // key를 받지 못하였을 때.
+                return;
+            }
+
+            request(requestKey);
+            this.$app.$eventBus.$emit('requestKlipSuccess');
+        },
+
+        getResultKlip(store, payload) {
+            const {requestKey} = payload;
+
+            if (!requestKey) {
+                return;
+            }
+
+            const result = getResult(requestKey);
+        },
+
+        async pollingUntilGetResult(store, payload) {
+            const self = this;
+            const {requestKey, callback} = payload;
+
+            if (!requestKey) {
+                return;
+            }
+
+            return new Promise((resolve, reject) => {
+                let cnt = 0;
+                let polling = setInterval(async () => {
+                    if (cnt > 60 * 5) {
+                        clearInterval(polling);
+                        resolve({
+                            success: false,
+                            error: new Error('polling_timeout')
+                        });
+                    }
+
+                    const res = await getResult(requestKey);
+
+                    if (res && res.status === 'completed' && res.request_key === requestKey) {
+                        clearInterval(polling);
+                        self.$app.$eventBus.$emit('klipRequestFinished');
+                        resolve({
+                            success: true,
+                            data: res
+                        });
+                    }
+
+                    callback && callback({ cnt, res });
+
+                    cnt += 1;
+                }, 1000);
+            })
+        },
+
         executeKlipWeb2App(store, payload) {
             const type = payload.type || null;
             const requestKey = payload.requestKey || null;
@@ -43,7 +117,6 @@ export default {
                     Log('err', 'There is not a requestKey.');
                 }
             }
-
         }
     },
 

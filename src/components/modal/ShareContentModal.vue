@@ -122,7 +122,7 @@
       },
 
       getKakaotalkImage() {
-        const url = this.data.item.metadata ? this.data.item.metadata.image : this.$static.getFileURL('img/logo/default-logo.svg');
+        const url = this.data.item.metadata ? this.data.item.metadata.image : this.$static.getFileURL('img/logo/default-logo-no-text.svg');
         return url;
       }
     },

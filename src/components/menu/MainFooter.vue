@@ -75,22 +75,22 @@
           {
             type: 'doc',
             url: 'https://github.com',
-            icon: 'ic-github.svg'
+            icon: 'ic-doc.svg'
           },
           {
             type: 'twitter',
             url: 'https://twitter.com',
-            icon: 'ic-sns-twitter.svg'
+            icon: 'ic-twitter.svg'
           },
           {
             type: 'medium',
             url: 'https://medium.com',
-            icon: 'ic-medium-black.svg'
+            icon: 'ic-medium.svg'
           },
           {
             type: 'contact',
             url: 'mailto:help@solex.com',
-            icon: 'ic-mail-black.svg'
+            icon: 'ic-contact.svg'
           }
         ]
       },

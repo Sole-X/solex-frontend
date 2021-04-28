@@ -11,11 +11,13 @@ const regexResult = {
   serve: commandRegex.exec(yarnScript)
 }
 
-let mode = process.VUE_CLI_SERVICE.mode
+let mode = process.env.NODE_ENV
 global.isServe = regexResult.serve && Array.isArray(regexResult.serve)
 
-if(!mode || mode === 'development' || mode === 'production') {
+if(!mode || mode === 'development') {
   mode = 'local.dev';
+} else if (mode === 'production') {
+  mode = 'local.base';
 }
 
 const withReport = mode.split('.report')[1] != null

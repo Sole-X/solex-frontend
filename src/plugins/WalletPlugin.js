@@ -2,6 +2,7 @@ import OzysWallet from '@/lib/ozys-wallet'
 import { kip7JsonInterface, kip17JsonInterface, kip7ByteCode, kip17ByteCode } from 'caver-js/packages/caver-kct/src/kctHelper'
 
 import Store from '@/store'
+import {getResult, request} from "klip-sdk";
 
 const $wallet = new OzysWallet({
   chain: 'KLAYTN',
@@ -12,7 +13,7 @@ const $wallet = new OzysWallet({
     1001: process.env.VUE_APP_PROVIDER_URL_BAOBAB
   },
   otherOptions: {
-    siteName: 'SOLE-X'
+    siteName: 'Sole-X'
   }
 })
 
@@ -34,6 +35,10 @@ export default class WalletPlugin {
     const { service, siteName } = $wallet.lastProps
 
     return $wallet.getStore().state.profile.getInstallURL(service, siteName)
+  }
+
+  getWallet() {
+    return $wallet;
   }
 
   getContract(params) {
@@ -88,7 +93,7 @@ export default class WalletPlugin {
       otherOptions: newProps.chain === 'ETHEREUM' ? {
         apiKey: process.env.VUE_APP_INFURA_KEY,
       } : {
-        siteName: 'SOLE-X'
+        siteName: 'Sole-X'
       }
     })
 
@@ -471,6 +476,24 @@ export default class WalletPlugin {
     let transactionHash
     let requestKey
 
+    Store.$app.$eventBus.$on('prepareKlipSuccess', key => {
+      if (!key) {
+        return;
+      }
+      requestKey = key;
+
+      Store.$app.showModal({
+        component: 'KlipRequestModal',
+        params: {
+          requestKey: requestKey
+        }
+      })
+
+      Store.$app.$eventBus.$on('klipRequestFinished', async (payload) => {
+        Log('d klip finished!');
+      });
+    })
+
     promise.once('requestKey', key => { // Klip 전용
       if(!key) {
         return
@@ -532,6 +555,59 @@ export default class WalletPlugin {
 
       Log('sendTx Error : ', JSON.stringify(e))
     })
+
+    if (isKlip) {
+      let type;
+      let body;
+
+      switch (action) {
+        case 'deposit':
+          type = 'sendKLAY';
+          body = {
+            bappName: process.env.VUE_APP_SITE_NAME,
+            to: _tx.to,
+            amount: Store.$app.$bn.toMaxUnit(_tx.value, 18, 6),
+            from: Store.getters.getUserInfo.address
+          }
+          break;
+        case 'depositToken':
+          type = 'sendToken';
+          body = {
+            bappName: process.env.VUE_APP_SITE_NAME,
+            to: _tx.to,
+            amount: '',
+            contract: ''
+          }
+          break;
+        case 'sendCard':
+          type = 'sendCard';
+          body = {
+            bappName: process.env.VUE_APP_SITE_NAME,
+            to: _tx.to,
+            id: '',
+            contract: ''
+          }
+          break;
+        case 'executeContract':
+          type = 'executeContract';
+          body = {
+            bappName: process.env.VUE_APP_SITE_NAME,
+            to: _tx.to,
+            value: '',
+            abi: '',
+            params: ''
+          }
+        default:
+          type = '';
+          body = {};
+          break;
+      }
+
+      Store.dispatch('prepareKlip', {
+        type,
+        body
+      });
+    }
 
     return promise
   }

@@ -10,6 +10,7 @@ import BuyOfferABI from '@/constants/abi/BuyOfferContract'
 import SellOfferABI from '@/constants/abi/SellOfferContract'
 import StakingABI from '@/constants/abi/StakingContract'
 import EthvaultABI from '@/constants/abi/ethvault-abi.json';
+import ExecutorABI from '@/constants/abi/ExecutorContract.json';
 //
 import EthvaultTestABI from '@/constants/abi/EthvaultTest.json';
 //
@@ -59,6 +60,10 @@ export default class RequestTxPlugin {
   // Only Klaytn 컨트랙트
   getSellOfferContract() {
     return new this._caver.contract(SellOfferABI, ContractList.SellOfferContract)
+  }
+
+  getExecutorContract() {
+    return new this._caver.contract(ExecutorABI, ContractList.ExecutorContract);
   }
 
   // 입출금 대상 주소(클레이튼 : Reserve, 이더리움 : 입금은 Bridge 출금은 Reserve)
@@ -301,7 +306,7 @@ export default class RequestTxPlugin {
   }
 
   // TODO : 이미 예치 이력이 있는 것은 Approve 체크 안하기
-  async depositToken(token, amount, chain) {
+  async depositToken(token, amount, chainInfo) {
     const isToken = parseInt(token) !== 0
 
     if(isToken) {
@@ -331,7 +336,7 @@ export default class RequestTxPlugin {
       }
     }
 
-    if(chain === 'ETHEREUM') {
+    if(chainInfo.chain === 'ETHEREUM') {
       return await this.depositBridgeToken(token, amount)
     }
 
