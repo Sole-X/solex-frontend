@@ -59,6 +59,7 @@
 
         <section v-if="getUserDeposited.tokens.length === 0" class="user-collapsible__content">
           <div class="user-collapsible_empty">
+            <img :src="$static.getFileURL('img/icon/ic-info-black.svg')">
             <h5>{{$t('UserPage.EmptyAssetsTitle')}}</h5>
             <p class="text-gray">{{$t('UserPage.EmptyAssetsDescription')}}</p>
           </div>
@@ -117,6 +118,7 @@
 
         <section v-if="getOnSaleOrAuctionAssets.length === 0" class="user-collapsible__content">
           <div class="user-collapsible_empty">
+            <img :src="$static.getFileURL('img/icon/ic-info-black.svg')">
             <h5>{{$t('UserPage.EmptyAssetsTitle')}}</h5>
             <p class="text-gray">{{$t('UserPage.EmptyAssetsDescription')}}</p>
           </div>
@@ -189,10 +191,11 @@
 
         <section v-if="getOnBuyAssets.length === 0" class="user-collapsible__content">
           <div class="user-collapsible_empty">
+            <img :src="$static.getFileURL('img/icon/ic-info-black.svg')">
             <h5>{{$t('UserPage.EmptyBuyItemsTitle')}}</h5>
             <p class="text-gray">{{$t('UserPage.EmptyBuyItemsDescription')}}</p>
 
-            <button :class="$bem('common-submit-button', '', ['primary']) + ' buy-section'" @click="handleMakeBuyOffer()">
+            <button :class="$bem('common-submit-button-empty', '', ['primary']) + ' buy-section'" @click="handleMakeBuyOffer()">
               {{$t('Market.RegisterOffer')}}
             </button>
           </div>

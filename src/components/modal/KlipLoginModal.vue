@@ -50,7 +50,7 @@ export default {
     });
 
     (function () {
-      const requestKey = self.getRequestKey || null;
+      const requestKey = (self.data && self.data.requestKey) || self.getRequestKey || null;
       if (requestKey) {
         const webStr = `https://klipwallet.com/?target=/a2a?request_key=${requestKey}`;
         const androidStr = `intent://klipwallet/open?url=https://klipwallet.com/?target=/a2a?request_key=${requestKey}#Intent;scheme=kakaotalk;package=com.kakao.talk;end`;

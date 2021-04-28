@@ -14,11 +14,15 @@
     <button @click="routeClicked">route</button>
     <br>
     <button @click="transactionFailTest">transaction fail</button>
+    <button @click="klipSendKlay">sendklay</button>
+    <br><br>
+    <button @click="klipRequestModal">showrequestModalKlip</button>
   </div>
 </template>
 
 <script>
 import {mapGetters} from 'vuex';
+import { prepare, request, getResult } from 'klip-sdk';
 let $t, self
 
 export default {
@@ -131,6 +135,44 @@ export default {
     async transactionFailTest() {
       const res = await this.$tx.cancelNegotiation('0xfc0ba2c8e42228bec0b8d1102a37a13bca6b12c505c5e422b59fac94606ed0a5', {
         type: 'cancelNegotiation'
+      });
+    },
+
+    async klipAuth() {
+      const bappName = 'Sole-X';
+      const res = await prepare.auth({bappName});
+    },
+
+    async klipSendKlay() {
+      const _reserve = this.$tx.getReserveContract();
+      const bappName = 'Sole-X';
+      const to = _reserve._address;
+      const amount = '0.0001';
+      const executor = this.$tx.getExecutorContract();
+      const resPrepare = await prepare.sendKLAY({bappName, to, amount});
+      const {expiration_time, request_key, status} = resPrepare;
+      if (request_key) {
+        this.showModal({
+          component: 'KlipLoginModal',
+          params: {
+            requestKey: request_key
+          }
+        })
+
+        this.$eventBus.$on('klipRequestFinished', async (payload) => {
+          const resRequest = await request(request_key, () => alert("error"));
+          const resGetResult = await getResult(request_key);
+        });
+
+      }
+    },
+
+    klipRequestModal() {
+      this.showModal({
+        component: 'KlipRequestModal',
+        params: {
+          requestKey: '1234'
+        }
       });
     }
   },

@@ -433,21 +433,33 @@
   }
 
   .order-request-status-modal__header {
-    padding: 0 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
     margin-top: 10px;
     margin-bottom: 20px;
 
-    span {
-      &:nth-child(1) {
+    div.order-request-status-modal__header-left {
+      span {
+        &:nth-child(1) {
 
+        }
+
+        &:nth-child(2) {
+          margin: 0 5px;
+        }
+
+        &:nth-child(3) {
+          font-weight: bold;
+        }
       }
+    }
 
-      &:nth-child(2) {
-        margin: 0 5px;
-      }
-
-      &:nth-child(3) {
-        font-weight: bold;
+    div.order-request-status-modal__header-right {
+      img {
+        cursor: pointer;
+        width: 14px;
       }
     }
   }
@@ -856,6 +868,7 @@
     padding: 12px;
     margin-bottom: 15px;
     background: #fafbfc;
+    outline-color: $primary_color;
   }
 
   .common-submit-button {
@@ -1378,5 +1391,65 @@
   div {
     display: inline;
     font-size: 18px;
+  }
+}
+
+.klip-request-modal {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 480px;
+  height: 320px;
+  background-color: white;
+  padding: 40px 40px 40px 40px;
+
+  .klip-request-modal-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  .klip-request-modal-main {
+    .klip-request-modal-main-top {
+      margin-bottom: 36px;
+      .klip-request-modal-main-top-title {
+        font-size: 20px;
+        color: #333333;
+        text-align: center;
+      }
+    }
+
+    .klip-request-modal-main-bottom {
+      display: flex;
+      justify-content: space-between;
+
+      .klip-request-modal-main-bottom-qr {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 180px;
+        height: 180px;
+        border: 1px solid #cccccc;
+      }
+
+      .klip-request-modal-main-bottom-info {
+        width: 200px;
+
+        img {
+          margin-bottom: 11px;
+        }
+
+        .klip-request-modal-main-bottom-info-desc {
+          font-size: 12px;
+        }
+      }
+    }
   }
 }

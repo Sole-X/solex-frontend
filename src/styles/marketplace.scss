@@ -496,6 +496,10 @@
           color: #333333;
         }
 
+        img.marketplace-filter-item-top-chevron {
+          width: 14px;
+        }
+
         .marketplace-filter-reset {
           display: inline-flex;
           align-items: center;
@@ -668,6 +672,42 @@
         justify-content: space-between;
         margin-bottom: 16px;
 
+        .marketplace-sell-items-header-bottom-select {
+          position: relative;
+          width: 160px;
+          height: 32px;
+          border: solid 1px #e8e8e8;
+          background: url($public_path + '/img/icon/ic-select-arrow.svg') no-repeat 90% 50%;
+
+          .marketplace-sell-items-header-bottom-select-box {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            padding: 0 16px;
+          }
+
+          .marketplace-sell-items-header-bottom-select-options {
+            position: absolute;
+            width: 160px;
+            border: solid 1px #e8e8e8;
+            top: 34px;
+            left: 0;
+            background-color: white;
+            z-index: 1001;
+            padding: 8px 0;
+            ul {
+              li {
+                cursor: pointer;
+                padding: 0 16px;
+                &:hover {
+                  background-color: $background_hover;
+                }
+              }
+            }
+          }
+        }
+
         select {
           border: solid 1px #e8e8e8;
           padding: 8px 16px;
@@ -675,6 +715,10 @@
           -moz-appearance: none;
           appearance: none;
           background: url($public_path + '/img/icon/ic-select-arrow.svg') no-repeat 85% 50%;
+
+          & option {
+            padding: 8px 20px;
+          }
         }
 
         button {
@@ -859,6 +903,11 @@
         align-items: center;
         width: 100%;
         height: calc(100vh - 150px);
+      }
+
+      &::after {
+        content: '';
+        width: 220px;
       }
     }
   }
