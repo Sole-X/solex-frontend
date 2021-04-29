@@ -206,7 +206,10 @@
         const itemCurrencyAddress = this.item ? this.item.currency : null;
 
         if (itemCurrencyAddress) {
-          const itemCurrency = _.find(supportCurrency, { tokenAddress: itemCurrencyAddress });
+          const itemCurrency = _.find(supportCurrency, row => {
+            if (this.$wallet.isSameAddress(row.tokenAddress, itemCurrencyAddress)) return true;
+            return false;
+          });
           if (itemCurrency) {
             return itemCurrency;
           }
