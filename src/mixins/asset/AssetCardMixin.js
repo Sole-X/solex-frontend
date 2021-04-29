@@ -1,22 +1,29 @@
 export default {
   methods: {
     $_AssetCardMixin_getImage(info) {
-      if(!info || !info.metadata) {
-        return {}
+      if (!info || !info.metadata) {
+        return {};
       }
 
-      const { image } = info.metadata
+      if (info.image && info.image !== "") {
+        return {
+          backgroundImage: `url(${info.image})`,
+          backgroundSize: "contain",
+        };
+      }
 
-      if(!image) {
-        return {}
+      const { image } = info.metadata;
+
+      if (!image) {
+        return {};
       }
 
       if (image) {
         return {
           backgroundImage: `url(${image})`,
-          backgroundSize: 'contain'
-        }
+          backgroundSize: "contain",
+        };
       }
-    }
-  }
-}
+    },
+  },
+};
