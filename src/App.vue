@@ -78,7 +78,7 @@
 
       showRouterView() {
         return !this.$route.meta.needLogin || this.getUserInfo.address
-      }
+      },
     },
     watch: {
       '$i18n.locale'(newVal) {

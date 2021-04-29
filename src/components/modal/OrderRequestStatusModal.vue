@@ -9,16 +9,22 @@
       </h6>
     </article>
     -->
-    <header v-if="data.item.isAuction" class="order-request-status-modal__header">
-      <span>{{ $t('Market.Bids0') }}</span>
-      <span>:</span>
-      <span>{{ getBasePrice }}</span>
+    <header class="order-request-status-modal__header">
+      <div v-if="data.item.isAuction" class="order-request-status-modal__header-left">
+        <span>{{ $t('Market.Bids0') }}</span>
+        <span>:</span>
+        <span>{{ getBasePrice }}</span>
+      </div>
+      <div v-else></div>
+      <div class="order-request-status-modal__header-right">
+        <img @click="() => close()" :src="$static.getFileURL('img/icon/ic-close-gray.svg')" >
+      </div>
     </header>
 
     <article class="gen-modal__content order-request-status-modal__table">
       <div class="order-request-status-modal__thead">
         <div :class="$bem('order-request-status-modal__tcol', '', [col.type])" v-for="col in getTableHeaders" :key="col.type">
-          <strong>{{col.text}}</strong>
+          {{col.text}}
         </div>
       </div>
 

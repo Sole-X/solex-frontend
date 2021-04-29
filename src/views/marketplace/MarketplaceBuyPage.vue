@@ -24,18 +24,26 @@
           {{ $t('Market.ResultNum', {total: total}) }}
         </div>
         <div class="marketplace-sell-items-header-bottom">
-          <select @change="orderChanged" ref="orderOptions">
-            <option value='DATE'>{{ $t('Market.OrderByNewest') }}</option>
-            <option value='POP'>{{ $t('Market.OrderByPopular') }}</option>
-            <option value='PRICE~'>{{ $t('Market.OrderByLowestPrice') }}</option>
-            <option value='PRICE'>{{ $t('Market.OrderByHighestPrice') }}</option>
-          </select>
+          <div class="marketplace-sell-items-header-bottom-select">
+            <div class="marketplace-sell-items-header-bottom-select-box" ref="selectBox" @click="selectBoxClicked">
+              {{ selectedOption() }}
+            </div>
+            <div class="marketplace-sell-items-header-bottom-select-options" ref="selectOption" v-show="showSelectBox">
+              <ul>
+                <li data-value='DATE' data-appear='Market.OrderByNewest' @click="optionClicked">{{ $t('Market.OrderByNewest') }}</li>
+                <li data-value='POP' data-appear='Market.OrderByPopular' @click="optionClicked">{{ $t('Market.OrderByPopular') }}</li>
+                <li data-value='PRICE~' data-appear='Market.OrderByLowestPrice' @click="optionClicked">{{ $t('Market.OrderByLowestPrice') }}</li>
+                <li data-value='PRICE' data-appear='Market.OrderByHighestPrice' @click="optionClicked">{{ $t('Market.OrderByHighestPrice') }}</li>
+              </ul>
+            </div>
+          </div>
+
           <button @click="registerClicked">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            {{ $t('Market.RegisterOffer') }}
+            <svg width="160px" height="40px" viewBox="0 0 160 40" class="border">
+              <polyline points="159,1 159,39 1,39 1,1 159,1" class="bg-line" />
+              <polyline points="159,1 159,39 1,39 1,1 159,1" class="hl-line" />
+            </svg>
+            <span>{{ $t('Market.RegisterOffer') }}</span>
           </button>
         </div>
       </header>
@@ -113,7 +121,13 @@ export default {
         }
       }
     }, 50);
+    this.clickEvent = (event) => {
+      if (!this.$refs.selectBox.contains(event.target) && !this.$refs.selectOption.contains(event.target)) {
+        this.showSelectBox = false;
+      }
+    }
     window.addEventListener('scroll', this.scrollEvent);
+    window.addEventListener('click', this.clickEvent);
   },
 
   updated() {
@@ -124,6 +138,7 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener('scroll', this.scrollEvent);
+    window.removeEventListener('click', this.clickEvent);
   },
 
   data() {
@@ -137,7 +152,9 @@ export default {
         section: 'order',
         value: 'POP'
       },
-      curStatus: []
+      curStatus: [],
+      showSelectBox: false,
+      selectedOption: () => $t('Market.SelectOrder'),
     }
   },
 
@@ -242,6 +259,18 @@ export default {
       imageElemList.forEach((elem) => {
         io.observe(elem);
       })
+    },
+
+    selectBoxClicked() {
+      this.showSelectBox = !this.showSelectBox;
+    },
+
+    optionClicked(event) {
+      const value = event.target.dataset.value;
+      const appear = event.target.dataset.appear;
+      this.showSelectBox = false;
+      this.selectedOption = () => $t(appear);
+      this.orderChanged(new Event('change'), value);
     }
   },
 

@@ -340,7 +340,9 @@
     "PeriodOptionMinute": "{num} minutes",
     "PeriodOptionWeek": "{num} week",
     "PeriodOptionWeeks": "{num} weeks",
-    "PeriodOptionDate": "{num} days"
+    "PeriodOptionDate": "{num} days",
+    "SelectOrder": "Sort by",
+    "SelectPrice": ""
   },
   "UserPage": {
     "MyInfo": "My Info",
@@ -390,9 +392,9 @@
     "EmptyAssetsDescription": "Sorry… no assets found inside your wallet",
     "DepositTokenTitle": "Deposit {token}",
     "WithdrawTokenTitle": "Withdraw {token}",
-    "DepositAmount": "Amount To Deposit",
-    "WithdrawAmount": "Amount To Withdraw",
-    "TransferAmount": "Amount To Transmit",
+    "DepositAmount": "Amount to Deposit",
+    "WithdrawAmount": "Amount to Withdraw",
+    "TransferAmount": "Amount to Transmit",
     "TransferAddress": "Recipient Address",
     "MyTokenBalance": "Your {token} Balance",
     "ReserveInputNeedConfirm": "Please confirm the transaction in your wallet",

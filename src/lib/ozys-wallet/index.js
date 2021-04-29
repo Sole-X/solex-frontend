@@ -207,6 +207,9 @@ var OzysWallet = /** @class */ (function () {
         }
         return this.platform.wallet.broadcastTx(tx);
     };
+    OzysWallet.prototype.prepare = function (type, body) {
+        return this.platform.wallet.prepare(type, body);
+    };
     OzysWallet.prototype.getBlockUrl = function (block) {
         return network_1.getBlockUrl(this.platform.name, this.getStore().state.network, block);
     };
