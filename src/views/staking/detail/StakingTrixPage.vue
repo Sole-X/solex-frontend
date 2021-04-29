@@ -15,14 +15,14 @@
                 class="staking-trix-amount-item__title-tooltip"
                 data-tooltip-text="사용자 Sole-X 계정의 현재 TRIX 토큰 수량을 의미합니다."
             >
-              <span>?</span>
+              <img :src="$static.getFileURL('img/icon/ic-staking-question.svg')">
             </div>
             <div
                 v-else
                 class="staking-trix-amount-item__title-tooltip"
                 data-tooltip-text="The current amount of TRIX deposited in your Sole-X account."
             >
-              <span>?</span>
+              <img :src="$static.getFileURL('img/icon/ic-staking-question.svg')">
             </div>
           </div>
           <div class="staking-trix-amount-item__balance-container">
@@ -73,14 +73,14 @@
               class="staking-trix-amount-item__title-tooltip"
               data-tooltip-text="사용자가 Sole-X에 스테이킹한 TRIX 토큰의 현재 수량을 의미합니다."
             >
-              <span>?</span>
+              <img :src="$static.getFileURL('img/icon/ic-staking-question.svg')">
             </div>
             <div
               v-else
               class="staking-trix-amount-item__title-tooltip"
               data-tooltip-text="The current amount you have staked in Sole-X"
             >
-              <span>?</span>
+              <img :src="$static.getFileURL('img/icon/ic-staking-question.svg')">
             </div>
           </div>
           <div class="staking-trix-amount-item__balance-container">

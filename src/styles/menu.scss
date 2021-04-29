@@ -8,7 +8,7 @@
   left: 0;
   position: fixed;
   background: #fff;
-  z-index: 99;
+  z-index: 999;
   border-bottom: 1px solid #e8e8e8;
 }
 
@@ -64,7 +64,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     font-weight: 500;
-    border: 1px solid $primary_color;
+    background-color: rgba(0, 178, 227, 0.1);
 
     img {
       @include full-circle(16px);
@@ -408,7 +408,7 @@
     width: 100%;
     height: 48px;
     display: flex;
-    border-bottom: 1px solid #231f20;
+    border-bottom: 1px solid #c1c5cc;
 
     .main-page__inner-nav__tab {
       width: 150px;
@@ -442,9 +442,8 @@
         height: 100%;
         margin-top: 1px;
         background: #fff;
-        border-color: #231f20;
+        border-color: #c1c5cc;
         border-top-color: $primary_color;
-        // transition: all 0.2s ease-out;
 
         a {
           color: $gen_black;

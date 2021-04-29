@@ -24,7 +24,7 @@
           <h6 class="text-lightblack">{{getMyBalanceTitle}}</h6>
           <div class="reserve-input-modal__form__input">
             <span>
-              <strong>{{getSelectedBalance ? getSelectedBalance.dprec(4) : getSelectedBalance | addComma}}</strong>
+              <strong>{{getMyBalanceAmount | addComma}}</strong>
             </span>
             <span class="text-gray">{{getCurrencyInfo.symbol}}</span>
           </div>
@@ -168,8 +168,9 @@
         agreeTerms: false,
         isAmountAvail: true,
         inputAmount: '0',
+        inputAmountComplete: null,
         inputAddress: '',
-        selectedPercent: 0
+        selectedPercent: 0,
       }
     },
 
@@ -184,6 +185,22 @@
         return $t('UserPage.MyTokenBalance', {
           token: getCurrencyInfo.symbol
         })
+      },
+
+      getMyBalanceAmount() {
+        const { action } = this.data;
+
+        let appearDecimal;
+        if (action === 'deposit' || action === 'withdraw' || action === 'transfer') {
+          appearDecimal = 8;
+        } else {
+          appearDecimal = 4;
+        }
+
+        if (this.getSelectedBalance) {
+          return this.getSelectedBalance.dprec(appearDecimal);
+        }
+        return this.getSelectedBalance;
       },
 
       getMyTokenTitle() {
@@ -314,6 +331,31 @@
         return '0'
       },
 
+      getSelectedOriginalBalance() {
+        const { action } = this.data;
+        const { getCurrencyInfo } = this;
+
+        if (action === 'deposit') {
+          return getCurrencyInfo.balance;
+        }
+
+        if (action === 'withdraw') {
+          return getCurrencyInfo.deposit;
+        }
+
+        if (action === 'staking') {
+          return getCurrencyInfo.deposit;
+        }
+
+        if (action === 'unstaking') {
+          return String(this.getStakingAmount);
+        }
+
+        if (action === 'transfer') {
+          return getCurrencyInfo.deposit;
+        }
+      },
+
       getTokenId() {
         let tokenId;
         if (this.data.token && this.data.token.metadata) {
@@ -328,7 +370,7 @@
     watch: {
       selectedPercent(newVal) {
         this.$refs.percent.close()
-        this.inputAmount = this.$bn.mulBN(this.getSelectedBalance, String(newVal)).toString().dprec(4)
+        this.inputAmount = this.$bn.mulBN(this.getSelectedBalance, String(newVal)).toString();
       },
 
       inputAmount(newVal) {
@@ -341,6 +383,32 @@
         } else {
           this.isAmountAvail = false;
           this.amountErrorInfo.text = $t('Staking.AmountErrorInfo')
+        }
+
+        // 소숫점 4자리 밑으로 출력 x
+        let appearDecimal;
+
+        const { action } = this.data;
+        if (action === 'deposit' || action === 'withdraw' || action === 'transfer') {
+          appearDecimal = 8;
+        } else {
+          appearDecimal = 4;
+        }
+
+        let dotIdx = null;
+        let flag = false;
+        let cnt = 0;
+        for (let i = 0; i < newVal.length; i++) {
+          const c = this.inputAmount[i];
+          if (flag)
+            cnt += 1;
+          if (c === '.') {
+            flag = true;
+            dotIdx = i;
+          }
+        }
+        if (cnt > appearDecimal && dotIdx) {
+          this.inputAmount = newVal.substring(0, dotIdx + appearDecimal + 1);
         }
       }
     },
@@ -366,6 +434,7 @@
           this.errorInfo.text = $t('UserPage.ReserveInputAmountErr')
         }
 
+        // TODO : 큰 금액의 경우 overflow가 발생할 수 있으므로 string 형식으로 변환해야 함.
         this.errorInfo.text = ''
         let sendInputAmount = Number(inputAmount);
         if (this.getChainInfo.chain === 'ETHEREUM') {
@@ -381,7 +450,6 @@
 
         // TODO : 로딩 끝나고 실제로 성공하면 닫기
         this.close()
-
         if (action === 'transfer') {
           // 전송하기는 파라미터가 2개이므로 분기 처리.
           this.data.onSubmit(String(sendInputAmount), inputAddress);
@@ -389,14 +457,18 @@
           // transferNft 는 toAddress가 파라미터
           this.data.onSubmit(inputAddress);
         } else {
-          this.data.onSubmit(String(sendInputAmount))
+          if (this.getChainInfo.chain === 'ETHEREUM') {
+            this.data.onSubmit(String(sendInputAmount))
+          } else {
+            this.data.onSubmit(this.inputAmount);
+          }
         }
       },
 
       handleSelectedPercent(percent) {
         this.$refs.percent.close()
         this.selectedPercent = percent
-        this.inputAmount = this.$bn.mulBN(this.getSelectedBalance, String(percent)).toString().dprec(4)
+        this.inputAmount = this.$bn.mulBN(this.getSelectedBalance, String(percent)).toString();
       },
 
       inputAddressCopied() {

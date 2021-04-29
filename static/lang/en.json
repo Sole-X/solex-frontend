@@ -27,10 +27,7 @@
     "Edit": "Edit",
     "CopyUrl": "Copy URL",
     "CopySuccess": "Copied!</br/>Press Ctrl + V to use it.",
-    "Item": [
-      "Item",
-      "Items"
-    ],
+    "Item": ["Item", "Items"],
     "Complete": "Complete",
     "Success": "Success",
     "Currency": "Currency",
@@ -53,10 +50,7 @@
     "None": "None",
     "Optional": "Optional",
     "Confirm": "Confirm",
-    "Asset": [
-      "Asset",
-      "Assets"
-    ],
+    "Asset": ["Asset", "Assets"],
     "Save": "Save",
     "State": "State",
     "Coin": "Coin",
@@ -69,11 +63,7 @@
     "Withdraw": "Withdraw",
     "Owner": "Owner",
     "SearchPlaceholder": "Search by Item / Collection / Account",
-    "SearchItems": [
-      "Items",
-      "Collections",
-      "Accounts"
-    ],
+    "SearchItems": ["Items", "Collections", "Accounts"],
     "Language": "ENG",
     "TermModalTitle": "Sole-X Terms of Service",
     "TermModalInput": "I agree to the Sole-X Terms of Service and Privacy Policy",
@@ -298,18 +288,11 @@
     "FilterCollections": "COLLECTIONS",
     "FilterCurrencies": "CURRENCIES",
     "FilterPrice": "PRICE",
-    "FilterStatusItems": [
-      "SALES",
-      "AUCTIONS",
-      "PROMOTION"
-    ],
+    "FilterStatusItems": ["SALES", "AUCTIONS", "PROMOTION"],
     "FilterStatusSales": "SALES",
     "FilterStatusAuctions": "AUCTIONS",
     "FilterStatusPromotion": "PROMOTION",
-    "FilterBlockchainItems": [
-      "ETHEREUM",
-      "KLAYTN"
-    ],
+    "FilterBlockchainItems": ["ETHEREUM", "KLAYTN"],
     "FilterBlockchainEthereum": "ETHEREUM",
     "FilterBlockchainKlaytn": "KLAYTN",
     "FilterCategoriesItems": [
@@ -331,10 +314,7 @@
     "ErrorMessage2": "You don't have enough {token}.",
     "ErrorMessage3": "Your bid must be at least 10% higher than the starting price or current bid.",
     "ErrorMessage4": "Your bid must be lower than the Buy It Now price.",
-    "LabelOnOffs": [
-      "ON",
-      "OFF"
-    ],
+    "LabelOnOffs": ["ON", "OFF"],
     "Bids0": "Starting Bid",
     "Bids1": "Current Bid",
     "NotEnoughToken": "You don't have enough {symbol}",
@@ -360,7 +340,9 @@
     "PeriodOptionMinute": "{num} minutes",
     "PeriodOptionWeek": "{num} week",
     "PeriodOptionWeeks": "{num} weeks",
-    "PeriodOptionDate": "{num} days"
+    "PeriodOptionDate": "{num} days",
+    "SelectOrder": "Sort by",
+    "SelectPrice": ""
   },
   "UserPage": {
     "MyInfo": "My Info",
@@ -375,9 +357,9 @@
     "ShowOnOffer": "On Sale / Auction",
     "RecentlyViewed": "Recently Viewed",
     "Liked": "Liked",
-    "OurSnsBannerTitle": "Join Our Community!",
-    "OurSnsBannerDescription": "Get access to the latest information an<br/>share your opinions or tips using Sole-X",
-    "OurSnsBannerSubmit": "Join us on Telegram",
+    "OurSnsBannerTitle": "Get the latest of Sole-X!",
+    "OurSnsBannerDescription": "Follow to receive the latest NFT trend. Explore the market for the next digital asset.",
+    "OurSnsBannerSubmit": "Follow the world of NFTs",
     "MyProfile": "My Profile",
     "MyProfileManageDescription": "Manage the information and preferences of your account",
     "WalletAddress": "Wallet Address",
@@ -410,9 +392,9 @@
     "EmptyAssetsDescription": "Sorry… no assets found inside your wallet",
     "DepositTokenTitle": "Deposit {token}",
     "WithdrawTokenTitle": "Withdraw {token}",
-    "DepositAmount": "Amount To Deposit",
-    "WithdrawAmount": "Amount To Withdraw",
-    "TransferAmount": "Amount To Transmit",
+    "DepositAmount": "Amount to Deposit",
+    "WithdrawAmount": "Amount to Withdraw",
+    "TransferAmount": "Amount to Transmit",
     "TransferAddress": "Recipient Address",
     "MyTokenBalance": "Your {token} Balance",
     "ReserveInputNeedConfirm": "Please confirm the transaction in your wallet",
@@ -450,10 +432,7 @@
     "TitleTransferNftToken": "Token ID"
   },
   "Explorer": {
-    "RankingMenu": [
-      "Ranking",
-      "Rank"
-    ],
+    "RankingMenu": ["Ranking", "Rank"],
     "RankingMenuDescription": "The ranking table is based on six performance indicators that measure a collection of NFT's Performance",
     "ActivityMenu": "Activity",
     "ActivityMenuDescription": "Search and view all transaction history in Sole-X",
@@ -505,24 +484,11 @@
     "Claimable": "CLAIMABLE",
     "DayLeft": "DAY(S) LEFT",
     "TableCoinTokens": "",
-    "TableTypes": [
-      "Staking",
-      "Unstaking",
-      "Claim",
-      "Reward"
-    ],
-    "TableStates": [
-      "COMPLETE",
-      "CLAIMABLE",
-      "DAY(S) LEFT",
-      "IN PROGRESS"
-    ],
+    "TableTypes": ["Staking", "Unstaking", "Claim", "Reward"],
+    "TableStates": ["COMPLETE", "CLAIMABLE", "DAY(S) LEFT", "IN PROGRESS"],
     "TitleStake": "Stake {token}",
     "TitleUnstake": "Unstake {token}",
-    "AmountStakes": [
-      "Amount to Stake",
-      "Amount to Unstake"
-    ],
+    "AmountStakes": ["Amount to Stake", "Amount to Unstake"],
     "NoDataTitle": "No Data to Display.",
     "NoDataDesc": "No records in your activity yet.",
     "AmountErrorInfo": "Enter a lower amount and try again."

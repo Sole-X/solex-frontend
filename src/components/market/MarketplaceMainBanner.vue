@@ -52,23 +52,24 @@ export default {
             "The freedom and healing of",
             "colors within the horse",
           ],
-          link: "www.enftee.com",
+          link:
+            "https://medium.sole-x.io/sole-x-cross-chain-nft-marketplace-9a958cebe59e",
           img: {
-            src: "img/article/article-market-home-banner-phoenix.jpg",
+            src: "img/article/article-market-home-banner-launch.jpg",
           },
         },
         {
           title: "K Museum Contemporary Art",
           description: ["We Create, Present,", "And Do Magic"],
-          link: "www.enftee.com",
+          link: "https://www.enftee.com",
           img: {
-            src: "img/article/article-market-home-banner-museum.jpg",
+            src: "img/article/article-market-home-banner-enftee.jpg",
           },
         },
         {
           title: "TOPNFT.WORLD",
           description: ["NFT Awards", "Since NFT Deserves fun"],
-          link: "www.topnft.world",
+          link: "https://www.topnft.world",
           img: {
             src: "img/article/article-market-home-banner-topnft.jpg",
           },
@@ -81,7 +82,7 @@ export default {
 
   methods: {
     bannerClicked(event, link) {
-      const targetURL = `http://${link}`;
+      const targetURL = link;
       window.open(targetURL, `banner ${link}`);
     },
   },

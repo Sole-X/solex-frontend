@@ -6,7 +6,12 @@
         :key="i"
         :style="banner.slideStyle"
       >
-        <router-link :to="{ path: '/sell' }">
+        <a
+          :href="banner.link"
+          :target="banner.link.startsWith('http') ? '_blank' : ''"
+          rel="noreferrer nofollow"
+        >
+          <!-- <router-link :to="{ path: banner.link }"> -->
           <div
             class="market-home__featured__default"
             :style="banner.contentStyle"
@@ -21,7 +26,8 @@
             </button>
           </router-link> -->
           </div>
-        </router-link>
+          <!-- </router-link> -->
+        </a>
       </swiper-slide>
 
       <div class="swiper-pagination" slot="pagination"></div>
@@ -67,33 +73,49 @@ export default {
           title: $t("Market.TopFeatured1Title"),
           desc: $t("Market.TopFeatured1Desc"),
           slideStyle: {
+            backgroundColor: "#04b3e2",
+          },
+          link:
+            "https://medium.sole-x.io/sole-x-cross-chain-nft-marketplace-9a958cebe59e",
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL(
+              "img/article/article-market-home-top-launch.jpg"
+            )}`,
+          },
+        },
+        {
+          title: $t("Market.TopFeatured1Title"),
+          desc: $t("Market.TopFeatured1Desc"),
+          slideStyle: {
             backgroundColor: "#202020",
           },
+          link: "/sell?search=Phoenix",
           contentStyle: {
             backgroundImage: `url(${this.$static.getFileURL(
               "img/article/article-market-home-top-1.jpg"
             )}`,
           },
         },
-        {
-          title: $t("Market.TopFeatured3Title"),
-          desc: $t("Market.TopFeatured3Desc"),
-          slideStyle: {
-            backgroundColor: "#feb0c0",
-          },
-          contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL(
-              "img/article/article-market-home-top-2.jpg"
-            )}`,
-          },
-          // classes: ["bg-black"],
-        },
+        // {
+        //   title: $t("Market.TopFeatured3Title"),
+        //   desc: $t("Market.TopFeatured3Desc"),
+        //   slideStyle: {
+        //     backgroundColor: "#feb0c0",
+        //   },
+        //   contentStyle: {
+        //     backgroundImage: `url(${this.$static.getFileURL(
+        //       "img/article/article-market-home-top-2.jpg"
+        //     )}`,
+        //   },
+        //   // classes: ["bg-black"],
+        // },
         {
           title: $t("Market.TopFeatured1Title"),
           desc: $t("Market.TopFeatured1Desc"),
           slideStyle: {
             backgroundColor: "#fefef6",
           },
+          link: "/sell?search=Manul",
           contentStyle: {
             backgroundImage: `url(${this.$static.getFileURL(
               "img/article/article-market-home-top-3.jpg"
@@ -106,9 +128,23 @@ export default {
           slideStyle: {
             backgroundColor: "#202342",
           },
+          link: "https://topnft.world/",
           contentStyle: {
             backgroundImage: `url(${this.$static.getFileURL(
               "img/article/article-market-home-top-4.jpg"
+            )}`,
+          },
+        },
+        {
+          title: $t("Market.TopFeatured1Title"),
+          desc: $t("Market.TopFeatured1Desc"),
+          slideStyle: {
+            backgroundColor: "#e5e6e8",
+          },
+          link: "#",
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL(
+              "img/article/article-market-home-top-unbroken.jpg"
             )}`,
           },
         },

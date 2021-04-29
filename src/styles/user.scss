@@ -1,4 +1,4 @@
-@import './head';
+@import "./head";
 
 .user-page {
   margin: 0 auto;
@@ -17,7 +17,7 @@
 
       &.user-asset__in-order {
         .user-collapsible_empty {
-          padding-top: 70px;
+
         }
 
         &--buy {
@@ -295,18 +295,21 @@
     @include vertical-align-flex;
     border-radius: 8px;
     padding: 0 80px;
-    background-image: linear-gradient(247deg, #37aee2 68%, #1e96c8 40%);
+    // background-image: linear-gradient(247deg, #37aee2 68%, #1e96c8 40%);
     position: relative;
+    background-image: url($public_path+"/img/article/article-mypage-banner-twitter.jpg");
+    background-size: 1080px 200px;
+    cursor: pointer;
 
-    &::after {
-      content: ' ';
-      top: 0;
-      right: 152px;
-      position: absolute;
-      width: 30%;
-      height: 100%;
-      background-image: url($public_path + "/img/article/article-mypage-banner-telegram.svg");
-    }
+    // &::after {
+    //   content: ' ';
+    //   top: 0;
+    //   right: 152px;
+    //   position: absolute;
+    //   width: 30%;
+    //   height: 100%;
+    //   background-image: url($public_path + "/img/article/article-mypage-banner-telegram.svg");
+    // }
 
     .user-info__banner__description {
       * {
@@ -362,13 +365,13 @@
 
   .user-collapsible_empty {
     width: 100%;
-    height: 300px;
-    padding-top: 40px;
+    padding-top: 80px;
+    padding-bottom: 80px;
     @include center-align-flex;
     flex-direction: column;
 
     img {
-      margin-bottom: 10px;
+      margin-bottom: 20px;
     }
 
     h5 {
@@ -402,7 +405,8 @@
       transition: all 0.2s ease-out;
       border: 1px solid $melange_gray;
 
-      &:hover, &:active {
+      &:hover,
+      &:active {
         border: 1px solid $primary_color;
       }
     }
@@ -412,7 +416,7 @@
 .user-detail__title {
   display: flex;
   align-items: center;
-  margin-bottom : 40px;
+  margin-bottom: 40px;
   h1 {
     display: flex;
     align-items: center;
@@ -587,7 +591,7 @@
         width: 400px;
         margin-left: auto;
 
-        >section {
+        > section {
           width: 100%;
           margin: -5px;
           display: flex;
@@ -600,7 +604,8 @@
             border: 1px solid $melange_gray;
             cursor: pointer;
 
-            &:hover, &:active {
+            &:hover,
+            &:active {
               border-color: $primary_color;
               transition: all 0.2s ease-out;
             }
@@ -608,6 +613,7 @@
         }
       }
     }
+
 
     .common-submit-button {
       width: 200px;
@@ -618,6 +624,17 @@
         margin-top: 60px;
         margin-bottom: 80px;
       }
+    }
+  }
+
+  .user-collapsible_empty {
+    .common-submit-button-empty {
+      width: 200px;
+      height: 40px;
+      background-color: $primary_color;
+      color: #fff;
+      font-weight: bold;
+      margin-top: 40px;
     }
   }
 }
@@ -675,7 +692,8 @@
     background: #fafbfc;
   }
 
-  .user-history__thead, .user-history__row {
+  .user-history__thead,
+  .user-history__row {
     padding: 0 20px;
     @include vertical-align-flex;
   }
@@ -697,7 +715,10 @@
       width: 10%;
     }
 
-    &--token, &--amount, &--hash, &--price {
+    &--token,
+    &--amount,
+    &--hash,
+    &--price {
       width: 16%;
     }
 
@@ -766,7 +787,8 @@
         }
       }
 
-      &--hash, &--address {
+      &--hash,
+      &--address {
         color: $tertiary_color;
 
         * {
@@ -837,15 +859,15 @@
 
       .img-cover {
         position: absolute;
-        bottom: -5px;
-        left: 3px;
-        width: 65px;
+        bottom: 0;
+        left: .5px;
+        width: 67px;
         height: 30px;
         border-radius: 0px 0px 40px 40px;
         opacity: 0.6;
         background-color: #333333;
 
-        .img-cover-camera{
+        .img-cover-camera {
           opacity: 0.9;
           position: absolute;
           margin-top: 2px;
@@ -867,7 +889,6 @@
       }
 
       p {
-
       }
     }
   }
@@ -954,13 +975,14 @@
   margin-left: 10px;
   background: {
     size: cover;
-    image: url($public_path + "/img/icon/ic-setting-off.svg");
+    image: url($public_path+"/img/icon/ic-setting-off.svg");
     position: center;
   }
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     background: {
-      image: url($public_path + "/img/icon/ic-setting-on.svg");
+      image: url($public_path+"/img/icon/ic-setting-on.svg");
     }
   }
 }

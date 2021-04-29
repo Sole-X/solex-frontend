@@ -23,6 +23,7 @@
 
         <section v-if="getUserActivities.nft.total === 0" class="user-collapsible__content">
           <div class="user-collapsible_empty">
+            <img :src="$static.getFileURL('img/icon/ic-info-black.svg')">
             <h5>{{$t('UserPage.EmptyDataTitle')}}</h5>
             <p class="text-gray">{{$t('UserPage.EmptyDataDescription2')}}</p>
           </div>
@@ -46,6 +47,7 @@
 
         <section v-if="getUserActivities.currency.total === 0" class="user-collapsible__content">
           <div class="user-collapsible_empty">
+            <img :src="$static.getFileURL('img/icon/ic-info-black.svg')">
             <h5>{{$t('UserPage.EmptyDataTitle')}}</h5>
             <p class="text-gray">{{$t('UserPage.EmptyDataDescription2')}}</p>
           </div>

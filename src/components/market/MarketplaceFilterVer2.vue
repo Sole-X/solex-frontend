@@ -22,8 +22,8 @@
       <section class="marketplace-filter-item" id="market-sell-status" v-show="this.sections.includes('status')">
         <div class="marketplace-filter-item-top" @click="event => topClicked(event, 'status')">
           <div class="marketplace-filter-title">{{ $t('Market.FilterStatus') }}</div>
-          <img v-if="!itemsShows.status" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
-          <img v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-if="!itemsShows.status" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
         </div>
         <div
             class="marketplace-filter-popover"
@@ -68,8 +68,8 @@
       <section class="marketplace-filter-item" id="market-sell-blockchain">
         <div class="marketplace-filter-item-top" @click="event => topClicked(event, 'blockchain')">
           <div class="marketplace-filter-title">{{ $t('Market.FilterBlockchain') }}</div>
-          <img v-if="!itemsShows.blockchain" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
-          <img v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-if="!itemsShows.blockchain" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
         </div>
         <div
           class="marketplace-filter-popover"
@@ -104,8 +104,8 @@
       <section class="marketplace-filter-item" id="market-sell-categories" v-show="this.sections.includes('categories')">
         <div class="marketplace-filter-item-top" @click="event => topClicked(event, 'categories')">
           <div class="marketplace-filter-title">{{ $t('Market.FilterCategories') }}</div>
-          <img v-if="!itemsShows.categories" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
-          <img v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-if="!itemsShows.categories" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
         </div>
         <div
             class="marketplace-filter-popover"
@@ -150,8 +150,8 @@
       <section class="marketplace-filter-item" id="market-sell-collections" v-show="this.sections.includes('collections')">
         <div class="marketplace-filter-item-top" @click="event => topClicked(event, 'collections')">
           <div class="marketplace-filter-title">{{ $t('Market.FilterCollections') }}</div>
-          <img v-if="!itemsShows.collections" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
-          <img v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-if="!itemsShows.collections" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
         </div>
         <div
             class="marketplace-filter-popover"
@@ -176,8 +176,8 @@
       <section class="marketplace-filter-item" id="market-sell-currencies" v-show="this.sections.includes('currencies')">
         <div class="marketplace-filter-item-top" @click="event => topClicked(event, 'currencies')">
           <div class="marketplace-filter-title">{{ $t('Market.FilterCurrencies') }}</div>
-          <img v-if="!itemsShows.currencies" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
-          <img v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-if="!itemsShows.currencies" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
         </div>
         <div
             class="marketplace-filter-popover"
@@ -202,8 +202,8 @@
       <section class="marketplace-filter-item" id="market-sell-price" v-show="this.sections.includes('price')">
         <div class="marketplace-filter-item-top" @click="event => topClicked(event, 'price')">
           <div class="marketplace-filter-title">{{ $t('Market.FilterPrice') }}</div>
-          <img v-if="!itemsShows.price" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
-          <img v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-if="!itemsShows.price" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
         </div>
         <div
             class="marketplace-filter-popover"
@@ -214,6 +214,7 @@
               <option value="" selected disabled hidden>select currency</option>
               <option v-for="(item, idx) in this.originalFilter.currencies" :value="item.symbol">{{ item.symbol }}</option>
             </select>
+
             <div class="marketplace-filter-popover-item" v-for="(item, idx) in this.originalFilter.price" ref="priceItems">
               <div
                   class="marketplace-filter-popover-item-title"
@@ -342,7 +343,9 @@ export default {
         nftCntCateART: 0,
         nftCntCateCOLLECT: 0,
         nftCntCateETC: 0
-      }
+      },
+      selectedOption: 'Select Currency',
+      showSelectBox: false
     }
   },
 
@@ -1143,7 +1146,19 @@ export default {
           }
         }
       }
-    }
+    },
+
+    selectBoxClicked() {
+      this.showSelectBox = !this.showSelectBox;
+    },
+
+    optionClicked(event) {
+      const value = event.target.dataset.value;
+      const appear = event.target.dataset.appear;
+      this.showSelectBox = false;
+      this.selectedOption = appear;
+      this.orderChanged(new Event('change'), value);
+    },
   },
 
   components: {

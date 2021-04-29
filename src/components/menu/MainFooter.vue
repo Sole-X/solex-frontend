@@ -4,8 +4,17 @@
       <h4>Sole-X</h4>
 
       <div>
-        <a v-for="site in getOurSites" :key="site.type" :href="site.url" target="_blank" rel="noopener noreferrer">
-          <img :src="$static.getFileURL(`img/icon/${site.icon}`)" :alt="site.type" />
+        <a
+          v-for="site in getOurSites"
+          :key="site.type"
+          :href="site.url"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img
+            :src="$static.getFileURL(`img/icon/${site.icon}`)"
+            :alt="site.type"
+          />
         </a>
       </div>
     </div>
@@ -13,27 +22,34 @@
     <div class="main-footer__writing">
       <div class="main-footer__description">
         <template v-if="$t('General.Language') === 'ENG'">
-          The newly designed Sole-X, based on our innovative chain bridge, <br />
-          enables easy and convenient trading in non-fungible tokens(NFT’s) and crypto collectibles.
+          The newly designed Sole-X, based on our innovative chain bridge,
+          <br />
+          enables easy and convenient trading in non-fungible tokens(NFT’s) and
+          crypto collectibles.
         </template>
         <template v-else>
           크로스 체인 브리지를 기반으로 새롭게 디자인된 Sole-X는 대체 불가능<br />
-           토큰(NFT) 및 암호화 수집품을 쉽고 편리하게 거래할 수 있게 해줍니다.
+          토큰(NFT) 및 암호화 수집품을 쉽고 편리하게 거래할 수 있게 해줍니다.
         </template>
       </div>
       <div v-if="false" class="main-footer__audit">
-        <br>Audit Certification Mark
+        <br />Audit Certification Mark
       </div>
     </div>
 
     <div class="main-footer__others">
       <div class="main-footer__links">
         <a class="underline" href="" target="_blank" rel="noopener noreferrer">
-          {{ $t('General.FooterContactUs') }}
+          {{ $t("General.FooterContactUs") }}
         </a>
 
-        <router-link class="underline" v-for="site in getPolicyLinks" :key="site.title" :to="{ path: site.url }">
-          {{site.title}}
+        <router-link
+          class="underline"
+          v-for="site in getPolicyLinks"
+          :key="site.title"
+          :to="{ path: site.url }"
+        >
+          {{ site.title }}
         </router-link>
       </div>
 
@@ -45,86 +61,128 @@
 </template>
 
 <script>
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'MainFooter',
-    props: {
+export default {
+  name: "MainFooter",
+  props: {},
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
 
+  mounted() {},
+
+  beforeDestroy() {},
+
+  data() {
+    return {};
+  },
+
+  computed: {
+    getOurSites() {
+      return [
+        {
+          type: "doc",
+          url: "https://github.com/Sole-X/",
+          icon: "ic-doc.svg",
+        },
+        {
+          type: "twitter",
+          url: "https://twitter.com/solex_io",
+          icon: "ic-sns-twitter.svg",
+        },
+        {
+          type: "medium",
+          url: "https://medium.sole-x.io",
+          icon: "ic-medium-black.svg",
+        },
+        {
+          type: "contact",
+          url: "mailto:contact@sole-x.io",
+          icon: "ic-mail-black.svg",
+        },
+      ];
     },
-    created() {
-      component = this
-      $t = this.$t.bind(this)
-    },
 
-    mounted() {
-
-    },
-
-    beforeDestroy() {
-
+    getPolicyLinks() {
+      return [
+        {
+          url: "/customer/privacy-policy",
+          title: this.$t("General.FooterPrivacyPolicy"),
+        },
+        {
+          url: "/customer/usage-terms",
+          title: this.$t("General.FooterTermsOfService"),
+        },
+        {
+          url: "/customer/faq",
+          title: this.$t("General.FooterFAQ"),
+        },
+      ];
     },
 
     data() {
-      return {}
+      return {};
     },
 
     computed: {
       getOurSites() {
         return [
           {
-            type: 'doc',
-            url: 'https://github.com',
-            icon: 'ic-github.svg'
+            type: "doc",
+            url: "https://github.com/Sole-X",
+            icon: "ic-doc.svg",
           },
           {
-            type: 'twitter',
-            url: 'https://twitter.com',
-            icon: 'ic-sns-twitter.svg'
+            type: "twitter",
+            url: "https://twitter.com/solex_io",
+            icon: "ic-twitter.svg",
           },
           {
-            type: 'medium',
-            url: 'https://medium.com',
-            icon: 'ic-medium-black.svg'
+            type: "medium",
+            url: "https://medium.sole-x.io",
+            icon: "ic-medium.svg",
           },
           {
-            type: 'contact',
-            url: 'mailto:help@solex.com',
-            icon: 'ic-mail-black.svg'
-          }
-        ]
+            type: "contact",
+            url: "mailto:contact@sole-x.io",
+            icon: "ic-contact.svg",
+          },
+        ];
       },
 
       getPolicyLinks() {
         return [
           {
-            url: '/customer/privacy-policy',
-            title: this.$t('General.FooterPrivacyPolicy')
+            url: "/customer/privacy-policy",
+            title: this.$t("General.FooterPrivacyPolicy"),
           },
           {
-            url: '/customer/usage-terms',
-            title: this.$t('General.FooterTermsOfService')
+            url: "/customer/usage-terms",
+            title: this.$t("General.FooterTermsOfService"),
           },
           {
-            url: '/customer/faq',
-            title: this.$t('General.FooterFAQ')
-          }
-        ]
+            url: "/customer/faq",
+            title: this.$t("General.FooterFAQ"),
+          },
+        ];
       },
 
       getFooterClass() {
-        if(this.$route.name === 'MarketHomePage') {
-          return ['marketplace']
+        if (this.$route.name === "MarketHomePage") {
+          return ["marketplace"];
         }
 
-        return []
-      }
+        return [];
+      },
     },
+  },
 
-    watch: {},
+  watch: {},
 
-    methods: {},
+  methods: {},
 
-    components: {}
-  }
+  components: {},
+};
 </script>
