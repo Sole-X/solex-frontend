@@ -255,18 +255,14 @@
       },
 
       isVisibleCurrency(row) {
-        if (this.info.nftInfo && this.info.nftInfo.platform === 'KLAY') {
-          const currency = _.find(this.getSupportCurrency, {
-            tokenAddress: row.tokenAddress
-          });
-
-          if (currency) {
-            if (currency.symbol && currency.symbol.toLowerCase() === 'klay') {
-              return false
-            }
-          }
+        if (this.info.isNegotiable) {
+          // 협상 가능한 게시글인 경우
+          return true;
+        } else {
+          // 협상 불가능한 게시글인 경우
+          if (this.$wallet.isSameAddress(row.tokenAddress, this.info.currencyInfo.tokenAddress)) return true;
+          return false;
         }
-        return true;
       }
     },
 

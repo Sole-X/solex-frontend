@@ -257,7 +257,7 @@
             >
             <div class="asset-form__row-input-result" v-show="!isModify && collectionInput" ref="inputResult">
               <ul>
-                <li v-for="collection in getSupportNft" v-if="isVisibleChain(collection)">
+                <li v-for="collection in getSupportNft">
                   <span @click="handleSelectCollection(collection)">{{ collection.name }}</span>
                 </li>
               </ul>
