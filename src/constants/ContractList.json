@@ -7,5 +7,7 @@
   "AuctionContract": "0x183239126aCa7d8F452354Abd2967bE73AD647E8",
   "BuyOfferContract": "0x0CeB536fB01d77D2BaCDcB93ac954F44BD2B029C",
   "SellOfferContract": "0x6ab8AD0C1D89Bf74F5e5a4a17137534944b4206a",
-  "StakingContract": "0x94467C82ec63949ccB4E6786F31722610Fc19e1e"
+  "StakingContract": "0x94467C82ec63949ccB4E6786F31722610Fc19e1e",
+  "EthVaultContract": "0x1bf68a9d1eaee7826b3593c20a0ca93293cb489a",
+  "KlayMintContract": "0x60070f5d2e1c1001400a04f152e7abd43410f7b9"
 }
