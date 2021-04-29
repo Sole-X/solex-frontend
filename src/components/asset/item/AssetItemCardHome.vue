@@ -443,8 +443,9 @@ export default {
     },
 
     getCurrency(address) {
-      const currency = _.find(this.getSupportCurrency, {
-        tokenAddress: address
+      const currency = _.find(this.getSupportCurrency, (row) => {
+        if (this.$wallet.isSameAddress(row.tokenAddress, address)) return true;
+        return false;
       })
 
       if (currency) {
