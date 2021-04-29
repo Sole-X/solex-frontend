@@ -85,7 +85,7 @@ export default {
         {
           type: "doc",
           url: "https://github.com/Sole-X/",
-          icon: "ic-github.svg",
+          icon: "ic-doc.svg",
         },
         {
           type: "twitter",
