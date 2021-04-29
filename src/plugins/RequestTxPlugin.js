@@ -324,7 +324,7 @@ export default class RequestTxPlugin {
       if(getIsApproved === '0') {
         const approveRes = await this.approveToken({
           tokenAddress: token,
-          isBridge: chain === 'ETHEREUM'
+          isBridge: chainInfo.chain === 'ETHEREUM'
         }, false)
 
         if(!approveRes.success) {
