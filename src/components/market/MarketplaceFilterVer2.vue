@@ -214,6 +214,7 @@
               <option value="" selected disabled hidden>select currency</option>
               <option v-for="(item, idx) in this.originalFilter.currencies" :value="item.symbol">{{ item.symbol }}</option>
             </select>
+
             <div class="marketplace-filter-popover-item" v-for="(item, idx) in this.originalFilter.price" ref="priceItems">
               <div
                   class="marketplace-filter-popover-item-title"
@@ -342,7 +343,9 @@ export default {
         nftCntCateART: 0,
         nftCntCateCOLLECT: 0,
         nftCntCateETC: 0
-      }
+      },
+      selectedOption: 'Select Currency',
+      showSelectBox: false
     }
   },
 
@@ -1143,7 +1146,19 @@ export default {
           }
         }
       }
-    }
+    },
+
+    selectBoxClicked() {
+      this.showSelectBox = !this.showSelectBox;
+    },
+
+    optionClicked(event) {
+      const value = event.target.dataset.value;
+      const appear = event.target.dataset.appear;
+      this.showSelectBox = false;
+      this.selectedOption = appear;
+      this.orderChanged(new Event('change'), value);
+    },
   },
 
   components: {

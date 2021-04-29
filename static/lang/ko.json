@@ -360,7 +360,9 @@
     "PeriodOptionMinute": "{num} 분",
     "PeriodOptionWeek": "{num} 주",
     "PeriodOptionWeeks": "{num} 주",
-    "PeriodOptionDate": "{num} 일"
+    "PeriodOptionDate": "{num} 일",
+    "SelectOrder": "정렬",
+    "SelectPrice": ""
   },
   "UserPage": {
     "MyInfo": "내 정보",
