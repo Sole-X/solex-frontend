@@ -376,15 +376,16 @@ export default {
     },
 
     async depositToken({commit, dispatch, getters}, payload) {
-      const { chain } = getters.getChainInfo
+      const chainInfo = getters.getChainInfo;
+
       const sendResult = await this.$app.$tx.depositToken(
         payload.token.currentAddress,
         payload.amount,
-        chain
+        chainInfo
       )
 
       // 이더리움 체인은 즉시 반영 불가능
-      if(sendResult.success && chain === 'KLAYTN') {
+      if(sendResult.success && chainInfo.chain === 'KLAYTN') {
         const newTokens = _.map(_.cloneDeep(getters.getUserDeposited.tokens), row => {
           if(!this.$app.$wallet.isSameAddress(row.currentAddress, payload.token)) {
             return row

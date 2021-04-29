@@ -1,7 +1,7 @@
 /**
  * @vue.config.js - vue-cli3 기준 최초 실행되는 파일
  * 커스텀 설정 파일 / 환경 변수 로드, 컴파일할 라이브러리 설정 등
-**/
+ **/
 
 const yarnScript = process.env.npm_lifecycle_script
 const ssrRegex = /vue-cli-service (ssr:build|ssr:serve)/gi
@@ -20,7 +20,7 @@ if(!mode || mode === 'development' || mode === 'production') {
 
 const withReport = mode.split('.report')[1] != null
 const transpileDependencies = (
-  global.isServe ? [] : Object.keys(require('./package.json').dependencies).concat(['base-x'])
+    global.isServe ? [] : Object.keys(require('./package.json').dependencies).concat(['base-x'])
 )
 
 if(withReport) {

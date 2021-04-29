@@ -216,5 +216,11 @@ export default { // TODO : method, params, query 등에 대한 검증
     path: '/v1/account/:accountAddr/agreement',
     requiredParams: ['accountAddr'],
     requiredQuery: []
+  },
+  collectItem: {
+    methods: ['GET'],
+    path: '/v1/nfts/metadata',
+    requiredParams: [],
+    requiredQuery: []
   }
 }

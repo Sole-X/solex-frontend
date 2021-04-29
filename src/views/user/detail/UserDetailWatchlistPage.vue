@@ -25,6 +25,7 @@
 
         <section v-if="getSearchedWatchlist.recent.length === 0" class="user-collapsible__content">
           <div class="user-collapsible_empty">
+            <img :src="$static.getFileURL('img/icon/ic-info-black.svg')">
             <h5>{{$t('UserPage.EmptyItemsTitle')}}</h5>
             <p class="text-gray">{{$t('UserPage.EmptyItemsDescription')}}</p>
           </div>
@@ -67,6 +68,7 @@
 
         <section v-if="getSearchedWatchlist.liked.length === 0" class="user-collapsible__content">
           <div class="user-collapsible_empty">
+            <img :src="$static.getFileURL('img/icon/ic-info-black.svg')">
             <h5>{{$t('UserPage.EmptyItemsTitle')}}</h5>
             <p class="text-gray">{{$t('UserPage.EmptyItemsDescription')}}</p>
           </div>
@@ -159,9 +161,6 @@
       getSearchedWatchlist() {
         const { recent, liked } = this.getUserWatchlist
         const { searchedKeyword } = this.getUserWatchlistFilters
-
-        Log('d getUserWatchList', this.getUserWatchlist)
-        Log('d getUserWatchListFilters', this.getUserWatchlistFilters);
 
         return {
           liked: _.filter(liked.list, item => {

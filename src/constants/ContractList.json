@@ -7,14 +7,5 @@
   "AuctionContract": "0x183239126aCa7d8F452354Abd2967bE73AD647E8",
   "BuyOfferContract": "0x0CeB536fB01d77D2BaCDcB93ac954F44BD2B029C",
   "SellOfferContract": "0x6ab8AD0C1D89Bf74F5e5a4a17137534944b4206a",
-  "StakingContract": "0x94467C82ec63949ccB4E6786F31722610Fc19e1e",
-
-  "EthVaultContract": "0x1bf68a9d1eaee7826b3593c20a0ca93293cb489a",
-  "KlayMintContract": "0x60070f5d2e1c1001400a04f152e7abd43410f7b9",
-  "OrbitFeeAddress": "0xe9f3604b85c9672728eeecf689cf1f0cf7dd03f2",
-  "BridgeContract": "0x727ab7c17d3662a87de4435001579567ddd9a349",
-
-  "TestNFT": "0x49E508C437AF1F0Cad0b52A31963A2cfF02cc666",
-  "TestToken": "0xAdD1C7ad7b0e59C8B083A59983291e0e73303Aee",
-  "TestToken-ETHreserve-input-modal__notice": "0x0336b0D9051bd5F8E3972C4b1c195d0586FcA8D7"
+  "StakingContract": "0x94467C82ec63949ccB4E6786F31722610Fc19e1e"
 }

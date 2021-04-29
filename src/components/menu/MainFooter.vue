@@ -122,12 +122,60 @@ export default {
       ];
     },
 
-    getFooterClass() {
-      if (this.$route.name === "MarketHomePage") {
-        return ["marketplace"];
-      }
+    data() {
+      return {};
+    },
 
-      return [];
+    computed: {
+      getOurSites() {
+        return [
+          {
+            type: "doc",
+            url: "https://github.com/Sole-X",
+            icon: "ic-doc.svg",
+          },
+          {
+            type: "twitter",
+            url: "https://twitter.com/solex_io",
+            icon: "ic-twitter.svg",
+          },
+          {
+            type: "medium",
+            url: "https://medium.sole-x.io",
+            icon: "ic-medium.svg",
+          },
+          {
+            type: "contact",
+            url: "mailto:contact@sole-x.io",
+            icon: "ic-contact.svg",
+          },
+        ];
+      },
+
+      getPolicyLinks() {
+        return [
+          {
+            url: "/customer/privacy-policy",
+            title: this.$t("General.FooterPrivacyPolicy"),
+          },
+          {
+            url: "/customer/usage-terms",
+            title: this.$t("General.FooterTermsOfService"),
+          },
+          {
+            url: "/customer/faq",
+            title: this.$t("General.FooterFAQ"),
+          },
+        ];
+      },
+
+      getFooterClass() {
+        if (this.$route.name === "MarketHomePage") {
+          return ["marketplace"];
+        }
+
+        return [];
+      },
     },
   },
 

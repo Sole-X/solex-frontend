@@ -24,6 +24,7 @@
 
         <section v-if="getSearchedItems.wallet.length === 0" class="user-collapsible__content">
           <div class="user-collapsible_empty">
+            <img :src="$static.getFileURL('img/icon/ic-info-black.svg')">
             <h5>{{$t('UserPage.EmptyItemsTitle')}}</h5>
             <p class="text-gray">{{$t('UserPage.EmptyItemsDescription')}}</p>
           </div>
@@ -33,7 +34,7 @@
         <section v-else class="user-collapsible__content">
           <div class="user-item__list">
             <div :class="$bem('asset-item-card', '', item.status === 'depositProgress' ? ['processing'] : '')" v-for="item in getSearchedItems.wallet" :key="item.id">
-              <section class="asset-item-card__thumbnail" @click="handleClickItem(item)" :style="$_AssetCardMixin_getImage(item)">
+              <section class="asset-item-card__thumbnail" @click="handleClickItem(item)" :style="inwalletImages[item.tokenAddress]">
                 <div class="asset-item-card__thumbnail__head">
                   <label class="asset-item-card__chain">
 
@@ -90,6 +91,7 @@
 
         <section v-if="getSearchedItems.deposited.length === 0" class="user-collapsible__content">
           <div class="user-collapsible_empty">
+            <img :src="$static.getFileURL('img/icon/ic-info-black.svg')">
             <h5>{{$t('UserPage.EmptyItemsTitle')}}</h5>
             <p class="text-gray">{{$t('UserPage.EmptyItemsDescription')}}</p>
           </div>
@@ -170,6 +172,7 @@
 
         <section v-if="getSearchedItems.onTrade.length === 0" class="user-collapsible__content">
           <div class="user-collapsible_empty">
+            <img :src="$static.getFileURL('img/icon/ic-info-black.svg')">
             <h5>{{$t('UserPage.EmptyItemsTitle')}}</h5>
             <p class="text-gray">{{$t('UserPage.EmptyItemsDescription')}}</p>
           </div>
@@ -225,6 +228,7 @@
   import UserCollapsibleHeader from '@/components/user/detail/UserCollapsibleHeader'
 
   let $t, component
+  let inwalletImageCnt = 0;
 
   export default {
     name: 'UserDetailMyItemPage',
@@ -244,7 +248,12 @@
     },
 
     data() {
-      return {}
+      return {
+        getImageFlag: false,
+        inwalletImages: {
+
+        }
+      }
     },
 
     computed: {
@@ -281,7 +290,14 @@
       }
     },
 
-    watch: {},
+    watch: {
+      'getSearchedItems.wallet'(newVal, oldVal) {
+        if (inwalletImageCnt < 2) {
+          this.setInwalletStyle(this.getSearchedItems.wallet);
+          inwalletImageCnt += 1;
+        }
+      }
+    },
 
     methods: {
       ...mapActions([
@@ -424,6 +440,16 @@
         this.$router.push({
           path: `/asset/item/${item.tokenAddress}/${item.tokenId}`
         })
+      },
+
+      async setInwalletStyle(items) {
+        for (const item of items) {
+          const result = await this.$_AssetCardMixin_getImage_inwallet(item);
+          this.inwalletImages = {
+            ...this.inwalletImages,
+            [item.tokenAddress]: result
+          }
+        }
       }
     },
 
