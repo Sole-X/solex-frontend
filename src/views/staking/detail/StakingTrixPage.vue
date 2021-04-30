@@ -457,7 +457,7 @@
 
         switch(currencyName) {
           case 'TriumphX':
-            retStr += 'ic-token-trix.jpg';
+            retStr += 'ic-token-trix.svg';
             break;
           case 'Klaytn':
             retStr += 'ic-token-klay.svg';
