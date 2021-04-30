@@ -13,7 +13,7 @@
         </div>
 
         <div :class="$bem('asset-item__history__col', '', ['price'])">
-          {{ $bn.toMaxUnit(row.amount, row.currencyInfo.decimal || 18, 4) }} {{row.currencyInfo.symbol}}
+          {{ $bn.toMaxUnit(row.amount, row.currencyInfo.decimal, 4) }} {{row.currencyInfo.symbol}}
         </div>
 
         <div :class="$bem('asset-item__history__col', '', ['address'])">

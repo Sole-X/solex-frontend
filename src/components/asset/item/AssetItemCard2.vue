@@ -180,7 +180,7 @@ export default {
         }
       }
       return {
-        decimal: 18,
+        decimal: 1,
         symbol: 'Symbol',
         toFiat: () => {}
       }

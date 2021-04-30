@@ -40,7 +40,7 @@ export class WhitelistToken {
       ETHEREUM: props.ethAddress || '',
       KLAYTN: props.tokenAddress || ''
     }
-    this.decimal = props.decimal || 18
+    this.decimal = props.decimal || props.decimals || 18
     this.chain = ['KLAYTN']
     this.usdPrice = props.usdPrice || '0'
     this.tokenAddress = props.tokenAddress || '0';
