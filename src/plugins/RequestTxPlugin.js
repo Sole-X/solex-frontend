@@ -11,9 +11,6 @@ import SellOfferABI from '@/constants/abi/SellOfferContract'
 import StakingABI from '@/constants/abi/StakingContract'
 import EthvaultABI from '@/constants/abi/ethvault-abi.json';
 import ExecutorABI from '@/constants/abi/ExecutorContract.json';
-//
-import EthvaultTestABI from '@/constants/abi/EthvaultTest.json';
-//
 import KlayminterABI from '@/constants/abi/klayminter-abi.json';
 
 const ethJsUtil = require('ethereumjs-util')
@@ -35,6 +32,26 @@ export default class RequestTxPlugin {
     const rpcUrl = isMainNet ? process.env.VUE_APP_PROVIDER_URL_CYPRESS : process.env.VUE_APP_PROVIDER_URL_BAOBAB;
 
     this._caver = new Caver(new Caver.providers.WebsocketProvider(rpcUrl))
+  }
+
+  getContractAddress(type) {
+    return ContractList[type];
+  }
+
+  getContractFunctionAbi(funcName) {
+    const abisList = [
+        KIP7ABI, KIP17ABI, ReserveABI, AuctionABI, BuyOfferABI, SellOfferABI, StakingABI, EthvaultABI, ExecutorABI, KlayminterABI
+    ];
+
+    for (const abis of abisList) {
+      for (const abi of abis) {
+        if (abi.name === funcName) {
+          return abi;
+        }
+      }
+    }
+
+    return null;
   }
 
   // Only Klaytn 컨트랙트
@@ -350,7 +367,8 @@ export default class RequestTxPlugin {
         type: 'SMART_CONTRACT_EXECUTION',
         to: _reserve._address,
         data,
-        value: isToken ? '0' : amount
+        value: isToken ? '0' : amount,
+        contract: isToken ? token : ''
       },
       methodDetail: {
         name: methodName,
@@ -429,7 +447,9 @@ export default class RequestTxPlugin {
         type: 'SMART_CONTRACT_EXECUTION',
         to: _reserve._address,
         data,
-        value: '0'
+        value: '0',
+        tokenAddress,
+        tokenId
       },
       methodDetail: {
         name: methodName,

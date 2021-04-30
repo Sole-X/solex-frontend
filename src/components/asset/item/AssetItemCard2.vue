@@ -125,7 +125,8 @@ export default {
 
   computed: {
     ...mapGetters([
-      'getSupportCurrency'
+      'getSupportCurrency',
+      'getSupportNft'
     ]),
 
     getItemPrice() {
@@ -253,15 +254,16 @@ export default {
 
     getPlatform() {
       let platform = 0;
-      if (this.type === 'buy') {
-        if (this.item.nftInfo) {
-          platform = this.item.nftInfo.platform;
-        }
-      } else if (this.type === 'sell') {
-        platform = this.item.nftInfo.platform;
-      } else if (this.type === 'home') {
-        platform = this.item.platform;
+      let tokenAddress = this.item.tokenAddress;
+      const supportNft = _.find(this.getSupportNft, row => {
+        if (this.$wallet.isSameAddress(row.tokenAddress, tokenAddress)) return true;
+        return false;
+      });
+      if (supportNft) {
+        if (supportNft.platform === 'KLAY') platform = 2;
+        else platform = 1;
       }
+
       return platform;
     },
 

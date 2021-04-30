@@ -30,6 +30,7 @@ export class NftInfo {
       image: '',
       tokenUri: ''
     }
+    this.nftInfo = props.nftInfo || {}
 
     // 이 값이 true로 넘어온다면 buy, sell, auction 등 기본 설정하지 않기
     if(!props.isDetail) {
@@ -93,11 +94,11 @@ export class NftInfo {
   }
 
   get chainIcon() {
-    if(this.platform === 1) {
+    if(this.nftInfo.platform === 'ETH') {
       return getFileURL()('img/icon/ic-token-eth.svg')
     }
 
-    if(this.platform === 2) {
+    if(this.nftInfo.platform === 'KLAY') {
       return getFileURL()('img/icon/ic-token-klay.svg')
     }
 
@@ -105,22 +106,24 @@ export class NftInfo {
   }
 
   get chainName() {
-    if(this.platform === 1) {
+    if(this.nftInfo.platform === 'ETH') {
       return 'Ethereum'
     }
 
-    if(this.platform === 2) {
+    if(this.nftInfo.platform === 'KLAY') {
       return 'Klaytn'
     }
 
     return ''
   }
 
+  /*
   get nftInfo() {
     return _.find(Store.getters.getSupportNft, nft => {
       return Store.$app.$wallet.isSameAddress(nft.addressToReserve, this.tokenAddress)
     })
   }
+  */
 
   get itemName() {
     return this.metadata.name || this.tokenId

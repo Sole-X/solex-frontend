@@ -13,7 +13,7 @@
         </div>
 
         <div :class="$bem('asset-page__category__tab', '', '')">
-          <span>{{getChainInfo.chain}}</span>
+          <span>{{ getHeaderChainName }}</span>
           <img :src="$static.getFileURL('img/icon/ic-chevron-right-gray.svg')" />
         </div>
 
@@ -240,7 +240,6 @@
         'getMyLocalItems',
         'getSupportNft',
         'getSupportCurrency',
-        'getChainInfo',
         'getLike'
       ]),
 
@@ -299,6 +298,10 @@
           return 'sell';
         }
       },
+
+      getHeaderChainName() {
+        return this.getItemInfo ? this.getItemInfo.chainName : '';
+      }
     },
 
     watch: {

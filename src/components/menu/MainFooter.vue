@@ -1,5 +1,5 @@
 <template>
-  <footer :class="$bem('main-footer', '', getFooterClass)">
+  <footer :class="$bem('main-footer', '', $route.name === 'MarketHomePage' ? ['marketplace'] : [])">
     <div class="main-footer__title">
       <h4>Sole-X</h4>
 
@@ -65,7 +65,9 @@ let $t, component;
 
 export default {
   name: "MainFooter",
+
   props: {},
+
   created() {
     component = this;
     $t = this.$t.bind(this);
@@ -124,58 +126,6 @@ export default {
 
     data() {
       return {};
-    },
-
-    computed: {
-      getOurSites() {
-        return [
-          {
-            type: "doc",
-            url: "https://github.com/Sole-X",
-            icon: "ic-doc.svg",
-          },
-          {
-            type: "twitter",
-            url: "https://twitter.com/solex_io",
-            icon: "ic-twitter.svg",
-          },
-          {
-            type: "medium",
-            url: "https://medium.sole-x.io",
-            icon: "ic-medium.svg",
-          },
-          {
-            type: "contact",
-            url: "mailto:contact@sole-x.io",
-            icon: "ic-contact.svg",
-          },
-        ];
-      },
-
-      getPolicyLinks() {
-        return [
-          {
-            url: "/customer/privacy-policy",
-            title: this.$t("General.FooterPrivacyPolicy"),
-          },
-          {
-            url: "/customer/usage-terms",
-            title: this.$t("General.FooterTermsOfService"),
-          },
-          {
-            url: "/customer/faq",
-            title: this.$t("General.FooterFAQ"),
-          },
-        ];
-      },
-
-      getFooterClass() {
-        if (this.$route.name === "MarketHomePage") {
-          return ["marketplace"];
-        }
-
-        return [];
-      },
     },
   },
 
