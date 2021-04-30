@@ -1,4 +1,4 @@
-@import './head';
+@import "./head";
 
 .landing-page {
   height: 100vh;
@@ -44,13 +44,14 @@
   .landing-page__section__description {
     width: calc(100% - 640px);
 
-    >article {
+    > article {
       height: 100%;
       padding-left: 80px;
       @include vertical-align-flex;
 
       img {
-        width: 128px;
+        //width: 128px;
+        width: 148px;
         margin-bottom: 95px;
       }
 

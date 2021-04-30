@@ -101,7 +101,7 @@
       </section>
 
       <!-- categories -->
-      <section class="marketplace-filter-item" id="market-sell-categories" v-show="this.sections.includes('categories')">
+      <!-- <section class="marketplace-filter-item" id="market-sell-categories" v-show="this.sections.includes('categories')">
         <div class="marketplace-filter-item-top" @click="event => topClicked(event, 'categories')">
           <div class="marketplace-filter-title">{{ $t('Market.FilterCategories') }}</div>
           <img class="marketplace-filter-item-top-chevron" v-if="!itemsShows.categories" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
@@ -144,7 +144,7 @@
             </div>
           </div>
         </div>
-      </section>
+      </section> -->
 
       <!-- collections -->
       <section class="marketplace-filter-item" id="market-sell-collections" v-show="this.sections.includes('collections')">
