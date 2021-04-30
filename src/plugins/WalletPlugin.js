@@ -476,6 +476,7 @@ export default class WalletPlugin {
     let transactionHash
     let requestKey
 
+    // klip Store에서 쏘는 이벤트를 받았을 때.
     Store.$app.$eventBus.$on('prepareKlipSuccess', key => {
       if (!key) {
         return;
@@ -493,6 +494,7 @@ export default class WalletPlugin {
         Log('d klip finished!');
       });
     })
+
 
     promise.once('requestKey', key => { // Klip 전용
       if(!key) {
@@ -560,6 +562,11 @@ export default class WalletPlugin {
       let type;
       let body;
 
+      const currency = _.find(Store.getters.getSupportCurrency, row => {
+        if (this.isSameAddress(_tx.contract, row.tokenAddress)) return true;
+        return false;
+      });
+
       switch (action) {
         case 'deposit':
           type = 'sendKLAY';
@@ -575,33 +582,28 @@ export default class WalletPlugin {
           body = {
             bappName: process.env.VUE_APP_SITE_NAME,
             to: _tx.to,
-            amount: '',
-            contract: ''
+            amount: Store.$app.$bn.toMaxUnit(_tx.value, currency ? currency.decimal : 18, 6),
+            contract: _tx.contract,
+            from: Store.getters.getUserInfo.address
           }
           break;
-        case 'sendCard':
+        case 'depositNft':
           type = 'sendCard';
           body = {
             bappName: process.env.VUE_APP_SITE_NAME,
             to: _tx.to,
-            id: '',
-            contract: ''
+            id: _tx.tokenId,
+            contract: _tx.tokenAddress,
+            from: Store.getters.getUserInfo.address
           }
           break;
-        case 'executeContract':
-          type = 'executeContract';
-          body = {
-            bappName: process.env.VUE_APP_SITE_NAME,
-            to: _tx.to,
-            value: '',
-            abi: '',
-            params: ''
-          }
         default:
           type = '';
           body = {};
           break;
       }
+
+      Log('d type, body', type, body)
 
       Store.dispatch('prepareKlip', {
         type,

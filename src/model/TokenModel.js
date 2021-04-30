@@ -23,7 +23,7 @@ export class WhitelistNft {
   }
 
   get chainName() {
-    if (this.platform === 'KLAY') {
+    if (this.platform === 2) {
       return 'Klaytn';
     } else {
       return 'Ethereum';

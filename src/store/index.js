@@ -168,6 +168,7 @@ let vuexOptions = {
         const newNft = _.map(res.info.nfts, token => {
           return new WhitelistNft(token)
         })
+
         const newToken = _.map(res.info.tokens, token => {
           return new WhitelistToken(token)
         })

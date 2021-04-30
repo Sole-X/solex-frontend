@@ -17,6 +17,9 @@
     <button @click="klipSendKlay">sendklay</button>
     <br><br>
     <button @click="klipRequestModal">showrequestModalKlip</button>
+    <br><br>
+    <button @click='klipStakingTest'>klipStakingTest</button>
+    <button @click="whiteListCurrency">supportCurrency</button>
   </div>
 </template>
 
@@ -167,13 +170,44 @@ export default {
       }
     },
 
-    klipRequestModal() {
+    klipRequestModal(requestKey) {
       this.showModal({
         component: 'KlipRequestModal',
         params: {
-          requestKey: '1234'
+          requestKey: requestKey
         }
       });
+    },
+
+    async klipStakingTest() {
+      const stakingContractAddress = this.$tx.getContractAddress('StakingContract');
+      const reserveContractAddress = this.$tx.getContractAddress('ReserveContract');
+      const value = "0";
+      const abi = JSON.stringify(this.$tx.getContractFunctionAbi('deposit'));
+      const params = "[]";
+
+      Log('d detail', stakingContractAddress, abi, params);
+
+      const resPrepare = await prepare.executeContract({
+        bappName: 'SoleX',
+        to: reserveContractAddress,
+        value,
+        abi: abi,
+        params: params
+      });
+      Log('d res', resPrepare);
+      if (resPrepare.request_key) {
+        this.klipRequestModal(resPrepare.request_key);
+        setInterval(async () => {
+          const result = await getResult(resPrepare.request_key);
+          Log('d result', result);
+        }, 3000);
+      }
+    },
+
+    async whiteListCurrency() {
+      const supportCurrencies = await this.getSupportCurrency;
+      Log('d sc', supportCurrencies);
     }
   },
 
