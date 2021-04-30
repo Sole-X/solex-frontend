@@ -462,7 +462,7 @@
           case 'Klaytn':
             retStr += 'ic-token-klay.svg';
             break;
-          case 'Tether':
+          case 'Tether USD':
             retStr += 'ic-token-usdt.svg';
             break;
           case 'KTJ3':
