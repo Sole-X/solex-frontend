@@ -101,6 +101,8 @@
         <div v-else-if="data.action === 'transferNft'" class="reserve-input-modal__agree-terms__text" v-html="$t('UserPage.ReserveInputTransferNftWarning')" />
         <div v-else class="reserve-input-modal__agree-terms__text" v-html="$t('UserPage.ReserveInputWarning')" />
         <template v-if="getChainInfo.chain === 'ETHEREUM'">
+          <div v-if="data.action === 'deposit'" class="reserve-input-modal__agree-terms__text" v-html="$t('UserPage.ReserveInputWarningDepositBridge')" />
+          <div v-else-if="data.action === 'withdraw'" class="reserve-input-modal__agree-terms__text" v-html="$t('UserPage.ReserveInputWarningWithdrawBridge')" />
           <div v-if="data.action === 'deposit'" class="reserve-input-modal__agree-terms__text" v-html="$t('UserPage.ReserveInputWarning2Deposit')" />
           <div v-else-if="data.action === 'withdraw'" class="reserve-input-modal__agree-terms__text" v-html="$t('UserPage.ReserveInputWarning2Withdraw')" />
         </template>

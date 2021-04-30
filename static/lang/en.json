@@ -401,6 +401,8 @@
     "ReserveInputWarning": "There is <strong class=\"text-primary\">no way</strong> to recover your wallet if you forget the password, seed phrase, of if you lose the private key.",
     "ReserveInputTransferWarning": "You only can transfer KLAY to <strong class=\"text-primary\">Klaytn wallets</strong> such as Kaikas and Klip.<br><br>Coins accidentally sent to <strong class=\"text-primary\">another address</strong> will be <strong class=\"text-primary\">lost forever</strong>.",
     "ReserveInputTransferNftWarning": "You only can transfer Klaytn NFT to <strong class=\"text-primary\">Klaytn wallets</strong> such as Kaikas and Klip.<br><br>NFTs accidentally sent to <strong class=\"text-primary\">another address</strong> will be <strong class=\"text-primary\">lost forever</strong>.",
+    "ReserveInputWarningDepositBridge": "It may take 15 to 20 minutes for the chain changing bridge to deposit to Sole-X account.",
+    "ReserveInputWarningWithdrawBridge": "It may take 15 to 20 minutes for the chain changing bridge to withdraw to Sole-X account.",
     "ReserveInputWarning2Deposit": "0.1% of the deposit assets is charged as a fee.",
     "ReserveInputWarning2Withdraw": "0.1% of the withdrawal assets is charged as a fee.",
     "ReserveInputAgree": "I agree to the above",
