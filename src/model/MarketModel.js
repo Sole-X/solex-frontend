@@ -93,11 +93,11 @@ export class NftInfo {
   }
 
   get chainIcon() {
-    if(this.platform === 1) {
+    if((this.nftInfo && this.nftInfo.platform === 'ETH') || this.platform === 1) {
       return getFileURL()('img/icon/ic-token-eth.svg')
     }
 
-    if(this.platform === 2) {
+    if((this.nftInfo && this.nftInfo.platform === 'KLAY') || this.platform === 2) {
       return getFileURL()('img/icon/ic-token-klay.svg')
     }
 
@@ -105,11 +105,11 @@ export class NftInfo {
   }
 
   get chainName() {
-    if(this.platform === 1) {
+    if((this.nftInfo && this.nftInfo.platform === 'ETH') || this.platform === 1) {
       return 'Ethereum'
     }
 
-    if(this.platform === 2) {
+    if((this.nftInfo && this.nftInfo.platform === 'KLAY') ||this.platform === 2) {
       return 'Klaytn'
     }
 
