@@ -11,6 +11,7 @@ export class WhitelistNft {
     this.chain = ['KLAYTN']
     this.logoUrl = props.logoUrl || ''
     this.platform = props.platform || ''
+    this.tokenAddress = props.tokenAddress;
   }
 
   get currentAddress() {
@@ -23,7 +24,7 @@ export class WhitelistNft {
   }
 
   get chainName() {
-    if (this.platform === 2) {
+    if (this.platform === 'KLAY') {
       return 'Klaytn';
     } else {
       return 'Ethereum';
