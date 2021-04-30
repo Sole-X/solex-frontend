@@ -420,7 +420,7 @@
             return "Ethereum";
           case 'Klaytn':
             return "Klaytn";
-          case 'USD Tether':
+          case 'Tether USD':
             return "Tether"
           case 'TriumpX':
             return "TriumphX";
