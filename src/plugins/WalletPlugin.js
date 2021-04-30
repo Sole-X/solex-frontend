@@ -582,7 +582,7 @@ export default class WalletPlugin {
           body = {
             bappName: process.env.VUE_APP_SITE_NAME,
             to: _tx.to,
-            amount: Store.$app.$bn.toMaxUnit(_tx.value, currency ? currency.decimal : 18, 6),
+            amount: Store.$app.$bn.toMaxUnit(_tx.value, currency ? currency.decimal : 1, 6),
             contract: _tx.contract,
             from: Store.getters.getUserInfo.address
           }
