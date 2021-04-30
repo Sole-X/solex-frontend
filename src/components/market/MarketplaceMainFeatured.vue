@@ -73,7 +73,7 @@ export default {
           title: $t("Market.TopFeatured1Title"),
           desc: $t("Market.TopFeatured1Desc"),
           slideStyle: {
-            backgroundColor: "#04b3e2",
+            backgroundColor: "#fed45c",
           },
           link:
             "https://medium.sole-x.io/sole-x-cross-chain-nft-marketplace-9a958cebe59e",
