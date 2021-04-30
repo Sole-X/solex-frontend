@@ -318,7 +318,7 @@ export default {
             if(address) {
               watchList.push({
                 address,
-                decimal: 18,
+                decimal: currency.decimal,
                 balance: '0'
               })
             }

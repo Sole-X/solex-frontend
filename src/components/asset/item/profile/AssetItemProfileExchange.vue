@@ -192,7 +192,9 @@
         if (currency && currency.symbol && currency.symbol !== 'null') {
           return this.$bn.toMaxUnit(basePrice, currency.decimal, 4);
         }
-
+        if (currency) {
+          return this.$bn.toMaxUnit(basePrice, currency.decimal, 4);
+        }
         return this.$bn.toMaxUnit(basePrice, 18, 4);
       },
 
@@ -210,7 +212,7 @@
           }
         }
         return {
-          decimal: 18,
+          decimal: 1,
           symbol: 'Symbol'
         }
       },
