@@ -75,7 +75,7 @@
           <div class="asset-item__profile__pay">
             <div
                 v-for="currency in getSupportCurrency"
-                v-if="$wallet.isSameAddress(currency.tokenAddress, getCurrency.tokenAddress)"
+                v-if="$wallet.isSameAddress(currency.tokenAddress, info.currencyInfo.tokenAddress)"
                 :class="$bem('asset-item__profile__pay__option', '', ['selected'])"
             >
               <button></button>
@@ -187,7 +187,7 @@
           basePrice = this.info.auction.basePrice;
         }
 
-        const currency = this.getCurrency;
+        const currency = this.info.currencyInfo;
 
         if (currency && currency.symbol && currency.symbol !== 'null') {
           return this.$bn.toMaxUnit(basePrice, currency.decimal, 4);
@@ -212,7 +212,7 @@
           }
         }
         return {
-          decimal: 1,
+          decimal: 18,
           symbol: 'Symbol'
         }
       },

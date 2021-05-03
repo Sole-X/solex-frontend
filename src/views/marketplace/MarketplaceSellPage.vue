@@ -19,7 +19,7 @@
       :page="'sell'"
     />
 
-    <div class="marketplace-sell-items">
+    <div class="marketplace-sell-items" ref="sellItemsContainer">
       <header class="marketplace-sell-items-header">
         <div class="marketplace-sell-items-header-top">
           {{ $t('Market.ResultNum', {total: total}) }}
@@ -81,7 +81,7 @@
           <common-loader />
         </template>
       </main>
-      <footer>
+      <footer ref="footer">
         <main-footer />
       </footer>
     </div>
