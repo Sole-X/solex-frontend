@@ -777,7 +777,7 @@ export default {
 
       let targetURL = this.getTargetURL();
 
-      this.setDataLoaded(false);
+      // this.setDataLoaded(false);
       const res = await axios.get(targetURL);
       if (res.status === 200) {
         this.items.push(...res.data.items);
@@ -785,7 +785,7 @@ export default {
         this.maxPage = res.data.maxPage;
         this.total = res.data.total;
 
-        this.setDataLoaded(true);
+        // this.setDataLoaded(true);
       }
     },
 

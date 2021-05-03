@@ -193,7 +193,7 @@
         })
         if (currency) return currency;
         return {
-          decimal: 1,
+          decimal: 18,
           symbol: ''
         };
       }
