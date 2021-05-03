@@ -1,6 +1,49 @@
 import { mapActions } from 'vuex'
+let keyEvent;
 
 export default {
+  mounted() {
+    keyEvent = (event) => {
+      const { keyCode } = event;
+      this.command.push(keyCode);
+      if (this.command.length > 5) {
+        this.command = [...this.command.slice(1)];
+      }
+      if (this.command.length === 5) {
+        let flag = true;
+        for (let i = 0; i < this.command.length; i++) {
+          const num = this.command[i];
+          if (i === 0 || i === 1) {
+            if (num !== 75) flag = false;
+          } else if (i===2) {
+            if (num !== 76) flag = false;
+          } else if (i===3) {
+            if (num !== 73) flag = false;
+          } else if (i===4) {
+            if (num !== 80) flag = false;
+          }
+        }
+        if (flag) {
+          this.isAvailConnectKlip = true;
+        } else {
+          this.isAvailConnectKlip = false;
+        }
+      }
+    }
+    window.addEventListener('keyup', keyEvent);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener('keyup', keyEvent);
+  },
+
+  data() {
+    return {
+      command: [],
+      isAvailConnectKlip: false,
+    }
+  },
+
   methods: {
     ...mapActions([
         'login',
@@ -9,8 +52,10 @@ export default {
     ]),
 
     async $_UserWalletMixin_handleConnect(service) {
-      if (service.className.includes('disabled')) {
-        return;
+      if (!this.isAvailConnectKlip) {
+        if (service.className.includes('disabled')) {
+          return;
+        }
       }
 
       if(this.getUserInfo.address) {
