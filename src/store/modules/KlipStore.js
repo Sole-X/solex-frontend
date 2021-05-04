@@ -79,7 +79,9 @@ export default {
 
                     if (res && res.status === 'completed' && res.request_key === requestKey) {
                         clearInterval(polling);
-                        self.$app.$eventBus.$emit('klipRequestFinished');
+                        self.$app.$eventBus.$emit('klipRequestFinished', {
+                            data: res
+                        });
                         resolve({
                             success: true,
                             data: res

@@ -286,7 +286,7 @@
 
       getStakingAmountLocal() {
         const currency = this.getCurrency(process.env.VUE_APP_TOKEN_NAME);
-        let decimal = 1;
+        let decimal = 18;
         if (!!currency)
           decimal = currency.decimal;
         const stakingAmount = this.$bn.toMaxUnit(this.getStakingAmount, decimal, 4);

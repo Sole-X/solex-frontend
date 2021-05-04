@@ -476,26 +476,6 @@ export default class WalletPlugin {
     let transactionHash
     let requestKey
 
-    // klip Store에서 쏘는 이벤트를 받았을 때.
-    Store.$app.$eventBus.$on('prepareKlipSuccess', key => {
-      if (!key) {
-        return;
-      }
-      requestKey = key;
-
-      Store.$app.showModal({
-        component: 'KlipRequestModal',
-        params: {
-          requestKey: requestKey
-        }
-      })
-
-      Store.$app.$eventBus.$on('klipRequestFinished', async (payload) => {
-        Log('d klip finished!');
-      });
-    })
-
-
     promise.once('requestKey', key => { // Klip 전용
       if(!key) {
         return
@@ -559,59 +539,54 @@ export default class WalletPlugin {
     })
 
     if (isKlip) {
-      let type;
-      let body;
+      const klipResult = await this.sendKlipTransaction(_tx.klipDetail);
+    }
 
-      const currency = _.find(Store.getters.getSupportCurrency, row => {
-        if (this.isSameAddress(_tx.contract, row.tokenAddress)) return true;
-        return false;
-      });
+    return promise
+  }
 
-      switch (action) {
-        case 'deposit':
-          type = 'sendKLAY';
-          body = {
-            bappName: process.env.VUE_APP_SITE_NAME,
-            to: _tx.to,
-            amount: Store.$app.$bn.toMaxUnit(_tx.value, 18, 6),
-            from: Store.getters.getUserInfo.address
+  sendKlipTransaction({ to, value, abi, params }) {
+    return new Promise((resolve, reject) => {
+      // klip Store에서 쏘는 이벤트를 받았을 때.
+      Store.$app.$eventBus.$on('prepareKlipSuccess', requestKey => {
+        if (!requestKey) {
+          return;
+        }
+
+        Store.$app.showModal({
+          component: 'KlipRequestModal',
+          params: {
+            requestKey: requestKey
           }
-          break;
-        case 'depositToken':
-          type = 'sendToken';
-          body = {
-            bappName: process.env.VUE_APP_SITE_NAME,
-            to: _tx.to,
-            amount: Store.$app.$bn.toMaxUnit(_tx.value, currency ? currency.decimal : 18, 6),
-            contract: _tx.contract,
-            from: Store.getters.getUserInfo.address
-          }
-          break;
-        case 'depositNft':
-          type = 'sendCard';
-          body = {
-            bappName: process.env.VUE_APP_SITE_NAME,
-            to: _tx.to,
-            id: _tx.tokenId,
-            contract: _tx.tokenAddress,
-            from: Store.getters.getUserInfo.address
-          }
-          break;
-        default:
-          type = '';
-          body = {};
-          break;
+        })
+
+        Store.dispatch('pollingUntilGetResult', {
+          requestKey: requestKey
+        })
+
+        Store.$app.$eventBus.$on('klipRequestFinished', async (payload) => {
+          resolve({
+            success: true,
+            payload
+          })
+        });
+      })
+
+      const type = 'executeContract';
+      const body = {
+        bappName: process.env.VUE_APP_SITE_NAME,
+        to, // 컨트랙트의 주소
+        value, // 컨트랙트 실행하면서 같이 보낼 KLAY 수량 (단위 : peb)
+        abi, // 실행할 함수의 abi
+        params, // 실행할 함수의 인자 목록
+        from: Store.getters.getUserInfo.address
       }
-
-      Log('d type, body', type, body)
 
       Store.dispatch('prepareKlip', {
         type,
         body
       });
-    }
-
-    return promise
+    })
   }
 
   /*
