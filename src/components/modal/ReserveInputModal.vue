@@ -358,9 +358,9 @@
 
       getTokenId() {
         let tokenId;
-        if (this.data.token && this.data.token.metadata) {
+        if (this.data.token && this.data.token.metadata && this.data.token.metadata.tokenId && this.data.token.metadata.tokenId !== '') {
           tokenId = this.data.token.metadata.tokenId;
-        } else if (this.data.token) {
+        } else if (this.data.token && this.data.token.tokenId && this.data.token.tokenId !== '') {
           tokenId = this.data.token.tokenId;
         }
         return tokenId;
