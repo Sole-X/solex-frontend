@@ -352,9 +352,6 @@ export default {
           })
 
           _vm.$eventBus.$off('onReceiveTxResult', receiveResultTx)
-          // 임시
-          _vm.$eventBus.$emit('sendMessageTxEnd');
-          //
         }
 
         // 1. 이벤트 구독 시작
@@ -416,21 +413,28 @@ export default {
 
     async withdrawToken({commit, dispatch, getters}, payload) {
       const { chain } = getters.getChainInfo
-      const signResult = await this.$app.$tx.withdrawToken(
-        payload.token.addressToReserve,
-        payload.amount,
-        {
-          type: 'withdrawToken',
-          token: payload.token,
-          amount: payload.amount,
-          action: payload.action
-        },
-        chain,
-        payload.toAddress
-      )
 
-      if(!signResult.success) {
-        return signResult
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
+
+      let signResult;
+
+      if (!isKlip) {
+        signResult = await this.$app.$tx.withdrawToken(
+          payload.token.addressToReserve,
+          payload.amount,
+          {
+            type: 'withdrawToken',
+            token: payload.token,
+            amount: payload.amount,
+            action: payload.action
+          },
+          chain,
+          payload.toAddress
+        )
+
+        if(!signResult.success) {
+          return signResult
+        }
       }
 
       let paramCate = chain === 'ETHEREUM' ? 'bridge' : 'token';
@@ -438,10 +442,21 @@ export default {
         paramCate = 'token';
       }
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: paramCate,
-        ...signResult.data
-      })
+      let sendResult;
+
+      if (!isKlip) {
+        sendResult = await dispatch('sendMessageTx', {
+          cate: paramCate,
+          ...signResult.data
+        })
+      } else if (isKlip) {
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress('ReserveContract'),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('ReserveContract', 'withdraw')),
+          params: JSON.stringify([this.$app.$tx.getRandomHash(), payload.token.addressToReserve, payload.amount, payload.toAddress])
+        });
+      }
 
       // 이더리움 체인은 즉시 반영 불가능
       if(sendResult.success && chain === 'KLAYTN') {
@@ -506,31 +521,45 @@ export default {
     async withdrawNft({commit, dispatch, getters}, payload) {
       const { chain } = getters.getChainInfo
 
-      const signResult = await this.$app.$tx.withdrawNft(
-        payload.token.tokenAddress,
-        payload.token.tokenId,
-        {
-          type: payload.action,
-          token: payload.token,
-          action: payload.action
-        },
-        chain,
-        payload.toAddress
-      )
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if(!signResult.success) {
-        return signResult
+      let sendResult;
+      if (!isKlip) {
+        const signResult = await this.$app.$tx.withdrawNft(
+            payload.token.tokenAddress,
+            payload.token.tokenId,
+            {
+              type: payload.action,
+              token: payload.token,
+              action: payload.action
+            },
+            chain,
+            payload.toAddress
+        )
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        let cate = chain === 'ETHEREUM' ? 'bridge' : 'token';
+        if (payload.action === 'transferNft') {
+          cate = 'token';
+        }
+
+        sendResult = await dispatch('sendMessageTx', {
+          cate: cate,
+          ...signResult.data
+        })
+      } else if (isKlip) {
+        const klipParams = [this.$app.$tx.getRandomHash(), payload.token.tokenAddress, payload.token.tokenId, payload.toAddress];
+
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress('ReserveContract'),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('ReserveContract', 'withdrawNft')),
+          params: JSON.stringify(klipParams)
+        });
       }
-
-      let cate = chain === 'ETHEREUM' ? 'bridge' : 'token';
-      if (payload.action === 'transferNft') {
-        cate = 'token';
-      }
-
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: cate,
-        ...signResult.data
-      })
 
       // 이더리움 체인은 즉시 반영 불가능
       if(sendResult.success && chain === 'KLAYTN') {
@@ -545,21 +574,35 @@ export default {
     },
 
     async placeBid({commit, dispatch}, payload) {
-      const signResult = await this.$app.$tx.placeBid(payload.tradeId, payload.amount,  {
-        type: payload.isCheckout ? 'trade' : 'bid',
-        token: payload.token,
-        amount: payload.amount,
-        cate: payload.cate
-      })
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if(!signResult.success) {
-        return signResult
+      let sendResult;
+      if (!isKlip) {
+        const signResult = await this.$app.$tx.placeBid(payload.tradeId, payload.amount,  {
+          type: payload.isCheckout ? 'trade' : 'bid',
+          token: payload.token,
+          amount: payload.amount,
+          cate: payload.cate
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        sendResult = await dispatch('sendMessageTx', {
+          cate: 'auction',
+          ...signResult.data
+        })
+      } else if (isKlip) {
+        const klipParams = [this.$app.$tx.getRandomHash(), payload.tradeId, payload.amount];
+
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress('ReserveContract'),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('ReserveContract', 'withdrawNft')),
+          params: JSON.stringify(klipParams)
+        });
       }
-
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: 'auction',
-        ...signResult.data
-      })
 
       if(sendResult.success) {
         /*
@@ -574,25 +617,49 @@ export default {
     },
 
     async addAuction({commit, dispatch}, payload) {
-      const signResult = await this.$app.$tx.addAuction(payload, {
-        type: 'addAuction'
-      })
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if(!signResult.success) {
-        return signResult
+      let signResult;
+      let sendResult;
+      let tradeId;
+
+      if (!isKlip) {
+        const signResult = await this.$app.$tx.addAuction(payload, {
+          type: 'addAuction'
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        sendResult = await dispatch('sendMessageTx', {
+          cate: 'auction',
+          ...signResult.data
+        })
+
+        tradeId = signResult.data.requestHash;
+      } else if (isKlip) {
+        const {tokenAddress, tokenId, biddingToken, minAmount, maxAmount, duration, isInstantTrade} = payload;
+        const randomHash = this.$app.$tx.getRandomHash();
+        const klipParams = [randomHash, tokenAddress, tokenId, biddingToken, minAmount, maxAmount, duration, isInstantTrade];
+
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress('ReserveContract'),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('ReserveContract', 'withdrawNft')),
+          params: JSON.stringify(klipParams)
+        });
+
+        tradeId = randomHash;
       }
-
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: 'auction',
-        ...signResult.data
-      })
 
       if(sendResult.success) {
         this.$app.$router.push({
           path: `/asset/item/${payload.tokenAddress}/${payload.tokenId}`,
           query: {
             type: 'sell',
-            tradeId: signResult.data.requestHash
+            // tradeId: signResult.data.requestHash
+            tradeId
           }
         })
       }
@@ -601,18 +668,36 @@ export default {
     },
 
     async editAuction({commit, dispatch}, payload) {
-      const signResult = await this.$app.$tx.editAuction(payload, {
-        type: 'editAuction'
-      })
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if(!signResult.success) {
-        return signResult
+      let signResult;
+      let sendResult;
+
+      if (!isKlip) {
+        signResult = await this.$app.$tx.editAuction(payload, {
+          type: 'editAuction'
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        sendResult = await dispatch('sendMessageTx', {
+          cate: 'auction',
+          ...signResult.data
+        })
       }
+      else if (isKlip) {
+        const { tradeId, biddingToken, minAmount, maxAmount, duration, isInstantTrade } = payload;
+        const klipParams = [this.$app.$tx.getRandomHash(), tradeId, biddingToken, minAmount, maxAmount, duration, isInstantTrade];
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: 'auction',
-        ...signResult.data
-      })
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress('AuctionContract'),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('AuctionContract', 'editAuction')),
+          params: JSON.stringify(klipParams)
+        });
+      }
 
       if(sendResult.success) {
         this.$app.$router.push({
@@ -628,18 +713,36 @@ export default {
     },
 
     async cancelAuction({commit, dispatch}, payload) {
-      const signResult = await this.$app.$tx.cancelAuction(payload.tradeId, {
-        type: 'cancelAuction'
-      })
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if(!signResult.success) {
-        return signResult
+      let signResult;
+      let sendResult;
+
+      if (!isKlip) {
+        signResult = await this.$app.$tx.cancelAuction(payload.tradeId, {
+          type: 'cancelAuction'
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        sendResult = await dispatch('sendMessageTx', {
+          cate: 'auction',
+          ...signResult.data
+        })
       }
+      else if (isKlip) {
+        const { tradeId } = payload;
+        const klipParams = [this.$app.$tx.getRandomHash(), tradeId];
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: 'auction',
-        ...signResult.data
-      })
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress('AuctionContract'),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('AuctionContract', 'cancelAuction')),
+          params: JSON.stringify(klipParams)
+        });
+      }
 
       if(sendResult.success) {
         this.$app.$router.push({
@@ -656,16 +759,34 @@ export default {
     },
 
     async closeAuction(store, payload) {
-      const signResult = await this.$app.$tx.closeAuction(payload.tradeId, {
-        type: 'closeAuction'
-      });
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if (!signResult.success) return signResult;
+      let signResult;
+      let sendResult;
 
-      const sendResult = await store.dispatch('sendMessageTx', {
-        cate: 'auction',
-        ...signResult.data
-      });
+      if (!isKlip) {
+        signResult = await this.$app.$tx.closeAuction(payload.tradeId, {
+          type: 'closeAuction'
+        });
+
+        if (!signResult.success) return signResult;
+
+        sendResult = await store.dispatch('sendMessageTx', {
+          cate: 'auction',
+          ...signResult.data
+        });
+      }
+      else if (isKlip) {
+        const { tradeId } = payload;
+        const klipParams = [this.$app.$tx.getRandomHash(), tradeId];
+
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress('AuctionContract'),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('AuctionContract', 'closeAuction')),
+          params: JSON.stringify(klipParams)
+        });
+      }
 
       if (sendResult.success) {
         this.$app.$router.push({
@@ -682,18 +803,36 @@ export default {
     },
 
     async retrieveAsset({commit, dispatch}, payload) {
-      const signResult = await this.$app.$tx.retrieveAsset(payload.tradeId, {
-        type: 'retrieve'
-      })
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if(!signResult.success) {
-        return signResult
+      let signResult;
+      let sendResult;
+
+      if (!isKlip) {
+        const signResult = await this.$app.$tx.retrieveAsset(payload.tradeId, {
+          type: 'retrieve'
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        const sendResult = await dispatch('sendMessageTx', {
+          cate: payload.cate,
+          ...signResult.data
+        })
       }
+      else if (isKlip) {
+        const { tradeId } = payload;
+        const klipParams = [this.$app.$tx.getRandomHash(), tradeId];
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: payload.cate,
-        ...signResult.data
-      })
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress('SellOfferContract'),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('SellOfferContract', 'cancelNego')),
+          params: JSON.stringify(klipParams)
+        });
+      }
 
       const $t = this.$app.$t.bind(this.$app)
 
@@ -726,26 +865,57 @@ export default {
     },
 
     async addNormalOffer({commit, dispatch}, payload) {
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
+
       const methodName = payload._type === 'buy' ? 'addBuyOffer' : 'addSellOffer'
-      const signResult = await this.$app.$tx[methodName](payload, {
-        type: methodName
-      })
 
-      if(!signResult.success) {
-        return signResult
+      let signResult;
+      let sendResult;
+      let tradeId;
+
+      if (!isKlip) {
+        signResult = await this.$app.$tx[methodName](payload, {
+          type: methodName
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        sendResult = await dispatch('sendMessageTx', {
+          cate: payload._type,
+          ...signResult.data
+        })
+
+        tradeId = signResult.data.requestHash;
       }
+      else if (isKlip) {
+        const { tokenAddress, tokenId, currency, amount, isNegotiable } = payload;
+        const randomHash = this.$app.$tx.getRandomHash();
+        const klipContractName = payload._type === 'buy' ? 'BuyOfferContract' : 'SellOfferContract';
+        const klipParams = payload._type === 'buy' ? [randomHash, tokenAddress, tokenId, currency, amount] : [randomHash, tokenAddress, tokenId, currency, amount, isNegotiable];
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: payload._type,
-        ...signResult.data
-      })
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress(klipContractName),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, methodName)),
+          params: JSON.stringify(klipParams)
+        });
+
+        if (sendResult.success) {
+
+        }
+
+        tradeId = randomHash;
+      }
 
       if(sendResult.success) {
         this.$app.$router.push({
           path: `/asset/item/${payload.tokenAddress}/${payload.tokenId}`,
           query: {
             type: payload._type,
-            tradeId: signResult.data.requestHash
+            // tradeId: signResult.data.requestHash
+            tradeId
           }
         })
       }
@@ -754,19 +924,39 @@ export default {
     },
 
     async editNormalOffer({commit, dispatch}, payload) {
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
+
+      let signResult;
+      let sendResult;
+
       const methodName = payload._type === 'buy' ? 'editBuyOffer' : 'editSellOffer'
-      const signResult = await this.$app.$tx[methodName](payload, {
-        type: methodName
-      })
 
-      if(!signResult.success) {
-        return signResult
+      if (!isKlip) {
+        const signResult = await this.$app.$tx[methodName](payload, {
+          type: methodName
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        const sendResult = await dispatch('sendMessageTx', {
+          cate: payload._type,
+          ...signResult.data
+        })
       }
+      else if (isKlip) {
+        const { tradeId, currency, amount, isNegotiable } = payload;
+        const klipContractName = payload._type === 'buy' ? 'BuyOfferContract' : 'SellOfferContract';
+        const klipParams = payload._type === 'buy' ? [this.$app.$tx.getRandomHash(), tradeId, currency, amount] : [this.$app.$tx.getRandomHash(), tradeId, currency, amount, isNegotiable];
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: payload._type,
-        ...signResult.data
-      })
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress(klipContractName),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, methodName)),
+          params: JSON.stringify(klipParams)
+        });
+      }
 
       if(sendResult.success) {
         this.$app.$router.push({
@@ -780,19 +970,39 @@ export default {
     },
 
     async cancelNormalOrder({commit, dispatch}, payload) {
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
+
+      let signResult;
+      let sendResult;
+
       const methodName = payload._type === 'buy' ? 'cancelBuyOffer' : 'cancelSellOffer'
-      const signResult = await this.$app.$tx[methodName](payload, {
-        type: methodName
-      })
 
-      if(!signResult.success) {
-        return signResult
+      if (!isKlip) {
+        signResult = await this.$app.$tx[methodName](payload, {
+          type: methodName
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        sendResult = await dispatch('sendMessageTx', {
+          cate: payload._type,
+          ...signResult.data
+        })
       }
+      else if (isKlip) {
+        const { tradeId } = payload;
+        const klipContractName = payload._type === 'buy' ? 'BuyOfferContract' : 'SellOfferContract';
+        const klipParams = payload._type === 'buy' ? [this.$app.$tx.getRandomHash(), tradeId] : [this.$app.$tx.getRandomHash(), tradeId];
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: payload._type,
-        ...signResult.data
-      })
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress(klipContractName),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, methodName)),
+          params: JSON.stringify(klipParams)
+        });
+      }
 
       if(sendResult.success) {
         this.$app.$router.push({
@@ -809,18 +1019,38 @@ export default {
     },
 
     async addNego({commit, dispatch}, payload) {
-      const signResult = await this.$app.$tx.addNego(payload, {
-        type: 'addNegotiation'
-      })
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if(!signResult.success) {
-        return signResult
+      let signResult;
+      let sendResult;
+
+      if (!isKlip) {
+        const signResult = await this.$app.$tx.addNego(payload, {
+          type: 'addNegotiation'
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        const sendResult = await dispatch('sendMessageTx', {
+          cate: 'sell',
+          ...signResult.data
+        })
       }
+      else if (isKlip) {
+        const { tradeId, currency, newPrice } = payload;
+        const klipContractName = 'SellOfferContract';
+        const klipMethodName = 'addNego';
+        const klipParams = [this.$app.$tx.getRandomHash(), tradeId, currency, newPrice];
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: 'sell',
-        ...signResult.data
-      })
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress(klipContractName),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
+          params: JSON.stringify(klipParams)
+        });
+      }
 
       if(sendResult.success) {
         this.$app.$router.push({
@@ -837,21 +1067,41 @@ export default {
     },
 
     async directExchange({commit, dispatch}, payload) {
-      const signResult = await this.$app.$tx.directExchange(payload.cate, payload.tradeId, {
-        type: 'trade',
-        token: payload.token,
-        amount: payload.amount,
-        cate: payload.cate
-      })
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if(!signResult.success) {
-        return signResult
+      let signResult;
+      let sendResult;
+
+      if (!isKlip) {
+        signResult = await this.$app.$tx.directExchange(payload.cate, payload.tradeId, {
+          type: 'trade',
+          token: payload.token,
+          amount: payload.amount,
+          cate: payload.cate
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        sendResult = await dispatch('sendMessageTx', {
+          cate: payload.cate,
+          ...signResult.data
+        })
       }
+      else if (isKlip) {
+        const { tradeId } = payload;
+        const klipContractName = payload.cate === 'buy' ? 'BuyOfferContract' : 'SellOfferContract';
+        const klipMethodName = payload.cate === 'buy' ? 'sellNft' : 'buyNft';
+        const klipParams = [this.$app.$tx.getRandomHash(), tradeId];
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: payload.cate,
-        ...signResult.data
-      })
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress(klipContractName),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
+          params: JSON.stringify(klipParams)
+        });
+      }
 
       if(sendResult.success) {
         this.$app.$router.push({
@@ -869,18 +1119,38 @@ export default {
     },
 
     async cancelNegotiation({commit, dispatch, getters}, payload) {
-      const signResult = await this.$app.$tx.cancelNegotiation(payload.tradeId,{
-        type: 'cancelNegotiation'
-      })
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if(!signResult.success) {
-        return signResult
+      let signResult;
+      let sendResult;
+
+      if (!isKlip) {
+        const signResult = await this.$app.$tx.cancelNegotiation(payload.tradeId,{
+          type: 'cancelNegotiation'
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        const sendResult = await dispatch('sendMessageTx', {
+          cate: 'sell',
+          ...signResult.data
+        })
       }
+      else if (isKlip) {
+        const { tradeId } = payload;
+        const klipContractName = 'SellOfferContract';
+        const klipMethodName = 'cancelNego';
+        const klipParams = [this.$app.$tx.getRandomHash(), tradeId];
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: 'sell',
-        ...signResult.data
-      })
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress(klipContractName),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
+          params: JSON.stringify(klipParams)
+        });
+      }
 
       const $t = this.$app.$t.bind(this.$app)
 
@@ -919,18 +1189,38 @@ export default {
     },
 
     async acceptNegotiation({commit, dispatch}, payload) {
-      const signResult = await this.$app.$tx.acceptNegotiation(payload.tradeId, payload.negoMaker, {
-        type: 'acceptNegotiation'
-      })
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if(!signResult.success) {
-        return signResult
+      let signResult;
+      let sendResult;
+
+      if (!isKlip) {
+        const signResult = await this.$app.$tx.acceptNegotiation(payload.tradeId, payload.negoMaker, {
+          type: 'acceptNegotiation'
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        const sendResult = await dispatch('sendMessageTx', {
+          cate: 'sell',
+          ...signResult.data
+        })
       }
+      else if (isKlip) {
+        const { tradeId, negoMaker } = payload;
+        const klipContractName = 'SellOfferContract';
+        const klipMethodName = 'acceptNego';
+        const klipParams = [this.$app.$tx.getRandomHash(), tradeId, negoMaker];
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: 'sell',
-        ...signResult.data
-      })
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress(klipContractName),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
+          params: JSON.stringify(klipParams)
+        });
+      }
 
       // TODO : State Update
       if(sendResult.success) {
@@ -948,18 +1238,40 @@ export default {
     },
 
     async rejectNegotiation({commit, dispatch, getters}, payload) {
-      const signResult = await this.$app.$tx.rejectNegotiation(payload.tradeId, payload.negoMaker, {
-        type: 'rejectNegotiation'
-      })
+      const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      if(!signResult.success) {
-        return signResult
+      let signResult;
+      let sendResult;
+      let randomHash;
+
+      if (!isKlip) {
+        const signResult = await this.$app.$tx.rejectNegotiation(payload.tradeId, payload.negoMaker, {
+          type: 'rejectNegotiation'
+        })
+
+        if(!signResult.success) {
+          return signResult
+        }
+
+        const sendResult = await dispatch('sendMessageTx', {
+          cate: 'sell',
+          ...signResult.data
+        })
       }
+      else if (isKlip) {
+        const { tradeId, negoMaker } = payload;
+        randomHash = this.$app.$tx.getRandomHash();
+        const klipContractName = 'SellOfferContract';
+        const klipMethodName = 'rejectNego';
+        const klipParams = [randomHash, tradeId, negoMaker];
 
-      const sendResult = await dispatch('sendMessageTx', {
-        cate: 'sell',
-        ...signResult.data
-      })
+        sendResult = await this.$app.$wallet.sendKlipTransaction({
+          to: this.$app.$tx.getContractAddress(klipContractName),
+          value: '0',
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
+          params: JSON.stringify(klipParams)
+        });
+      }
 
       if(!sendResult.success) {
         return sendResult
@@ -967,8 +1279,8 @@ export default {
 
       const sendDetail = await this.$app.$http.post('declineNego', {
         body: {
-          msg: signResult.data.message,
-          signHash: signResult.data.signature,
+          msg: signResult ? signResult.data.message : '',
+          signHash: signResult ? signResult.data.signature : randomHash,
           connectAddr: getters.getUserInfo.address,
           hashType: getters.getChainInfo.chain === 'KLAYTN' ? 2 : 1,
           declineType: payload.reason.type,

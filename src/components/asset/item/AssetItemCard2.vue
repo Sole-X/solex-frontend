@@ -258,9 +258,9 @@ export default {
       const supportNft = _.find(this.getSupportNft, row => {
         if (this.$wallet.isSameAddress(row.tokenAddress, tokenAddress)) return true;
         return false;
-      });
+      })
       if (supportNft) {
-        if (supportNft.platform === 'KLAY') platform = 2;
+        if (supportNft.platform === 'KLAY') platform = 2
         else platform = 1;
       }
 

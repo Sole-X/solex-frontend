@@ -11,7 +11,7 @@ export class WhitelistNft {
     this.chain = ['KLAYTN']
     this.logoUrl = props.logoUrl || ''
     this.platform = props.platform || ''
-    this.tokenAddress = props.tokenAddress;
+    this.tokenAddress = props.tokenAddress || '';
   }
 
   get currentAddress() {
