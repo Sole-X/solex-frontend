@@ -35,7 +35,7 @@
                   "No activity"
               }}
             </div>
-            <router-link :to="{ query: { mode: 'profile' } }">
+            <router-link v-if="isShowSetting" :to="{ query: { mode: 'profile' } }">
               <button class="user-setting-link"></button>
             </router-link>
           </div>
@@ -425,6 +425,19 @@ export default {
           });
       }
     },
+
+    isShowSetting() {
+      let isKlip = null;
+
+      if (this.$wallet.getWallet().platform && this.$wallet.getWallet().platform.wallet) {
+        isKlip = this.$wallet.getWallet().platform.wallet.name === 'klip';
+      }
+
+      if (isKlip) {
+        return false;
+      }
+      return true;
+    }
   },
 
   watch: {},

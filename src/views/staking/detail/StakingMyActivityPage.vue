@@ -10,7 +10,7 @@
             <div class="left-bottom">
               <template v-if="getIsSetAmount">
                 <span>{{ this.$bn.toMaxUnit(getStakingAmount, 18, 4) }}</span>
-                <span>{{ this.getCurrency('TriumphX').symbol }}</span>
+                <span>{{ this.getCurrency(getTokenAddress).symbol }}</span>
               </template>
               <template v-else>
                 <common-loader />
@@ -30,7 +30,7 @@
             <div class="left-bottom">
               <template v-if="getIsSetAmount">
                 <span>{{ this.$bn.toMaxUnit(getUnstakingAmount, 18, 4) }}</span>
-                <span>{{ this.getCurrency('TriumphX').symbol }}</span>
+                <span>{{ this.getCurrency(getTokenAddress).symbol }}</span>
               </template>
               <template v-else>
                 <common-loader />
@@ -50,7 +50,7 @@
             <div class="left-bottom">
               <template v-if="getIsSetAmount">
                 <span>{{ this.$bn.toMaxUnit(getRewardAmount, 18, 4) }}</span>
-                <span>{{ this.getCurrency('TriumphX').symbol }}</span>
+                <span>{{ this.getCurrency(getTokenAddress).symbol }}</span>
               </template>
               <template v-else>
                 <common-loader />
@@ -104,7 +104,7 @@
 
             <div :class="$bem('staking-activity__table__col', '', ['state'])">
               <button
-                  @click="(event) => row.type === 2 && Date(row.due) <= Date() ? claimButtonClicked(event, getCurrency(getTokenName)) : ''"
+                  @click="(event) => row.type === 2 && Date(row.due) <= Date() ? claimButtonClicked(event, getCurrency(getTokenAddress)) : ''"
                   :data-index="row.index"
                   :data-amount="row.amount"
                   :class="convertState(row.type, row.due).className"
@@ -362,8 +362,11 @@
         }
       },
 
-      getCurrency(name) {
-        return _.find(this.getSupportCurrency, {'name': name});
+      getCurrency(tokenAddress) {
+        return _.find(this.getSupportCurrency, currency => {
+          if (this.$wallet.isSameAddress(currency.tokenAddress, tokenAddress)) return true;
+          return false;
+        });
       },
 
       convertDate(date) {

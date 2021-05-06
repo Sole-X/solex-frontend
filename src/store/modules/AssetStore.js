@@ -644,9 +644,9 @@ export default {
         const klipParams = [randomHash, tokenAddress, tokenId, biddingToken, minAmount, maxAmount, duration, isInstantTrade];
 
         sendResult = await this.$app.$wallet.sendKlipTransaction({
-          to: this.$app.$tx.getContractAddress('ReserveContract'),
+          to: this.$app.$tx.getContractAddress('AuctionContract'),
           value: '0',
-          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('ReserveContract', 'withdrawNft')),
+          abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('AuctionContract', 'addAuction')),
           params: JSON.stringify(klipParams)
         });
 

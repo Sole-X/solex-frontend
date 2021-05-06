@@ -96,23 +96,43 @@ export default {
 
     actions: {
         async stakingToken({commit, dispatch, getters}, payload) {
-            const signResult = await this.$app.$tx.stakingToken(payload.token.addressToReserve, payload.amount, {
-                type: 'stakingToken',
-                token: payload.token,
-                amount: payload.amount
-            });
+            const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-            if (!signResult.success) {
-                return signResult
+            let signResult;
+            let sendResult;
+
+            if (!isKlip) {
+                signResult = await this.$app.$tx.stakingToken(payload.token.addressToReserve, payload.amount, {
+                    type: 'stakingToken',
+                    token: payload.token,
+                    amount: payload.amount
+                });
+
+                if (!signResult.success) {
+                    return signResult
+                }
+
+                sendResult = await dispatch('sendMessageTx', {
+                    cate: 'stake',
+                    message: signResult.data.message,
+                    requestHash: signResult.data.requestHash,
+                    signature: signResult.data.signature,
+                    ...signResult.data
+                });
             }
+            else if (isKlip) {
+                const { amount } = payload;
+                const klipContractName = 'StakingContract';
+                const klipMethodName = 'staking';
+                const klipParams = [this.$app.$tx.getRandomHash(), amount];
 
-            const sendResult = await dispatch('sendMessageTx', {
-                cate: 'stake',
-                message: signResult.data.message,
-                requestHash: signResult.data.requestHash,
-                signature: signResult.data.signature,
-                ...signResult.data
-            });
+                sendResult = await this.$app.$wallet.sendKlipTransaction({
+                    to: this.$app.$tx.getContractAddress(klipContractName),
+                    value: '0',
+                    abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
+                    params: JSON.stringify(klipParams)
+                });
+            }
 
             if (sendResult.success) {
                 dispatch('openTxSuccessModal', {
@@ -144,23 +164,43 @@ export default {
         },
 
         async unstakingToken({commit, dispatch, getters}, payload) {
-            const signResult = await this.$app.$tx.unstakingToken(payload.token.currentAddress, payload.amount, {
-                type: 'unstakingToken',
-                token: payload.token,
-                amount: payload.amount
-            });
+            const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-            if (!signResult.success) {
-                return signResult;
+            let signResult;
+            let sendResult;
+
+            if (!isKlip) {
+                signResult = await this.$app.$tx.unstakingToken(payload.token.currentAddress, payload.amount, {
+                    type: 'unstakingToken',
+                    token: payload.token,
+                    amount: payload.amount
+                });
+
+                if (!signResult.success) {
+                    return signResult;
+                }
+
+                sendResult = await dispatch('sendMessageTx', {
+                    cate: 'stake',
+                    message: signResult.data.message,
+                    requestHash: signResult.data.requestHash,
+                    signature: signResult.data.signature,
+                    ...signResult.data
+                });
             }
+            else if (isKlip) {
+                const { amount } = payload;
+                const klipContractName = 'StakingContract';
+                const klipMethodName = 'unstaking';
+                const klipParams = [this.$app.$tx.getRandomHash(), amount];
 
-            const sendResult = await dispatch('sendMessageTx', {
-                cate: 'stake',
-                message: signResult.data.message,
-                requestHash: signResult.data.requestHash,
-                signature: signResult.data.signature,
-                ...signResult.data
-            });
+                sendResult = await this.$app.$wallet.sendKlipTransaction({
+                    to: this.$app.$tx.getContractAddress(klipContractName),
+                    value: '0',
+                    abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
+                    params: JSON.stringify(klipParams)
+                });
+            }
 
             if (sendResult.success) {
                 dispatch('openTxSuccessModal', {
@@ -189,45 +229,84 @@ export default {
         },
 
         async claimUnstakingToken({commit, dispatch, getters}, payload) {
-            const signResult = await this.$app.$tx.claimUnstakingToken(payload.token.currentAddress, payload.amount, {
-                type: 'claimUnstakingToken',
-                token: payload.token,
-                uid: payload.uid
-            });
+            const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-            if (!signResult.success) {
-                return signResult;
+            let signResult;
+            let sendResult;
+
+            if (!isKlip) {
+                signResult = await this.$app.$tx.claimUnstakingToken(payload.token.currentAddress, payload.amount, {
+                    type: 'claimUnstakingToken',
+                    token: payload.token,
+                    uid: payload.uid
+                });
+
+                if (!signResult.success) {
+                    return signResult;
+                }
+
+                sendResult = await dispatch('sendMessageTx', {
+                    cate: 'stake',
+                    message: signResult.data.message,
+                    requestHash: signResult.data.requestHash,
+                    signature: signResult.data.signature,
+                    ...signResult.data
+                });
             }
+            else if (isKlip) {
+                const { uid } = payload;
+                const klipContractName = 'StakingContract';
+                const klipMethodName = 'claimUnstaking';
+                const klipParams = [this.$app.$tx.getRandomHash(), uid];
 
-            const sendResult = await dispatch('sendMessageTx', {
-                cate: 'stake',
-                message: signResult.data.message,
-                requestHash: signResult.data.requestHash,
-                signature: signResult.data.signature,
-                ...signResult.data
-            });
+                sendResult = await this.$app.$wallet.sendKlipTransaction({
+                    to: this.$app.$tx.getContractAddress(klipContractName),
+                    value: '0',
+                    abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
+                    params: JSON.stringify(klipParams)
+                });
+            }
 
             // Log('StakingStore/claimUnstakingToken sendResult', sendResult);
             // 동작은 가능, 프론트엔드 구현 예정.
         },
 
         async claimRewardToken({commit, dispatch, getters}, payload) {
-            const signResult = await this.$app.$tx.claimRewardToken(payload.token.currentAddress, payload.amount, {
-                type: 'claimRewardToken',
-                token: payload.token
-            });
+            const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-            if (!signResult.success) {
-                return signResult;
+            let signResult;
+            let sendResult;
+
+            if (!isKlip) {
+                signResult = await this.$app.$tx.claimRewardToken(payload.token.currentAddress, payload.amount, {
+                    type: 'claimRewardToken',
+                    token: payload.token
+                });
+
+                if (!signResult.success) {
+                    return signResult;
+                }
+
+                sendResult = await dispatch('sendMessageTx', {
+                    cate: 'stake',
+                    message: signResult.data.message,
+                    requestHash: signResult.data.requestHash,
+                    signature: signResult.data.signature,
+                    ...signResult.data
+                });
             }
+            else if (isKlip) {
+                const klipContractName = 'StakingContract';
+                const klipMethodName = 'claimReward';
+                const klipParams = [this.$app.$tx.getRandomHash()];
 
-            const sendResult = await dispatch('sendMessageTx', {
-                cate: 'stake',
-                message: signResult.data.message,
-                requestHash: signResult.data.requestHash,
-                signature: signResult.data.signature,
-                ...signResult.data
-            });
+                sendResult = await this.$app.$wallet.sendKlipTransaction({
+                    to: this.$app.$tx.getContractAddress(klipContractName),
+                    value: '0',
+                    abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
+                    params: JSON.stringify(klipParams)
+                });
+            }
 
             return sendResult;
         },
@@ -294,13 +373,10 @@ export default {
         async setRewardAmount({commit, dispatch, getters}, payload) {
             const { rewards } = payload;
 
-            const getSupportCurrency = getters.getSupportCurrency;
-            const trix = _.find(getSupportCurrency, {name: process.env.VUE_APP_TOKEN_NAME});
-
             if (rewards) {
                 let rewardAmount = '0';
                 const rewardObject = _.find(rewards, (row, index) => {
-                    return this.$app.$wallet.isSameAddress(row.currency, trix.addressToReserve);
+                    return this.$app.$wallet.isSameAddress(row.currency, process.env.VUE_APP_TOKEN_ADDRESS);
                 });
 
                 if (rewardObject) {

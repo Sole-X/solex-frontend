@@ -844,11 +844,9 @@ export default class RequestTxPlugin {
     const stakingBalance = await _staking.methods.stakingBalance(user).call();
     const IndexPrecision = await _staking.methods.IndexPrecision().call();
     const rewardIndex = await _staking.methods.rewardInfo(rewardTokenIndex).call().then(res => {
-      Log('rewardInfo : ', res);
       return res.index;
     });
     const balanceIndex = await _staking.methods.userInfoList(user, currency).call().then(res => {
-      Log('userInfoList : ', res);
       return res.index;
     });
 

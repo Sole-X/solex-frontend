@@ -601,12 +601,12 @@ export default {
         this.originalFilter.collections.push(nft);
       }
 
-      this.itemsHeights.status = this.$refs.status.offsetHeight;
-      this.itemsHeights.blockchain = this.$refs.blockchain.offsetHeight;
-      this.itemsHeights.categories = this.$refs.categories.offsetHeight;
-      this.itemsHeights.collections = this.$refs.collections.offsetHeight;
-      this.itemsHeights.currencies = this.$refs.currencies.offsetHeight;
-      this.itemsHeights.price = this.$refs.price.offsetHeight;
+      this.itemsHeights.status = this.$refs.status ? this.$refs.status.offsetHeight : 0;
+      this.itemsHeights.blockchain = this.$refs.blockchain ? this.$refs.blockchain.offsetHeight : 0;
+      this.itemsHeights.categories = this.$refs.categories ? this.$refs.categories.offsetHeight : 0;
+      this.itemsHeights.collections = this.$refs.collections ? this.$refs.collections.offsetHeight : 0;
+      this.itemsHeights.currencies = this.$refs.currencies ? this.$refs.currencies.offsetHeight : 0;
+      this.itemsHeights.price = this.$refs.price ? this.$refs.price.offsetHeight : 0;
 
       const res3 = await axios.get(`${process.env.VUE_APP_API_ENDPOINT}/v1/common/sideInfo`);
       if (res3.status === 200) {

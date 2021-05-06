@@ -197,7 +197,6 @@
     methods: {
       ...mapActions([
         'initMarketMain',
-          'coatLike'
       ]),
 
       async initPage() {
