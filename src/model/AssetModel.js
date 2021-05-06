@@ -178,7 +178,9 @@ export class AssetItemDetail extends NftInfo {
 
     return _.find(Store.getters.getSupportCurrency, row => {
       return Store.$app.$wallet.isSameAddress(row.addressToReserve, targetToken)
-    }) || {}
+    }) || {
+      toFiat: () => '0'
+    }
   }
 
   get isInstantTrade() {
@@ -465,7 +467,9 @@ export class AssetItemHistory {
   get currencyInfo() {
     return _.find(Store.getters.getSupportCurrency, row => {
       return Store.$app.$wallet.isSameAddress(row.addressToReserve, this.currency)
-    }) || {}
+    }) || {
+      toFiat: () => '0'
+    }
   }
 
   get fromAddressGetter() {
