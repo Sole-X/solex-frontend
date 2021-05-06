@@ -459,26 +459,6 @@ export default {
 
       return newState
     },
-
-    async coatLike (store, payload) {
-      const { accountAddr } = payload;
-
-      const marketMainList = store.getters.getMarketMainList;
-
-      const baseURL = process.env.VUE_APP_API_ENDPOINT;
-      const pathURL = `v1/nfts/like/${accountAddr}`;
-      const targetURL = `${baseURL}/${pathURL}`;
-      const res = await axios.get(targetURL);
-
-      if (res.status === 200) {
-        const items = res.data.items;
-        if (!items) return;
-
-        for (const item of items) {
-          Log('item', item);
-        }
-      }
-    }
   },
 
   getters: {

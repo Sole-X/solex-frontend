@@ -68,7 +68,8 @@ export class ActivityRow {
   get currencyInfo() {
     const { currency } = this
     const defaultObj = {
-      decimal: 18
+      decimal: 18,
+      toFiat: () => '0'
     }
 
     if(!this.currency) {
