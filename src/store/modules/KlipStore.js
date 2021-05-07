@@ -43,6 +43,7 @@ export default {
             }
 
             request(requestKey);
+
             this.$app.$eventBus.$emit('requestKlipSuccess');
         },
 
@@ -54,6 +55,8 @@ export default {
             }
 
             const result = getResult(requestKey);
+
+            return result;
         },
 
         async pollingUntilGetResult(store, payload) {
@@ -79,8 +82,9 @@ export default {
 
                     if (res && res.status === 'completed' && res.request_key === requestKey) {
                         clearInterval(polling);
+
                         self.$app.$eventBus.$emit('klipRequestFinished', {
-                            data: res
+                            ...res
                         });
                         resolve({
                             success: true,

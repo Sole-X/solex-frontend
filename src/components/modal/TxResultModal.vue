@@ -98,10 +98,14 @@
         }
 
         if(action === 'staking') {
-          return '스테이킹 수량'
+          return $t('UserPage.StakingAmount')
         }
 
-        return '요청 수량'
+        if (action === 'unstaking') {
+          return $t('UserPage.UnstakingAmount')
+        }
+
+        return $t('UserPage.TransactionAmount')
       },
 
       getChainType() {

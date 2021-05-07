@@ -475,11 +475,11 @@ export default {
         })
       }
 
-      if(sendResult.info) {
+      if(sendResult.info || sendResult.result) {
         dispatch('openTxSuccessModal', {
           action: payload.action === 'transfer' ? 'transfer' : 'withdraw',
           success: sendResult.success,
-          txHash: sendResult.info.txHash,
+          txHash: sendResult.info ? sendResult.info.txHash : sendResult.result.tx_hash,
           amount: payload.amount,
           currency: payload.token
         })
@@ -505,11 +505,11 @@ export default {
         })
       }
 
-      if(sendResult.data) {
+      if(sendResult.data || sendResult.result) {
         dispatch('openTxSuccessModal', {
           action: 'deposit',
-          success: sendResult.data.success,
-          txHash: sendResult.data.transactionHash,
+          success: sendResult.data ? sendResult.data.success : sendResult.result.success,
+          txHash: sendResult.data ? sendResult.data.transactionHash : sendResult.result.tx_hash,
           amount: payload.amount,
           currency: payload.token
         })
@@ -523,9 +523,10 @@ export default {
 
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
+      let signResult;
       let sendResult;
       if (!isKlip) {
-        const signResult = await this.$app.$tx.withdrawNft(
+        signResult = await this.$app.$tx.withdrawNft(
             payload.token.tokenAddress,
             payload.token.tokenId,
             {
@@ -570,15 +571,26 @@ export default {
         }))
       }
 
+      if(sendResult.data || sendResult.result) {
+        dispatch('openTxSuccessModal', {
+          action: 'deposit',
+          success: sendResult.data ? sendResult.data.success : sendResult.success,
+          txHash: sendResult.data ? sendResult.data.transactionHash : sendResult.result.tx_hash,
+          amount: payload.amount,
+          currency: payload.token
+        })
+      }
+
       return sendResult
     },
 
     async placeBid({commit, dispatch}, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
+      let signResult;
       let sendResult;
       if (!isKlip) {
-        const signResult = await this.$app.$tx.placeBid(payload.tradeId, payload.amount,  {
+        signResult = await this.$app.$tx.placeBid(payload.tradeId, payload.amount,  {
           type: payload.isCheckout ? 'trade' : 'bid',
           token: payload.token,
           amount: payload.amount,
@@ -605,12 +617,13 @@ export default {
       }
 
       if(sendResult.success) {
-        /*
-        dispatch('showAlert', {
-          title: '입찰하기 성공',
-          content: ''
+        dispatch('openTxSuccessModal', {
+          action: 'placeBid',
+          success: sendResult.data ? sendResult.data.success : sendResult.success,
+          txHash: sendResult.data ? sendResult.data.transactionHash : sendResult.result.tx_hash,
+          amount: payload.amount,
+          currency: payload.token
         })
-        */
       }
 
       return sendResult
@@ -624,7 +637,7 @@ export default {
       let tradeId;
 
       if (!isKlip) {
-        const signResult = await this.$app.$tx.addAuction(payload, {
+        signResult = await this.$app.$tx.addAuction(payload, {
           type: 'addAuction'
         })
 
@@ -809,7 +822,7 @@ export default {
       let sendResult;
 
       if (!isKlip) {
-        const signResult = await this.$app.$tx.retrieveAsset(payload.tradeId, {
+        signResult = await this.$app.$tx.retrieveAsset(payload.tradeId, {
           type: 'retrieve'
         })
 
@@ -817,7 +830,7 @@ export default {
           return signResult
         }
 
-        const sendResult = await dispatch('sendMessageTx', {
+        sendResult = await dispatch('sendMessageTx', {
           cate: payload.cate,
           ...signResult.data
         })
@@ -914,7 +927,6 @@ export default {
           path: `/asset/item/${payload.tokenAddress}/${payload.tokenId}`,
           query: {
             type: payload._type,
-            // tradeId: signResult.data.requestHash
             tradeId
           }
         })
@@ -932,7 +944,7 @@ export default {
       const methodName = payload._type === 'buy' ? 'editBuyOffer' : 'editSellOffer'
 
       if (!isKlip) {
-        const signResult = await this.$app.$tx[methodName](payload, {
+        signResult = await this.$app.$tx[methodName](payload, {
           type: methodName
         })
 
@@ -940,7 +952,7 @@ export default {
           return signResult
         }
 
-        const sendResult = await dispatch('sendMessageTx', {
+        sendResult = await dispatch('sendMessageTx', {
           cate: payload._type,
           ...signResult.data
         })
@@ -1025,7 +1037,7 @@ export default {
       let sendResult;
 
       if (!isKlip) {
-        const signResult = await this.$app.$tx.addNego(payload, {
+        signResult = await this.$app.$tx.addNego(payload, {
           type: 'addNegotiation'
         })
 
@@ -1033,7 +1045,7 @@ export default {
           return signResult
         }
 
-        const sendResult = await dispatch('sendMessageTx', {
+        sendResult = await dispatch('sendMessageTx', {
           cate: 'sell',
           ...signResult.data
         })
@@ -1125,7 +1137,7 @@ export default {
       let sendResult;
 
       if (!isKlip) {
-        const signResult = await this.$app.$tx.cancelNegotiation(payload.tradeId,{
+        signResult = await this.$app.$tx.cancelNegotiation(payload.tradeId,{
           type: 'cancelNegotiation'
         })
 
@@ -1133,7 +1145,7 @@ export default {
           return signResult
         }
 
-        const sendResult = await dispatch('sendMessageTx', {
+        sendResult = await dispatch('sendMessageTx', {
           cate: 'sell',
           ...signResult.data
         })
@@ -1195,7 +1207,7 @@ export default {
       let sendResult;
 
       if (!isKlip) {
-        const signResult = await this.$app.$tx.acceptNegotiation(payload.tradeId, payload.negoMaker, {
+        signResult = await this.$app.$tx.acceptNegotiation(payload.tradeId, payload.negoMaker, {
           type: 'acceptNegotiation'
         })
 
@@ -1203,7 +1215,7 @@ export default {
           return signResult
         }
 
-        const sendResult = await dispatch('sendMessageTx', {
+        sendResult = await dispatch('sendMessageTx', {
           cate: 'sell',
           ...signResult.data
         })
@@ -1245,7 +1257,7 @@ export default {
       let randomHash;
 
       if (!isKlip) {
-        const signResult = await this.$app.$tx.rejectNegotiation(payload.tradeId, payload.negoMaker, {
+        signResult = await this.$app.$tx.rejectNegotiation(payload.tradeId, payload.negoMaker, {
           type: 'rejectNegotiation'
         })
 
@@ -1253,10 +1265,27 @@ export default {
           return signResult
         }
 
-        const sendResult = await dispatch('sendMessageTx', {
+        sendResult = await dispatch('sendMessageTx', {
           cate: 'sell',
           ...signResult.data
         })
+
+        const sendDetail = await this.$app.$http.post('declineNego', {
+          body: {
+            msg: signResult ? signResult.data.message : '',
+            signHash: signResult ? signResult.data.signature : randomHash,
+            connectAddr: getters.getUserInfo.address,
+            hashType: getters.getChainInfo.chain === 'KLAYTN' ? 2 : 1,
+            declineType: payload.reason.type,
+            declineReason: payload.reason.message
+          },
+          urlParams: {
+            sellId: payload.tradeId,
+            negoId: payload.negoId
+          }
+        })
+
+        return sendDetail;
       }
       else if (isKlip) {
         const { tradeId, negoMaker } = payload;
@@ -1271,36 +1300,17 @@ export default {
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
           params: JSON.stringify(klipParams)
         });
-      }
 
-      if(!sendResult.success) {
-        return sendResult
-      }
-
-      const sendDetail = await this.$app.$http.post('declineNego', {
-        body: {
-          msg: signResult ? signResult.data.message : '',
-          signHash: signResult ? signResult.data.signature : randomHash,
-          connectAddr: getters.getUserInfo.address,
-          hashType: getters.getChainInfo.chain === 'KLAYTN' ? 2 : 1,
-          declineType: payload.reason.type,
-          declineReason: payload.reason.message
-        },
-        urlParams: {
-          sellId: payload.tradeId,
-          negoId: payload.negoId
+        if (sendResult.success) {
+          return {
+            success: true
+          }
+        } else {
+          return {
+            success: false
+          }
         }
-      })
-
-      if(sendDetail.success) {
-        dispatch('updateNegotiationStatus', {
-          user: payload.negoMaker,
-          status: 3,
-          statusStr: 'CANCEL'
-        })
       }
-
-      return sendDetail
     },
 
     updateNegotiationStatus({commit, getters}, payload) {

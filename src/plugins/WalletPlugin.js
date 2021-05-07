@@ -483,12 +483,12 @@ export default class WalletPlugin {
 
       requestKey = key
 
-      if(!Store.getters.getPlatformInfo.isMobile) {
-        Store.dispatch('executeKlipWeb2App', {
-          type: 'connect',
-          requestKey
-        })
-      }
+      // if(!Store.getters.getPlatformInfo.isMobile) {
+      //   Store.dispatch('executeKlipWeb2App', {
+      //     type: 'connect',
+      //     requestKey
+      //   })
+      // }
 
       /* TODO : 클립 SDK 상에서의 취소 대응 지원 전 임시 대응
       Store.dispatch('updateTransactionProgress', true)
@@ -540,6 +540,15 @@ export default class WalletPlugin {
 
     if (isKlip) {
       const klipResult = await this.sendKlipTransaction(_tx.klipDetail);
+
+      return Store.$app.showModal({
+        component: 'TxResultModal',
+        params: {
+          action: 'transaction',
+          success: klipResult.success,
+          txHash: klipResult.result.tx_hash,
+        }
+      })
     }
 
     return promise
@@ -548,7 +557,7 @@ export default class WalletPlugin {
   sendKlipTransaction({ to, value, abi, params }) {
     return new Promise((resolve, reject) => {
       // klip Store에서 쏘는 이벤트를 받았을 때.
-      Store.$app.$eventBus.$on('prepareKlipSuccess', requestKey => {
+      Store.$app.$eventBus.$once('prepareKlipSuccess', requestKey => {
         if (!requestKey) {
           return;
         }
@@ -567,7 +576,7 @@ export default class WalletPlugin {
         Store.$app.$eventBus.$on('klipRequestFinished', async (payload) => {
           resolve({
             success: true,
-            payload
+            ...payload
           })
         });
       })
