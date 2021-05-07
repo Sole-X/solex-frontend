@@ -46,7 +46,7 @@
             <button
                 v-if="Number(getSolexAmountLocal) > 0"
                 :class="$bem('common-submit-button', '', ['primary'])"
-                @click="handleStakingCurrency(getCurrency(getTokenName))"
+                @click="handleStakingCurrency(getCurrency(getTokenAddress))"
             >
               {{ translated("StakeTrix") }}
             </button>
@@ -111,7 +111,7 @@
             <button
                 v-if="Number(getStakingAmountLocal) > 0"
                 :class="$bem('common-submit-button', '', ['primary'])"
-                @click="handleUnStakingCurrency(getCurrency(getTokenName))"
+                @click="handleUnStakingCurrency(getCurrency(getTokenAddress))"
             >
               {{ translated("UnstakeTrix") }}
             </button>
@@ -185,7 +185,7 @@
           <button
             v-if="isEnableClaimTokenReward"
             :class="$bem('common-submit-button', '', ['primary'])"
-            @click="rewardButtonClicked(getCurrency(getTokenName))"
+            @click="rewardButtonClicked(getCurrency(getTokenAddress))"
           >
             {{ translated("ClaimRewards") }}
           </button>
@@ -255,18 +255,10 @@
         return false
       },
 
-      getSelectedBalance() {
-        const { getCurrencyInfo } = this
-
-        return getCurrencyInfo.decBalance
-
-        return '0'
-      },
-
       getSolexAmountLocal() {
         let solexAmount = 0;
-        if (this.getCurrency(this.getTokenName)) {
-          solexAmount = this.getCurrency(this.getTokenName).decDeposit.dprec(4);
+        if (this.getCurrency(this.getTokenAddress)) {
+          solexAmount = this.getCurrency(this.getTokenAddress).decDeposit.dprec(4);
         }
         return solexAmount;
       },
@@ -285,8 +277,8 @@
       },
 
       getStakingAmountLocal() {
-        const currency = this.getCurrency(process.env.VUE_APP_TOKEN_NAME);
-        let decimal = 1;
+        const currency = this.getCurrency(this.getTokenAddress);
+        let decimal = 18;
         if (!!currency)
           decimal = currency.decimal;
         const stakingAmount = this.$bn.toMaxUnit(this.getStakingAmount, decimal, 4);
@@ -335,10 +327,6 @@
       },
 
       handleStakingCurrency(row) {
-        if (row.symbol !== 'TRIX') {
-          return;
-        }
-
         const targetAddress = row.addressToReserve;
         if (!targetAddress) {
           return;
@@ -433,22 +421,11 @@
         return this.getTranslateValue(this.getKeyOfTranslate(val));
       },
 
-      getCurrencyInfo(currencyName) {
-        return _.find(this.getSupportCurrency, (currency) => {
-          return this.isSame(currencyName, currency.name);
-        });
-      },
-
-      isSame(currencyName1, currencyName2) {
-        if (currencyName1 === currencyName2) {
-          return true;
-        } else {
+      getCurrency(tokenAddress) {
+        return _.find(this.getSupportCurrency, currency => {
+          if (this.$wallet.isSameAddress(currency.tokenAddress, tokenAddress)) return true;
           return false;
-        }
-      },
-
-      getCurrency(name) {
-        return _.find(this.getSupportCurrency, {'name': name});
+        });
       },
 
       getImgSrc(currencyName) {

@@ -34,20 +34,49 @@ export default class RequestTxPlugin {
     this._caver = new Caver(new Caver.providers.WebsocketProvider(rpcUrl))
   }
 
-  getContractAddress(type) {
-    return ContractList[type];
+  getContractAddress(contractName) {
+    return ContractList[contractName];
   }
 
-  getContractFunctionAbi(funcName) {
-    const abisList = [
-        KIP7ABI, KIP17ABI, ReserveABI, AuctionABI, BuyOfferABI, SellOfferABI, StakingABI, EthvaultABI, ExecutorABI, KlayminterABI
-    ];
+  getContractFunctionAbi(contractName, funcName) {
+    let abi;
 
-    for (const abis of abisList) {
-      for (const abi of abis) {
-        if (abi.name === funcName) {
-          return abi;
-        }
+    switch (contractName) {
+      case 'ReserveContract':
+        abi = ReserveABI;
+        break;
+      case 'AuctionContract':
+        abi = AuctionABI;
+        break;
+      case 'BuyOfferContract':
+        abi = BuyOfferABI;
+        break;
+      case 'SellOfferContract':
+        abi = SellOfferABI;
+        break;
+      case 'StakingContract':
+        abi = StakingABI;
+        break;
+      case 'EthVaultContract':
+        abi = EthvaultABI;
+        break;
+      case 'KlayMintContract':
+        abi = KlayminterABI;
+        break;
+      case 'ExecutorContract':
+        abi = ExecutorABI;
+        break;
+      case 'KIP7Contract':
+        abi = KIP7ABI;
+        break;
+      case 'KIP17Contract':
+        abi = KIP17ABI;
+        break;
+    }
+
+    for (const item of abi) {
+      if (item.name === funcName) {
+        return item;
       }
     }
 
@@ -189,11 +218,12 @@ export default class RequestTxPlugin {
     }
   }
 
-  async sendTransaction({ sendParams, methodDetail }) {
+  async sendTransaction({ sendParams, methodDetail, klipDetail }) {
     return new Promise((resolve, reject) => {
       this._wallet.sendTransaction(methodDetail.name, {
         ...sendParams,
-        methodDetail
+        methodDetail,
+        klipDetail
       }).then(receipt => {
         resolve(receipt)
       }).catch(e => {
@@ -316,6 +346,12 @@ export default class RequestTxPlugin {
         name: methodName,
         params: methodParams,
         abi: isNft ? KIP17ABI : KIP7ABI
+      },
+      klipDetail: {
+        to: tokenContract._address,
+        value: '0',
+        abi: JSON.stringify(this.getContractFunctionAbi(isNft ? 'KIP17Contract' : 'KIP7Contract', methodName)),
+        params: JSON.stringify(methodParams)
       }
     }).catch(err => {
       Log('error : ', err)
@@ -374,6 +410,12 @@ export default class RequestTxPlugin {
         name: methodName,
         params: methodParams,
         abi: ReserveABI
+      },
+      klipDetail: {
+        to: this.getContractAddress('ReserveContract'),
+        value: isToken ? '0' : amount,
+        abi: JSON.stringify(this.getContractFunctionAbi('ReserveContract', methodName)),
+        params: JSON.stringify(methodParams)
       }
     })
   }
@@ -455,6 +497,12 @@ export default class RequestTxPlugin {
         name: methodName,
         params: methodParams,
         abi: ReserveABI
+      },
+      klipDetail: {
+        to: this.getContractAddress('ReserveContract'),
+        value: '0',
+        abi: JSON.stringify(this.getContractFunctionAbi('ReserveContract', methodName)),
+        params: JSON.stringify(methodParams)
       }
     })
   }
@@ -796,11 +844,9 @@ export default class RequestTxPlugin {
     const stakingBalance = await _staking.methods.stakingBalance(user).call();
     const IndexPrecision = await _staking.methods.IndexPrecision().call();
     const rewardIndex = await _staking.methods.rewardInfo(rewardTokenIndex).call().then(res => {
-      Log('rewardInfo : ', res);
       return res.index;
     });
     const balanceIndex = await _staking.methods.userInfoList(user, currency).call().then(res => {
-      Log('userInfoList : ', res);
       return res.index;
     });
 

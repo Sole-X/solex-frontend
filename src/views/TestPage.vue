@@ -186,8 +186,6 @@ export default {
       const abi = JSON.stringify(this.$tx.getContractFunctionAbi('deposit'));
       const params = "[]";
 
-      Log('d detail', stakingContractAddress, abi, params);
-
       const resPrepare = await prepare.executeContract({
         bappName: 'SoleX',
         to: reserveContractAddress,
@@ -195,19 +193,17 @@ export default {
         abi: abi,
         params: params
       });
-      Log('d res', resPrepare);
+
       if (resPrepare.request_key) {
         this.klipRequestModal(resPrepare.request_key);
         setInterval(async () => {
           const result = await getResult(resPrepare.request_key);
-          Log('d result', result);
         }, 3000);
       }
     },
 
     async whiteListCurrency() {
       const supportCurrencies = await this.getSupportCurrency;
-      Log('d sc', supportCurrencies);
     }
   },
 
