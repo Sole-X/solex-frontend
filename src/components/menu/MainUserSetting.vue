@@ -15,7 +15,7 @@
 
         <div class="main-user-setting__header__info__nickname">
           <span>{{ getUserInfo.username || 'No activity' }}</span>
-          <router-link :to="{ path: '/user/info', query: { mode: 'profile' } }">
+          <router-link v-if="isShowSetting" :to="{ path: '/user/info', query: { mode: 'profile' } }">
             <button class="user-setting-link"></button>
           </router-link>
         </div>
@@ -111,6 +111,19 @@
             this.$refs.profile_image.src = this.$static.getFileURL('img/icon/ic-profile-default.svg');
           })
         }
+      },
+
+      isShowSetting() {
+        let isKlip = null;
+
+        if (this.$wallet.getWallet().platform && this.$wallet.getWallet().platform.wallet) {
+          isKlip = this.$wallet.getWallet().platform.wallet.name === 'klip';
+        }
+
+        if (isKlip) {
+          return false;
+        }
+        return true;
       }
     },
 
@@ -124,7 +137,7 @@
       async handleLogout() {
         await this.logout()
         this.$emit('onClose')
-      }
+      },
     },
 
     components: {}

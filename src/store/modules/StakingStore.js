@@ -132,6 +132,15 @@ export default {
                     abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
                     params: JSON.stringify(klipParams)
                 });
+
+                if (sendResult.success && sendResult.result) {
+                    sendResult = {
+                        success: sendResult.success,
+                        info: {
+                            txHash: sendResult.result.tx_hash
+                        }
+                    }
+                }
             }
 
             if (sendResult.success) {
@@ -200,6 +209,15 @@ export default {
                     abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
                     params: JSON.stringify(klipParams)
                 });
+
+                if (sendResult.success && sendResult.result) {
+                    sendResult = {
+                        success: sendResult.success,
+                        info: {
+                            txHash: sendResult.result.tx_hash
+                        }
+                    }
+                }
             }
 
             if (sendResult.success) {
@@ -426,6 +444,16 @@ export default {
             if (res.status === 200) {
                 let { totalReward, totalStaking, totalSupply, trixPrice } = res.data;
 
+                const trix = _.find(store.getters.getSupportCurrency, currency => {
+                    return this.$app.$wallet.isSameAddress(currency.tokenAddress, process.env.VUE_APP_TOKEN_ADDRESS);
+                })
+
+                if (trix) {
+                    totalSupply = this.$app.$bn.toMaxUnit(totalSupply, trix.decimal, 4);
+                    totalStaking = this.$app.$bn.toMaxUnit(totalStaking, trix.decimal, 4);
+                    totalReward = this.$app.$bn.toMaxUnit(totalReward, trix.decimal, 4);
+                }
+
                 store.commit('SET_TOTAL_SUPPLY', { totalSupply });
                 store.commit('SET_TOTAL_STAKED', { totalStaked: totalStaking });
                 store.commit('SET_REWARDS_DISTRIBUTED', { rewardsDistributed: totalReward });
@@ -499,33 +527,21 @@ export default {
         getTotalSupply(state, getters) {
             const rootVue = getters.getRootVue;
             const getSupportCurrency = getters.getSupportCurrency;
-            const trix = _.find(getSupportCurrency, {name: 'TriumphX'});
-            if (trix) {
-                const totalSupply = rootVue.$bn.toMaxUnit(rootVue.$bn.toBN(state.totalSupply), trix.decimal, 4);
-                return totalSupply;
-            }
+
             return state.totalSupply;
         },
 
         getTotalStaked(state, getters) {
             const rootVue = getters.getRootVue;
             const getSupportCurrency = getters.getSupportCurrency;
-            const trix = _.find(getSupportCurrency, {name: 'TriumphX'});
-            if (trix) {
-                const totalStaked = rootVue.$bn.toMaxUnit(rootVue.$bn.toBN(state.totalStaked), trix.decimal, 4);
-                return totalStaked;
-            }
+
             return state.totalStaked;
         },
 
         getRewardsDistributed(state, getters) {
             const rootVue = getters.getRootVue;
             const getSupportCurrency = getters.getSupportCurrency;
-            const trix = _.find(getSupportCurrency, {name: 'TriumphX'});
-            if (trix) {
-                const rewardsDistributed = rootVue.$bn.toMaxUnit(rootVue.$bn.toBN(state.rewardsDistributed), trix.decimal, 4);
-                return rewardsDistributed;
-            }
+
             return state.rewardsDistributed;
         },
 
