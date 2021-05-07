@@ -380,7 +380,7 @@ export default class RequestTxPlugin {
           isBridge: chainInfo.chain === 'ETHEREUM'
         }, false)
 
-        if(!approveRes.success) {
+        if(approveRes && !approveRes.success) {
           return {
             success: false,
             error: new Error('approve_failed')
@@ -404,7 +404,8 @@ export default class RequestTxPlugin {
         to: _reserve._address,
         data,
         value: isToken ? '0' : amount,
-        contract: isToken ? token : ''
+        contract: isToken ? token : '',
+        amount: amount,
       },
       methodDetail: {
         name: methodName,
@@ -468,7 +469,7 @@ export default class RequestTxPlugin {
         isBridge: chain === 'ETHEREUM'
       }, true)
 
-      if(!approveRes.success) {
+      if(approveRes && !approveRes.success) {
         return {
           success: false,
           error: new Error('approve_failed')
