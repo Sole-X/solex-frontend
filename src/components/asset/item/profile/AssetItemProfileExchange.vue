@@ -93,7 +93,7 @@
               <strong class="text-secondary">{{ getItemPrice | addComma }}</strong> {{info.currencyInfo.symbol}}
             </p>
 
-            <p>$ {{info.currencyInfo.toFiat($bn.toMaxUnit(info.exchange.basePrice, info.currencyInfo.decimal, 4)).dprec(4) | addComma}}</p>
+            <p>$ {{getUsdPrice | addComma}}</p>
           </div>
         </li>
       </ul>
@@ -196,6 +196,16 @@
           return this.$bn.toMaxUnit(basePrice, currency.decimal, 4);
         }
         return this.$bn.toMaxUnit(basePrice, 18, 4);
+      },
+
+      getUsdPrice() {
+        let usdPrice = this.info.usdPrice;
+
+        const currency = this.getCurrency;
+        if (currency.symbol !== 'Symbol') {
+          usdPrice = currency.toFiat(this.getItemPrice);
+        }
+        return usdPrice.dprec(4);
       },
 
       getCurrency() {

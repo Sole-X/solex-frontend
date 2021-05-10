@@ -35,7 +35,7 @@
               </strong> {{info.currencyInfo ? info.currencyInfo.symbol : ''}}
             </p>
             <p>
-              $ {{ info.usdPrice }}
+              $ {{ getUsdPrice }}
             </p>
           </div>
         </li>
@@ -156,7 +156,7 @@
         if (currency.symbol !== 'Symbol') {
           usdPrice = currency.toFiat(this.getItemPrice);
         }
-        return usdPrice;
+        return usdPrice.dprec(4);
       }
     },
 
