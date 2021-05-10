@@ -472,6 +472,21 @@ export default class WalletPlugin {
       }
     }
 
+    if (isKlip) {
+      const klipResult = await this.sendKlipTransaction(_tx.klipDetail);
+
+      Store.$app.showModal({
+        component: 'TxResultModal',
+        params: {
+          action: 'transaction',
+          success: klipResult.success,
+          txHash: klipResult.result.tx_hash,
+        }
+      })
+
+      return klipResult;
+    }
+
     const promise = $wallet.broadcastTx(tx)
     let transactionHash
     let requestKey
@@ -537,19 +552,6 @@ export default class WalletPlugin {
 
       Log('sendTx Error : ', JSON.stringify(e))
     })
-
-    if (isKlip) {
-      const klipResult = await this.sendKlipTransaction(_tx.klipDetail);
-
-      return Store.$app.showModal({
-        component: 'TxResultModal',
-        params: {
-          action: 'transaction',
-          success: klipResult.success,
-          txHash: klipResult.result.tx_hash,
-        }
-      })
-    }
 
     return promise
   }

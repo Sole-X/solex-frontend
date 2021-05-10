@@ -83,19 +83,39 @@ export default {
                     if (res && res.status === 'completed' && res.request_key === requestKey) {
                         clearInterval(polling);
 
-                        self.$app.$eventBus.$emit('klipRequestFinished', {
-                            ...res
+                        const receipt = await this.$app.$wallet.collection.klay.getTransactionReceipt(
+                            res.result.tx_hash
+                        ).catch(() => {
+                            return -1
                         });
-                        resolve({
-                            success: true,
-                            data: res
-                        });
+
+                        if (receipt === -1) {
+                            store.dispatch('errorOccuredKlip');
+                            reject({
+                                success: false,
+                                data: res
+                            })
+                        } else {
+                            self.$app.$eventBus.$emit('klipRequestFinished', {
+                                ...res
+                            });
+                            resolve({
+                                success: true,
+                                data: res
+                            });
+                        }
                     }
 
                     callback && callback({ cnt, res });
 
                     cnt += 1;
-                }, 1000);
+                }, 500);
+            })
+        },
+
+        errorOccuredKlip(store, payload) {
+            store.dispatch('showAlert', {
+                title: this.$app.$t('General.TransactionFail')
             })
         },
 

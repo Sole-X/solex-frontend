@@ -142,7 +142,7 @@ export default {
           name: 'Klip',
           chain: 'klaytn',
           icon: this.$static.getFileURL('img/logo/logo-klip.svg'),
-          className: "select-wallet__option option-klip disabled",
+          className: "select-wallet__option option-klip",
           appear: 'Klaytn'
         },
       ]
