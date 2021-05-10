@@ -94,7 +94,11 @@
 
             <div :class="$bem('explorer-main__table__col', '', ['token'])">
               <div></div>
-              <div>{{rank.tokenAddress.slice(0, 8)}}</div>
+              <div class="explorer-rank-token">
+                <span class="explorer-rank-token-name" :data-text="getCollectionName(rank.tokenAddress)">
+                  {{ getCollectionName(rank.tokenAddress).slice(0, 16) + (getCollectionName(rank.tokenAddress).length > 16 ? '...' : '') }}
+                </span>
+              </div>
             </div>
 
             <div :class="$bem('explorer-main__table__col', '', ['volume'])">
@@ -167,7 +171,8 @@
 
     computed: {
       ...mapGetters([
-        'getAllRanks'
+        'getAllRanks',
+        'getSupportNft'
       ]),
 
       getTopRanks() {
@@ -310,6 +315,18 @@
         }
 
         this.sortStatus = newState
+      },
+
+      getCollectionName(tokenAddress) {
+        const collection = _.find(this.getSupportNft, nft => {
+          return this.$wallet.isSameAddress(tokenAddress, nft.tokenAddress);
+        });
+
+        if (collection) {
+          return collection.name;
+        }
+
+        return tokenAddress;
       }
     },
 
