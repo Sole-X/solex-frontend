@@ -688,6 +688,14 @@
         color: $primary_color;
         text-decoration: underline;
       }
+
+      &.item-publisher {
+        cursor: pointer;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
 
     strong {

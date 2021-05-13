@@ -4,12 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "serve-dev": "vue-cli-service serve --mode dev",
-    "serve-live": "vue-cli-service serve --mode live",
-    "serve-prod": "vue-cli-service serve --mode prod",
-    "build": "vue-cli-service build --mode local.dev",
-    "build-dev": "vue-cli-service build --mode jenkins.dev",
-    "build-live": "vue-cli-service build --mode jenkins.live"
+    "build": "vue-cli-service build --mode local.dev"
   },
   "dependencies": {
     "axios": "^0.21.1",
