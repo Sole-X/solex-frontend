@@ -65,7 +65,7 @@ export default {
     },
 
     havePublisher() {
-      // TODO: 아래 주석 제거.
+      const { info } = this;
       if (
         info.tokenAddress == "0x2F5Dc7dCe80d30C122999087F41059d40Bc94c52" &&
         info.tokenId == 494
@@ -77,14 +77,19 @@ export default {
     },
 
     getPublisherAddress() {
+      const { info } = this;
       // TODO : 작가 이름을 이 곳에 넣을 것.
       if (this.havePublisher) {
         // TODO : 실제 데이터 입력 시, 작가 이름을 동적 변경.
         // 홍길동과 미상은 더미 데이터.
-        return "Jungman Kim";
-      } else {
-        return "Unknown";
+        if (
+          info.tokenAddress == "0x2F5Dc7dCe80d30C122999087F41059d40Bc94c52" &&
+          info.tokenId == 494
+        ) {
+          return "Jungman Kim";
+        }
       }
+      return "Unknown";
     },
   },
 
