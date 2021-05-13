@@ -284,9 +284,6 @@ export default {
                     params: JSON.stringify(klipParams)
                 });
             }
-
-            // Log('StakingStore/claimUnstakingToken sendResult', sendResult);
-            // 동작은 가능, 프론트엔드 구현 예정.
         },
 
         async claimRewardToken({commit, dispatch, getters}, payload) {

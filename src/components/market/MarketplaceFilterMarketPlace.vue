@@ -250,7 +250,7 @@ let scrollEvent;
 let io;
 
 export default {
-  name: 'MarketplaceFilterVer2',
+  name: 'MarketplaceFilterMarketPlace',
 
   props: [
       'sections', 'propItems', 'propCurrentPage', 'propMaxPage', 'propTotal', 'propDataLoaded', 'propOrder', 'page', 'propCurStatus'

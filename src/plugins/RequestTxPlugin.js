@@ -15,9 +15,6 @@ import KlayminterABI from '@/constants/abi/klayminter-abi.json';
 
 const ethJsUtil = require('ethereumjs-util')
 
-// TODO : Reserve, Auction, Sell, Bid 등 각 주요 컨트랙트 캐싱
-// TODO : Bridge : 다중 브릿지 도입 시 타겟 체인 확인
-// TODO : Bridge : Receive Address 확인
 export default class RequestTxPlugin {
   constructor(props) {
     this._caver = {}
@@ -178,7 +175,6 @@ export default class RequestTxPlugin {
   }
 
   async signWithMessage(data, params) {
-    // Tx 진행 모달 노출
     Store.dispatch('showModal', {
       component: 'TxProgressModal',
       params: {
@@ -680,7 +676,6 @@ export default class RequestTxPlugin {
     })
   }
 
-  // 이 부분 볼 것.
   // 협상 철회 관련.
   async closeBuyOffer(tradeId, detail) {
     const hash = this.getRandomHash()
@@ -836,7 +831,6 @@ export default class RequestTxPlugin {
     return await _staking.methods.pendingBalance(walletAddress).call();
   }
 
-  // 유저의 스테이킹 보상 > 청구 가능수량 디버깅용
   async getUserClaimableAmount(currency, rewardTokenIndex) {
     const $bn = Store.$app.$bn;
     const _staking = this.getStakingContract();

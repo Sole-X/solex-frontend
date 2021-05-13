@@ -6,17 +6,6 @@
       </h1>
     </article>
 
-    <!-- for publishing
-    <user-detail-search
-      :keyword="getUserActivityFilters.keyword"
-      :filters="getUserActivityFilters.searchedKeyword"
-      :defaultTitle="$t('UserPage.HistorySearchPlaceholder')"
-      @onInput="handleInputItemKeyword"
-      @onSubmit="handleSearchUserItems"
-      @onRemove="handleRemoveKeyword"
-    />
-    -->
-
     <article class="user-collapsible user-history__item">
       <ui-collapsible ref="items">
         <user-collapsible-header slot="header" :title="$t('General.Item')[1]" :total="getUserActivities.nft.total" />

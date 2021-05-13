@@ -13,7 +13,6 @@
       </div>
     </div>
 
-    <!-- TODO : v-for -->
     <slot name="submit"></slot>
   </div>
 </template>
@@ -63,7 +62,6 @@
         const navHeight = 150
         const asideMarginTop = 80
 
-        // 윈도우 높이 - Nav - Nav <> Aside 간격 = 최대 스크롤 애니메이션 높이
         const realHeight = height - navHeight
 
         if(this.$route.name.startsWith('AssetItem')) {

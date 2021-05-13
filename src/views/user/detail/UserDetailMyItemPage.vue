@@ -7,17 +7,6 @@
       <div class="user-detail__title-count">{{ getNumOfMyItems }}</div>
     </article>
 
-    <!-- for publishing
-    <user-detail-search
-      :keyword="getUserItemFilters.keyword"
-      :filters="getUserItemFilters.searchedKeyword"
-      :defaultTitle="$t('UserPage.ItemSearchPlaceholder')"
-      @onInput="handleInputItemKeyword"
-      @onSubmit="handleSearchUserItems"
-      @onRemove="handleRemoveKeyword"
-    />
-    -->
-
     <article class="user-collapsible user-item__in-wallet">
       <ui-collapsible ref="inWallet">
         <user-collapsible-header slot="header" :title="$t('UserPage.ShowInWallet')" :total="getSearchedItems.wallet.length" />
@@ -411,7 +400,6 @@
         })
       },
 
-      // TODO : API, 검색
       handleSearchUserItems() {
         const prevState = _.cloneDeep(this.getUserItemFilters)
         const alreadySearched = _.find(prevState.searchedKeyword, keyword => {

@@ -550,8 +550,6 @@ export default {
         })
 
         if(res.success) {
-          // 7 = 출금된 것
-          // TODO : API, 입출금 진행 중(이더리움 체인의 경우)
           maxPage = Number(res.info.maxPage);
           const activeList = _.filter(res.info.items, nft => {
             return nft.status !== 7
@@ -651,7 +649,6 @@ export default {
         }
       })
 
-      // TODO : API 수정 요청
       if(res.success) {
         newState.currency = {
           page: Number(res.info.currentPage),
@@ -747,19 +744,6 @@ export default {
         }),
         row => row.status !== 7
       )
-
-      /*
-      const getAuctionOrders =  await this.$app.$http.get('getAuctionOrders', {
-        urlQuery: {
-          limit: 100,
-          userAddress: getters.getUserInfo.address
-        }
-      })
-
-      if(!getAuctionOrders.success) {
-        return false
-      }
-       */
 
       newState.auction = _.filter(
         _.map(res.info.lockToken['BID'], row => {

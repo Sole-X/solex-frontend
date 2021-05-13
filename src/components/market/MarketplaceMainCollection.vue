@@ -39,7 +39,7 @@
 <script>
   import { mapActions } from 'vuex'
   import AssetItemCard from '@/components/asset/item/AssetItemCard'
-  import AssetItemCard2 from "@/components/asset/item/AssetItemCard2";
+  import AssetItemCardMarketPlace from "@/components/asset/item/AssetItemCardMarketPlace";
   import AssetItemCardHome from '@/components/asset/item/AssetItemCardHome';
 
   let $t, component
@@ -176,7 +176,7 @@
 
     components: {
       AssetItemCard,
-      AssetItemCard2,
+      AssetItemCardMarketPlace,
       AssetItemCardHome
     }
   }

@@ -23,40 +23,6 @@
       </ul>
     </div>
     <common-search-bar-html></common-search-bar-html>
-
-    <!--
-    <common-search-bar
-      :keyword="getSearchFilter.keyword"
-      @onInput="value => keyword = value"
-    >
-      <div slot="option" class="common-search-bar__option">
-        <span>{{getSearchFilter.type}}</span>
-        <ui-popover ref="select" class="common-search-bar__select" animation="shift-away">
-          <ul>
-            <li @click="handleSelectSearchType('sell')">{{$t('General.SellMenu')}}</li>
-            <li @click="handleSelectSearchType('buy')">{{$t('General.BuyMenu')}}</li>
-          </ul>
-        </ui-popover>
-      </div>
-      <ui-popover slot="result" ref="search" :class="$bem('common-search-bar__result', '', ['menu'])" openOn="click">
-        <div class="common-search-bar__result__item" v-for="i in 3" :key="i">
-          <div class="common-search-bar__result__title">
-            {{['Items', 'Collections', 'Accounts'][i - 1]}}
-          </div>
-
-          <div class="common-search-bar__result__list">
-            <div class="common-search-bar__result__row" v-for="j in 4" :key="j">
-              <div></div>
-              <div>
-                <span class="highlighted">hi</span> everyone
-                <button>test</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ui-popover>
-    </common-search-bar>
-    -->
   </nav>
 </template>
 
@@ -187,25 +153,6 @@
 
       isActiveMenu(menu) {
         const { path, name, query } = this.$route
-
-        if(menu.type === 'buyTrade') {
-          /*
-          if(name === 'AssetMainPage' && path === '/buy') {
-            return true
-          }
-
-          if(name === 'AssetItemPage' && path === '/buy') {
-            return true
-          }
-
-          return false
-
-           */
-        }
-
-        if(menu.type === 'sellTrade') {
-          // return (name === 'AssetMainPage' && query.type === 'sell') || (name.startsWith('AssetItem') && query.type !== 'buy')
-        }
 
         return path.startsWith(menu.path)
       },

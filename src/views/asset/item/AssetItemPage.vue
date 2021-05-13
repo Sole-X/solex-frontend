@@ -149,10 +149,7 @@
       <div v-else>
         <swiper :options="swiperOptions">
           <swiper-slide v-for="item in getRelatedItems" :key="item.relatedId">
-            <!--
-            <asset-item-card :info="item" :options="{ showChain: false, showHeart: false }" />
-            -->
-            <asset-item-card2
+            <asset-item-card-market-place
                 class="marketplace-sell-items-contents-image"
                 :item="item"
                 :type="getRelatedItemType"
@@ -178,7 +175,7 @@
   import { mapActions, mapGetters, mapMutations } from 'vuex'
   import AssetCardMixin from '@/mixins/asset/AssetCardMixin'
   import AssetItemCard from '@/components/asset/item/AssetItemCard'
-  import AssetItemCard2 from "@/components/asset/item/AssetItemCard2";
+  import AssetItemCardMarketPlace from "@/components/asset/item/AssetItemCardMarketPlace";
   import AssetItemDetail from '@/components/asset/item/detail/AssetItemDetail'
   import AssetItemProfileDeposited from '@/components/asset/item/profile/AssetItemProfileDeposited'
   import AssetItemProfileExchange from '@/components/asset/item/profile/AssetItemProfileExchange'
@@ -282,19 +279,6 @@
         if (page === 'buy') {
           return 'buy';
         } else if (page === 'sell') {
-          /*
-          switch (status) {
-            case 1:
-            case 2:
-              return 'auction';
-            case 3:
-            case 4:
-              return 'sell';
-            default:
-              return 'sell';
-          }
-
-           */
           return 'sell';
         }
       },
@@ -354,11 +338,6 @@
         })
 
         this.loadingStatus = false;
-
-        /*
-        await this.setMyItems();
-        await this.setMyLocalItems();
-        */
 
         return true
       },
@@ -702,22 +681,6 @@
               }
             } else {
               // 협상자가 아닌 경우
-              /*
-              if (this.getChainInfo.chain === 'ETHEREUM' && this.getItemInfo.nftInfo.platform === 'KLAY') {
-                return {
-                  leftButton: {
-                    title: $t('Market.DoNego'),
-                    classes: ['disabled'],
-                    click: () => {}
-                  },
-                  rightButton: {
-                    title: $t('Market.BuyItNow'),
-                    classes: ['disabled'],
-                    click: () => {}
-                  }
-                }
-              }
-              */
               return {
                 leftButton: {
                   title: $t('Market.DoNego'),
@@ -806,58 +769,6 @@
         }
       },
 
-      getAuctionButtonsBackup(info) {
-        // not use now
-
-        const { isEndedAuction, ownerAddress, isSell } = info;
-        const isOwner = this.$wallet.isSameAddress(this.getUserInfo.address, ownerAddress);
-
-        if (!isEndedAuction) {
-          // 경매가 진행 중인 경우
-          if (isOwner) {
-            // 판매자인 경우
-            return {
-              leftButton: {
-                title: $t('General.Edit'),
-                classes: ['outline-primary'],
-                click: () => {
-                  this.handleEditOrder()
-                }
-              },
-              rightButton: {
-                title: $t('General.Cancel'),
-                classes: ['primary'],
-                click: () => {
-                  this.handleCancelOrder(isSell ? 'sell' : 'buy')
-                }
-              }
-            }
-          } else {
-            // 판매자가 아닌 경우
-            return {
-              leftButton: {
-
-              },
-              rightButton: {
-                title: $t('Market.BuyItNow'),
-                disable: !isInstantTrade,
-                classes: isInstantTrade ? ['primary'] : ['disabled'],
-                tooltip: isInstantTrade ? '' : '',
-                click: () => {
-                  if(!isInstantTrade) {
-                    return
-                  }
-                  return this.handleDirectTrade()
-                }
-              }
-            }
-          }
-        } else {
-          // 경매가 진행 중이 아닌 경우
-
-        }
-      },
-
       getExchangeButtons(info) {
         const { isMyItem, currentOfferState, isNegotiable, isSell, exchange, isBuy, myNego, isSoldout } = info
         const isEnded = currentOfferState === 'cancel' || (exchange && exchange.isFinished)
@@ -910,7 +821,6 @@
         }
 
         // 내가 예치한 아이템에 대한 매수 글을 보게 된 경우 즉시 판매 가능
-        //if (isBuy && isMyItem) {
         if (isBuy) {
           if (exchange && exchange.isBuyer) {
             return {
@@ -936,17 +846,6 @@
               }
               return false;
             }));
-            // user 지갑에 NFT 존재 유무 확인.
-            // TODO : Sole X 지갑으로 deposit 후, 컨트랙션 진행해야 함.
-            /*
-            let isHavingLocalItem = Boolean(_.find(this.getMyLocalItems, row => {
-              if (this.$wallet.isSameAddress(this.$route.params.tokenId, row.tokenId)) return true;
-              return false;
-            }))
-            롤백.
-            if (isHavingItem || isHavingLocalItem) {
-            */
-
             if (isHavingItem) {
               return {
                 leftButton: {
@@ -1026,26 +925,6 @@
 
         // 종료된 경매
         if(info.isEndedAuction) {
-          /*
-          if (!info.isEndedAuctionDecided) {
-            // 경매는 종료되었지만, 확정을 누르기 전 상태
-            return {
-              leftButton: {
-                title: isMyItem || info.isWillBeMine ? $t('Market.BidResultSuccess') : $t('Market.BidResultFail'),
-                classes: ['disabled'],
-                click: () => {}
-              },
-              rightButton: {
-                title: isMyItem ? $t('Market.FinalizeAuction') : $t('Market.EndedAuction'),
-                classes: isMyItem ? ['primary'] : ['disabled'],
-                click: isMyItem ? () => {
-                  this.handleCloseOrder();
-                } : () => {}
-              }
-            }
-          }
-           */
-
           // 경매가 종료된 상태.
           return {
             leftButton: {
@@ -1210,7 +1089,7 @@
 
     components: {
       AssetItemCard,
-      AssetItemCard2,
+      AssetItemCardMarketPlace,
       AssetItemDetail,
       AssetItemProfileDeposited,
       AssetItemProfileExchange,

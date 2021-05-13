@@ -11,7 +11,6 @@ export default class RequestPlugin {
 
     this.requestModule = axios.create({
       headers: defaultHeaders,
-      // withCredentials: true,
       baseURL: process.env.VUE_APP_API_ENDPOINT
     })
 

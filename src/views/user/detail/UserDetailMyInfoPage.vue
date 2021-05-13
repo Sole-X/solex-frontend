@@ -87,9 +87,6 @@
 
           <swiper :options="swiperOptions">
             <swiper-slide v-for="item in getSelectedItems" :key="item.id">
-              <!--
-              <asset-item-card :info="item" :options="{ showLabel: false, showChain: true, showHeart: false }" />
-              -->
               <asset-item-card-my-page :item="item" />
             </swiper-slide>
           </swiper>
@@ -180,7 +177,6 @@
           <p v-html="$t('UserPage.OurSnsBannerDescription')" />
         </div>
 
-        <!-- TODO : 링크 -->
         <button class="user-info__banner__link">
           <strong>{{ $t("UserPage.OurSnsBannerSubmit") }}</strong>
         </button>

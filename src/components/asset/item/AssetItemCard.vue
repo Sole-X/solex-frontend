@@ -3,25 +3,18 @@
     <section class="asset-item-card__thumbnail" @click="handleClickItem" :style="$_AssetCardMixin_getImage(info)">
       <div class="asset-item-card__thumbnail__head">
         <slot name="leftLabel">
-          <!--
-          <label v-if="options.showLabel && info.isOnTrade" :class="$bem('asset-item-card__type', '', [info.isAuction ? 'buy' : 'sell'])">
-            {{info.isAuction ? $t('Market.Auctions') + ' ' + (info.isEndedAuction ? $t('Market.LabelOnOffs')[1] : $t('Market.LabelOnOffs')[0] ) : $t('Market.BuyItNow')}}
-          </label>
-          -->
         </slot>
 
         <label v-if="options.showChain" class="asset-item-card__chain">
           <template v-if="info.chainIcon">
             <img :src="info.chainIcon" :alt="`symbol of ${info.chainName}`" />
           </template>
-          <!-- 임시 -->
           <template v-else-if="chain === 'ethereum'">
             <img :src="$static.getFileURL('img/icon/ic-token-eth.svg')" >
           </template>
           <template v-else>
             <img :src="$static.getFileURL('img/icon/ic-token-klay.svg')" >
           </template>
-          <!-- 임시 -->
         </label>
 
         <button v-if="options.showHeart" class="asset-item-card__bookmark" ref="heart">
