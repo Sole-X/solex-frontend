@@ -68,7 +68,7 @@ export default {
       const { info } = this;
       if (
         info.tokenAddress == "0x2F5Dc7dCe80d30C122999087F41059d40Bc94c52" &&
-        info.tokenId == 494
+        [492, 493, 494, 496, 498].includes(info.tokenId)
       ) {
         return true;
       } else {
@@ -78,15 +78,12 @@ export default {
 
     getPublisherAddress() {
       const { info } = this;
-      // TODO : 작가 이름을 이 곳에 넣을 것.
       if (this.havePublisher) {
-        // TODO : 실제 데이터 입력 시, 작가 이름을 동적 변경.
-        // 홍길동과 미상은 더미 데이터.
         if (
           info.tokenAddress == "0x2F5Dc7dCe80d30C122999087F41059d40Bc94c52" &&
-          info.tokenId == 494
+          [492, 493, 494, 496, 498].includes(info.tokenId)
         ) {
-          return "Jungman Kim";
+          return "KJM";
         }
       }
       return "Unknown";
@@ -97,14 +94,13 @@ export default {
 
   methods: {
     publisherClicked(event) {
-      return;
-      // if (!this.havePublisher) {
-      //   return;
-      // }
+      if (!this.havePublisher) {
+        return;
+      }
 
-      // // TODO: targetURL에 작가 정보 페이지 링크를 넣을 것.
-      // const targetURL = "https://enftee.com/";
-      // window.open(targetURL, `publisher ${targetURL}`);
+      const targetURL =
+        "https://enftee.medium.com/kjm-1st-nft-collection-unbroken-heart-156b85d81094";
+      window.open(targetURL, `publisher ${targetURL}`);
     },
   },
 
