@@ -66,9 +66,10 @@ export default {
 
     havePublisher() {
       const { info } = this;
+
       if (
         info.tokenAddress == "0x2F5Dc7dCe80d30C122999087F41059d40Bc94c52" &&
-        [492, 493, 494, 496, 498].includes(info.tokenId)
+        ["492", "493", "494", "496", "498"].includes(info.tokenId)
       ) {
         return true;
       } else {
@@ -81,7 +82,7 @@ export default {
       if (this.havePublisher) {
         if (
           info.tokenAddress == "0x2F5Dc7dCe80d30C122999087F41059d40Bc94c52" &&
-          [492, 493, 494, 496, 498].includes(info.tokenId)
+          ["492", "493", "494", "496", "498"].includes(info.tokenId)
         ) {
           return "KJM";
         }
