@@ -225,7 +225,6 @@ export default class WalletPlugin {
     }
 
     // Store.dispatch('setNetworkHealth', 101)
-
     // 블록 싱크가 아예 죽은 경우 구독이 안될테니 직접 RPC 요청 보내서 초기화 진행
     const initBlock = await this.getRpcInstance().getBlock('latest').catch(() => {
       // 블록 초기화 실패 시 코드 500으로 처리
@@ -450,7 +449,6 @@ export default class WalletPlugin {
 
     const wallet = Store.getters.getUserInfo
 
-    // 지갑이 없다면 리턴
     if (!wallet)
       return
 
@@ -498,16 +496,6 @@ export default class WalletPlugin {
 
       requestKey = key
 
-      // if(!Store.getters.getPlatformInfo.isMobile) {
-      //   Store.dispatch('executeKlipWeb2App', {
-      //     type: 'connect',
-      //     requestKey
-      //   })
-      // }
-
-      /* TODO : 클립 SDK 상에서의 취소 대응 지원 전 임시 대응
-      Store.dispatch('updateTransactionProgress', true)
-      */
     }).once('transactionHash', res => {
       transactionHash = res
 

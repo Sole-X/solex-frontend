@@ -3,15 +3,6 @@
     <header class="asset-item__chart__header">
       <div class="asset-item__chart__header__title">
         <h4>{{$t('Market.PriceChart')}}</h4>
-        <!--
-        <div class="asset-item__chart__header__filter">
-          <common-search-dropdown
-            :list="getCurrencyToDropdownList"
-            :selected="selectedCurrency"
-            @onSelect="(currency) => selectedCurrency = currency"
-          />
-        </div>
-        -->
       </div>
 
       <div class="asset-item__chart__header__summary">
@@ -42,7 +33,7 @@
     </header>
 
     <article class="asset-item__chart__wrapper">
-      <asset-item-detail-chart-view2
+      <asset-item-detail-chart-view
         :histories="history.history"
         :propHoverData="hoverData"
         v-on:update:hoverData="setData"
@@ -56,7 +47,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import CommonSearchDropdown from '@/components/common/CommonSearchDropdown'
-  import AssetItemDetailChartView2 from '@/components/asset/item/detail/AssetItemDetailChartView2';
+  import AssetItemDetailChartView from '@/components/asset/item/detail/AssetItemDetailChartView';
 
   let $t, component
 
@@ -127,7 +118,7 @@
 
     components: {
       CommonSearchDropdown,
-      AssetItemDetailChartView2
+      AssetItemDetailChartView
     }
   }
 </script>

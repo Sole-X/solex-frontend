@@ -51,9 +51,6 @@
           <div class="asset-item__profile__pay">
             <div v-for="currency in getSupportCurrency" v-if="isVisibleCurrency(currency)" :class="$bem('asset-item__profile__pay__option', '', ['selected'])">
               <button></button>
-              <!--
-              <span>{{info.currencyInfo.symbol}}</span>
-              -->
               <span>{{ currency.symbol }}</span>
             </div>
           </div>

@@ -73,7 +73,7 @@ import { mapActions, mapGetters } from 'vuex';
 let $t, self
 
 export default {
-  name: 'AssetItemCard2',
+  name: 'AssetItemCardMarketPlace',
   props: {
     item: {
       type: Object

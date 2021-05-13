@@ -366,7 +366,9 @@
         return _.find(this.getSupportCurrency, currency => {
           if (this.$wallet.isSameAddress(currency.tokenAddress, tokenAddress)) return true;
           return false;
-        });
+        }) || {
+          symbol: 'TRIX'
+        }
       },
 
       convertDate(date) {

@@ -247,11 +247,6 @@ export default {
         }).then(res => {
           if (res.success) {
             commit('SET_MARKET_MAIN_LIST', {
-              /*
-              popular: _.map(res.info.nfts || [], row => {
-                return new NftInfo(row)
-              })
-              */
               popular: res.info.items
             })
           }
@@ -270,12 +265,6 @@ export default {
         }).then(res => {
           if (res.success) {
             commit('SET_MARKET_MAIN_LIST', {
-              /*
-              recently: _.map(res.info.nfts || [], row => {
-                return new NftInfo(row)
-              })
-
-               */
               recently: res.info.items
             })
           }
@@ -294,12 +283,6 @@ export default {
         }).then(res => {
           if (res.success) {
             commit('SET_MARKET_MAIN_LIST', {
-              /*
-              ethereum: _.map(res.info.items || [], row => {
-                return new NftInfo(row)
-              })
-
-               */
               ethereum: res.info.items
             })
           }
@@ -318,12 +301,6 @@ export default {
         }).then(res => {
           if (res.success) {
             commit('SET_MARKET_MAIN_LIST', {
-              /*
-              klaytn: _.map(res.info.items || [], row => {
-                return new NftInfo(row)
-              })
-
-               */
               klaytn: res.info.items
             })
           }
@@ -342,12 +319,6 @@ export default {
         }).then(res => {
           if(res.success) {
             commit('SET_MARKET_MAIN_LIST', {
-              /*
-              collectible: _.map(res.info.items || [], row => {
-                return new NftInfo(row)
-              })
-
-               */
               collectible: res.info.items
             })
           }
@@ -368,12 +339,6 @@ export default {
           }).then(res => {
             if(res.success) {
               commit('SET_MARKET_MAIN_LIST', {
-                /*
-                recentlyViewed: _.map(res.info.items || [], row => {
-                  return new NftInfo(row)
-                })
-
-                 */
                 recentlyViewed: res.info.items
               })
             }

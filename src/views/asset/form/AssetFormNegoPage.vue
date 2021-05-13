@@ -190,11 +190,6 @@
         if(priceToPeb.dcomp(usedCurrency.deposit) === 1) {
           return alert('예치 수량보단 적게')
         }
-        /*
-        else if(priceToPeb.dcomp(getItemInfo.currentPrice) === 1 || priceToPeb.dcomp(getItemInfo.currentPrice) === 0) {
-          return alert('즉시구매가보단 적게')
-        }
-         */
 
         return await this.addNego({
           tokenAddress: getItemInfo.tokenAddress,

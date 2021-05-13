@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 import LandingPage from '@/views/LandingPage.vue'
 import MarketHomePage from '@/views/MarketHomePage'
-import AssetMainPage from '@/views/asset/AssetMainPage'
 
 import MarketplaceBuyPage from '@/views/marketplace/MarketplaceBuyPage';
 import MarketplaceSellPage from '@/views/marketplace/MarketplaceSellPage';
@@ -59,8 +58,6 @@ import WalletConnectPage from '@/views/wallet/WalletConnectPage';
 
 import RenderPage from '@/views/render/RenderPage';
 
-import TestPage from '@/views/TestPage';
-
 Vue.use(VueRouter)
 
 const indexPageRoute = {
@@ -98,14 +95,6 @@ const routes = [
     path: '/sell',
     name: 'MarketSellPage',
     component: MarketplaceSellPage,
-    meta: {
-      hideFooter: true
-    }
-  },
-  {
-    path: '/assets',
-    name: 'AssetMainPage',
-    component: AssetMainPage,
     meta: {
       hideFooter: true
     }
@@ -392,11 +381,6 @@ const routes = [
     name: 'RenderPage',
     component: RenderPage
   },
-  {
-    path: '/test',
-    name: 'TestPage',
-    component: TestPage
-  }
 ]
 
 const router = new VueRouter({

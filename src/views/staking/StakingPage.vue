@@ -140,7 +140,6 @@
           'setIsSetAmount'
       ]),
 
-      // optimizing을 위해 computed로 옮겨도 될 것으로 보이나, 우선은 method에 위치시킴.
       getTranslateValue(val) {
         if (val in $t('Staking')){
           return $t('Staking')[val];
