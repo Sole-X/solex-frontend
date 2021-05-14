@@ -58,7 +58,7 @@ export default {
           el: ".swiper-pagination",
         },
         allowTouchMove: false,
-        loop: false,
+        loop: true,
         autoplay: {
           delay: 5000,
         },
@@ -149,19 +149,19 @@ export default {
             )}`,
           },
         },
-        {
-          title: $t("Market.TopFeatured1Title"),
-          desc: $t("Market.TopFeatured1Desc"),
-          slideStyle: {
-            backgroundColor: "#e5e6e8",
-          },
-          link: "#",
-          contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL(
-              "img/article/article-market-home-top-unbroken.jpg"
-            )}`,
-          },
-        },
+        // {
+        //   title: $t("Market.TopFeatured1Title"),
+        //   desc: $t("Market.TopFeatured1Desc"),
+        //   slideStyle: {
+        //     backgroundColor: "#e5e6e8",
+        //   },
+        //   link: "#",
+        //   contentStyle: {
+        //     backgroundImage: `url(${this.$static.getFileURL(
+        //       "img/article/article-market-home-top-unbroken.jpg"
+        //     )}`,
+        //   },
+        // },
       ];
     },
   },
