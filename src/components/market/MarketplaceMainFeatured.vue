@@ -73,16 +73,30 @@ export default {
           title: $t("Market.TopFeatured1Title"),
           desc: $t("Market.TopFeatured1Desc"),
           slideStyle: {
-            backgroundColor: "#fed45c",
+            backgroundColor: "#efefef",
           },
           link:
-            "https://medium.sole-x.io/sole-x-cross-chain-nft-marketplace-9a958cebe59e",
+            "https://enftee.medium.com/kjm-1st-nft-collection-unbroken-heart-156b85d81094",
           contentStyle: {
             backgroundImage: `url(${this.$static.getFileURL(
-              "img/article/article-market-home-top-launch.jpg"
+              "img/article/article-market-home-top-kjm.jpg"
             )}`,
           },
         },
+        // {
+        //   title: $t("Market.TopFeatured1Title"),
+        //   desc: $t("Market.TopFeatured1Desc"),
+        //   slideStyle: {
+        //     backgroundColor: "#fed45c",
+        //   },
+        //   link:
+        //     "https://medium.sole-x.io/sole-x-cross-chain-nft-marketplace-9a958cebe59e",
+        //   contentStyle: {
+        //     backgroundImage: `url(${this.$static.getFileURL(
+        //       "img/article/article-market-home-top-launch.jpg"
+        //     )}`,
+        //   },
+        // },
         {
           title: $t("Market.TopFeatured1Title"),
           desc: $t("Market.TopFeatured1Desc"),
