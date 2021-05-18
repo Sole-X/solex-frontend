@@ -75,6 +75,32 @@ export default {
           slideStyle: {
             backgroundColor: "#efefef",
           },
+          link: "https://sole-x.io/sell?search=phoenix",
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL(
+              "img/article/article-market-home-top-phoenix-bloom.jpg"
+            )}`,
+          },
+        },
+        {
+          title: $t("Market.TopFeatured1Title"),
+          desc: $t("Market.TopFeatured1Desc"),
+          slideStyle: {
+            backgroundColor: "#efefef",
+          },
+          link: "https://sole-x.io/sell?search=dharma",
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL(
+              "img/article/article-market-home-top-rising-sun.jpg"
+            )}`,
+          },
+        },
+        {
+          title: $t("Market.TopFeatured1Title"),
+          desc: $t("Market.TopFeatured1Desc"),
+          slideStyle: {
+            backgroundColor: "#efefef",
+          },
           link: "https://www.sole-x.io/sell?search=KJM",
           contentStyle: {
             backgroundImage: `url(${this.$static.getFileURL(
