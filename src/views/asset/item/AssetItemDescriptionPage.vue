@@ -22,7 +22,7 @@
         "
         @click="publisherClicked"
       >
-        {{ getPublisherAddress }}
+        {{ getPublisherName }}
       </span>
     </div>
 
@@ -63,28 +63,23 @@ export default {
 
       return "";
     },
-
     havePublisher() {
-      const { info } = this;
-
-      if (
-        info.tokenAddress == "0x2F5Dc7dCe80d30C122999087F41059d40Bc94c52" &&
-        ["492", "493", "494", "496", "498"].includes(info.tokenId)
-      ) {
-        return true;
-      } else {
-        return false;
-      }
+      const publisherName = this.getPublisherName();
+      return !(publisherName == "Unknown");
     },
-
-    getPublisherAddress() {
+    getPublisherName() {
       const { info } = this;
-      if (this.havePublisher) {
-        if (
-          info.tokenAddress == "0x2F5Dc7dCe80d30C122999087F41059d40Bc94c52" &&
-          ["492", "493", "494", "496", "498"].includes(info.tokenId)
-        ) {
+      if (info.tokenAddress == "0x2F5Dc7dCe80d30C122999087F41059d40Bc94c52") {
+        if (["492", "493", "494", "496", "498"].includes(info.tokenId)) {
           return "KJM";
+        } else if (["524", "526"].includes(info.tokenId)) {
+          return "CupOfTherapy";
+        } else if (
+          ["535", "536", "537", "538", "539", "540"].includes(info.tokenId)
+        ) {
+          return "RisingSun";
+        } else if (["544", "545", "546"].includes(info.tokenId)) {
+          return "PhoenixValley";
         }
       }
       return "Unknown";
@@ -95,12 +90,25 @@ export default {
 
   methods: {
     publisherClicked(event) {
-      if (!this.havePublisher) {
+      const publisherName = this.getPublisherName();
+      if (publisherName == "Unknown") {
         return;
       }
-
-      const targetURL = "https://sole-x.io/sell?search=KJM";
-      window.open(targetURL, `publisher ${targetURL}`);
+      if (publisherName == "KJM") {
+        const targetURL =
+          "https://enftee.medium.com/kjm-1st-nft-collection-unbroken-heart-156b85d81094";
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == "CupOfTherapy") {
+        const targetURL = "https://www.instagram.com/cupoftherapy/";
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == "RisingSun") {
+        const targetURL =
+          "https://enftee.medium.com/risingsun-artist-sole-x-dharma-series-41c372213ed5";
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == "PhoenixValley") {
+        const targetURL = "http://blog.artmusee.com/kimseokyoung";
+        window.open(targetURL, `publisher ${targetURL}`);
+      }
     },
   },
 

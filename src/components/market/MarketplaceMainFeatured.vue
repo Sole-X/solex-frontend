@@ -75,7 +75,7 @@ export default {
           slideStyle: {
             backgroundColor: "#efefef",
           },
-          link: "https://sole-x.io/sell?search=KJM",
+          link: "https://www.sole-x.io/sell?search=KJM",
           contentStyle: {
             backgroundImage: `url(${this.$static.getFileURL(
               "img/article/article-market-home-top-kjm.jpg"
