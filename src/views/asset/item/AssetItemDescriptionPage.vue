@@ -99,8 +99,7 @@ export default {
         return;
       }
 
-      const targetURL =
-        "https://enftee.medium.com/kjm-1st-nft-collection-unbroken-heart-156b85d81094";
+      const targetURL = "https://sole-x.io/sell?search=KJM";
       window.open(targetURL, `publisher ${targetURL}`);
     },
   },

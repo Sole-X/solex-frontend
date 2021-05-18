@@ -75,8 +75,7 @@ export default {
           slideStyle: {
             backgroundColor: "#efefef",
           },
-          link:
-            "https://enftee.medium.com/kjm-1st-nft-collection-unbroken-heart-156b85d81094",
+          link: "https://sole-x.io/sell?search=KJM",
           contentStyle: {
             backgroundImage: `url(${this.$static.getFileURL(
               "img/article/article-market-home-top-kjm.jpg"
