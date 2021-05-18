@@ -1,6 +1,6 @@
 <template>
   <div ref="marketplace-sell" class="marketplace-sell">
-    <marketplace-filter-ver2
+    <marketplace-filter-market-place
       :sections="['filterBy', 'status', 'categories', 'collections', 'currencies', 'price']"
       :propItems="items"
       v-on:update:items="setData"
@@ -69,7 +69,7 @@
       </header>
       <main class="marketplace-sell-items-contents">
         <template v-if="getDataLoaded">
-          <asset-item-card2
+          <asset-item-card-market-place
               class="marketplace-sell-items-contents-image"
               v-for="item in items"
               :item="item"
@@ -89,8 +89,8 @@
 </template>
 
 <script>
-import AssetItemCard2 from '@/components/asset/item/AssetItemCard2';
-import MarketplaceFilterVer2 from '@/components/market/MarketplaceFilterVer2';
+import AssetItemCardMarketPlace from '@/components/asset/item/AssetItemCardMarketPlace';
+import MarketplaceFilterMarketPlace from '@/components/market/MarketplaceFilterMarketPlace';
 import MarketplaceMixin from "@/mixins/marketplace/MarketplaceMixin";
 import MainFooter from '@/components/menu/MainFooter'
 import { mapGetters } from 'vuex';
@@ -329,8 +329,8 @@ export default {
   },
 
   components: {
-    AssetItemCard2,
-    MarketplaceFilterVer2,
+    AssetItemCardMarketPlace,
+    MarketplaceFilterMarketPlace,
     MainFooter
   }
 }

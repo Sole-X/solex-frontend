@@ -1,26 +1,18 @@
 <template>
-  <TrendChart
-      v-if="this.histories && this.histories.length > 0"
-      :datasets="getDatasets"
-      :grid="getGrid"
-      :labels="getLabels"
-      :interactive='true'
-      @mouse-move="onMouseMove"
-  >
-  </TrendChart>
+  <canvas id="priceChart">
+    
+  </canvas>
 </template>
 
 <script>
 let $t, self
+import Chart from 'chart.js'
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'AssetItemDetailChartView',
-
-  mixins: [],
-
   props: [
-      'histories', 'propHoverData', 'propShowHover'
+    'histories', 'propHoverData', 'propShowHover'
   ],
 
   created() {
@@ -29,55 +21,29 @@ export default {
   },
 
   mounted() {
-
-  },
-
-  beforeDestroy() {
-
-  },
-
-  data() {
-    return {
-
-    }
+    this.createChart('priceChart', this.planetChartData)
   },
 
   computed: {
     ...mapGetters([
-        'getSupportCurrency'
+      'getSupportCurrency'
     ]),
-
-    hoverData: {
-      get () {
-        return this.propHoverData;
-      },
-
-      set (newVal) {
-        this.$emit('update:hoverData', 'hoverData', newVal);
-      }
-    },
-
-    showHover: {
-      get () {
-        return this.propShowHover;
-      },
-
-      set (newVal) {
-        this.$emit('update:showHover', 'showHover', newVal);
-      }
-    },
-
-    getChartData() {
-      let data = [];
+  },
+  methods:{
+    createChart(charId, chartData){
+      const ctx = document.getElementById(charId);
+      
+      let xLabels = [];
       for (const row of this.histories) {
-        data = [Boolean(Number(row.usdPrice)) ? Number(row.usdPrice) : 0, ...data];
+        const date = new Date(row.updatedAt);
+        let xLabel = `${date.getMonth()}/${date.getDate()}`
+        xLabels = [...xLabels, xLabel];
       }
-      return data;
-    },
 
-    getDataset() {
       let data = [];
+      
       for (const row of this.histories) {
+        
         const currency = _.find(this.getSupportCurrency, cur => {
           if (this.$wallet.isSameAddress(row.currency, cur.tokenAddress)) return true;
           return false;
@@ -89,68 +55,69 @@ export default {
         }
         data = [
             ...data,
-          {
-            value: Number(price),
-            updatedAt: row.updatedAt,
-          }
+            price
         ];
       }
+      
+      const myChart = new Chart(ctx,{
+        type: "line",
+        data: {
+          labels: xLabels,
+          datasets: [
+            {
+              data: data,
+              fill: false,
+              backgroundColor: "rgba(54,73,93,.5)",
+              borderColor: "#36495d",
+              borderWidth: 3
+            }
+          ]
+        },
+        options: {
+          legend:{
+            display: false
+          },
+          responsive: true,
+          lineTension: 1,
+          tooltips: {
+            mode: 'index',
+            intersect: false,
+            custom: function(tooltip) {
+              if (!tooltip) return;
+              // disable displaying the color box;
+              tooltip.displayColors = false;
+            },
+            callbacks: {
 
-      return {
-        data: data,
-        smooth: true,
-        fill: false,
-        className: 'item-price'
-      }
-    },
+              label: function(tooltipItem, data) {
+                  var label = data.datasets[tooltipItem.datasetIndex].label || '';
 
-    getDatasets() {
-      return [this.getDataset];
-    },
-
-    getGrid() {
-      return {
-        verticalLines: true,
-        horizontalLines: true
-      }
-    },
-
-    getLabels() {
-      let xLabels = [];
-      for (const row of this.histories) {
-        const date = new Date(row.updatedAt);
-        let xLabel = `${date.getMonth()}/${date.getDate()}`
-        xLabels = [...xLabels, xLabel];
-      }
-
-      return {
-        xLabels: xLabels,
-        yLabels: 5,
-        yLabelsTextFormatter: val => '$ ' + Math.round(val * 10000) / 10000
-      }
+                  if (label) {
+                      label += ': ';
+                  }
+                  label += Math.round(tooltipItem.yLabel * 100) / 100;
+                  return label;
+              }
+            }
+          },
+          hover: {
+            mode: 'nearest',
+            intersect: true
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  padding: 25
+                }
+              }
+            ]
+          }
+        }
+        ,
+      })
     }
-  },
-
-  watch: {
-    hoverData (newVal, oldVal) {
-      if (!newVal) {
-        this.showHover = false;
-        return;
-      }
-      this.showHover = true;
-    }
-  },
-
-  methods: {
-    onMouseMove(event) {
-      const { index, data } = event ? event : {index: null, data: null};
-
-      this.hoverData = data;
-    }
-  },
-
-  components: {
-
   }
 }
 </script>

@@ -42,7 +42,6 @@ export class UserActivity {
     return ''
   }
 
-  // eventType, statusStr 값을 조합해 나온 실제 이벤트 종류
   get realEventName() {
     const { eventTypeToString, statusStr } = this
 
@@ -293,9 +292,7 @@ export class UserActivity {
       case 'NEGO': {
         return $t('Market.Negotiation')
       }
-      // devjoo Activity event 추가
       case 'TOKEN': {
-        // vue-i18n 버그로 인해 번역 적용 x
         return $t('Market.Token')
       }
       case 'NFT': {

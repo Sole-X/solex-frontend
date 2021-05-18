@@ -6,16 +6,6 @@
       </h1>
     </article>
 
-    <!-- for publishing
-    <user-detail-search
-      :keyword="getUserWatchlistFilters.keyword"
-      :filters="getUserWatchlistFilters.searchedKeyword"
-      :defaultTitle="$t('UserPage.ItemSearchPlaceholder')"
-      @onInput="handleInputWatchlistKeyword"
-      @onSubmit="handleSearchUserWatchlist"
-    />
-    -->
-
     <article class="user-collapsible user-item__in-wallet">
       <ui-collapsible ref="recentlyViewed">
         <user-collapsible-header slot="header"

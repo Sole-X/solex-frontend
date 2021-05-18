@@ -161,14 +161,6 @@
       </div>
 
       <div class="main-page__filter__price">
-        <!-- TODO : API, Price 단위 Currency 기존 Currency와 별개로 추가
-        <common-search-dropdown
-          :list="getSearchFilter.currency"
-          :selected="selectedToken"
-          :defaultTitle=""
-        />
-        -->
-
         <div class="main-page__filter__options">
           <ul>
             <li

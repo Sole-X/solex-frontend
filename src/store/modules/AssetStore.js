@@ -201,14 +201,6 @@ export default {
             isDetail: true,
             relatedId: item.id
           }
-          /*
-          return new AssetItemDetail({
-            ...item,
-            isDetail: true,
-            relatedId: item.id
-          })
-
-           */
         }))
       }
 
@@ -219,8 +211,6 @@ export default {
       return await this.$app.$http.post('addItemReadLog', {
         body: {
           accountAddr: getters.getUserInfo.address,
-          // tokenAddr: payload.tokenAddress,
-          // tokenId: payload.tokenId
           tradeId: payload.tradeId
         }
       })
@@ -671,7 +661,6 @@ export default {
           path: `/asset/item/${payload.tokenAddress}/${payload.tokenId}`,
           query: {
             type: 'sell',
-            // tradeId: signResult.data.requestHash
             tradeId
           }
         })
@@ -1234,7 +1223,6 @@ export default {
         });
       }
 
-      // TODO : State Update
       if(sendResult.success) {
         const { params } = this.$app.$route
         dispatch('setItemInfo', {
@@ -1314,20 +1302,7 @@ export default {
     },
 
     updateNegotiationStatus({commit, getters}, payload) {
-      // 성공했으니 API 재호출 없이 상태 업데이트
       const newItemInfo = _.cloneDeep(getters.getItemInfo)
-
-      /*
-      newItemInfo.exchange.negos = _.map(newItemInfo.exchange.negos, nego => {
-        if(this.$app.$wallet.isSameAddress(nego.accountAddress, payload.user)) {
-          nego.status = payload.status
-          nego.statusStr = payload.statusStr
-        }
-
-        return nego
-      })
-      commit('SET_ITEM_INFO', newItemInfo)
-       */
     },
 
     async showActivityDetail({commit, dispatch, getters}, payload) {

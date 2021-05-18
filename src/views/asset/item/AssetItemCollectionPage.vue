@@ -17,12 +17,6 @@
     <section class="asset-item__collection">
       <article class="asset-item__collection__description">
         <div class="asset-item__collection__description__links">
-          <!--
-          <button :class="$bem('asset-item__collection__description__link', '', ['primary'])" v-clipboard:copy="'collection url'" v-clipboard:success="$_GlobalValueMixin_showCopyTooltip">
-            <img :src="$static.getFileURL('img/icon/ic-copy-wh.svg')" alt="copy" />
-          </button>
-          -->
-
           <button class="asset-item__collection__description__link" v-for="option in getItemExternalLinks" :key="option.type" @click="handleClickExternalLink(option)">
             <img :src="option.image" :alt="option.type" @click="option.onclick" />
           </button>

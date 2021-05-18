@@ -3,15 +3,6 @@
     <article class="asset-item__profile__title">
       <div class="asset-item__profile__collection">
         <h6>{{info.collectionName || '-'}}</h6>
-        <!--
-        <button v-if="info.isExchange" :class="$bem('asset-item__profile__collection__label', '', !info.isEndedExchange ? ['progress'] : '')">
-          <strong v-if="info.isBuy">{{ !info.isEndedExchange ? $t('Market.LabelBuyOn') : $t('Market.LabelBuyOff') }}</strong>
-          <strong v-else-if="info.isSell">{{ !info.isEndedExchange ? $t('Market.LabelSaleOn') : $t('Market.LabelSaleOff') }}</strong>
-        </button>
-        <button v-else-if="info.isAuction" :class="$bem('asset-item__profile__collection__label', '', !info.isEndedAuction ? ['progress'] : '')">
-          <strong>{{ !info.isEndedAuction ? $t('Market.LabelAuctionOn') : $t('Market.LabelAuctionOff') }}</strong>
-        </button>
-        -->
       </div>
 
       <h1>{{info.itemName}}</h1>
@@ -59,12 +50,6 @@
           {{buttonProps.rightButton.tooltip}}
         </ui-tooltip>
       </button>
-
-      <!--
-      <button v-if="!buttonProps.rightButton && info.isMyItem && info.isCollected" :class="$bem('common-submit-button', '', ['primary'])" @click="handleMakeAuction()">
-        {{$t('Market.MakeAuction')}}
-      </button>
-      -->
     </article>
   </section>
 </template>
@@ -111,11 +96,6 @@
 
       getPriceLabel() {
         let label = $t('Market.AveragePrice');
-        /*
-        if (this.info.exchange && this.info.exchange.status === 7) {
-          label = $t('Market.LastPrice');
-        }
-        */
         return label;
       },
 

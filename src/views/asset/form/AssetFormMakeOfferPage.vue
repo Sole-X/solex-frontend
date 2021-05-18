@@ -63,13 +63,6 @@
               </button>
             </div>
 
-            <!--
-            <div class="asset-form__price__balance">
-              <span>{{$t('Market.UserBalanceLabel', { token: usedCurrency.symbol })}} </span>
-              <span><strong>{{usedCurrency.decDeposit.dprec(4) | addComma}}</strong> {{usedCurrency.symbol}} </span>
-            </div>
-            -->
-
             <!--오류 문구-->
             <div></div>
           </div>
@@ -115,12 +108,6 @@
               </button>
             </div>
 
-            <!--
-            <div class="asset-form__price__balance">
-              <span>{{$t('Market.UserBalanceLabel', { token: usedCurrency.symbol })}} : </span>
-              <span><strong>{{usedCurrency.decDeposit.dprec(4) | addComma}}</strong> {{usedCurrency.symbol}} </span>
-            </div>
-            -->
             <!--오류문구-->
             <div v-if="endPriceError" class="asset-form__price-error">
               {{ $t('Market.ErrorMessage1') }}
@@ -187,12 +174,6 @@
               </button>
             </div>
 
-            <!--
-            <div class="asset-form__price__balance">
-              <span>{{$t('Market.UserBalanceLabel', { token: usedCurrency.symbol })}} : </span>
-              <span><strong>{{usedCurrency.decDeposit.dprec(4) | addComma}}</strong> {{usedCurrency.symbol}} </span>
-            </div>
-            -->
             <!--오류문구-->
             <div>
 
@@ -226,26 +207,6 @@
               {{$t('Market.MakeOfferCollectionDesc')}}
             </span>
           </div>
-
-          <!--
-          <common-search-bar
-            :disabled="isModify"
-            :keyword="collectionKeyword"
-            :options="getSearchbarOptions"
-            @onInput="handleSetCollectionKeyword"
-          >
-            <div class="common-search-bar__result__item" slot="resultBody">
-              <div class="common-search-bar__result__list">
-                <div class="common-search-bar__result__row" v-for="collection in getSupportNft" :key="collection.symbol" @click="handleSelectCollection(collection)">
-                  <div></div>
-                  <div>
-                    {{$_SearchMixin_getHighlightedKeyword(collection.name)}}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </common-search-bar>
-          -->
           <div class="asset-form__row-input-container">
             <input
                 type="text"
@@ -624,14 +585,6 @@
 
         // 커스텀 매수 주문 생성이 아닌 경우
         if(!info) {
-          // 매도, 경매 주문인데 Owner 유저가 아닌 경우
-          // if(!res.info.isBuy && isNotOwner) {
-          //   return this.$router.push({
-          //     path: '/home'
-          //   })
-          // }
-          // qa 진행을 위해 주석 처리
-
           // 매수 주문인데 내가 Owner 유저인 경우
           if(res.info.isBuy && !isNotOwner) {
             return this.$router.push({

@@ -117,14 +117,6 @@ export class NftInfo {
     return ''
   }
 
-  /*
-  get nftInfo() {
-    return _.find(Store.getters.getSupportNft, nft => {
-      return Store.$app.$wallet.isSameAddress(nft.addressToReserve, this.tokenAddress)
-    })
-  }
-  */
-
   get itemName() {
     return this.metadata.name || this.tokenId
   }

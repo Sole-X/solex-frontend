@@ -90,22 +90,6 @@ export default {
 
             store.commit('SET_RESPONSE_DATA', {responseData: resData.data});
 
-            /*
-            for (const item of resData.data.nftItems) {
-                newItems.items.push(["", "", item.name]);
-            }
-            for (const collection of resData.data.nftInfos) {
-                newItems.collections.push(["", "", collection.name]);
-            }
-            for (const account of resData.data.accounts) {
-                newItems.accounts.push(["", "", account.accountAddress]);
-            }
-
-            store.commit('SET_ITEMS_ITEMS', {items: newItems.items});
-            store.commit('SET_ITEMS_COLLECTIONS', {collections: newItems.collections});
-            store.commit('SET_ITEMS_ACCOUNTS', {accounts: newItems.accounts});
-             */
-
             const wordLength = word.length;
             const wordLowerCase = typeof word === 'string' ? word.toLowerCase() : word;
             if (resData.data.nftItems && resData.data.nftItems.length > 0) {
