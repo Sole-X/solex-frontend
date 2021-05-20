@@ -64,7 +64,7 @@ export default {
       return "";
     },
     havePublisher() {
-      const publisherName = this.getPublisherName();
+      const publisherName = this.getPublisherName;
       return !(publisherName == "Unknown");
     },
     getPublisherName() {
@@ -118,7 +118,7 @@ export default {
 
   methods: {
     publisherClicked(event) {
-      const publisherName = this.getPublisherName();
+      const publisherName = this.getPublisherName;
       if (publisherName == "Unknown") {
         return;
       }
