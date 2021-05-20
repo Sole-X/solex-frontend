@@ -70,15 +70,43 @@ export default {
     getPublisherName() {
       const { info } = this;
       if (info.tokenAddress == "0x2F5Dc7dCe80d30C122999087F41059d40Bc94c52") {
-        if (["492", "493", "494", "496", "498"].includes(info.tokenId)) {
+        if (
+          [
+            "492",
+            "493",
+            "494",
+            "496",
+            "498",
+            "556",
+            "557",
+            "558",
+            "559",
+            "560",
+          ].includes(info.tokenId)
+        ) {
           return "KJM";
         } else if (["524", "526"].includes(info.tokenId)) {
           return "CupOfTherapy";
         } else if (
-          ["535", "536", "537", "538", "539", "540"].includes(info.tokenId)
+          [
+            "535",
+            "536",
+            "537",
+            "538",
+            "539",
+            "540",
+            "547",
+            "548",
+            "549",
+            "550",
+            "551",
+            "552",
+          ].includes(info.tokenId)
         ) {
           return "RisingSun";
-        } else if (["544", "545", "546"].includes(info.tokenId)) {
+        } else if (
+          ["544", "545", "546", "553", "554", "555"].includes(info.tokenId)
+        ) {
           return "PhoenixValley";
         }
       }
@@ -106,7 +134,8 @@ export default {
           "https://enftee.medium.com/risingsun-artist-sole-x-dharma-series-41c372213ed5";
         window.open(targetURL, `publisher ${targetURL}`);
       } else if (publisherName == "PhoenixValley") {
-        const targetURL = "http://blog.artmusee.com/kimseokyoung";
+        const targetURL =
+          "https://enftee.medium.com/phoenixvalley-artist-second-nft-series-eea950bd1197";
         window.open(targetURL, `publisher ${targetURL}`);
       }
     },
