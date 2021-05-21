@@ -108,6 +108,8 @@ export default {
           ["544", "545", "546", "553", "554", "555"].includes(info.tokenId)
         ) {
           return "PhoenixValley";
+        } else if (["570", "568", "566", "564", "562"].includes(info.tokenId)) {
+          return "KJH";
         }
       }
       return "Unknown";
@@ -136,6 +138,10 @@ export default {
       } else if (publisherName == "PhoenixValley") {
         const targetURL =
           "https://enftee.medium.com/phoenixvalley-artist-second-nft-series-eea950bd1197";
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == "KJH") {
+        const targetURL =
+          "https://enftee.medium.com/the-innocence-of-current-affair-cartoonist-kjh-e2d1a6dac3c8";
         window.open(targetURL, `publisher ${targetURL}`);
       }
     },
