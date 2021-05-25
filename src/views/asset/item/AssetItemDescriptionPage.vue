@@ -108,7 +108,19 @@ export default {
           ["544", "545", "546", "553", "554", "555"].includes(info.tokenId)
         ) {
           return "PhoenixValley";
-        } else if (["570", "568", "566", "564", "562"].includes(info.tokenId)) {
+        } else if (
+          [
+            "570",
+            "568",
+            "566",
+            "564",
+            "562",
+            "579",
+            "577",
+            "581",
+            "575",
+          ].includes(info.tokenId)
+        ) {
           return "KJH";
         }
       }
