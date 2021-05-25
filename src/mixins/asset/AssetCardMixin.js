@@ -45,6 +45,7 @@ export default {
           }
         }
       }
+
       return {
         backgroundImage: `url(${image})`,
         backgroundSize: "contain",

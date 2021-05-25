@@ -313,9 +313,7 @@ export default class WalletPlugin {
 
     try {
       const estimateGas = await this.getRpcInstance().estimateGas(tx)
-      // gas = Math.floor(estimateGas * 1.5)
-      // temp
-      gas = Math.floor(estimateGas * 3);
+      gas = Math.floor(estimateGas * 1.5)
     } catch(e) {
       Store.$app.$eventBus.$emit('failureEstimateGas', {
         action
