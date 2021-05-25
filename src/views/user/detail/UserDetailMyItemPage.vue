@@ -23,7 +23,7 @@
         <section v-else class="user-collapsible__content">
           <div class="user-item__list">
             <div :class="$bem('asset-item-card', '', item.status === 'depositProgress' ? ['processing'] : '')" v-for="item in getSearchedItems.wallet" :key="item.id">
-              <section class="asset-item-card__thumbnail" @click="handleClickItem(item)" :style="inwalletImages[item.tokenAddress]">
+              <section class="asset-item-card__thumbnail" @click="handleClickItem(item)" :style="inwalletImages[item.tokenAddress + '_' + item.tokenId]">
                 <div class="asset-item-card__thumbnail__head">
                   <label class="asset-item-card__chain">
 
@@ -300,6 +300,7 @@
 
       initPage() {
         this.setUserItems()
+        this.setInwalletStyle(this.getSearchedItems.wallet);
       },
 
       initCollapsibleStatus() {
@@ -435,7 +436,7 @@
           const result = await this.$_AssetCardMixin_getImage_inwallet(item);
           this.inwalletImages = {
             ...this.inwalletImages,
-            [item.tokenAddress]: result
+            [item.tokenAddress+'_'+item.tokenId]: result
           }
         }
       }

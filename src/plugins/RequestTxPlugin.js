@@ -25,6 +25,7 @@ export default class RequestTxPlugin {
 
   initReserveCaver() {
     const isMainNet = this._wallet.isMainNet()
+
     // const rpcUrl = isMainNet ? 'wss://cypress-rpc.klaytn.ozys.net:8652' : 'wss://api.cypress.ozys.net:8652'
     const rpcUrl = isMainNet ? process.env.VUE_APP_PROVIDER_URL_CYPRESS : process.env.VUE_APP_PROVIDER_URL_BAOBAB;
 
@@ -146,17 +147,17 @@ export default class RequestTxPlugin {
   }
 
   getEthVaultContract() {
-    return new this._wallet.getContract({
-      abi: EthvaultABI,
-      address: ContractList.EthVaultContract
-    })
+    return new this._caver.contract(EthvaultABI, ContractList.EthVaultContract);
   }
 
   getKlayminterContract() {
-    return new this._wallet.getContract({
-      abi: KlayminterABI,
-      address: ContractList.KlayMintContract
-    })
+    const caver = new Caver((this._wallet.isMainNet() ? process.env.VUE_APP_PROVIDER_URL_CYPRESS : process.env.VUE_APP_PROVIDER_URL_BAOBAB));
+    return new caver.contract(KlayminterABI, ContractList.KlayMintContract);
+  }
+
+  getKlaytnReserveContract() {
+    const caver = new Caver((this._wallet.isMainNet() ? process.env.VUE_APP_PROVIDER_URL_CYPRESS : process.env.VUE_APP_PROVIDER_URL_BAOBAB));
+    return new caver.contract(ReserveABI, ContractList.ReserveContract);
   }
 
   getERC20TestContract() {
@@ -507,6 +508,55 @@ export default class RequestTxPlugin {
   async depositBridgeNft(tokenAddress, tokenId) {
     const ethVault = this.getEthVaultContract()
     const toAddr = this.getReserveContract()._address
+
+    const _klayMinter = this.getKlayminterContract();
+    let kAddress = null;
+    try {
+      kAddress = await _klayMinter.methods.getTokenAddress(tokenAddress).call();
+    } catch (e) {
+      
+    }
+
+    let isWhiteList = true;
+    if (!kAddress || this._wallet.isSameAddress(kAddress, '0x0000000000000000000000000000000000000000')) {
+      isWhiteList = false;
+    } else {
+      const _kReserve = this.getKlaytnReserveContract();
+      try {
+        isWhiteList = await _kReserve.methods.whiteListNfts(kAddress).call();
+      } catch (e) {
+        isWhiteList = false;
+      }
+    }
+
+    if (!isWhiteList) {
+      // TODO: white list를 위해 보내려는 주소를 아래 파라미터로 넣어주세요.
+      //
+      // const methodName = 'depositNFT'
+      // const methodParams = [tokenAddress, 'KLAYTN', "보내려는 주소", tokenId, '0x']
+      // const data = ethVault.methods.depositNFT(...methodParams).encodeABI()
+      //
+      // await this.sendTransaction({
+      //   sendParams: {
+      //     type: 'SMART_CONTRACT_EXECUTION',
+      //     to: ethVault._address,
+      //     data,
+      //     value: '0'
+      //   },
+      //   methodDetail: {
+      //     name: methodName,
+      //     params: methodParams,
+      //     abi: ReserveABI
+      //   }
+      // })
+      Store.$app.showAlert({
+        title: Store.$app.$t('General.TransactionFail')
+      })
+      return {
+        success: false,
+        error: new Error('not_white_list')
+      }
+    }
 
     const methodName = 'depositNFT'
     const dataHash = this.generateBridgeRandomHash()
