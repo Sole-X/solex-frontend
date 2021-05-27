@@ -122,6 +122,8 @@ export default {
           ].includes(info.tokenId)
         ) {
           return "KJH";
+        } else if (["583", "585", "587", "589"].includes(info.tokenId)) {
+          return "Rosa Fantasy";
         }
       }
       return "Unknown";
@@ -154,6 +156,10 @@ export default {
       } else if (publisherName == "KJH") {
         const targetURL =
           "https://enftee.medium.com/the-innocence-of-current-affair-cartoonist-kjh-e2d1a6dac3c8";
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == "Rosa Fantasy") {
+        const targetURL =
+          "https://enftee.medium.com/cyborg-farmer-6c68201fc7a9";
         window.open(targetURL, `publisher ${targetURL}`);
       }
     },
