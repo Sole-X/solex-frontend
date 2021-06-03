@@ -82,19 +82,19 @@ export default {
         //     )}`,
         //   },
         // },
-        {
-          title: $t("Market.TopFeatured1Title"),
-          desc: $t("Market.TopFeatured1Desc"),
-          slideStyle: {
-            backgroundColor: "#f4e4ee",
-          },
-          link: "https://sole-x.io/sell?search=phoenix",
-          contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL(
-              "img/article/article-market-home-top-phoenix-bloom.jpg"
-            )}`,
-          },
-        },
+        // {
+        //   title: $t("Market.TopFeatured1Title"),
+        //   desc: $t("Market.TopFeatured1Desc"),
+        //   slideStyle: {
+        //     backgroundColor: "#f4e4ee",
+        //   },
+        //   link: "https://sole-x.io/sell?search=phoenix",
+        //   contentStyle: {
+        //     backgroundImage: `url(${this.$static.getFileURL(
+        //       "img/article/article-market-home-top-phoenix-bloom.jpg"
+        //     )}`,
+        //   },
+        // },
         {
           title: $t("Market.TopFeatured1Title"),
           desc: $t("Market.TopFeatured1Desc"),
@@ -148,19 +148,19 @@ export default {
         //   },
         //   // classes: ["bg-black"],
         // },
-        {
-          title: $t("Market.TopFeatured1Title"),
-          desc: $t("Market.TopFeatured1Desc"),
-          slideStyle: {
-            backgroundColor: "#fefef6",
-          },
-          link: "/sell?search=Manul",
-          contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL(
-              "img/article/article-market-home-top-3.jpg"
-            )}`,
-          },
-        },
+        // {
+        //   title: $t("Market.TopFeatured1Title"),
+        //   desc: $t("Market.TopFeatured1Desc"),
+        //   slideStyle: {
+        //     backgroundColor: "#fefef6",
+        //   },
+        //   link: "/sell?search=Manul",
+        //   contentStyle: {
+        //     backgroundImage: `url(${this.$static.getFileURL(
+        //       "img/article/article-market-home-top-3.jpg"
+        //     )}`,
+        //   },
+        // },
         {
           title: $t("Market.TopFeatured1Title"),
           desc: $t("Market.TopFeatured1Desc"),
