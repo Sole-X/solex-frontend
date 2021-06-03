@@ -124,6 +124,8 @@ export default {
           return "KJH";
         } else if (["583", "585", "587", "589"].includes(info.tokenId)) {
           return "Rosa Fantasy";
+        } else if (["596", "597", "598", "600", "602"].includes(info.tokenId)) {
+          return "Chanchitos";
         }
       }
       return "Unknown";
@@ -160,6 +162,9 @@ export default {
       } else if (publisherName == "Rosa Fantasy") {
         const targetURL =
           "https://enftee.medium.com/cyborg-farmer-6c68201fc7a9";
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == "Chanchitos") {
+        const targetURL = "https://www.instagram.com/mundochanchan/";
         window.open(targetURL, `publisher ${targetURL}`);
       }
     },
