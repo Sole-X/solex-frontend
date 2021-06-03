@@ -82,6 +82,11 @@ export default {
             "558",
             "559",
             "560",
+            "595",
+            "594",
+            "593",
+            "592",
+            "591",
           ].includes(info.tokenId)
         ) {
           return "KJM";
