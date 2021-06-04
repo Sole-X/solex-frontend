@@ -64,6 +64,8 @@
       <marketplace-main-tips />
 
       <marketplace-main-banner />
+
+      <marketplace-main-email />
     </section>
   </div>
 </template>
@@ -74,6 +76,7 @@
   import MarketplaceMainCollection from '@/components/market/MarketplaceMainCollection'
   import MarketplaceMainTips from '@/components/market/MarketplaceMainTips'
   import MarketplaceMainBanner from '@/components/market/MarketplaceMainBanner';
+  import MarketplaceMainEmail from '@/components/market/MarketplaceMainEmail';
 
   let $t, component
   let io;
@@ -215,7 +218,8 @@
       MarketplaceMainTips,
       MarketplaceMainFeatured,
       MarketplaceMainCollection,
-      MarketplaceMainBanner
+      MarketplaceMainBanner,
+      MarketplaceMainEmail
     }
   }
 </script>

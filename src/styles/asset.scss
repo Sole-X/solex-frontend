@@ -347,6 +347,10 @@
         position: center;
       }
 
+      &.has-video {
+        cursor: pointer;
+      }
+
       .asset-item__thumbnail__icon {
         @include full-circle(36px);
         background: #fff;
@@ -357,6 +361,15 @@
         img {
           width: 100%;
         }
+      }
+
+      .asset-item__thumbnail__video {
+        @include center-align-flex;
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        border-radius: 20px;
+        border: 1px solid $melange_gray;
       }
 
       .asset-item__thumbnail__enlargement {
@@ -413,7 +426,12 @@
           margin-bottom: 13px;
 
           h6 {
+            cursor: pointer;
             color: $gen_lightblack;
+
+            &:hover {
+              color: $primary_color;
+            }
           }
 
           .asset-item__profile__collection__label {
@@ -1434,9 +1452,8 @@
 
 .asset-item-card2 {
   cursor: pointer;
-  margin-right: 12px;
-  margin-left: 12px;
-  margin-bottom: 40px;
+  width: 220px;
+  height: 300px;
 
   //transform: scale(0.94);
   //transition: transform 0.1s, box-shadow 0.1s;
@@ -1452,6 +1469,9 @@
   //}
 
   .asset-item-card2-thumbnail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 220px;
     height: 180px;
     background-color: #fafbfc;
@@ -1510,6 +1530,20 @@
         }
       }
     }
+
+    .asset-item-card2-thumbnail-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 6px;
+      .asset-item-card2-thumbnail-footer-left {
+
+      }
+
+      .asset-item-card2-thumbnail-footer-right {
+
+      }
+    }
   }
 
   .asset-item-card2-description {
@@ -1519,6 +1553,43 @@
     width: 220px;
     height: 120px;
     padding: 14px 0;
+
+    &.loading {
+      .asset-item-card2-description-header {
+        height: 36px;
+        .asset-item-card2-description-header-token {
+          width: 120px;
+          height: 12px;
+          background-color: rgba(222, 227, 235, 0.3);
+          margin-bottom: 8px;
+        }
+
+        .asset-item-card2-description-header-title {
+          width: 180px;
+          height: 16px;
+          background-color: rgba(222, 227, 235, 0.3);
+        }
+      }
+
+      .asset-item-card2-description-footer {
+        .asset-item-card2-description-footer-eth {
+          width: 80px;
+          height: 20px;
+          background-color: rgba(222, 227, 235, 0.3);
+          margin-bottom: 8px;
+        }
+
+        .asset-item-card2-description-footer-items {
+          display: flex;
+          .asset-item-card2-description-footer-items-item {
+            width: 40px;
+            height: 12px;
+            margin-right: 10px;
+            background-color: rgba(222, 227, 235, 0.3);
+          }
+        }
+      }
+    }
 
     .asset-item-card2-description-header {
       .asset-item-card2-description-header-token {

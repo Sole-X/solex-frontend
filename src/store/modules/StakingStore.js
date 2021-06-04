@@ -6,6 +6,7 @@ export const getDefaultState = () => ({
     stakingAmount: 0,
     unstakingAmount: 0,
     rewardAmount: 0,
+    rewardAmountWeek: 0,
     isSetAmount: false,
     totalRewardAmount: 0,
     curPage: 1,
@@ -40,6 +41,10 @@ export default {
 
         SET_REWARD_AMOUNT(state, payload) {
             state.rewardAmount = payload;
+        },
+
+        SET_REWARD_AMOUNT_WEEK(state, payload) {
+            state.rewardAmountWeek = payload;
         },
 
         SET_IS_SET_AMOUNT(state, payload) {
@@ -390,15 +395,25 @@ export default {
 
             if (rewards) {
                 let rewardAmount = '0';
-                const rewardObject = _.find(rewards, (row, index) => {
-                    return this.$app.$wallet.isSameAddress(row.currency, process.env.VUE_APP_TOKEN_ADDRESS);
-                });
+                let rewardAmountWeek = '0';
 
-                if (rewardObject) {
-                    rewardAmount = rewardObject.totalReward;
-                }
+                rewards.forEach(reward => {
+                    const currency = _.find(getters.getSupportCurrency, supportCurrency => {
+                        if (this.$app.$wallet.isSameAddress(supportCurrency.tokenAddress, reward.currency)) return true;
+                        return false;
+                    });
+
+                    if (currency) {
+                        const amount = currency.toFiat && currency.toFiat(reward.totalReward ? reward.totalReward : '0');
+                        const amountWeek = currency.toFiat && currency.toFiat(reward.weekAmount ? reward.weekAmount : '0');
+
+                        rewardAmount = amount && rewardAmount.dadd(amount);
+                        rewardAmountWeek = amountWeek && rewardAmountWeek.dadd(amountWeek);
+                    }
+                })
 
                 commit('SET_REWARD_AMOUNT', rewardAmount);
+                commit('SET_REWARD_AMOUNT_WEEK', rewardAmountWeek);
             }
         },
 
@@ -503,6 +518,10 @@ export default {
 
         getRewardAmount(state) {
             return state.rewardAmount;
+        },
+
+        getRewardAmountWeek(state) {
+            return state.rewardAmountWeek;
         },
 
         getIsSetAmount(state) {

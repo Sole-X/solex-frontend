@@ -68,11 +68,12 @@
     "Deposit": "Deposit",
     "Withdraw": "Withdraw",
     "Owner": "Owner",
-    "SearchPlaceholder": "Search by Item / Collection / Account",
+    "SearchPlaceholder": "Search by Item / Collection / Account / Publisher",
     "SearchItems": [
       "Items",
       "Collections",
-      "Accounts"
+      "Accounts",
+      "Publisher"
     ],
     "Language": "ENG",
     "TermModalTitle": "Sole-X Terms of Service",
@@ -302,13 +303,16 @@
     "FilterCollections": "COLLECTIONS",
     "FilterCurrencies": "CURRENCIES",
     "FilterPrice": "PRICE",
+    "FilterPublisher": "PUBLISHER",
     "FilterStatusItems": [
       "SALES",
       "AUCTIONS",
+      "SOLD ITEMS",
       "PROMOTION"
     ],
     "FilterStatusSales": "SALES",
     "FilterStatusAuctions": "AUCTIONS",
+    "FilterStatusSolditems": "SOLD ITEMS",
     "FilterStatusPromotion": "PROMOTION",
     "FilterBlockchainItems": [
       "ETHEREUM",
@@ -366,7 +370,12 @@
     "PeriodOptionWeeks": "{num} weeks",
     "PeriodOptionDate": "{num} days",
     "SelectOrder": "Sort by",
-    "SelectPrice": "Select Currency"
+    "SelectPrice": "Select Currency",
+    "MarketHomeEmailTitleMain": "Don't miss out on news from the World of NFTs",
+    "MarketHomeEmailTitleSub": "Subscribe to the newsletter to hear about Sole-X updated and events",
+    "MarketHomeEmailPlaceholder": "Email address",
+    "MarketHomeEmailSubmit": "SUBMIT",
+    "MarketHomeEmailThanks": "Thanks!"
   },
   "UserPage": {
     "MyInfo": "My Info",
@@ -502,7 +511,8 @@
     "ClaimRewards": "Claim Rewards",
     "CurrentlyStaked": "Currently Staked",
     "UnstakingInProgress": "Unstaking in Progress",
-    "EarnedRewardsByStaking": "Earned Rewards by Staking",
+    "EarnedRewardsByStaking": "Earned Rewards: All Time",
+    "EarnedRewardsByStakingLastWeek": "Earned Rewards: Last 7 Days",
     "TableIdx": "#",
     "TableDate": "Date",
     "TableCoinToken": "Coin/Token",

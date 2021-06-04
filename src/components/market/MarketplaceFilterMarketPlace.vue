@@ -30,7 +30,7 @@
             :style="{'height': itemsShows.status ? itemsHeights['status'] + 'px' : '0px'}"
         >
           <div ref="status">
-            <div class="marketplace-filter-popover-item">
+            <div class="marketplace-filter-popover-item" v-if="page !== 'buy'">
               <div
                   class="marketplace-filter-popover-item-title"
                   :data-obj="JSON.stringify({section: 'status', value: 'SALES'})"
@@ -40,7 +40,7 @@
               </div>
               <div class="item-value">{{ nftCnt.nftCntSell || 0 }}</div>
             </div>
-            <div class="marketplace-filter-popover-item">
+            <div class="marketplace-filter-popover-item" v-if="page !== 'buy'">
               <div
                   class="marketplace-filter-popover-item-title"
                   :data-obj="JSON.stringify({section: 'status', value: 'AUCTIONS'})"
@@ -53,10 +53,20 @@
             <div class="marketplace-filter-popover-item">
               <div
                   class="marketplace-filter-popover-item-title"
+                  :data-obj="JSON.stringify({section: 'status', value: 'SOLDITEMS'})"
+              >
+                <div class="red-dot disabled"></div>
+                <div class="item-value" @click="(event) => statusClicked(event, 'SOLDITEMS')" :data-obj="JSON.stringify({section: 'status', value: 'SOLDITEMS'})">{{ $t('Market.FilterStatusItems')[2] }}</div>
+              </div>
+              <div class="item-value">{{ page === 'buy' ? nftCnt.nftCntBuyDone : nftCnt.nftCntDone || 0 }}</div>
+            </div>
+            <div class="marketplace-filter-popover-item">
+              <div
+                  class="marketplace-filter-popover-item-title"
                   :data-obj="JSON.stringify({section: 'status', value: 'PROMOTION'})"
               >
                 <div class="red-dot disabled"></div>
-                <div class="item-value" @click="(event) => statusClicked(event, 'PROMOTION')" :data-obj="JSON.stringify({section: 'status', value: 'PROMOTION'})">{{ $t('Market.FilterStatusItems')[2] }}</div>
+                <div class="item-value" @click="(event) => statusClicked(event, 'PROMOTION')" :data-obj="JSON.stringify({section: 'status', value: 'PROMOTION'})">{{ $t('Market.FilterStatusItems')[3] }}</div>
               </div>
               <div class="item-value">{{ nftCnt.nftCntPromotion || 0 }}</div>
             </div>
@@ -237,6 +247,36 @@
           </div>
         </div>
       </section>
+
+      <section class="marketplace-filter-item" id="market-sell-publisher" v-show="this.sections.includes('publisher')">
+        <div class="marketplace-filter-item-top" @click="event => topClicked(event, 'publisher')">
+          <div class="marketplace-filter-title">{{ $t('Market.FilterPublisher') }}</div>
+          <img class="marketplace-filter-item-top-chevron" v-if="!itemsShows.publisher" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
+          <img class="marketplace-filter-item-top-chevron" v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
+        </div>
+        <div
+            class="marketplace-filter-popover"
+            :style="{'height': itemsShows.publisher ? '175px' : '0'}"
+        >
+          <div ref="publisher" class="marketplace-filter-popover-publisher">
+            <div class="marketplace-filter-popover-publisher-input-container">
+              <input type="text" class="marketplace-filter-popover-input" v-model="publisherInput" v-on:keyup.enter="publisherSubmitClicked" />
+              <img :src="$static.getFileURL('img/icon/ic-search-gray.svg')" @click="publisherSubmitClicked" />
+            </div>
+            <div class="marketplace-filter-popover-publisher-list" ref="publisher-list">
+              <div
+                  class="marketplace-filter-popover-publisher-list-item disabled"
+                  v-for="item in getPublisherList()"
+                  @click="(event) => publisherClicked(event, item)"
+                  :data-name="item"
+              >
+                <div class="red-dot"/>
+                <span>{{ item }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
@@ -286,7 +326,8 @@ export default {
         categories: true,
         collections: true,
         currencies: true,
-        price: true
+        price: true,
+        publisher: true,
       },
       itemsHeights: {
         status: 0,
@@ -294,7 +335,8 @@ export default {
         categories: 0,
         collections: 0,
         currencies: 0,
-        price: 0
+        price: 0,
+        publisher: 0,
       },
       filterby: [],
       filters: {
@@ -305,7 +347,8 @@ export default {
         currencies: [],
         price: [],
         order: [],
-        search: []
+        search: [],
+        publisher: [],
       },
       originalFilter: {
         status: [],
@@ -345,7 +388,9 @@ export default {
         nftCntCateETC: 0
       },
       selectedOption: 'Select Currency',
-      showSelectBox: false
+      showSelectBox: false,
+      publisherInput: '',
+      pubs: [],
     }
   },
 
@@ -434,7 +479,7 @@ export default {
         }
       }
       return cnt;
-    }
+    },
   },
 
   watch: {
@@ -447,7 +492,8 @@ export default {
         ...this.filters.currencies,
         ...this.filters.price,
         ...this.filters.order,
-        ...this.filters.search
+        ...this.filters.search,
+        ...this.filters.publisher,
       ]);
     },
 
@@ -460,7 +506,8 @@ export default {
         ...this.filters.currencies,
         ...this.filters.price,
         ...this.filters.order,
-        ...this.filters.search
+        ...this.filters.search,
+        ...this.filters.publisher,
       ])
     },
 
@@ -473,7 +520,8 @@ export default {
         ...this.filters.currencies,
         ...this.filters.price,
         ...this.filters.order,
-        ...this.filters.search
+        ...this.filters.search,
+        ...this.filters.publisher,
       ]);
     },
 
@@ -486,7 +534,8 @@ export default {
         ...this.filters.currencies,
         ...this.filters.price,
         ...this.filters.order,
-        ...this.filters.search
+        ...this.filters.search,
+        ...this.filters.publisher,
       ]);
     },
 
@@ -499,7 +548,8 @@ export default {
         ...this.filters.collections,
         ...this.filters.price,
         ...this.filters.order,
-        ...this.filters.search
+        ...this.filters.search,
+        ...this.filters.publisher,
       ]);
     },
 
@@ -512,7 +562,8 @@ export default {
         ...this.filters.collections,
         ...this.filters.currencies,
         ...this.filters.order,
-        ...this.filters.search
+        ...this.filters.search,
+        ...this.filters.publisher,
       ]);
     },
 
@@ -525,7 +576,8 @@ export default {
         ...this.filters.collections,
         ...this.filters.currencies,
         ...this.filters.price,
-        ...this.filters.search
+        ...this.filters.search,
+        ...this.filters.publisher,
       ])
     },
 
@@ -538,8 +590,40 @@ export default {
         ...this.filters.collections,
         ...this.filters.currencies,
         ...this.filters.price,
-        ...this.filters.order
+        ...this.filters.order,
+        ...this.filters.publisher,
       ])
+    },
+
+    'filters.publisher': function (newVal, oldVal) {
+      this.filterby = _.cloneDeep([
+          ...newVal,
+        ...this.filters.status,
+        ...this.filters.blockchain,
+        ...this.filters.categories,
+        ...this.filters.collections,
+        ...this.filters.currencies,
+        ...this.filters.price,
+        ...this.filters.order,
+        ...this.filters.search,
+      ]);
+
+      const publisherList = this.$refs['publisher-list'];
+
+      for (const elem of publisherList.children) {
+        const name = elem.dataset.name;
+
+        const filter = newVal.find(item => {
+          if (item.value === name) return true;
+          return false;
+        })
+
+        if (filter) {
+          elem.className = elem.className.replace('disabled', 'selected');
+        } else {
+          elem.className = elem.className.replace('selected', 'disabled');
+        }
+      }
     },
 
     filterby: async function(newVal, oldVal) {
@@ -582,7 +666,7 @@ export default {
 
     propOrder: function (newVal, oldVal) {
       this.filters.order = [newVal];
-    }
+    },
   },
 
   methods: {
@@ -607,11 +691,13 @@ export default {
       this.itemsHeights.collections = this.$refs.collections ? this.$refs.collections.offsetHeight : 0;
       this.itemsHeights.currencies = this.$refs.currencies ? this.$refs.currencies.offsetHeight : 0;
       this.itemsHeights.price = this.$refs.price ? this.$refs.price.offsetHeight : 0;
+      this.itemsHeights.publisher = this.$refs.publisher ? this.$refs.publisher.offsetHeight : 0;
 
       const res3 = await axios.get(`${process.env.VUE_APP_API_ENDPOINT}/v1/common/sideInfo`);
       if (res3.status === 200) {
         if (res3.data && res3.data.nftCnt) {
           this.nftCnt = _.cloneDeep(res3.data.nftCnt);
+          this.pubs = res3.data?.pubs || [];
         }
       }
 
@@ -623,6 +709,7 @@ export default {
       if ($query['currencies']) await this.routeWithFilter('currencies');
       if ($query['price']) await this.routeWithFilter('price');
       if ($query['search']) await this.routeWithFilter('search');
+      if ($query['publisher']) await this.routeWithFilter('publisher');
     },
 
     routeWithFilter(section) {
@@ -631,13 +718,6 @@ export default {
       if ($query[section + 'Obj']) {
         const obj = JSON.parse($query[section + 'Obj']);
         this[`${section}Clicked`](null, $query[section], obj);
-        /*
-        this.filters[section].push({
-          section,
-          value: $query[section],
-          desc: obj
-        })
-        */
       } else if (section === 'search') {
         if ($query[section]) {
           const value = $query[section];
@@ -669,6 +749,7 @@ export default {
         currencies: [],
         price: [],
         search: [],
+        publisher: [],
         order: [],
         limit: [20],
         connectAddr: []
@@ -686,7 +767,28 @@ export default {
 
       let urlQuery = "";
       for (let key in queries) {
-        const query = queries[key];
+        let query = queries[key];
+
+        // SOLD_ITEMS 일 때,
+        if (key === 'status') {
+          if (query.length > 0) urlQuery += 'lifeStatus=';
+          for (const q of query) {
+            if (!(urlQuery.includes('DONE') || urlQuery.includes('START'))) {
+              if (q === 'SOLDITEMS') {
+                urlQuery += 'DONE,';
+              }
+              else if (q === 'SELL' || q === 'AUCTION') {
+                urlQuery += 'START,';
+              }
+            }
+
+            if (urlQuery[urlQuery.length - 1] === ',') {
+              urlQuery = urlQuery.slice(0, -1);
+            }
+            urlQuery += '&';
+          }
+        }
+
         switch(key) {
           case 'blockchain':
             key = 'platform';
@@ -701,6 +803,8 @@ export default {
             key = 'currency';
             break
         }
+
+        query = [...new Set(queries[key])];
 
         urlQuery += `${key}=`;
         for (const q of query) {
@@ -745,23 +849,55 @@ export default {
           return text;
         }
       }
-      const idx = this.filters.status.findIndex(i => i.value === value);
-      if (idx > -1) {
-        this.filters.status.splice(idx, 1);
-        this.curStatus.splice(idx, 1);
 
-        if (event.target.parentElement.hasChildNodes()) {
-          const redDotNode = event.target.parentElement.childNodes[0];
-          redDotNode.className = redDotNode.className.replace('selected', 'disabled');
+      if (!event) {
+        event = new Event('clickOutside');
+        const parentElem = this.$refs['status'];
+        let curElem = null;
+        for (const elem of parentElem.children) {
+          if (JSON.parse(elem.children[0].dataset.obj).value.includes(value)) {
+            curElem = elem.children[0];
+            break;
+          }
         }
-      } else {
-        this.filters.status.push(status);
-        this.curStatus.push(status);
+        if (curElem) {
+          curElem.children[1].dispatchEvent(event);
+        }
+      }
 
-        if (event.target.parentElement.hasChildNodes()) {
-          const redDotNode = event.target.parentElement.childNodes[0];
-          redDotNode.className = redDotNode.className.replace('disabled', 'selected');
-        }
+      let flag = false;
+      let oldVal = _.cloneDeep(this.filters.status);
+      this.filters.status.splice(0);
+      if ((oldVal.length > 0 && oldVal[0].value !== status.value) || oldVal.length === 0) flag = true;
+      if (flag) this.filters.status.push(status);
+
+      // 다중 선택을 위한 코드
+      // const idx = this.filters.status.findIndex(i => i.value === value);
+      // if (idx > -1) {
+      //   this.filters.status.splice(idx, 1);
+      //   this.curStatus.splice(idx, 1);
+      //
+      //   if (event.target.parentElement.hasChildNodes()) {
+      //     const redDotNode = event.target.parentElement.childNodes[0];
+      //     redDotNode.className = redDotNode.className.replace('selected', 'disabled');
+      //   }
+      // } else {
+      //   this.filters.status.push(status);
+      //   this.curStatus.push(status);
+      //
+      //   if (event.target.parentElement.hasChildNodes()) {
+      //     const redDotNode = event.target.parentElement.childNodes[0];
+      //     redDotNode.className = redDotNode.className.replace('disabled', 'selected');
+      //   }
+      // }
+
+      for (const node of this.$refs.status.children) {
+        const redDotNode = node.querySelector('.red-dot');
+        if (redDotNode) redDotNode.className = redDotNode.className.replace('selected', 'disabled');
+      }
+      if (flag && event.target.parentElement.hasChildNodes()) {
+        const redDotNode = event.target.parentElement.childNodes[0];
+        redDotNode.className = redDotNode.className.replace('disabled', 'selected');
       }
     },
 
@@ -859,9 +995,15 @@ export default {
             break;
           }
         }
+
         if (curElem) {
           curElem.dispatchEvent(event);
         }
+
+        collection.desc = _.find(this.getSupportNft, nft => {
+          if (this.$wallet.isSameName(nft.name, value)) return true;
+          return false;
+        });
       }
 
       const idx = this.filters.collections.findIndex(i => i.value === value);
@@ -929,6 +1071,32 @@ export default {
       if (flag && event.target.parentElement.hasChildNodes()) {
         const redDotNode = event.target.parentElement.childNodes[0];
         redDotNode.className = redDotNode.className.replace('disabled', 'selected');
+      }
+    },
+
+    publisherClicked(event, value) {
+      const publisher = {
+        section: 'publisher',
+        value,
+        appear: () => value,
+      }
+
+      if (!event) {
+        this.publisherSubmitClicked(null, value);
+        setTimeout(() => {
+          const listElem = this.$refs['publisher-list'];
+          for (const elem of listElem.children) {
+            elem.className = elem.className.replace('disabled', 'selected');
+          }
+        }, 100);
+      }
+
+      const idx = this.filters.publisher.findIndex(i => i.value === value);
+
+      if (idx > -1) {
+        this.filters.publisher.splice(idx, 1);
+      } else {
+        this.filters.publisher.push(publisher);
       }
     },
 
@@ -1159,6 +1327,19 @@ export default {
       this.selectedOption = appear;
       this.orderChanged(new Event('change'), value);
     },
+
+    publisherSubmitClicked(event, value) {
+      this.pubs = [value ? value : this.publisherInput];
+      const listElem = this.$refs['publisher-list'];
+      for (const elem of listElem.children) {
+        elem.className = elem.className.replace('selected', 'disabled');
+      }
+      this.publisherInput = '';
+    },
+
+    getPublisherList() {
+      return this.pubs;
+    }
   },
 
   components: {

@@ -6,6 +6,7 @@ import MarketHomePage from '@/views/MarketHomePage'
 
 import MarketplaceBuyPage from '@/views/marketplace/MarketplaceBuyPage';
 import MarketplaceSellPage from '@/views/marketplace/MarketplaceSellPage';
+import CollectionPage from '@/views/marketplace/CollectionPage';
 
 import AssetItemPage from '@/views/asset/item/AssetItemPage'
 import AssetItemDescriptionPage from '@/views/asset/item/AssetItemDescriptionPage'
@@ -97,6 +98,14 @@ const routes = [
     component: MarketplaceSellPage,
     meta: {
       hideFooter: true
+    }
+  },
+  {
+    path: '/collection',
+    name: 'ColllectionPage',
+    component: CollectionPage,
+    meta: {
+      maxWidth: '1220px',
     }
   },
   {

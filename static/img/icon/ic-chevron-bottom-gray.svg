@@ -1,11 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="8" height="6" viewBox="0 0 8 6">
-    <g fill="none" fill-rule="evenodd" stroke-linecap="round">
-        <g stroke="#C1C5CC" stroke-width="2">
-            <g>
-                <g>
-                    <path d="M1186.824 51.999L1186.823 56 1182.821 56.001" transform="translate(-1181 -53) rotate(45 1184.823 54)"/>
-                </g>
-            </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="12" height="7" viewBox="0 0 12 7">
+    <g fill="none" fill-rule="evenodd">
+        <g fill="#DEE3EB" fill-rule="nonzero">
+            <path d="M1169 517c.513 0 .936.386.993.883l.007.117v7h-7c-.552 0-1-.448-1-1 0-.513.386-.936.883-.993L1163 523h5v-5c0-.513.386-.936.883-.993L1169 517z" transform="translate(-1160 -520) rotate(45 1166 521)"/>
         </g>
     </g>
 </svg>

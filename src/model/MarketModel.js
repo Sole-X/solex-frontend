@@ -27,6 +27,7 @@ export class NftInfo {
     this.metadata = props.desc || {
       name: '',
       description: '',
+      animationUrl: null,
       image: '',
       tokenUri: ''
     }

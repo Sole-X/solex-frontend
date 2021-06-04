@@ -222,5 +222,17 @@ export default { // TODO : method, params, query 등에 대한 검증
     path: '/v1/nfts/metadata',
     requiredParams: [],
     requiredQuery: []
-  }
+  },
+  setNewLetterEmail: {
+    methods: ['POST'],
+    path: '/v1/common/newsletter',
+    requiredParam: [],
+    requiredQuery: []
+  },
+  getCollectionInfo: {
+    methods: ['GET'],
+    path: '/v1/nfts/:collectionAddr',
+    requiredParam: ['collectionAddr'],
+    requiredQuery: []
+  },
 }

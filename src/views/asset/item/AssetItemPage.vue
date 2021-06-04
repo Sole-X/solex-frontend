@@ -86,14 +86,32 @@
     </div>
 
     <section class="asset-item__info">
-      <article class="asset-item__thumbnail" :style="$_AssetCardMixin_getImage(getItemInfo)">
-        <div class="asset-item__thumbnail__icon">
-          <img :src="getItemInfo.chainIcon" alt="platform" />
-        </div>
+      <article
+          :class="'asset-item__thumbnail' + (hasVideo(getItemInfo) ? ' has-video' : '')"
+          :style="$_AssetCardMixin_getImage(getItemInfo)"
+          @click="playVideo(getItemInfo)"
+      >
+        <template v-if="loadingStatus">
 
-        <button class="asset-item__thumbnail__enlargement" @click="enlargementClicked">
-          <img :src="$static.getFileURL('img/icon/ic-search-bk.svg')" alt="search" />
-        </button>
+        </template>
+        <template v-else>
+          <div class="asset-item__thumbnail__icon">
+            <img :src="getItemInfo.chainIcon" alt="platform" />
+          </div>
+
+          <div v-if="hasVideo(getItemInfo)" class="asset-item__thumbnail__video">
+            <img
+                :src="$static.getFileURL('img/icon/ic-play-video.svg')"
+                alt="video"
+            />
+          </div>
+          <button v-else class="asset-item__thumbnail__enlargement" @click="enlargementClicked">
+            <img
+                :src="$static.getFileURL('img/icon/ic-search-bk.svg')"
+                alt="search"
+            />
+          </button>
+        </template>
       </article>
 
       <article class="asset-item__profile__wrap">
@@ -1084,6 +1102,28 @@
         this.$router.push({
           path: '/asset/make-offer/auction'
         })
+      },
+
+      hasVideo(item) {
+        const videoUrl = item.metadata?.animationUrl;
+        if (videoUrl) {
+          return true;
+        }
+        return false;
+      },
+
+      playVideo(item) {
+        if (!this.hasVideo(item)) return false;
+        const videoUrl = item.metadata?.animationUrl;
+        if (videoUrl) {
+          this.showModal({
+            component: 'PlayVideoModal',
+            params: {
+              videoUrl: videoUrl,
+              closable: true,
+            }
+          })
+        }
       },
     },
 

@@ -54,6 +54,10 @@ export default {
             state.items.accounts = _.cloneDeep(payload.accounts);
         },
 
+        SET_ITEMS_PUBLISHERS(state, payload) {
+            state.items.publishers = _.cloneDeep(payload.publishers);
+        },
+
         SET_RESPONSE_DATA(state, payload) {
             state.responseData = _.cloneDeep(payload.responseData);
         }
@@ -79,7 +83,8 @@ export default {
             const newItems = {
                 items: [],
                 collections: [],
-                accounts: []
+                accounts: [],
+                publishers: [],
             };
 
             const resData = await store.dispatch("httpRequestGet", {
@@ -137,10 +142,22 @@ export default {
                 }
             }
 
+            if (resData.data.publishers && resData.data.publishers.length > 0) {
+                for (const publisher of resData.data.publishers) {
+                    const publisherLowerCase = publisher.toLowerCase ? publisher.toLowerCase() : '';
+                    if (publisherLowerCase.includes(wordLowerCase)) {
+                        const idxStart = publisherLowerCase.indexOf(wordLowerCase);
+                        const idxEnd = idxStart + wordLength;
+                        const newPublisher = [publisher.slice(0, idxStart), publisher.slice(idxStart, idxEnd), publisher.slice(idxEnd, publisher.length), publisher];
+                        newItems.publishers.push(newPublisher);
+                    }
+                }
+            }
 
             store.commit("SET_ITEMS_ITEMS", {items: newItems.items});
             store.commit("SET_ITEMS_COLLECTIONS", {collections: newItems.collections});
             store.commit("SET_ITEMS_ACCOUNTS", {accounts: newItems.accounts});
+            store.commit("SET_ITEMS_PUBLISHERS", {publishers: newItems.publishers});
         },
 
         async httpRequestGet(store, payload) {

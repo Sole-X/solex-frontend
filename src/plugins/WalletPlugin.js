@@ -61,6 +61,7 @@ export default class WalletPlugin {
   }
 
   checkWalletDisable() {
+    return false;
     return !this.isMainNet() && process.env.VUE_APP_PROFILE !== 'dev'
   }
 
@@ -614,6 +615,17 @@ web3-utils/src/index.js 의 toChecksumAddress가 this.utils에 포함이 되지 
       return false;
     }
 
+  }
+
+  isSameName(nameA, nameB) {
+    try {
+      const nameAUpper = typeof nameA === 'string' ? nameA.toUpperCase() : '-1';
+      const nameBUpper = typeof nameB === 'string' ? nameB.toUpperCase() : '-2';
+
+      return nameAUpper === nameBUpper;
+    } catch (e) {
+      return false;
+    }
   }
 
   isValidAddress(address) {

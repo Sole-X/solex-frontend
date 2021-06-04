@@ -8,7 +8,14 @@
 
     <article class="user-collapsible user-history__item">
       <ui-collapsible ref="items">
-        <user-collapsible-header slot="header" :title="$t('General.Item')[1]" :total="getUserActivities.nft.total" />
+        <user-collapsible-header
+            slot="header"
+            :title="$t('General.Item')[1]"
+            :total="getUserActivities.nft.total"
+            :sortby="getIsSortby('items')"
+            :propSortbyKey="sortbyKey"
+            v-on:update:sortbyKey="setData"
+        />
 
         <section v-if="getUserActivities.nft.total === 0" class="user-collapsible__content">
           <div class="user-collapsible_empty">
@@ -90,7 +97,9 @@
     },
 
     data() {
-      return {}
+      return {
+        sortbyKey: 'Sort by',
+      }
     },
 
     computed: {
@@ -111,7 +120,26 @@
     },
 
     watch: {
+      sortbyKey (newVal, oldVal) {
+        if (newVal === 'Sort by') return;
+        if (newVal === 'All') {
+          this.initPage({
 
+          });
+        } else if (newVal === 'In Progress') {
+          this.initPage({
+            query: {
+              status: 'ING'
+            }
+          });
+        } else if (newVal === 'Complete') {
+          this.initPage({
+            query: {
+              status: 'DONE'
+            }
+          });
+        }
+      }
     },
 
     methods: {
@@ -248,7 +276,15 @@
         return _.pickBy(result, queryType => {
           return queryType
         })
-      }
+      },
+
+      getIsSortby(key) {
+        return this.$refs[key]?.isOpen;
+      },
+
+      setData(key, value) {
+        this[key] = value;
+      },
     },
 
     components: {

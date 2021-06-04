@@ -68,11 +68,12 @@
     "Deposit": "입금",
     "Withdraw": "출금",
     "Owner": "소유자",
-    "SearchPlaceholder": "아이템 / 컬렉션 / 계정으로 검색",
+    "SearchPlaceholder": "아이템 / 컬렉션 / 계정 / 퍼블리셔로 검색",
     "SearchItems": [
       "아이템",
       "컬렉션",
-      "계정"
+      "계정",
+      "퍼블리셔"
     ],
     "Language": "KOR",
     "TermModalTitle": "Sole-X 약관동의",
@@ -302,13 +303,16 @@
     "FilterCollections": "컬렉션",
     "FilterCurrencies": "통화",
     "FilterPrice": "가격",
+    "FilterPublisher": "퍼블리셔",
     "FilterStatusItems": [
       "판매",
       "경매",
+      "판매 종료",
       "프로모션"
     ],
     "FilterStatusSales": "판매",
     "FilterStatusAuctions": "경매",
+    "FilterStatusSolditems": "판매 종료",
     "FilterStatusPromotion": "프로모션",
     "FilterBlockchainItems": [
       "이더리움",
@@ -366,7 +370,12 @@
     "PeriodOptionWeeks": "{num} 주",
     "PeriodOptionDate": "{num} 일",
     "SelectOrder": "정렬",
-    "SelectPrice": "선택해주세요"
+    "SelectPrice": "선택해주세요",
+    "MarketHomeEmailTitleMain": "World of NFTs의 새로운 소식을 놓치지 마세요",
+    "MarketHomeEmailTitleSub": "Sole-X의 업데이트와 이벤트 등을 확인할 수 있는 뉴스레터 구독하기",
+    "MarketHomeEmailPlaceholder": "이메일 주소",
+    "MarketHomeEmailSubmit": "제출",
+    "MarketHomeEmailThanks": "감사합니다."
   },
   "UserPage": {
     "MyInfo": "내 정보",
@@ -502,7 +511,8 @@
     "ClaimRewards": "보상 청구하기",
     "CurrentlyStaked": "현재 스테이킹 수량",
     "UnstakingInProgress": "언스테이킹 중인 수량",
-    "EarnedRewardsByStaking": "스테이킹으로 획득한 보상",
+    "EarnedRewardsByStaking": "현재까지 획득한 보상",
+    "EarnedRewardsByStakingLastWeek": "지난 7일간 획득한 보상",
     "TableIdx": "#",
     "TableDate": "일시",
     "TableCoinToken": "코인/토큰",
