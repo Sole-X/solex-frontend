@@ -1,5 +1,10 @@
 <template>
-  <footer :class="$bem('main-footer', '', $route.name === 'MarketHomePage' ? ['marketplace'] : [])">
+  <footer
+      :class="$bem('main-footer', '', $route.name === 'MarketHomePage' ? ['marketplace'] : [])"
+      :style="meta && meta.maxWidth ? {
+        maxWidth: meta.maxWidth
+      } : {}"
+  >
     <div class="main-footer__title">
       <h4>Sole-X</h4>
 
@@ -66,7 +71,9 @@ let $t, component;
 export default {
   name: "MainFooter",
 
-  props: {},
+  props: {
+    meta: Object
+  },
 
   created() {
     component = this;

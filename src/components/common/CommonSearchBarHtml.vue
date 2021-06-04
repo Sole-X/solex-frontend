@@ -69,6 +69,23 @@
             </div>
           </div>
         </div>
+        <div class="input-section-item">
+          <h4 class="input-section-item-title">{{ $t('General.SearchItems')[3] }}</h4>
+          <div class="input-section-item-content-container" v-for="(publisher, k) in getItems.publishers">
+            <div
+                class="input-section-item-content"
+                @click="(event) => publisherClicked(event, publisher[3])"
+                :data-valueFragment0="publisher[0]"
+                :data-valueFragment1="publisher[1]"
+                :data-valueFragment2="publisher[2]"
+                :data-publisher="publisher[3]"
+            >
+              <span>{{ publisher[0] }}</span>
+              <span class="input-section-item-content-highlighted">{{ publisher[1] }}</span>
+              <span>{{ publisher[2] }}</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="submit-section">
@@ -311,6 +328,21 @@ export default {
         const accountInfo = this.$wallet.getAccountUrl(itemInfo.accountAddress);
         const win = window.open(accountInfo);
       }
+
+      this.setIsSearching({isSearching: false});
+      this.$refs.searchVal.value = '';
+    },
+
+    async publisherClicked(event, publisher) {
+      let type = this.getTypeForHttp;
+      type = type === 'BUY' ? 'buy' : 'sell';
+
+      this.$router.push({
+        path: `/${type}`,
+        query: {
+          publisher: publisher,
+        }
+      });
 
       this.setIsSearching({isSearching: false});
       this.$refs.searchVal.value = '';

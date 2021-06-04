@@ -7,7 +7,7 @@
 
     <article class="asset-item__profile__title">
       <div class="asset-item__profile__collection">
-        <h6>{{info.collectionName || '-'}}</h6>
+        <h6 @click="collectionClicked">{{info.collectionName || '-'}}</h6>
         <button :class="$bem('asset-item__profile__collection__label', '', !info.isEndedAuction ? ['progress'] : '')">
           <strong>{{ !info.isEndedAuction ? $t('Market.LabelAuctionOn') : $t('Market.LabelAuctionOff') }}</strong>
         </button>
@@ -290,6 +290,21 @@
       handleWriterClicked(event) {
         this.isCopy = true;
         setTimeout(() => {this.isCopy = false}, 500);
+      },
+
+      collectionClicked() {
+        const collectionName = this.info.collectionName;
+        const collectionTokenAddress = this.info.tokenAddress;
+
+        if (collectionName && collectionTokenAddress) {
+          this.$router.push({
+            path: '/collection',
+            query: {
+              collection: collectionName,
+              collectionAddress: collectionTokenAddress,
+            }
+          });
+        }
       }
     },
 

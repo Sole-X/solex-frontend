@@ -5,7 +5,7 @@
         <div class="staking-activity__amount-item">
           <div class="left">
             <div class="left-top">
-              {{ translated("CurrentlyStaked") }}
+              {{ $t("Staking.CurrentlyStaked") }}
             </div>
             <div class="left-bottom">
               <template v-if="getIsSetAmount">
@@ -18,14 +18,14 @@
             </div>
           </div>
           <div class="right">
-            <img :src="$static.getFileURL('img/icon/ic-token-trix.jpg')" alt='trix' />
+            <!--<img :src="$static.getFileURL('img/icon/ic-token-trix.jpg')" alt='trix' />-->
           </div>
         </div>
 
         <div class="staking-activity__amount-item">
           <div class="left">
             <div class="left-top">
-              {{ translated("UnstakingInProgress") }}
+              {{ $t("Staking.UnstakingInProgress") }}
             </div>
             <div class="left-bottom">
               <template v-if="getIsSetAmount">
@@ -38,19 +38,19 @@
             </div>
           </div>
           <div class="right">
-            <img :src="$static.getFileURL('img/icon/ic-token-trix.jpg')" alt='trix' />
+            <!--<img :src="$static.getFileURL('img/icon/ic-token-trix.jpg')" alt='trix' />-->
           </div>
         </div>
 
         <div class="staking-activity__amount-item">
           <div class="left">
             <div class="left-top">
-              {{ translated("EarnedRewardsByStaking") }}
+              {{ $t("Staking.EarnedRewardsByStaking") }}
             </div>
             <div class="left-bottom">
               <template v-if="getIsSetAmount">
                 <span>{{ this.$bn.toMaxUnit(getRewardAmount, 18, 4) }}</span>
-                <span>{{ this.getCurrency(getTokenAddress).symbol }}</span>
+                <span>USD</span>
               </template>
               <template v-else>
                 <common-loader />
@@ -58,9 +58,30 @@
             </div>
           </div>
           <div class="right">
-            <img :src="$static.getFileURL('img/icon/ic-token-trix.jpg')" alt='trix' />
+            <!-- <img :src="$static.getFileURL('img/icon/ic-token-trix.jpg')" alt='trix' />-->
           </div>
         </div>
+
+        <div class="staking-activity__amount-item">
+          <div class="left">
+            <div class="left-top">
+              {{ $t("Staking.EarnedRewardsByStakingLastWeek") }}
+            </div>
+            <div class="left-bottom">
+              <template v-if="getIsSetAmount">
+                <span>{{ $bn.toMaxUnit(getRewardAmountWeek, 18, 4) }}</span>
+                <span>USD</span>
+              </template>
+              <template v-else>
+                <common-loader />
+              </template>
+            </div>
+          </div>
+          <div class="right">
+            <!-- <img :src="$static.getFileURL('img/icon/ic-token-trix.jpg')" alt='trix' />-->
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -204,6 +225,7 @@
           'getStakingAmount',
           'getUnstakingAmount',
           'getRewardAmount',
+          'getRewardAmountWeek',
           'getCurPage',
           'getTotalPage',
           'getNumOfActivities',

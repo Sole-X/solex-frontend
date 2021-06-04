@@ -377,6 +377,7 @@ export default {
 
     async setSideInfo({commit}) {
       const res = await this.$app.$http.get('getSideInfo')
+      Log('d res', res);
 
       if(res.success) {
         commit('SET_MARKET_SIDE_INFO', res.info.nftCnt)

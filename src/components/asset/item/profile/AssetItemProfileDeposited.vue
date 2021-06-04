@@ -2,7 +2,7 @@
   <section :class="$bem('asset-item__profile', '', ['deposited'])">
     <article class="asset-item__profile__title">
       <div class="asset-item__profile__collection">
-        <h6>{{info.collectionName || '-'}}</h6>
+        <h6 @click="collectionClicked">{{info.collectionName || '-'}}</h6>
       </div>
 
       <h1>{{info.itemName}}</h1>
@@ -161,7 +161,7 @@
       },
 
       handleLikeClicked() {
-        if (!info.isCollected || !$route.query.tradeId) {
+        if (!this.info.isCollected || !this.$route.query.tradeId) {
           return;
         }
         this.$emit('onClickLike');
@@ -171,6 +171,21 @@
       handleWriterClicked(event) {
         this.isCopy = true;
         setTimeout(() => {this.isCopy = false}, 500);
+      },
+
+      collectionClicked() {
+        const collectionName = this.info.collectionName;
+        const collectionTokenAddress = this.info.tokenAddress;
+
+        if (collectionName && collectionTokenAddress) {
+          this.$router.push({
+            path: '/collection',
+            query: {
+              collection: collectionName,
+              collectionAddress: collectionTokenAddress,
+            }
+          });
+        }
       }
     },
 

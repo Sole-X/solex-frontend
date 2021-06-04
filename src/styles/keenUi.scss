@@ -1,5 +1,9 @@
 @import './head';
 
+.ui-collapsible:not(.is-disabled) .ui-collapsible__header:hover, body[modality="keyboard"] .ui-collapsible:not(.is-disabled) .ui-collapsible__header:focus {
+  background-color: transparent;
+}
+
 .ui-collapsible {
   .ui-collapsible__header {
     height: 56px;

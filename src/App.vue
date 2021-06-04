@@ -10,7 +10,7 @@
       <main-connect-wallet v-else />
     </main>
 
-    <main-footer v-if="!$route.meta.hideFooter" />
+    <main-footer v-if="!$route.meta.hideFooter" :meta="$route.meta"/>
   </div>
 </template>
 

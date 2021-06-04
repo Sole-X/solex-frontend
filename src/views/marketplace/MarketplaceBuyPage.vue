@@ -1,7 +1,7 @@
 <template>
   <div ref="marketplace-sell" class="marketplace-sell">
     <marketplace-filter-market-place
-      :sections="['filterBy', 'categories', 'collections', 'currencies', 'price']"
+      :sections="['filterBy', 'status', 'categories', 'collections', 'currencies', 'price', 'publisher']"
       :propItems="items"
       v-on:update:items="setData"
       :propCurrentPage="currentPage"

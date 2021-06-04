@@ -7,7 +7,7 @@
 
     <article class="asset-item__profile__title">
       <div class="asset-item__profile__collection">
-        <h6>{{info.collectionName || ''}}</h6>
+        <h6 @click="collectionClicked">{{info.collectionName || ''}}</h6>
         <button :class="$bem('asset-item__profile__collection__label', '', !info.isEndedExchange ? ['progress'] : '')">
           <strong v-if="info.isBuy">{{ !info.isEndedExchange ? $t('Market.PageLabelBuyOn') : $t('Market.PageLabelBuyOff') }}</strong>
           <strong v-else-if="info.isSell">{{ !info.isEndedExchange ? $t('Market.LabelSaleOn') : $t('Market.LabelSaleOff') }}</strong>
@@ -271,6 +271,21 @@
           // 협상 불가능한 게시글인 경우
           if (this.$wallet.isSameAddress(row.tokenAddress, this.info.currencyInfo.tokenAddress)) return true;
           return false;
+        }
+      },
+
+      collectionClicked() {
+        const collectionName = this.info.collectionName;
+        const collectionTokenAddress = this.info.tokenAddress;
+
+        if (collectionName && collectionTokenAddress) {
+          this.$router.push({
+            path: '/collection',
+            query: {
+              collection: collectionName,
+              collectionAddress: collectionTokenAddress,
+            }
+          });
         }
       }
     },
