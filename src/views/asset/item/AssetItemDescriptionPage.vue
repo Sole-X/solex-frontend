@@ -131,6 +131,8 @@ export default {
           return "Rosa Fantasy";
         } else if (["596", "597", "598", "600", "602"].includes(info.tokenId)) {
           return "Chanchitos";
+        } else if (["606", "607", "608", "609", "610"].includes(info.tokenId)) {
+          return "MUZIKTIGER";
         }
       }
       return "Unknown";
@@ -170,6 +172,9 @@ export default {
         window.open(targetURL, `publisher ${targetURL}`);
       } else if (publisherName == "Chanchitos") {
         const targetURL = "https://www.instagram.com/mundochanchan/";
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == "MUZIKTIGER") {
+        const targetURL = "https://www.instagram.com/muziktiger/";
         window.open(targetURL, `publisher ${targetURL}`);
       }
     },
