@@ -133,6 +133,8 @@ export default {
           return "Chanchitos";
         } else if (["606", "607", "608", "609", "610"].includes(info.tokenId)) {
           return "MUZIKTIGER";
+        } else if (["614", "616", "618", "619"].includes(info.tokenId)) {
+          return "RosaFantasy";
         }
       }
       return "Unknown";
@@ -175,6 +177,9 @@ export default {
         window.open(targetURL, `publisher ${targetURL}`);
       } else if (publisherName == "MUZIKTIGER") {
         const targetURL = "https://www.instagram.com/muziktiger/";
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == "RosaFantasy") {
+        const targetURL = "https://enftee.medium.com/rosafantasys-cyborg-the-beginning-4ba5850e0b11";
         window.open(targetURL, `publisher ${targetURL}`);
       }
     },
