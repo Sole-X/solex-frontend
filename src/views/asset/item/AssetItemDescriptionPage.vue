@@ -137,6 +137,8 @@ export default {
           return "RosaFantasy";
         } else if (["621", "624", "625"].includes(info.tokenId)) {
           return "HANJUNGSUN";
+        } else if (["629", "630", "631"].includes(info.tokenId)) {
+          return "Nooni";
         }
       }
       return "Unknown";
@@ -185,6 +187,9 @@ export default {
         window.open(targetURL, `publisher ${targetURL}`);
       } else if (publisherName == "HANJUNGSUN") {
         const targetURL = "https://enftee.medium.com/hanjungsun-apartment-series-with-triumphx-5e1f5e09a825";
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == "Nooni") {
+        const targetURL = "https://www.instagram.com/nooni_nooni_nooni/";
         window.open(targetURL, `publisher ${targetURL}`);
       }
     },
