@@ -139,6 +139,8 @@ export default {
           return "HANJUNGSUN";
         } else if (["629", "630", "631"].includes(info.tokenId)) {
           return "NOONI";
+        } else if (["632", "633", "634", "635"].includes(info.tokenId)) {
+          return "YEMIKIM";
         }
       }
       return "Unknown";
@@ -190,6 +192,9 @@ export default {
         window.open(targetURL, `publisher ${targetURL}`);
       } else if (publisherName == "NOONI") {
         const targetURL = "https://enftee.medium.com/nooni-artist-first-nft-with-triumphx-5c1cf7db2037";
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == "YEMIKIM") {
+        const targetURL = "https://www.instagram.com/yemikim_official/";
         window.open(targetURL, `publisher ${targetURL}`);
       }
     },
