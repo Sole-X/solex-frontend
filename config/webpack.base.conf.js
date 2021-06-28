@@ -21,6 +21,18 @@ module.exports = {
       vue$: 'vue/dist/vue.esm.js',
     },
   },
+  module: {
+    rules: [
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: 'ignore-loader',
+          },
+        ],
+      },
+    ],
+  },
   plugins: [
     new webpack.ProvidePlugin({
       _: resolve('./src/utils/LodashImporter'),

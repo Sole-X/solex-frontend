@@ -1,6 +1,6 @@
 # components/modal
 
-### component func.
+## component func
 
     파일 이름으로 유추 가능.
 

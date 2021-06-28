@@ -23,7 +23,7 @@ div {
   &::-webkit-scrollbar-thumb {
     background-color: #babac0;
     border-radius: #{$width}px;
-    border: #{$width / 4}px solid #fff;
+    border: #{$width * 0.25}px solid #fff;
   }
 
   /* set button(top and bottom of the scrollbar) */
