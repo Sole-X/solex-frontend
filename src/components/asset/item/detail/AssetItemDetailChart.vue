@@ -2,31 +2,37 @@
   <section class="asset-item__chart">
     <header class="asset-item__chart__header">
       <div class="asset-item__chart__header__title">
-        <h4>{{$t('Market.PriceChart')}}</h4>
+        <h4>{{ $t('Market.PriceChart') }}</h4>
       </div>
 
       <div class="asset-item__chart__header__summary">
         <div class="asset-item__chart__header__summary__col">
-          <p><strong>$ {{history.maxPrice.dprec(2) | addComma}}</strong> {{selectedCurrency.name}}</p>
+          <p>
+            <strong>$ {{ history.maxPrice.dprec(2) | addComma }}</strong> {{ selectedCurrency.name }}
+          </p>
           <p>
             <img :src="$static.getFileURL('img/icon/ic-chart-highest.svg')" alt="highest" />
-            {{$t('Market.HighestPrice')}}
+            {{ $t('Market.HighestPrice') }}
           </p>
         </div>
 
         <div class="asset-item__chart__header__summary__col">
-          <p><strong>$ {{history.minPrice.dprec(2) | addComma}}</strong> {{selectedCurrency.name}}</p>
+          <p>
+            <strong>$ {{ history.minPrice.dprec(2) | addComma }}</strong> {{ selectedCurrency.name }}
+          </p>
           <p>
             <img :src="$static.getFileURL('img/icon/ic-chart-lowest.svg')" alt="lowest" />
-            {{$t('Market.LowestPrice')}}
+            {{ $t('Market.LowestPrice') }}
           </p>
         </div>
 
         <div class="asset-item__chart__header__summary__col">
-          <p><strong>$ {{history.avgPrice.dprec(2) | addComma}}</strong> {{selectedCurrency.name}}</p>
+          <p>
+            <strong>$ {{ history.avgPrice.dprec(2) | addComma }}</strong> {{ selectedCurrency.name }}
+          </p>
           <p>
             <img :src="$static.getFileURL('img/icon/ic-chart-average.svg')" alt="average" />
-            {{$t('Market.AveragePrice')}}
+            {{ $t('Market.AveragePrice') }}
           </p>
         </div>
       </div>
@@ -45,80 +51,73 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
-  import CommonSearchDropdown from '@/components/common/CommonSearchDropdown'
-  import AssetItemDetailChartView from '@/components/asset/item/detail/AssetItemDetailChartView';
+import { mapGetters } from 'vuex';
+import CommonSearchDropdown from '@/components/common/CommonSearchDropdown';
+import AssetItemDetailChartView from '@/components/asset/item/detail/AssetItemDetailChartView';
 
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'AssetItemDetailChart',
-    props: {
-      history: Object
+export default {
+  name: 'AssetItemDetailChart',
+  props: {
+    history: Object,
+  },
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
+
+  mounted() {},
+
+  beforeDestroy() {},
+
+  data() {
+    return {
+      selectedCurrency: {},
+      histories: [],
+      historyReversed: [],
+      hoverData: null,
+      showHover: false,
+    };
+  },
+
+  computed: {
+    ...mapGetters(['getSupportCurrency', 'getItemHistory']),
+
+    getCurrencyToDropdownList() {
+      return _.map(_.cloneDeep(this.getSupportCurrency), (currency) => {
+        return {
+          name: currency.symbol,
+          value: currency,
+        };
+      });
     },
-    created() {
-      component = this
-      $t = this.$t.bind(this)
+  },
+
+  watch: {
+    history: function (newVal, oldVal) {
+      this.historyReversed = _.cloneDeep(newVal.history).reverse();
     },
 
-    mounted() {
-
-    },
-
-    beforeDestroy() {
-
-    },
-
-    data() {
-      return {
-        selectedCurrency: {},
-        histories: [],
-        historyReversed: [],
-        hoverData: null,
-        showHover: false
+    getItemHistory: function () {
+      const itemHistory = this.getItemHistory;
+      let historyTemp = null;
+      if (itemHistory && itemHistory.history && itemHistory.history.length > 0 && itemHistory.history[0]) {
+        historyTemp = itemHistory.history[0];
       }
+      this.histories = historyTemp;
     },
+  },
 
-    computed: {
-      ...mapGetters([
-        'getSupportCurrency',
-        'getItemHistory'
-      ]),
-
-      getCurrencyToDropdownList() {
-        return _.map(_.cloneDeep(this.getSupportCurrency), currency => {
-          return {
-            name: currency.symbol,
-            value: currency
-          }
-        })
-      }
+  methods: {
+    setData(key, value) {
+      this[key] = value;
     },
+  },
 
-    watch: {
-      history: function(newVal, oldVal) {
-        this.historyReversed = _.cloneDeep(newVal.history).reverse();
-      },
-
-      getItemHistory: function () {
-        const itemHistory = this.getItemHistory;
-        let historyTemp = null;
-        if (itemHistory && itemHistory.history && itemHistory.history.length > 0 && itemHistory.history[0]) {
-          historyTemp = itemHistory.history[0];
-        }
-        this.histories = historyTemp;
-      }
-    },
-
-    methods: {
-      setData(key, value) {
-        this[key] = value;
-      },
-    },
-
-    components: {
-      CommonSearchDropdown,
-      AssetItemDetailChartView
-    }
-  }
+  components: {
+    CommonSearchDropdown,
+    AssetItemDetailChartView,
+  },
+};
 </script>

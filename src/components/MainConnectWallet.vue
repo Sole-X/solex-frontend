@@ -2,9 +2,9 @@
   <section class="main-connect-wallet router-view">
     <div class="main-connect-wallet__title">
       <h4>
-        <strong>{{$t('General.NotConnectedWalletTitle')}}</strong>
+        <strong>{{ $t('General.NotConnectedWalletTitle') }}</strong>
       </h4>
-      <p>{{$t('General.NotConnectedWalletDescription')}}</p>
+      <p>{{ $t('General.NotConnectedWalletDescription') }}</p>
     </div>
 
     <div class="main-connect-wallet__select">
@@ -18,10 +18,10 @@
           <img :src="service.icon" :alt="service.name" />
           <div>
             <div>
-              {{service.name}}
+              {{ service.name }}
             </div>
             <div>
-              {{service.appear}}
+              {{ service.appear }}
             </div>
           </div>
         </div>
@@ -29,53 +29,45 @@
     </div>
 
     <div class="main-connect-wallet__warning">
-      <p class="text-gray">
-
-      </p>
-      <p class="text-gray">
-
-      </p>
+      <p class="text-gray"></p>
+      <p class="text-gray"></p>
     </div>
   </section>
 </template>
 
 <script>
-  import UserWalletMixin from '@/mixins/user/UserWalletMixin'
+import UserWalletMixin from '@/mixins/user/UserWalletMixin';
 
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'MainConnectWallet',
+export default {
+  name: 'MainConnectWallet',
 
-    mixins: [UserWalletMixin],
+  mixins: [UserWalletMixin],
 
-    created() {
-      component = this
-      $t = this.$t.bind(this)
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
+
+  mounted() {},
+
+  beforeDestroy() {},
+
+  data() {
+    return {};
+  },
+
+  computed: {
+    getAvailableService() {
+      return this.$_UserWalletMixin_getAvailableService();
     },
+  },
 
-    mounted() {
+  watch: {},
 
-    },
+  methods: {},
 
-    beforeDestroy() {
-
-    },
-
-    data() {
-      return {}
-    },
-
-    computed: {
-      getAvailableService() {
-        return this.$_UserWalletMixin_getAvailableService()
-      }
-    },
-
-    watch: {},
-
-    methods: {},
-
-    components: {}
-  }
+  components: {},
+};
 </script>

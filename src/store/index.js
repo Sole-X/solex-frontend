@@ -1,25 +1,25 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
-import platform from 'platform'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
+import platform from 'platform';
 
-import ModalStore from '@/store/modules/ModalStore'
-import MarketStore from '@/store/modules/MarketStore'
-import UserStore from '@/store/modules/UserStore'
-import AssetStore from '@/store/modules/AssetStore'
-import ExplorerStore from '@/store/modules/ExplorerStore'
-import TxStore from '@/store/modules/TxStore'
-import SearchStore from '@/store/modules/SearchStore'
-import StakingStore from '@/store/modules/StakingStore'
-import KlipStore from '@/store/modules/KlipStore'
+import ModalStore from '@/store/modules/ModalStore';
+import MarketStore from '@/store/modules/MarketStore';
+import UserStore from '@/store/modules/UserStore';
+import AssetStore from '@/store/modules/AssetStore';
+import ExplorerStore from '@/store/modules/ExplorerStore';
+import TxStore from '@/store/modules/TxStore';
+import SearchStore from '@/store/modules/SearchStore';
+import StakingStore from '@/store/modules/StakingStore';
+import KlipStore from '@/store/modules/KlipStore';
 
-import { WhitelistNft, WhitelistToken } from '@/model/TokenModel'
-import { getBrowser, _checkIsMobile } from '@/utils/common'
+import { WhitelistNft, WhitelistToken } from '@/model/TokenModel';
+import { getBrowser, _checkIsMobile } from '@/utils/common';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-const lang = navigator.language || navigator.userLanguage
-const defaultLang = lang === 'ko' || lang.indexOf('ko-') !== -1 ? 'ko' : 'en'
+const lang = navigator.language || navigator.userLanguage;
+const defaultLang = lang === 'ko' || lang.indexOf('ko-') !== -1 ? 'ko' : 'en';
 
 export const getDefaultState = () => ({
   windowInfo: {
@@ -28,13 +28,13 @@ export const getDefaultState = () => ({
     scrollTop: 0,
     prevScroll: 0,
     isActive: true,
-    isSmall: false
+    isSmall: false,
   },
   platformInfo: {
     ...platform,
     checkNotice: false,
     browser: getBrowser(),
-    isMobile: _checkIsMobile()
+    isMobile: _checkIsMobile(),
   },
   userLang: defaultLang,
   loadingStatus: {},
@@ -47,18 +47,18 @@ export const getDefaultState = () => ({
     block: {
       number: 0,
       receivedAt: 0,
-      timestamp: 0
-    }
+      timestamp: 0,
+    },
   },
   networkHealth: 200,
   accessType: '',
-  tradingFee: '0'
-})
+  tradingFee: '0',
+});
 
-let RootStore = {}
+let RootStore = {};
 let vuexOptions = {
   state() {
-    return getDefaultState()
+    return getDefaultState();
   },
   modules: {
     modal: ModalStore,
@@ -69,197 +69,195 @@ let vuexOptions = {
     tx: TxStore,
     search: SearchStore,
     staking: StakingStore,
-    klip: KlipStore
+    klip: KlipStore,
   },
   mutations: {
     SET_WINDOW_INFO(state, payload) {
       state.windowInfo = {
         ...state.windowInfo,
-        ...payload
-      }
+        ...payload,
+      };
     },
 
     SET_USER_LANG(state, payload) {
-      state.userLang = payload
+      state.userLang = payload;
     },
 
     SET_LOADING_STATUS(state, payload) {
       state.loadingStatus = {
         ...state.loadingStatus,
-        ...payload
-      }
+        ...payload,
+      };
     },
 
     SET_CHAIN_INFO(state, payload) {
       state.chainInfo = {
         ...state.chainInfo,
-        ...payload
-      }
+        ...payload,
+      };
     },
 
     SET_NETWORK_HEALTH(state, payload) {
       state.networkHealth = {
         ...state.networkHealth,
-        ...payload
-      }
+        ...payload,
+      };
     },
 
     SET_SUPPORT_NFT(state, payload) {
-      state.supportNft = payload
+      state.supportNft = payload;
     },
 
     SET_SUPPORT_CURRENCY(state, payload) {
-      state.supportCurrency = payload
+      state.supportCurrency = payload;
     },
 
     SET_ACCESS_TYPE(state, payload) {
-      state.accessType = payload
+      state.accessType = payload;
     },
 
     SET_TRADING_FEE(state, payload) {
-      state.tradingFee = payload
+      state.tradingFee = payload;
     },
 
     CLEAR_CURRENCY_BALANCE(state) {
-      const newCurrencies = _.cloneDeep(state.supportCurrency)
+      const newCurrencies = _.cloneDeep(state.supportCurrency);
 
-      for(const currency of newCurrencies) {
-        currency.balance = '0'
-        currency.deposit = '0'
-        currency.onTrade = '0'
-        currency.totalDeposit = '0'
-        currency.staking = '0'
-        currency.unstaking = '0'
+      for (const currency of newCurrencies) {
+        currency.balance = '0';
+        currency.deposit = '0';
+        currency.onTrade = '0';
+        currency.totalDeposit = '0';
+        currency.staking = '0';
+        currency.unstaking = '0';
       }
 
-      state.supportCurrency = newCurrencies
-    }
+      state.supportCurrency = newCurrencies;
+    },
   },
   actions: {
-    setWindowInfo({commit}, payload) {
-      if(payload.width) {
-        payload.isSmall = payload.width < 1000
+    setWindowInfo({ commit }, payload) {
+      if (payload.width) {
+        payload.isSmall = payload.width < 1000;
       }
 
-      commit('SET_WINDOW_INFO', payload)
+      commit('SET_WINDOW_INFO', payload);
     },
 
-    setUserLang({commit}, payload) {
-      commit('SET_USER_LANG', payload)
+    setUserLang({ commit }, payload) {
+      commit('SET_USER_LANG', payload);
     },
 
-    setLoadingStatus({commit}, payload) {
-      commit('SET_LOADING_STATUS', payload)
+    setLoadingStatus({ commit }, payload) {
+      commit('SET_LOADING_STATUS', payload);
     },
 
-    setChainInfo({commit}, payload) {
-      commit('SET_CHAIN_INFO', payload)
+    setChainInfo({ commit }, payload) {
+      commit('SET_CHAIN_INFO', payload);
     },
 
-    setNetworkHealth({commit}, payload) {
-      commit('SET_NETWORK_HEALTH', payload)
+    setNetworkHealth({ commit }, payload) {
+      commit('SET_NETWORK_HEALTH', payload);
     },
 
     // TODO : API, Contract
-    async setWhitelist({commit}) {
-      const res = await this.$app.$http.get('getWhitelistTokens')
+    async setWhitelist({ commit }) {
+      const res = await this.$app.$http.get('getWhitelistTokens');
 
-      if(res.success) {
-        const newNft = _.map(res.info.nfts, token => {
-          return new WhitelistNft(token)
-        })
+      if (res.success) {
+        const newNft = _.map(res.info.nfts, (token) => {
+          return new WhitelistNft(token);
+        });
 
-        const newToken = _.map(res.info.tokens, token => {
-          return new WhitelistToken(token)
-        })
+        const newToken = _.map(res.info.tokens, (token) => {
+          return new WhitelistToken(token);
+        });
 
-        commit('SET_SUPPORT_NFT', newNft)
-        commit('SET_SUPPORT_CURRENCY', newToken)
-        commit('SET_TRADING_FEE', String(res.info.fee))
+        commit('SET_SUPPORT_NFT', newNft);
+        commit('SET_SUPPORT_CURRENCY', newToken);
+        commit('SET_TRADING_FEE', String(res.info.fee));
       }
 
-      return res
+      return res;
     },
 
-    setAccessType({commit}, payload) {
-      commit('SET_ACCESS_TYPE', payload)
-    }
+    setAccessType({ commit }, payload) {
+      commit('SET_ACCESS_TYPE', payload);
+    },
   },
   getters: {
     getRootVue() {
-      return RootStore.$app
+      return RootStore.$app;
     },
 
     getWindowInfo(state) {
-      return state.windowInfo
+      return state.windowInfo;
     },
 
     getPlatformInfo(state) {
-      return state.platformInfo
+      return state.platformInfo;
     },
 
     getLoadingStatus(state) {
-      return state.loadingStatus
+      return state.loadingStatus;
     },
 
     getSupportCurrency(state, getters) {
-      return state.supportCurrency
+      return state.supportCurrency;
     },
 
     getSupportNft(state, getters) {
-      return state.supportNft
+      return state.supportNft;
     },
 
     getChainInfo(state) {
-      return state.chainInfo
+      return state.chainInfo;
     },
 
     getNetworkHealth(state) {
-      return state.networkHealth
+      return state.networkHealth;
     },
 
     getEnableTestNet(state) {
-      return true
+      return true;
     },
 
     getAccessType(state) {
-      return state.accessType
+      return state.accessType;
     },
 
     getTradingFee(state) {
-      return state.tradingFee
-    }
+      return state.tradingFee;
+    },
   },
-  plugins: []
-}
+  plugins: [],
+};
 
-if(window.navigator.cookieEnabled) {
-  const storageName = 'solex_1.0'
+if (window.navigator.cookieEnabled) {
+  const storageName = 'solex_1.0';
 
   vuexOptions.plugins.push(
     new createPersistedState({
       key: storageName,
-      paths: [
-        'userLang'
-      ],
+      paths: ['userLang'],
       getState: () => {
-        const defaultState = getDefaultState()
+        const defaultState = getDefaultState();
 
-        if(localStorage.getItem(storageName)) {
-          const snapshotState = JSON.parse(localStorage.getItem(storageName))
+        if (localStorage.getItem(storageName)) {
+          const snapshotState = JSON.parse(localStorage.getItem(storageName));
 
-          for(const key in snapshotState) {
-            if(defaultState[key]) {
-              defaultState[key] = snapshotState[key]
+          for (const key in snapshotState) {
+            if (defaultState[key]) {
+              defaultState[key] = snapshotState[key];
             }
           }
         }
 
-        return defaultState
-      }
-    })
-  )
+        return defaultState;
+      },
+    }),
+  );
 }
 
-RootStore = new Vuex.Store(vuexOptions)
-export default RootStore
+RootStore = new Vuex.Store(vuexOptions);
+export default RootStore;

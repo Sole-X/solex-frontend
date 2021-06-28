@@ -77,7 +77,6 @@
   }
 
   .customer-faq-page__content {
-
   }
 }
 
@@ -124,7 +123,7 @@
       .customer-faq-tab__item-description {
         z-index: -1;
         overflow: hidden;
-        transition: height .5s;
+        transition: height 0.5s;
 
         hr {
           border-top: 1px solid #dee3eb;
@@ -236,22 +235,26 @@
   }
 }
 
-.customer-privacy-policy, .customer-usage-terms {
+.customer-privacy-policy,
+.customer-usage-terms {
   margin: 0 auto;
   max-width: 1080px;
 
-  .customer-privacy-policy-header, .customer-usage-terms-header {
+  .customer-privacy-policy-header,
+  .customer-usage-terms-header {
     display: flex;
     flex-direction: column;
     padding: 50px 0 34px 0;
 
-    .customer-privacy-policy-header-up, .customer-usage-terms-header-up {
+    .customer-privacy-policy-header-up,
+    .customer-usage-terms-header-up {
       font-size: 28px;
       font-weight: 900;
       color: #333333;
     }
 
-    .customer-privacy-policy-header-down, .customer-usage-terms-header-down {
+    .customer-privacy-policy-header-down,
+    .customer-usage-terms-header-down {
       align-self: flex-end;
 
       select {
@@ -262,8 +265,10 @@
     }
   }
 
-  .customer-privacy-policy-main, .customer-usage-terms-main {
-    .customer-privacy-policy-content, .customer-usage-terms-content {
+  .customer-privacy-policy-main,
+  .customer-usage-terms-main {
+    .customer-privacy-policy-content,
+    .customer-usage-terms-content {
       div {
         margin-bottom: 34px;
 

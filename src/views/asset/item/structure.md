@@ -10,5 +10,3 @@
    ![image](https://user-images.githubusercontent.com/78536273/118099860-c73be600-b410-11eb-8e22-20a34c1cb3ea.png)
 5. AssetItemPage.vue
    ![image](https://user-images.githubusercontent.com/78536273/118100004-f05c7680-b410-11eb-806f-62a6cf5206a6.png)
-
-   

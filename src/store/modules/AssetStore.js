@@ -1,5 +1,5 @@
-import { AssetItemDetail, AssetBuyOffer, AssetSaleOffer, AssetItemHistory } from '@/model/AssetModel'
-import axios from 'axios'
+import { AssetItemDetail, AssetBuyOffer, AssetSaleOffer, AssetItemHistory } from '@/model/AssetModel';
+import axios from 'axios';
 
 export const getDefaultState = () => ({
   itemInfo: {},
@@ -9,22 +9,22 @@ export const getDefaultState = () => ({
     avgPrice: '0',
     maxPrice: '0',
     prices: [],
-    history: []
+    history: [],
   },
   relatedItems: [],
   myItems: [],
   myLocalItems: [],
   like: false,
-})
+});
 
 // TODO : 트랜잭션 관련 요소들 TxStore 쪽으로 옮기기
 export default {
   state() {
-    return getDefaultState()
+    return getDefaultState();
   },
   mutations: {
     SET_ITEM_INFO(state, payload) {
-      state.itemInfo = payload
+      state.itemInfo = payload;
     },
 
     SET_WRITING_INFO(state, payload) {
@@ -32,10 +32,10 @@ export default {
     },
 
     CLEAR_ITEM_INFO(state) {
-      const defaultState = getDefaultState()
+      const defaultState = getDefaultState();
 
-      state.itemInfo = defaultState.itemInfo
-      state.relatedItems = defaultState.relatedItems
+      state.itemInfo = defaultState.itemInfo;
+      state.relatedItems = defaultState.relatedItems;
     },
 
     CLEAR_WRITING_INFO(state) {
@@ -46,14 +46,14 @@ export default {
     },
 
     SET_RELATED_ITEMS(state, payload) {
-      state.relatedItems = payload
+      state.relatedItems = payload;
     },
 
     SET_ITEM_HISTORY(state, payload) {
       state.itemHistory = {
         ...state.itemHistory,
-        ...payload
-      }
+        ...payload,
+      };
     },
 
     SET_MY_ITEMS(state, payload) {
@@ -66,94 +66,98 @@ export default {
 
     SET_LIKE(state, payload) {
       state.like = payload;
-    }
+    },
   },
   actions: {
-    async setItemInfo({commit, getters}, { params = {}, query = {} }) {
-      await commit('CLEAR_ITEM_INFO')
+    async setItemInfo({ commit, getters }, { params = {}, query = {} }) {
+      await commit('CLEAR_ITEM_INFO');
 
       const urlQuery = {
-        connectAddr: getters.getUserInfo.address
-      }
+        connectAddr: getters.getUserInfo.address,
+      };
 
-      if(query.type === 'buy') {
-        urlQuery.buyId = query.tradeId
+      if (query.type === 'buy') {
+        urlQuery.buyId = query.tradeId;
       }
 
       const getItemDetail = await this.$app.$http.get('getItemDetail', {
         urlParams: {
           tokenAddress: params.tokenAddress,
-          tokenId: params.tokenId
+          tokenId: params.tokenId,
         },
-        urlQuery
-      })
+        urlQuery,
+      });
 
       const defaultInfo = {
         tokenAddress: params.tokenAddress,
-        tokenId: params.tokenId
-      }
-      const newState = new AssetItemDetail(getItemDetail.success ? {
-        ...defaultInfo,
-        ...getItemDetail.info,
-        tradeId: query.tradeId,
-        isCollected: true,
-        isDetail: true // 이 값이 true로 넘어간다면 buy, sell, auction 등 기본 설정하지 않기
-      } : {
-        ...defaultInfo,
-        isCollected: false
-      })
+        tokenId: params.tokenId,
+      };
+      const newState = new AssetItemDetail(
+        getItemDetail.success
+          ? {
+              ...defaultInfo,
+              ...getItemDetail.info,
+              tradeId: query.tradeId,
+              isCollected: true,
+              isDetail: true, // 이 값이 true로 넘어간다면 buy, sell, auction 등 기본 설정하지 않기
+            }
+          : {
+              ...defaultInfo,
+              isCollected: false,
+            },
+      );
 
       const connectAddr = getters.getUserInfo ? getters.getUserInfo.address : '';
-      let urlQueryForWriting = {}
+      let urlQueryForWriting = {};
       if (connectAddr && connectAddr !== '') {
         urlQueryForWriting.connectAddr = connectAddr;
       }
 
-      if(query.type === 'buy' && query.tradeId) {
+      if (query.type === 'buy' && query.tradeId) {
         const buyInfo = await this.$app.$http.get('getWritingDetailBuy', {
           urlParams: {
-            tradeId: query.tradeId
+            tradeId: query.tradeId,
           },
-          urlQuery: urlQueryForWriting
-        })
+          urlQuery: urlQueryForWriting,
+        });
 
-        if(buyInfo.success) {
-          const newBuyInfo = new AssetBuyOffer(buyInfo.info.buy)
+        if (buyInfo.success) {
+          const newBuyInfo = new AssetBuyOffer(buyInfo.info.buy);
 
-          newState.buy = newBuyInfo
-          newState.exchange = newBuyInfo
-          newState.statusStr = 'BUY'
+          newState.buy = newBuyInfo;
+          newState.exchange = newBuyInfo;
+          newState.statusStr = 'BUY';
 
           let likeFlag = null;
           if (buyInfo.info && buyInfo.info.buy) {
             likeFlag = buyInfo.info.buy.like;
           }
           if (likeFlag !== null) {
-            commit('SET_LIKE', likeFlag)
+            commit('SET_LIKE', likeFlag);
           }
         }
       }
 
-      if(query.type === 'sell' && query.tradeId) {
+      if (query.type === 'sell' && query.tradeId) {
         const saleInfo = await this.$app.$http.get('getWritingDetailSale', {
           urlParams: {
-            tradeId: query.tradeId
+            tradeId: query.tradeId,
           },
-          urlQuery: urlQueryForWriting
-        })
+          urlQuery: urlQueryForWriting,
+        });
 
-        if(saleInfo.success) {
-          const newSaleInfo = new AssetSaleOffer(saleInfo.info)
+        if (saleInfo.success) {
+          const newSaleInfo = new AssetSaleOffer(saleInfo.info);
 
-          if(newSaleInfo.saleType === 'sell') {
-            newState.sell = newSaleInfo
-            newState.exchange = newSaleInfo
-            newState.statusStr = 'SELL'
+          if (newSaleInfo.saleType === 'sell') {
+            newState.sell = newSaleInfo;
+            newState.exchange = newSaleInfo;
+            newState.statusStr = 'SELL';
           }
 
-          if(newSaleInfo.saleType === 'auction') {
-            newState.auction = newSaleInfo
-            newState.statusStr = 'AUCTION'
+          if (newSaleInfo.saleType === 'auction') {
+            newState.auction = newSaleInfo;
+            newState.statusStr = 'AUCTION';
           }
 
           let likeFlag = null;
@@ -161,81 +165,83 @@ export default {
             likeFlag = saleInfo.info.like;
           }
           if (likeFlag !== null) {
-            commit('SET_LIKE', likeFlag)
+            commit('SET_LIKE', likeFlag);
           }
         }
       }
 
-      commit('SET_ITEM_INFO', newState)
+      commit('SET_ITEM_INFO', newState);
 
       return {
         success: true,
-        info: newState
-      }
+        info: newState,
+      };
     },
 
-    async setRelatedItems({commit, state}, payload) {
+    async setRelatedItems({ commit, state }, payload) {
       const { page } = payload;
 
       let res = {
-        success: false
+        success: false,
       };
       if (page === 'buy') {
         res = await this.$app.$http.get('getBuyOrders', {
           urlQuery: {
-            collection: state.itemInfo.tokenAddress
-          }
-        })
+            collection: state.itemInfo.tokenAddress,
+          },
+        });
       } else if (page === 'sell') {
         res = await this.$app.$http.get('searchNft', {
           urlQuery: {
-            collection: state.itemInfo.tokenAddress
-          }
-        })
+            collection: state.itemInfo.tokenAddress,
+          },
+        });
       }
 
-      if(res.success) {
-        commit('SET_RELATED_ITEMS', _.map(res.info.items, item => {
-          return {
-            ...item,
-            isDetail: true,
-            relatedId: item.id
-          }
-        }))
+      if (res.success) {
+        commit(
+          'SET_RELATED_ITEMS',
+          _.map(res.info.items, (item) => {
+            return {
+              ...item,
+              isDetail: true,
+              relatedId: item.id,
+            };
+          }),
+        );
       }
 
-      return res
+      return res;
     },
 
-    async setItemReadLog({commit, getters}, payload) {
+    async setItemReadLog({ commit, getters }, payload) {
       return await this.$app.$http.post('addItemReadLog', {
         body: {
           accountAddr: getters.getUserInfo.address,
-          tradeId: payload.tradeId
-        }
-      })
+          tradeId: payload.tradeId,
+        },
+      });
     },
 
-    updateItemInfo({commit}, payload) {
-      commit('SET_ITEM_INFO', payload)
+    updateItemInfo({ commit }, payload) {
+      commit('SET_ITEM_INFO', payload);
     },
 
     // TODO : API, 수집된 후 재차 확인
-    async setItemHistory({commit, getters}, payload) {
+    async setItemHistory({ commit, getters }, payload) {
       const res = await this.$app.$http.get('getItemHistory', {
         urlParams: {
           tokenAddress: payload.tokenAddress,
-          tokenId: payload.tokenId
-        }
-      })
+          tokenId: payload.tokenId,
+        },
+      });
 
-      if(res.success) {
-        const { minPrice, avgPrice, maxPrice, history } = res.info
+      if (res.success) {
+        const { minPrice, avgPrice, maxPrice, history } = res.info;
 
         const newHistory = [];
         for (const h of history) {
-          if (Array.isArray(h) && h.length === 0)
-            continue;
+          if (Array.isArray(h) && h.length === 0) continue;
           else newHistory.push(h);
         }
 
@@ -244,66 +250,69 @@ export default {
           avgPrice: String(avgPrice || '0'),
           maxPrice: String(maxPrice || '0'),
           prices: res.info.prices || [],
-          history: _.map(newHistory && newHistory[0], history => {
-            return new AssetItemHistory(history)
-          })
-        }
+          history: _.map(newHistory && newHistory[0], (history) => {
+            return new AssetItemHistory(history);
+          }),
+        };
 
-        commit('SET_ITEM_HISTORY', newState)
+        commit('SET_ITEM_HISTORY', newState);
       }
 
-      return res
+      return res;
     },
 
-    async sendMessageTx({commit, dispatch, getters}, payload) {
-      const _vm = this.$app
+    async sendMessageTx({ commit, dispatch, getters }, payload) {
+      const _vm = this.$app;
 
-      return new Promise(async resolve => {
+      return new Promise(async (resolve) => {
         // 소켓 Tx 구독 시작
-        _vm.$eventBus.$emit('emitTx', payload.requestHash)
+        _vm.$eventBus.$emit('emitTx', payload.requestHash);
 
         // 로컬 Tx 진행 목록 업데이트
-        commit('SET_TX_QUEUE', getters.getTxQueue.concat({
-          hash: payload.requestHash,
-          txHash: '',
-          status: 'start'
-        }))
+        commit(
+          'SET_TX_QUEUE',
+          getters.getTxQueue.concat({
+            hash: payload.requestHash,
+            txHash: '',
+            status: 'start',
+          }),
+        );
 
         /** 2. Tx Pending(socket > pending event) 구독
          * 실패할 경우 Queue에서 제거하고 Tx 실패 반환
          * 성공할 경우 TxHash Queue에다 추가하고 다음 이벤트 기다리기
          **/
         const receivePendingTx = (e) => {
-          if(e.hash !== payload.requestHash) {
-            return
+          if (e.hash !== payload.requestHash) {
+            return;
           }
 
-          const prevTxQueue =  _.cloneDeep(getters.getTxQueue)
-          const newTxQueue = _.filter(prevTxQueue, queue => {
-            let returnFlag = true
+          const prevTxQueue = _.cloneDeep(getters.getTxQueue);
+          const newTxQueue = _.filter(prevTxQueue, (queue) => {
+            let returnFlag = true;
 
-            if(queue.hash === payload.requestHash) {
-              if(queue.result === 'fail') {
-                returnFlag = false
+            if (queue.hash === payload.requestHash) {
+              if (queue.result === 'fail') {
+                returnFlag = false;
               }
 
-              queue.txHash = e.tx
-              queue.status = 'pending'
+              queue.txHash = e.tx;
+              queue.status = 'pending';
             }
 
-            return returnFlag
-          })
+            return returnFlag;
+          });
 
-          if(prevTxQueue.length !== newTxQueue.length) {
+          if (prevTxQueue.length !== newTxQueue.length) {
             resolve({
               success: false,
-              error: new Error('tx_not_executed')
-            })
+              error: new Error('tx_not_executed'),
+            });
           }
 
-          commit('SET_TX_QUEUE', newTxQueue)
-          _vm.$eventBus.$off('onReceiveTxPending', receivePendingTx)
-        }
+          commit('SET_TX_QUEUE', newTxQueue);
+          _vm.$eventBus.$off('onReceiveTxPending', receivePendingTx);
+        };
 
         /** 3. Tx Result(socket > resultTx event) 구독
          * 실패할 경우 Queue에서 제거하고 Tx 실패 반환
@@ -314,39 +323,42 @@ export default {
             dispatch('showAlert', {
               title: this.$app.$t('General.TransactionFail'),
               content: this.$app.$t('General.TransactionFailContent'),
-            })
+            });
             return;
           } else {
             _vm.$eventBus.$emit('refreshPage');
           }
 
-          const pendingTx = _.find(getters.getTxQueue, queue => {
-            return queue.hash === e.hash
-          })
+          const pendingTx = _.find(getters.getTxQueue, (queue) => {
+            return queue.hash === e.hash;
+          });
 
-          if(!pendingTx) {
-            return
+          if (!pendingTx) {
+            return;
           }
 
-          commit('SET_TX_QUEUE', _.filter(getters.getTxQueue, queue => {
-            return queue.txHash !== e.txHash
-          }))
+          commit(
+            'SET_TX_QUEUE',
+            _.filter(getters.getTxQueue, (queue) => {
+              return queue.txHash !== e.txHash;
+            }),
+          );
 
           resolve({
             success: e.result,
             info: {
               txHash: e.txHash,
               nonce: payload.requestHash,
-              detail: pendingTx.detail
-            }
-          })
+              detail: pendingTx.detail,
+            },
+          });
 
-          _vm.$eventBus.$off('onReceiveTxResult', receiveResultTx)
-        }
+          _vm.$eventBus.$off('onReceiveTxResult', receiveResultTx);
+        };
 
         // 1. 이벤트 구독 시작
-        _vm.$eventBus.$on('onReceiveTxPending', receivePendingTx)
-        _vm.$eventBus.$on('onReceiveTxResult', receiveResultTx)
+        _vm.$eventBus.$on('onReceiveTxPending', receivePendingTx);
+        _vm.$eventBus.$on('onReceiveTxResult', receiveResultTx);
 
         // Tx Send
         await _vm.$http.post('sendSignedMessageTx', {
@@ -356,53 +368,49 @@ export default {
             hash: payload.requestHash,
             hashType: this.$app.$wallet.getHashType(getters.getChainInfo.chain),
             msg: payload.message,
-            signHash: payload.signature
-          }
-        })
-      })
+            signHash: payload.signature,
+          },
+        });
+      });
     },
 
-    async depositToken({commit, dispatch, getters}, payload) {
+    async depositToken({ commit, dispatch, getters }, payload) {
       const chainInfo = getters.getChainInfo;
 
-      const sendResult = await this.$app.$tx.depositToken(
-        payload.token.currentAddress,
-        payload.amount,
-        chainInfo
-      )
+      const sendResult = await this.$app.$tx.depositToken(payload.token.currentAddress, payload.amount, chainInfo);
 
       // 이더리움 체인은 즉시 반영 불가능
-      if(sendResult.success && chainInfo.chain === 'KLAYTN') {
-        const newTokens = _.map(_.cloneDeep(getters.getUserDeposited.tokens), row => {
-          if(!this.$app.$wallet.isSameAddress(row.currentAddress, payload.token)) {
-            return row
+      if (sendResult.success && chainInfo.chain === 'KLAYTN') {
+        const newTokens = _.map(_.cloneDeep(getters.getUserDeposited.tokens), (row) => {
+          if (!this.$app.$wallet.isSameAddress(row.currentAddress, payload.token)) {
+            return row;
           }
 
-          row.depositAmount = this.$app.$bn.addBN(row.depositAmount, payload.amount).toString()
+          row.depositAmount = this.$app.$bn.addBN(row.depositAmount, payload.amount).toString();
 
-          return row
-        })
+          return row;
+        });
 
         commit('SET_USER_DEPOSITED', {
-          tokens: newTokens
-        })
+          tokens: newTokens,
+        });
       }
 
-      if(sendResult.data) {
+      if (sendResult.data) {
         dispatch('openTxSuccessModal', {
           action: 'deposit',
           success: sendResult.data.success,
           txHash: sendResult.data.transactionHash,
           amount: payload.amount,
-          currency: payload.token
-        })
+          currency: payload.token,
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async withdrawToken({commit, dispatch, getters}, payload) {
-      const { chain } = getters.getChainInfo
+    async withdrawToken({ commit, dispatch, getters }, payload) {
+      const { chain } = getters.getChainInfo;
 
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
@@ -416,14 +424,14 @@ export default {
             type: 'withdrawToken',
             token: payload.token,
             amount: payload.amount,
-            action: payload.action
+            action: payload.action,
           },
           chain,
-          payload.toAddress
-        )
+          payload.toAddress,
+        );
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
       }
 
@@ -437,79 +445,80 @@ export default {
       if (!isKlip) {
         sendResult = await dispatch('sendMessageTx', {
           cate: paramCate,
-          ...signResult.data
-        })
+          ...signResult.data,
+        });
       } else if (isKlip) {
         sendResult = await this.$app.$wallet.sendKlipTransaction({
           to: this.$app.$tx.getContractAddress('ReserveContract'),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('ReserveContract', 'withdraw')),
-          params: JSON.stringify([this.$app.$tx.getRandomHash(), payload.token.addressToReserve, payload.amount, payload.toAddress])
+          params: JSON.stringify([
+            this.$app.$tx.getRandomHash(),
+            payload.token.addressToReserve,
+            payload.amount,
+            payload.toAddress,
+          ]),
         });
       }
 
       // 이더리움 체인은 즉시 반영 불가능
-      if(sendResult.success && chain === 'KLAYTN') {
-        const newTokens = _.map(_.cloneDeep(getters.getUserDeposited.tokens), row => {
-          if(!this.$app.$wallet.isSameAddress(row.currentAddress, payload.token)) {
-            return row
+      if (sendResult.success && chain === 'KLAYTN') {
+        const newTokens = _.map(_.cloneDeep(getters.getUserDeposited.tokens), (row) => {
+          if (!this.$app.$wallet.isSameAddress(row.currentAddress, payload.token)) {
+            return row;
           }
 
-          row.depositAmount = this.$app.$bn.subBN(row.depositAmount, payload.amount).toString()
+          row.depositAmount = this.$app.$bn.subBN(row.depositAmount, payload.amount).toString();
 
-          return row
-        })
+          return row;
+        });
 
         commit('SET_USER_DEPOSITED', {
-          tokens: newTokens
-        })
+          tokens: newTokens,
+        });
       }
 
-      if(sendResult.info || sendResult.result) {
+      if (sendResult.info || sendResult.result) {
         dispatch('openTxSuccessModal', {
           action: payload.action === 'transfer' ? 'transfer' : 'withdraw',
           success: sendResult.success,
           txHash: sendResult.info ? sendResult.info.txHash : sendResult.result.tx_hash,
           amount: payload.amount,
-          currency: payload.token
-        })
+          currency: payload.token,
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async depositNft({commit, dispatch, getters}, payload) {
-      const { chain } = getters.getChainInfo
-      const sendResult = await this.$app.$tx.depositNft(
-        payload.tokenAddress,
-        payload.tokenId,
-        chain
-      )
+    async depositNft({ commit, dispatch, getters }, payload) {
+      const { chain } = getters.getChainInfo;
+      const sendResult = await this.$app.$tx.depositNft(payload.tokenAddress, payload.tokenId, chain);
 
       // 이더리움 체인은 즉시 반영 불가능
-      if(sendResult.success && chain === 'KLAYTN') {
+      if (sendResult.success && chain === 'KLAYTN') {
         commit('SET_USER_BALANCE', {
-          nft: _.filter(getters.getUserBalance.nft, item => {
-            return item.tokenAddress !== payload.tokenAddress || payload.tokenId !== item.tokenId
-          })
-        })
+          nft: _.filter(getters.getUserBalance.nft, (item) => {
+            return item.tokenAddress !== payload.tokenAddress || payload.tokenId !== item.tokenId;
+          }),
+        });
       }
 
-      if(sendResult.data || sendResult.result) {
+      if (sendResult.data || sendResult.result) {
         dispatch('openTxSuccessModal', {
           action: 'deposit',
           success: sendResult.data ? sendResult.data.success : sendResult.result.success,
           txHash: sendResult.data ? sendResult.data.transactionHash : sendResult.result.tx_hash,
           amount: payload.amount,
-          currency: payload.token
-        })
+          currency: payload.token,
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async withdrawNft({commit, dispatch, getters}, payload) {
-      const { chain } = getters.getChainInfo
+    async withdrawNft({ commit, dispatch, getters }, payload) {
+      const { chain } = getters.getChainInfo;
 
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
@@ -517,19 +526,19 @@ export default {
       let sendResult;
       if (!isKlip) {
         signResult = await this.$app.$tx.withdrawNft(
-            payload.token.tokenAddress,
-            payload.token.tokenId,
-            {
-              type: payload.action,
-              token: payload.token,
-              action: payload.action
-            },
-            chain,
-            payload.toAddress
-        )
+          payload.token.tokenAddress,
+          payload.token.tokenId,
+          {
+            type: payload.action,
+            token: payload.token,
+            action: payload.action,
+          },
+          chain,
+          payload.toAddress,
+        );
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         let cate = chain === 'ETHEREUM' ? 'bridge' : 'token';
@@ -539,62 +548,70 @@ export default {
 
         sendResult = await dispatch('sendMessageTx', {
           cate: cate,
-          ...signResult.data
-        })
+          ...signResult.data,
+        });
       } else if (isKlip) {
-        const klipParams = [this.$app.$tx.getRandomHash(), payload.token.tokenAddress, payload.token.tokenId, payload.toAddress];
+        const klipParams = [
+          this.$app.$tx.getRandomHash(),
+          payload.token.tokenAddress,
+          payload.token.tokenId,
+          payload.toAddress,
+        ];
 
         sendResult = await this.$app.$wallet.sendKlipTransaction({
           to: this.$app.$tx.getContractAddress('ReserveContract'),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('ReserveContract', 'withdrawNft')),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
       // 이더리움 체인은 즉시 반영 불가능
-      if(sendResult.success && chain === 'KLAYTN') {
-        const newState = _.cloneDeep(getters.getUserItems.total)
+      if (sendResult.success && chain === 'KLAYTN') {
+        const newState = _.cloneDeep(getters.getUserItems.total);
 
-        commit('SET_USER_ITEMS', _.filter(newState, item => {
-          return item.tokenAddress !== payload.tokenAddress || payload.tokenId !== item.tokenId
-        }))
+        commit(
+          'SET_USER_ITEMS',
+          _.filter(newState, (item) => {
+            return item.tokenAddress !== payload.tokenAddress || payload.tokenId !== item.tokenId;
+          }),
+        );
       }
 
-      if(sendResult.data || sendResult.result) {
+      if (sendResult.data || sendResult.result) {
         dispatch('openTxSuccessModal', {
           action: 'deposit',
           success: sendResult.data ? sendResult.data.success : sendResult.success,
           txHash: sendResult.data ? sendResult.data.transactionHash : sendResult.result.tx_hash,
           amount: payload.amount,
-          currency: payload.token
-        })
+          currency: payload.token,
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async placeBid({commit, dispatch}, payload) {
+    async placeBid({ commit, dispatch }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
       let sendResult;
       if (!isKlip) {
-        signResult = await this.$app.$tx.placeBid(payload.tradeId, payload.amount,  {
+        signResult = await this.$app.$tx.placeBid(payload.tradeId, payload.amount, {
           type: payload.isCheckout ? 'trade' : 'bid',
           token: payload.token,
           amount: payload.amount,
-          cate: payload.cate
-        })
+          cate: payload.cate,
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: 'auction',
-          ...signResult.data
-        })
+          ...signResult.data,
+        });
       } else if (isKlip) {
         const klipParams = [this.$app.$tx.getRandomHash(), payload.tradeId, payload.amount];
 
@@ -602,24 +619,24 @@ export default {
           to: this.$app.$tx.getContractAddress('ReserveContract'),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('ReserveContract', 'withdrawNft')),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
-      if(sendResult.success) {
+      if (sendResult.success) {
         dispatch('openTxSuccessModal', {
           action: 'placeBid',
           success: sendResult.data ? sendResult.data.success : sendResult.success,
           txHash: sendResult.data ? sendResult.data.transactionHash : sendResult.result.tx_hash,
           amount: payload.amount,
-          currency: payload.token
-        })
+          currency: payload.token,
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async addAuction({commit, dispatch}, payload) {
+    async addAuction({ commit, dispatch }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
@@ -628,48 +645,57 @@ export default {
 
       if (!isKlip) {
         signResult = await this.$app.$tx.addAuction(payload, {
-          type: 'addAuction'
-        })
+          type: 'addAuction',
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: 'auction',
-          ...signResult.data
-        })
+          ...signResult.data,
+        });
 
         tradeId = signResult.data.requestHash;
       } else if (isKlip) {
-        const {tokenAddress, tokenId, biddingToken, minAmount, maxAmount, duration, isInstantTrade} = payload;
+        const { tokenAddress, tokenId, biddingToken, minAmount, maxAmount, duration, isInstantTrade } = payload;
         const randomHash = this.$app.$tx.getRandomHash();
-        const klipParams = [randomHash, tokenAddress, tokenId, biddingToken, minAmount, maxAmount, duration, isInstantTrade];
+        const klipParams = [
+          randomHash,
+          tokenAddress,
+          tokenId,
+          biddingToken,
+          minAmount,
+          maxAmount,
+          duration,
+          isInstantTrade,
+        ];
 
         sendResult = await this.$app.$wallet.sendKlipTransaction({
           to: this.$app.$tx.getContractAddress('AuctionContract'),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('AuctionContract', 'addAuction')),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
 
         tradeId = randomHash;
       }
 
-      if(sendResult.success) {
+      if (sendResult.success) {
         this.$app.$router.push({
           path: `/asset/item/${payload.tokenAddress}/${payload.tokenId}`,
           query: {
             type: 'sell',
-            tradeId
-          }
-        })
+            tradeId,
+          },
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async editAuction({commit, dispatch}, payload) {
+    async editAuction({ commit, dispatch }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
@@ -677,44 +703,51 @@ export default {
 
       if (!isKlip) {
         signResult = await this.$app.$tx.editAuction(payload, {
-          type: 'editAuction'
-        })
+          type: 'editAuction',
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: 'auction',
-          ...signResult.data
-        })
-      }
-      else if (isKlip) {
+          ...signResult.data,
+        });
+      } else if (isKlip) {
         const { tradeId, biddingToken, minAmount, maxAmount, duration, isInstantTrade } = payload;
-        const klipParams = [this.$app.$tx.getRandomHash(), tradeId, biddingToken, minAmount, maxAmount, duration, isInstantTrade];
+        const klipParams = [
+          this.$app.$tx.getRandomHash(),
+          tradeId,
+          biddingToken,
+          minAmount,
+          maxAmount,
+          duration,
+          isInstantTrade,
+        ];
 
         sendResult = await this.$app.$wallet.sendKlipTransaction({
           to: this.$app.$tx.getContractAddress('AuctionContract'),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('AuctionContract', 'editAuction')),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
-      if(sendResult.success) {
+      if (sendResult.success) {
         this.$app.$router.push({
           path: `/asset/item/${payload.tokenAddress}/${payload.tokenId}`,
           query: {
             tradeId: payload.tradeId,
-            type: 'sell'
-          }
-        })
+            type: 'sell',
+          },
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async cancelAuction({commit, dispatch}, payload) {
+    async cancelAuction({ commit, dispatch }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
@@ -722,19 +755,18 @@ export default {
 
       if (!isKlip) {
         signResult = await this.$app.$tx.cancelAuction(payload.tradeId, {
-          type: 'cancelAuction'
-        })
+          type: 'cancelAuction',
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: 'auction',
-          ...signResult.data
-        })
-      }
-      else if (isKlip) {
+          ...signResult.data,
+        });
+      } else if (isKlip) {
         const { tradeId } = payload;
         const klipParams = [this.$app.$tx.getRandomHash(), tradeId];
 
@@ -742,22 +774,22 @@ export default {
           to: this.$app.$tx.getContractAddress('AuctionContract'),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('AuctionContract', 'cancelAuction')),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
-      if(sendResult.success) {
+      if (sendResult.success) {
         this.$app.$router.push({
           path: '/request/complete',
           query: {
             type: 'cancel',
             tokenAddress: payload.tokenAddress,
-            tokenId: payload.tokenId
-          }
-        })
+            tokenId: payload.tokenId,
+          },
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
     async closeAuction(store, payload) {
@@ -768,17 +800,16 @@ export default {
 
       if (!isKlip) {
         signResult = await this.$app.$tx.closeAuction(payload.tradeId, {
-          type: 'closeAuction'
+          type: 'closeAuction',
         });
 
         if (!signResult.success) return signResult;
 
         sendResult = await store.dispatch('sendMessageTx', {
           cate: 'auction',
-          ...signResult.data
+          ...signResult.data,
         });
-      }
-      else if (isKlip) {
+      } else if (isKlip) {
         const { tradeId } = payload;
         const klipParams = [this.$app.$tx.getRandomHash(), tradeId];
 
@@ -786,25 +817,25 @@ export default {
           to: this.$app.$tx.getContractAddress('AuctionContract'),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('AuctionContract', 'closeAuction')),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
       if (sendResult.success) {
         this.$app.$router.push({
-          path : '/request/complete',
+          path: '/request/complete',
           query: {
             type: 'cancel',
             tokenAddress: payload.tokenAddress,
-            tokenId: payload.tokenId
-          }
-        })
+            tokenId: payload.tokenId,
+          },
+        });
       }
 
       return sendResult;
     },
 
-    async retrieveAsset({commit, dispatch}, payload) {
+    async retrieveAsset({ commit, dispatch }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
@@ -812,19 +843,18 @@ export default {
 
       if (!isKlip) {
         signResult = await this.$app.$tx.retrieveAsset(payload.tradeId, {
-          type: 'retrieve'
-        })
+          type: 'retrieve',
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: payload.cate,
-          ...signResult.data
-        })
-      }
-      else if (isKlip) {
+          ...signResult.data,
+        });
+      } else if (isKlip) {
         const { tradeId } = payload;
         const klipParams = [this.$app.$tx.getRandomHash(), tradeId];
 
@@ -832,44 +862,44 @@ export default {
           to: this.$app.$tx.getContractAddress('SellOfferContract'),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi('SellOfferContract', 'cancelNego')),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
-      const $t = this.$app.$t.bind(this.$app)
+      const $t = this.$app.$t.bind(this.$app);
 
-      if(sendResult.success) {
-        let content = ''
+      if (sendResult.success) {
+        let content = '';
 
-        if(payload.cate === 'sell') {
-          content = `사용자가 협상에 활용한 <strong class="text-secondary">${payload.price} ${payload.symbol}</strong> 가 성공적으로 회수되었습니다. 블록체인에서 트랜잭션 내역을 확인하려면 아래 <strong class="text-secondary">내 활동</strong> 버튼을 눌러주세요.`
+        if (payload.cate === 'sell') {
+          content = `사용자가 협상에 활용한 <strong class="text-secondary">${payload.price} ${payload.symbol}</strong> 가 성공적으로 회수되었습니다. 블록체인에서 트랜잭션 내역을 확인하려면 아래 <strong class="text-secondary">내 활동</strong> 버튼을 눌러주세요.`;
         }
 
         dispatch('showAlert', {
           content,
           confirm: {
             cancel: {
-              text: $t('General.Close')
+              text: $t('General.Close'),
             },
             accept: {
               text: $t('UserPage.MyActivity'),
               callback: () => {
                 this.$app.$router.push({
-                  path: '/user/history'
-                })
-              }
-            }
-          }
-        })
+                  path: '/user/history',
+                });
+              },
+            },
+          },
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async addNormalOffer({commit, dispatch}, payload) {
+    async addNormalOffer({ commit, dispatch }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
-      const methodName = payload._type === 'buy' ? 'addBuyOffer' : 'addSellOffer'
+      const methodName = payload._type === 'buy' ? 'addBuyOffer' : 'addSellOffer';
 
       let signResult;
       let sendResult;
@@ -877,149 +907,152 @@ export default {
 
       if (!isKlip) {
         signResult = await this.$app.$tx[methodName](payload, {
-          type: methodName
-        })
+          type: methodName,
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: payload._type,
-          ...signResult.data
-        })
+          ...signResult.data,
+        });
 
         tradeId = signResult.data.requestHash;
-      }
-      else if (isKlip) {
+      } else if (isKlip) {
         const { tokenAddress, tokenId, currency, amount, isNegotiable } = payload;
         const randomHash = this.$app.$tx.getRandomHash();
         const klipContractName = payload._type === 'buy' ? 'BuyOfferContract' : 'SellOfferContract';
-        const klipParams = payload._type === 'buy' ? [randomHash, tokenAddress, tokenId, currency, amount] : [randomHash, tokenAddress, tokenId, currency, amount, isNegotiable];
+        const klipParams =
+          payload._type === 'buy'
+            ? [randomHash, tokenAddress, tokenId, currency, amount]
+            : [randomHash, tokenAddress, tokenId, currency, amount, isNegotiable];
 
         sendResult = await this.$app.$wallet.sendKlipTransaction({
           to: this.$app.$tx.getContractAddress(klipContractName),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, methodName)),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
 
         if (sendResult.success) {
-
         }
 
         tradeId = randomHash;
       }
 
-      if(sendResult.success) {
+      if (sendResult.success) {
         this.$app.$router.push({
           path: `/asset/item/${payload.tokenAddress}/${payload.tokenId}`,
           query: {
             type: payload._type,
-            tradeId
-          }
-        })
+            tradeId,
+          },
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async editNormalOffer({commit, dispatch}, payload) {
+    async editNormalOffer({ commit, dispatch }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
       let sendResult;
 
-      const methodName = payload._type === 'buy' ? 'editBuyOffer' : 'editSellOffer'
+      const methodName = payload._type === 'buy' ? 'editBuyOffer' : 'editSellOffer';
 
       if (!isKlip) {
         signResult = await this.$app.$tx[methodName](payload, {
-          type: methodName
-        })
+          type: methodName,
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: payload._type,
-          ...signResult.data
-        })
-      }
-      else if (isKlip) {
+          ...signResult.data,
+        });
+      } else if (isKlip) {
         const { tradeId, currency, amount, isNegotiable } = payload;
         const klipContractName = payload._type === 'buy' ? 'BuyOfferContract' : 'SellOfferContract';
-        const klipParams = payload._type === 'buy' ? [this.$app.$tx.getRandomHash(), tradeId, currency, amount] : [this.$app.$tx.getRandomHash(), tradeId, currency, amount, isNegotiable];
+        const klipParams =
+          payload._type === 'buy'
+            ? [this.$app.$tx.getRandomHash(), tradeId, currency, amount]
+            : [this.$app.$tx.getRandomHash(), tradeId, currency, amount, isNegotiable];
 
         sendResult = await this.$app.$wallet.sendKlipTransaction({
           to: this.$app.$tx.getContractAddress(klipContractName),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, methodName)),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
-      if(sendResult.success) {
+      if (sendResult.success) {
         this.$app.$router.push({
           path: `/asset/item/${payload.tokenAddress}/${payload.tokenId}`,
           query: {
             type: payload._type,
-            tradeId: payload.tradeId
-          }
-        })
+            tradeId: payload.tradeId,
+          },
+        });
       }
     },
 
-    async cancelNormalOrder({commit, dispatch}, payload) {
+    async cancelNormalOrder({ commit, dispatch }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
       let sendResult;
 
-      const methodName = payload._type === 'buy' ? 'cancelBuyOffer' : 'cancelSellOffer'
+      const methodName = payload._type === 'buy' ? 'cancelBuyOffer' : 'cancelSellOffer';
 
       if (!isKlip) {
         signResult = await this.$app.$tx[methodName](payload, {
-          type: methodName
-        })
+          type: methodName,
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: payload._type,
-          ...signResult.data
-        })
-      }
-      else if (isKlip) {
+          ...signResult.data,
+        });
+      } else if (isKlip) {
         const { tradeId } = payload;
         const klipContractName = payload._type === 'buy' ? 'BuyOfferContract' : 'SellOfferContract';
-        const klipParams = payload._type === 'buy' ? [this.$app.$tx.getRandomHash(), tradeId] : [this.$app.$tx.getRandomHash(), tradeId];
+        const klipParams =
+          payload._type === 'buy' ? [this.$app.$tx.getRandomHash(), tradeId] : [this.$app.$tx.getRandomHash(), tradeId];
 
         sendResult = await this.$app.$wallet.sendKlipTransaction({
           to: this.$app.$tx.getContractAddress(klipContractName),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, methodName)),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
-      if(sendResult.success) {
+      if (sendResult.success) {
         this.$app.$router.push({
           path: '/request/complete',
           query: {
             type: 'cancel',
             tokenAddress: payload.tokenAddress,
-            tokenId: payload.tokenId
-          }
-        })
+            tokenId: payload.tokenId,
+          },
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async addNego({commit, dispatch}, payload) {
+    async addNego({ commit, dispatch }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
@@ -1027,19 +1060,18 @@ export default {
 
       if (!isKlip) {
         signResult = await this.$app.$tx.addNego(payload, {
-          type: 'addNegotiation'
-        })
+          type: 'addNegotiation',
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: 'sell',
-          ...signResult.data
-        })
-      }
-      else if (isKlip) {
+          ...signResult.data,
+        });
+      } else if (isKlip) {
         const { tradeId, currency, newPrice } = payload;
         const klipContractName = 'SellOfferContract';
         const klipMethodName = 'addNego';
@@ -1049,25 +1081,25 @@ export default {
           to: this.$app.$tx.getContractAddress(klipContractName),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
-      if(sendResult.success) {
+      if (sendResult.success) {
         this.$app.$router.push({
           path: '/request/complete',
           query: {
             type: 'negotiation',
             tokenAddress: payload.tokenAddress,
-            tokenId: payload.tokenId
-          }
-        })
+            tokenId: payload.tokenId,
+          },
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async directExchange({commit, dispatch}, payload) {
+    async directExchange({ commit, dispatch }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
@@ -1078,19 +1110,18 @@ export default {
           type: 'trade',
           token: payload.token,
           amount: payload.amount,
-          cate: payload.cate
-        })
+          cate: payload.cate,
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: payload.cate,
-          ...signResult.data
-        })
-      }
-      else if (isKlip) {
+          ...signResult.data,
+        });
+      } else if (isKlip) {
         const { tradeId } = payload;
         const klipContractName = payload.cate === 'buy' ? 'BuyOfferContract' : 'SellOfferContract';
         const klipMethodName = payload.cate === 'buy' ? 'sellNft' : 'buyNft';
@@ -1100,46 +1131,45 @@ export default {
           to: this.$app.$tx.getContractAddress(klipContractName),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
-      if(sendResult.success) {
+      if (sendResult.success) {
         this.$app.$router.push({
           path: '/request/complete',
           query: {
             type: 'checkout',
             tokenAddress: payload.tokenAddress,
             tokenId: payload.tokenId,
-            tradeId: payload.tradeId
-          }
-        })
+            tradeId: payload.tradeId,
+          },
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async cancelNegotiation({commit, dispatch, getters}, payload) {
+    async cancelNegotiation({ commit, dispatch, getters }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
       let sendResult;
 
       if (!isKlip) {
-        signResult = await this.$app.$tx.cancelNegotiation(payload.tradeId,{
-          type: 'cancelNegotiation'
-        })
+        signResult = await this.$app.$tx.cancelNegotiation(payload.tradeId, {
+          type: 'cancelNegotiation',
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: 'sell',
-          ...signResult.data
-        })
-      }
-      else if (isKlip) {
+          ...signResult.data,
+        });
+      } else if (isKlip) {
         const { tradeId } = payload;
         const klipContractName = 'SellOfferContract';
         const klipMethodName = 'cancelNego';
@@ -1149,47 +1179,47 @@ export default {
           to: this.$app.$tx.getContractAddress(klipContractName),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
-      const $t = this.$app.$t.bind(this.$app)
+      const $t = this.$app.$t.bind(this.$app);
 
-      if(sendResult.success) {
+      if (sendResult.success) {
         dispatch('showAlert', {
           content: $t('Market.DoRejectSuccessMessage', {
             price: payload.order.price,
             token: payload.order.symbol,
-            menu: $t('General.MyActivity')
+            menu: $t('General.MyActivity'),
           }),
           confirm: {
             cancel: {
-              text: $t('General.Close')
+              text: $t('General.Close'),
             },
             accept: {
               text: $t('General.MyActivity'),
               callback: () => {
                 this.$app.$router.push({
-                  path: '/user/history'
-                })
-              }
-            }
-          }
-        })
+                  path: '/user/history',
+                });
+              },
+            },
+          },
+        });
 
         dispatch('updateNegotiationStatus', {
           user: getters.getUserInfo.address,
           status: 3,
-          statusStr: 'CANCEL'
-        })
+          statusStr: 'CANCEL',
+        });
 
         this.$app.$eventBus.$emit('retrievedAsset');
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async acceptNegotiation({commit, dispatch}, payload) {
+    async acceptNegotiation({ commit, dispatch }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
@@ -1197,19 +1227,18 @@ export default {
 
       if (!isKlip) {
         signResult = await this.$app.$tx.acceptNegotiation(payload.tradeId, payload.negoMaker, {
-          type: 'acceptNegotiation'
-        })
+          type: 'acceptNegotiation',
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: 'sell',
-          ...signResult.data
-        })
-      }
-      else if (isKlip) {
+          ...signResult.data,
+        });
+      } else if (isKlip) {
         const { tradeId, negoMaker } = payload;
         const klipContractName = 'SellOfferContract';
         const klipMethodName = 'acceptNego';
@@ -1219,25 +1248,25 @@ export default {
           to: this.$app.$tx.getContractAddress(klipContractName),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
       }
 
-      if(sendResult.success) {
-        const { params } = this.$app.$route
+      if (sendResult.success) {
+        const { params } = this.$app.$route;
         dispatch('setItemInfo', {
           params,
           query: {
             type: 'sell',
-            tradeId: payload.tradeId
-          }
-        })
+            tradeId: payload.tradeId,
+          },
+        });
       }
 
-      return sendResult
+      return sendResult;
     },
 
-    async rejectNegotiation({commit, dispatch, getters}, payload) {
+    async rejectNegotiation({ commit, dispatch, getters }, payload) {
       const isKlip = this.$app.$wallet.getWallet().platform.wallet.name === 'klip';
 
       let signResult;
@@ -1246,17 +1275,17 @@ export default {
 
       if (!isKlip) {
         signResult = await this.$app.$tx.rejectNegotiation(payload.tradeId, payload.negoMaker, {
-          type: 'rejectNegotiation'
-        })
+          type: 'rejectNegotiation',
+        });
 
-        if(!signResult.success) {
-          return signResult
+        if (!signResult.success) {
+          return signResult;
         }
 
         sendResult = await dispatch('sendMessageTx', {
           cate: 'sell',
-          ...signResult.data
-        })
+          ...signResult.data,
+        });
 
         const sendDetail = await this.$app.$http.post('declineNego', {
           body: {
@@ -1265,17 +1294,16 @@ export default {
             connectAddr: getters.getUserInfo.address,
             hashType: getters.getChainInfo.chain === 'KLAYTN' ? 2 : 1,
             declineType: payload.reason.type,
-            declineReason: payload.reason.message
+            declineReason: payload.reason.message,
           },
           urlParams: {
             sellId: payload.tradeId,
-            negoId: payload.negoId
-          }
-        })
+            negoId: payload.negoId,
+          },
+        });
 
         return sendDetail;
-      }
-      else if (isKlip) {
+      } else if (isKlip) {
         const { tradeId, negoMaker } = payload;
         randomHash = this.$app.$tx.getRandomHash();
         const klipContractName = 'SellOfferContract';
@@ -1286,40 +1314,40 @@ export default {
           to: this.$app.$tx.getContractAddress(klipContractName),
           value: '0',
           abi: JSON.stringify(this.$app.$tx.getContractFunctionAbi(klipContractName, klipMethodName)),
-          params: JSON.stringify(klipParams)
+          params: JSON.stringify(klipParams),
         });
 
         if (sendResult.success) {
           return {
-            success: true
-          }
+            success: true,
+          };
         } else {
           return {
-            success: false
-          }
+            success: false,
+          };
         }
       }
     },
 
-    updateNegotiationStatus({commit, getters}, payload) {
-      const newItemInfo = _.cloneDeep(getters.getItemInfo)
+    updateNegotiationStatus({ commit, getters }, payload) {
+      const newItemInfo = _.cloneDeep(getters.getItemInfo);
     },
 
-    async showActivityDetail({commit, dispatch, getters}, payload) {
-      let info = {}
+    async showActivityDetail({ commit, dispatch, getters }, payload) {
+      let info = {};
 
-      if(payload.event === 'NEGO_REJECT' || payload.event === 'SELL_CANCEL' || payload.event === 'BID_FAIL') {
+      if (payload.event === 'NEGO_REJECT' || payload.event === 'SELL_CANCEL' || payload.event === 'BID_FAIL') {
         const res = await this.$app.$http.get('getSellOrder', {
           urlParams: {
-            offerId: payload.body.offerId
-          }
-        })
+            offerId: payload.body.offerId,
+          },
+        });
 
-        if(!res.success) {
-          return false
+        if (!res.success) {
+          return false;
         }
 
-        info = new AssetSaleOffer(res.info.items[0])
+        info = new AssetSaleOffer(res.info.items[0]);
       }
 
       dispatch('showModal', {
@@ -1329,30 +1357,30 @@ export default {
           event: payload.event,
           info,
           tradeId: payload.body.offerId,
-          page: payload.body.page
-        }
-      })
+          page: payload.body.page,
+        },
+      });
     },
 
-    async reportItem({commit, dispatch}, payload) {
+    async reportItem({ commit, dispatch }, payload) {
       const res = await this.$app.$http.post('reportItem', {
         body: {
           tokenAddress: payload.tokenAddress,
           tokenId: payload.tokenId,
-          reason: payload.reason
-        }
-      })
+          reason: payload.reason,
+        },
+      });
 
-      if(res.success) {
-        const $t = this.$app.$t.bind(this.$app)
+      if (res.success) {
+        const $t = this.$app.$t.bind(this.$app);
 
         dispatch('showAlert', {
           title: $t('Market.Thanks'),
-          content: $t('Market.ReportSuccess')
-        })
+          content: $t('Market.ReportSuccess'),
+        });
       }
 
-      return res
+      return res;
     },
 
     async setMyItems(store, payload) {
@@ -1361,8 +1389,8 @@ export default {
       const targetURL = `${baseURL}/${pathURL}`;
       const res = await axios.get(targetURL);
 
-      if(res.status === 200) {
-        store.commit('SET_MY_ITEMS', {items: res.data.items});
+      if (res.status === 200) {
+        store.commit('SET_MY_ITEMS', { items: res.data.items });
       }
     },
 
@@ -1378,25 +1406,25 @@ export default {
       }
 
       store.commit('SET_MY_LOCAL_ITEMS', {
-        myLocalItems: localItems
+        myLocalItems: localItems,
       });
-    }
+    },
   },
   getters: {
     getItemInfo(state) {
-      return state.itemInfo
+      return state.itemInfo;
     },
 
     getWritingInfo(state) {
-      return state.writingInfo
+      return state.writingInfo;
     },
 
     getRelatedItems(state) {
-      return state.relatedItems
+      return state.relatedItems;
     },
 
     getItemHistory(state) {
-      return state.itemHistory
+      return state.itemHistory;
     },
 
     getMyItems(state) {
@@ -1409,6 +1437,6 @@ export default {
 
     getLike(state) {
       return state.like;
-    }
-  }
-}
+    },
+  },
+};

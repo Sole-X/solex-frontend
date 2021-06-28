@@ -7,18 +7,18 @@
     </div>
 
     <div class="tx-result-modal__title">
-      <h5>{{$t('Network.TxRequestSuccess')}}</h5>
+      <h5>{{ $t('Network.TxRequestSuccess') }}</h5>
     </div>
 
     <div class="tx-result-modal__detail">
       <div class="tx-result-modal__detail__row" v-if="data.amount">
         <p>
-          {{getAmountTitle}}
+          {{ getAmountTitle }}
         </p>
 
         <p>
-          <strong>{{$bn.toMaxUnit(data.amount, data.currency.decimal, 4) | addComma}}</strong>
-          <span class="text-gray"> {{data.currency.symbol}}</span>
+          <strong>{{ $bn.toMaxUnit(data.amount, data.currency.decimal, 4) | addComma }}</strong>
+          <span class="text-gray"> {{ data.currency.symbol }}</span>
         </p>
       </div>
 
@@ -26,7 +26,7 @@
         <p>Tx Hash</p>
         <p>
           <a :href="$wallet.getTxUrl(data.txHash, getChainType)" target="_blank" rel="noopener noreferrer">
-            {{getMaskedAddress(data.txHash)}}
+            {{ getMaskedAddress(data.txHash) }}
           </a>
         </p>
       </div>
@@ -36,104 +36,97 @@
       <ul>
         <li>
           <img :src="$static.getFileURL('img/icon/ic-check-black.svg')" alt="check" />
-          <span>{{$t('Network.TxRequestCheckInActivity')}}</span>
+          <span>{{ $t('Network.TxRequestCheckInActivity') }}</span>
         </li>
       </ul>
     </div>
 
     <div :class="$bem('gen-modal__submit', ['confirm'], '')">
       <button :class="$bem('common-submit-button', '', ['cancel'])" @click="close()">
-        {{$t('General.Close')}}
+        {{ $t('General.Close') }}
       </button>
 
       <button :class="$bem('common-submit-button', '', ['primary'])" @click="handleSubmit()">
-        {{$t('General.MyActivity')}}
+        {{ $t('General.MyActivity') }}
       </button>
     </div>
   </section>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'TxResultModal',
-    props: {
-      data: Object,
-      close: Function
+export default {
+  name: 'TxResultModal',
+  props: {
+    data: Object,
+    close: Function,
+  },
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
+
+  mounted() {},
+
+  beforeDestroy() {},
+
+  data() {
+    return {};
+  },
+
+  computed: {
+    ...mapGetters(['getMaskedAddress']),
+
+    getAmountTitle() {
+      const { action } = this.data;
+
+      if (action === 'deposit') {
+        return $t('UserPage.DepositAmount');
+      }
+
+      if (action === 'withdraw') {
+        return $t('UserPage.WithdrawAmount');
+      }
+
+      if (action === 'staking') {
+        return $t('UserPage.StakingAmount');
+      }
+
+      if (action === 'unstaking') {
+        return $t('UserPage.UnstakingAmount');
+      }
+
+      return $t('UserPage.TransactionAmount');
     },
-    created() {
-      component = this
-      $t = this.$t.bind(this)
+
+    getChainType() {
+      const { action } = this.data;
+
+      return action === 'deposit' ? this.getChainInfo.chain : 'KLAYTN';
     },
+  },
 
-    mounted() {
+  watch: {},
 
-    },
+  methods: {
+    handleSubmit() {
+      const { action } = this.data;
 
-    beforeDestroy() {
-
-    },
-
-    data() {
-      return {}
-    },
-
-    computed: {
-      ...mapGetters([
-        'getMaskedAddress'
-      ]),
-
-      getAmountTitle() {
-        const { action } = this.data
-
-        if(action === 'deposit') {
-          return $t('UserPage.DepositAmount')
-        }
-
-        if(action === 'withdraw') {
-          return $t('UserPage.WithdrawAmount')
-        }
-
-        if(action === 'staking') {
-          return $t('UserPage.StakingAmount')
-        }
-
-        if (action === 'unstaking') {
-          return $t('UserPage.UnstakingAmount')
-        }
-
-        return $t('UserPage.TransactionAmount')
-      },
-
-      getChainType() {
-        const { action } = this.data
-
-        return action === 'deposit' ? this.getChainInfo.chain : 'KLAYTN'
+      if (action === 'staking' || action === 'unstaking') {
+        this.$router.push({
+          path: '/staking/activity',
+        });
+      } else {
+        this.$router.push({
+          path: '/user/history',
+        });
       }
     },
+  },
 
-    watch: {},
-
-    methods: {
-      handleSubmit() {
-        const { action } = this.data
-
-        if (action === 'staking' || action ==='unstaking') {
-          this.$router.push({
-            path: '/staking/activity'
-          })
-        } else {
-          this.$router.push({
-            path: '/user/history'
-          })
-        }
-
-      }
-    },
-
-    components: {}
-  }
+  components: {},
+};
 </script>

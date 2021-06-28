@@ -2,29 +2,51 @@
   <section :class="$bem('asset-item__profile', '', [info.isSell ? 'sell' : 'buy'])">
     <article v-if="info.isEndedExchange && page === 'sell'" class="asset-item__profile__ended">
       <img :src="$static.getFileURL('img/icon/ic-info-primary.svg')" alt="info" />
-      <span>{{getMessageForEndedExchange}}</span>
+      <span>{{ getMessageForEndedExchange }}</span>
     </article>
 
     <article class="asset-item__profile__title">
       <div class="asset-item__profile__collection">
-        <h6 @click="collectionClicked">{{info.collectionName || ''}}</h6>
+        <h6 @click="collectionClicked">{{ info.collectionName || '' }}</h6>
         <button :class="$bem('asset-item__profile__collection__label', '', !info.isEndedExchange ? ['progress'] : '')">
-          <strong v-if="info.isBuy">{{ !info.isEndedExchange ? $t('Market.PageLabelBuyOn') : $t('Market.PageLabelBuyOff') }}</strong>
-          <strong v-else-if="info.isSell">{{ !info.isEndedExchange ? $t('Market.LabelSaleOn') : $t('Market.LabelSaleOff') }}</strong>
+          <strong v-if="info.isBuy">{{
+            !info.isEndedExchange ? $t('Market.PageLabelBuyOn') : $t('Market.PageLabelBuyOff')
+          }}</strong>
+          <strong v-else-if="info.isSell">{{
+            !info.isEndedExchange ? $t('Market.LabelSaleOn') : $t('Market.LabelSaleOff')
+          }}</strong>
         </button>
       </div>
 
-      <h1>{{info.metadata.name || `Item ${info.tokenId}`}}</h1>
+      <h1>{{ info.metadata.name || `Item ${info.tokenId}` }}</h1>
       <div class="asset-item__hypen-row">
-        <span class="asset-item__hypen-row__label">{{ info.isBuy ? $t('Market.WantedTitle') : $t('Market.OwnerTitle')}}</span>
+        <span class="asset-item__hypen-row__label">{{
+          info.isBuy ? $t('Market.WantedTitle') : $t('Market.OwnerTitle')
+        }}</span>
         <span class="divider"></span>
         <template v-if="info.isBuy">
-          <span v-if="info.isMyItem" class="asset-item__hypen-row__value text-secondary">{{ $t('Market.OwnerIsMe') }}</span>
-          <span v-else v-clipboard:copy="info.ownerAddress" class="asset-item__hypen-row__value text-secondary writer-copy" v-clipboard:success="handleWriterClicked">{{ info.ownerAddress }}</span>
+          <span v-if="info.isMyItem" class="asset-item__hypen-row__value text-secondary">{{
+            $t('Market.OwnerIsMe')
+          }}</span>
+          <span
+            v-else
+            v-clipboard:copy="info.ownerAddress"
+            class="asset-item__hypen-row__value text-secondary writer-copy"
+            v-clipboard:success="handleWriterClicked"
+            >{{ info.ownerAddress }}</span
+          >
         </template>
         <template v-else-if="info.isSell">
-          <span v-if="info.isMyItem" class="asset-item__hypen-row__value text-secondary">{{ $t('Market.OwnerIsMe') }}</span>
-          <span v-else v-clipboard:copy="info.ownerAddress" class="asset-item__hypen-row__value text-secondary writer-copy" v-clipboard:success="handleWriterClicked">{{ info.ownerAddress }}</span>
+          <span v-if="info.isMyItem" class="asset-item__hypen-row__value text-secondary">{{
+            $t('Market.OwnerIsMe')
+          }}</span>
+          <span
+            v-else
+            v-clipboard:copy="info.ownerAddress"
+            class="asset-item__hypen-row__value text-secondary writer-copy"
+            v-clipboard:success="handleWriterClicked"
+            >{{ info.ownerAddress }}</span
+          >
         </template>
         <div class="writer-copied" v-if="isCopy">copied</div>
       </div>
@@ -33,23 +55,36 @@
     <article class="asset-item__profile__detail">
       <ul v-if="info.statusStr === 'SELL'">
         <li>
-          <div>{{$t('Market.CurrentNego')}}</div>
+          <div>{{ $t('Market.CurrentNego') }}</div>
           <div class="asset-item__profile__nego">
-            <div v-for="(nego, i) in [...info.exchange.currentNegos].slice(0, 8)" :key="nego.id" :style="getNegoUserStyle(nego, i)" class="asset-item__profile__nego__user">
-
-            </div>
+            <div
+              v-for="(nego, i) in [...info.exchange.currentNegos].slice(0, 8)"
+              :key="nego.id"
+              :style="getNegoUserStyle(nego, i)"
+              class="asset-item__profile__nego__user"
+            ></div>
 
             <button class="asset-item__request__more" @click="$_AssetSellMixin_openNegoStatusModal(info)">
-              <img :src="$static.getFileURL(`img/icon/ic-message-${info.exchange.currentNegos.length > 0 ? 'black' : 'gray'}.svg`)" />
+              <img
+                :src="
+                  $static.getFileURL(
+                    `img/icon/ic-message-${info.exchange.currentNegos.length > 0 ? 'black' : 'gray'}.svg`,
+                  )
+                "
+              />
               <span v-html="$t('Market.NegoCount', { total: info.exchange.negos.length })" />
             </button>
           </div>
         </li>
 
         <li>
-          <div>{{$t('Market.AcceptedCurrency')}}</div>
+          <div>{{ $t('Market.AcceptedCurrency') }}</div>
           <div class="asset-item__profile__pay">
-            <div v-for="currency in getSupportCurrency" v-if="isVisibleCurrency(currency)" :class="$bem('asset-item__profile__pay__option', '', ['selected'])">
+            <div
+              v-for="currency in getSupportCurrency"
+              v-if="isVisibleCurrency(currency)"
+              :class="$bem('asset-item__profile__pay__option', '', ['selected'])"
+            >
               <button></button>
               <span>{{ currency.symbol }}</span>
             </div>
@@ -60,20 +95,22 @@
       <ul v-if="Boolean(info.buy)">
         <li class="asset-item__profile__time">
           <div>
-            {{$t('Market.ListingDate')}}
+            {{ $t('Market.ListingDate') }}
           </div>
           <div>
-            <strong>{{$date.formatDate(info.exchange.createdAt, 'fff')}}</strong> ({{$date.getFromNow(info.exchange.createdAt)}})
+            <strong>{{ $date.formatDate(info.exchange.createdAt, 'fff') }}</strong> ({{
+              $date.getFromNow(info.exchange.createdAt)
+            }})
           </div>
         </li>
 
         <li>
-          <div>{{$t('Market.AcceptedCurrency')}}</div>
+          <div>{{ $t('Market.AcceptedCurrency') }}</div>
           <div class="asset-item__profile__pay">
             <div
-                v-for="currency in getSupportCurrency"
-                v-if="$wallet.isSameAddress(currency.tokenAddress, info.currencyInfo.tokenAddress)"
-                :class="$bem('asset-item__profile__pay__option', '', ['selected'])"
+              v-for="currency in getSupportCurrency"
+              v-if="$wallet.isSameAddress(currency.tokenAddress, info.currencyInfo.tokenAddress)"
+              :class="$bem('asset-item__profile__pay__option', '', ['selected'])"
             >
               <button></button>
               <span>{{ currency.symbol }}</span>
@@ -84,34 +121,49 @@
 
       <ul>
         <li class="asset-item__profile__detail__price">
-          <div>{{$t('Market.Price')}}</div>
+          <div>{{ $t('Market.Price') }}</div>
           <div>
             <p>
-              <strong class="text-secondary">{{ getItemPrice | addComma }}</strong> {{info.currencyInfo.symbol}}
+              <strong class="text-secondary">{{ getItemPrice | addComma }}</strong> {{ info.currencyInfo.symbol }}
             </p>
 
-            <p>$ {{getUsdPrice | addComma}}</p>
+            <p>$ {{ getUsdPrice | addComma }}</p>
           </div>
         </li>
       </ul>
     </article>
 
     <article v-if="walletConnected" class="asset-item__profile__action">
-      <button :class="$route.query.tradeId ? 'asset-item__profile__action__bookmark' : 'asset-item__profile__action__bookmark disabled'" @click="handleLikeClicked">
+      <button
+        :class="
+          $route.query.tradeId
+            ? 'asset-item__profile__action__bookmark'
+            : 'asset-item__profile__action__bookmark disabled'
+        "
+        @click="handleLikeClicked"
+      >
         <img :src="$static.getFileURL(`img/icon/ic-heart-asset-${likeLocal ? 'on' : 'off'}.svg`)" />
       </button>
 
-      <button v-if="buttonProps.leftButton" :class="$bem('common-submit-button', '', buttonProps.leftButton.classes)" @click="buttonProps.leftButton.click">
-        {{buttonProps.leftButton.title}}
+      <button
+        v-if="buttonProps.leftButton"
+        :class="$bem('common-submit-button', '', buttonProps.leftButton.classes)"
+        @click="buttonProps.leftButton.click"
+      >
+        {{ buttonProps.leftButton.title }}
         <ui-tooltip v-if="buttonProps.leftButton.tooltip" position="bottom">
-          {{buttonProps.leftButton.tooltip}}
+          {{ buttonProps.leftButton.tooltip }}
         </ui-tooltip>
       </button>
 
-      <button v-if="buttonProps.rightButton" :class="$bem('common-submit-button', '', buttonProps.rightButton.classes)" @click="buttonProps.rightButton.click">
-        {{buttonProps.rightButton.title}}
+      <button
+        v-if="buttonProps.rightButton"
+        :class="$bem('common-submit-button', '', buttonProps.rightButton.classes)"
+        @click="buttonProps.rightButton.click"
+      >
+        {{ buttonProps.rightButton.title }}
         <ui-tooltip v-if="buttonProps.rightButton.tooltip" position="bottom">
-          {{buttonProps.leftButton.tooltip}}
+          {{ buttonProps.leftButton.tooltip }}
         </ui-tooltip>
       </button>
     </article>
@@ -119,179 +171,172 @@
 </template>
 
 <script>
-  import AssetSellMixin from '@/mixins/asset/AssetSellMixin'
-  import { mapGetters } from 'vuex';
+import AssetSellMixin from '@/mixins/asset/AssetSellMixin';
+import { mapGetters } from 'vuex';
 
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'AssetItemProfileExchange',
+export default {
+  name: 'AssetItemProfileExchange',
 
-    mixins: [AssetSellMixin],
+  mixins: [AssetSellMixin],
 
-    props: {
-      info: Object,
-      buttonProps: Object,
-      walletConnected: Boolean,
-      page: String,
-      like: Boolean
-    },
+  props: {
+    info: Object,
+    buttonProps: Object,
+    walletConnected: Boolean,
+    page: String,
+    like: Boolean,
+  },
 
-    created() {
-      component = this
-      $t = this.$t.bind(this)
-    },
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
 
-    mounted() {
+  mounted() {},
 
-    },
+  beforeDestroy() {},
 
-    beforeDestroy() {
+  data() {
+    return {
+      likeLocal: this.like,
+      isCopy: false,
+    };
+  },
 
-    },
+  computed: {
+    ...mapGetters(['getSupportCurrency']),
 
-    data() {
-      return {
-        likeLocal: this.like,
-        isCopy: false
+    getMessageForEndedExchange() {
+      const { info } = this;
+
+      // 협상 제안 내역이 있는 경우
+      if (info.exchange.myNego) {
+        return info.isWillBeMine
+          ? '축하합니다! 판매자가 사용자의 제안을 수락했습니다.'
+          : '이 NFT의 판매가 종료되었습니다. 자산을 회수해주세요.';
       }
+
+      return $t('Market.ThisItemOfferIsEnded');
     },
 
-    computed: {
-      ...mapGetters([
-          'getSupportCurrency'
-      ]),
+    getItemPrice() {
+      let basePrice = '0';
 
-      getMessageForEndedExchange() {
-        const { info } = this
+      if (this.info.isBuy) {
+        basePrice = this.info.buy.basePrice;
+      } else if (this.info.isSell) {
+        basePrice = this.info.sell.currentPrice;
+      } else if (this.info.isAuction) {
+        basePrice = this.info.auction.basePrice;
+      }
 
-        // 협상 제안 내역이 있는 경우
-        if(info.exchange.myNego) {
-          return info.isWillBeMine ? '축하합니다! 판매자가 사용자의 제안을 수락했습니다.' : '이 NFT의 판매가 종료되었습니다. 자산을 회수해주세요.'
-        }
+      const currency = this.info.currencyInfo;
 
-        return $t('Market.ThisItemOfferIsEnded')
-      },
-
-      getItemPrice() {
-        let basePrice = "0";
-
-        if (this.info.isBuy) {
-          basePrice = this.info.buy.basePrice;
-        } else if (this.info.isSell) {
-          basePrice = this.info.sell.currentPrice;
-        } else if (this.info.isAuction) {
-          basePrice = this.info.auction.basePrice;
-        }
-
-        const currency = this.info.currencyInfo;
-
-        if (currency && currency.symbol && currency.symbol !== 'null') {
-          return this.$bn.toMaxUnit(basePrice, currency.decimal, 4);
-        }
-        if (currency) {
-          return this.$bn.toMaxUnit(basePrice, currency.decimal, 4);
-        }
-        return this.$bn.toMaxUnit(basePrice, 18, 4);
-      },
-
-      getUsdPrice() {
-        let usdPrice = this.info.usdPrice;
-
-        const currency = this.getCurrency;
-        if (currency.symbol !== 'Symbol') {
-          usdPrice = currency.toFiat(this.getItemPrice);
-        }
-        return usdPrice.dprec(4);
-      },
-
-      getCurrency() {
-        const supportCurrency = this.getSupportCurrency;
-        const itemCurrencyAddress = this.info ? this.info.currency : null;
-
-        if (itemCurrencyAddress) {
-          const itemCurrency = _.find(supportCurrency, row => {
-            if (this.$wallet.isSameAddress(row.tokenAddress, itemCurrencyAddress)) return true;
-            return false;
-          });
-          if (itemCurrency) {
-            return itemCurrency;
-          }
-        }
-        return {
-          decimal: 18,
-          symbol: 'Symbol'
-        }
-      },
+      if (currency && currency.symbol && currency.symbol !== 'null') {
+        return this.$bn.toMaxUnit(basePrice, currency.decimal, 4);
+      }
+      if (currency) {
+        return this.$bn.toMaxUnit(basePrice, currency.decimal, 4);
+      }
+      return this.$bn.toMaxUnit(basePrice, 18, 4);
     },
 
-    watch: {
+    getUsdPrice() {
+      let usdPrice = this.info.usdPrice;
 
+      const currency = this.getCurrency;
+      if (currency.symbol !== 'Symbol') {
+        usdPrice = currency.toFiat(this.getItemPrice);
+      }
+      return usdPrice.dprec(4);
     },
 
-    methods: {
-      getNegoUserStyle(nego, index) {
-        const r = parseInt(Math.random(0, 255) * 100)
-        const g = parseInt(Math.random(0, 255) * 100)
-        const b = parseInt(Math.random(0, 255) * 100)
+    getCurrency() {
+      const supportCurrency = this.getSupportCurrency;
+      const itemCurrencyAddress = this.info ? this.info.currency : null;
 
-        return {
-          zIndex: 8 - (index - 1),
-          background: (index - 1) === (8 - 1) ? '#dee3eb' : `rgb(${r}, ${g}, ${b})`
+      if (itemCurrencyAddress) {
+        const itemCurrency = _.find(supportCurrency, (row) => {
+          if (this.$wallet.isSameAddress(row.tokenAddress, itemCurrencyAddress)) return true;
+          return false;
+        });
+        if (itemCurrency) {
+          return itemCurrency;
         }
-      },
+      }
+      return {
+        decimal: 18,
+        symbol: 'Symbol',
+      };
+    },
+  },
 
-      handleLikeClicked() {
-        if (!this.$route.query.tradeId)
-          return
+  watch: {},
 
-        this.$emit('onClickLike');
-        this.likeLocal = !this.likeLocal;
-      },
+  methods: {
+    getNegoUserStyle(nego, index) {
+      const r = parseInt(Math.random(0, 255) * 100);
+      const g = parseInt(Math.random(0, 255) * 100);
+      const b = parseInt(Math.random(0, 255) * 100);
 
-      handleWriterClicked(event) {
-        this.isCopy = true;
-        setTimeout(() => {this.isCopy = false}, 500);
-      },
+      return {
+        zIndex: 8 - (index - 1),
+        background: index - 1 === 8 - 1 ? '#dee3eb' : `rgb(${r}, ${g}, ${b})`,
+      };
+    },
 
-      isVisibleToken(row) {
-        if (this.getChainInfo.chain === 'ETHEREUM') {
-          if (row.symbol.toLowerCase() === 'klay') {
-            return false;
-          }
-        }
-        return true;
-      },
+    handleLikeClicked() {
+      if (!this.$route.query.tradeId) return;
 
-      isVisibleCurrency(row) {
-        if (this.info.isNegotiable) {
-          // 협상 가능한 게시글인 경우
-          return true;
-        } else {
-          // 협상 불가능한 게시글인 경우
-          if (this.$wallet.isSameAddress(row.tokenAddress, this.info.currencyInfo.tokenAddress)) return true;
+      this.$emit('onClickLike');
+      this.likeLocal = !this.likeLocal;
+    },
+
+    handleWriterClicked(event) {
+      this.isCopy = true;
+      setTimeout(() => {
+        this.isCopy = false;
+      }, 500);
+    },
+
+    isVisibleToken(row) {
+      if (this.getChainInfo.chain === 'ETHEREUM') {
+        if (row.symbol.toLowerCase() === 'klay') {
           return false;
         }
-      },
+      }
+      return true;
+    },
 
-      collectionClicked() {
-        const collectionName = this.info.collectionName;
-        const collectionTokenAddress = this.info.tokenAddress;
-
-        if (collectionName && collectionTokenAddress) {
-          this.$router.push({
-            path: '/collection',
-            query: {
-              collection: collectionName,
-              collectionAddress: collectionTokenAddress,
-            }
-          });
-        }
+    isVisibleCurrency(row) {
+      if (this.info.isNegotiable) {
+        // 협상 가능한 게시글인 경우
+        return true;
+      } else {
+        // 협상 불가능한 게시글인 경우
+        if (this.$wallet.isSameAddress(row.tokenAddress, this.info.currencyInfo.tokenAddress)) return true;
+        return false;
       }
     },
 
-    components: {
+    collectionClicked() {
+      const collectionName = this.info.collectionName;
+      const collectionTokenAddress = this.info.tokenAddress;
 
-    }
-  }
+      if (collectionName && collectionTokenAddress) {
+        this.$router.push({
+          path: '/collection',
+          query: {
+            collection: collectionName,
+            collectionAddress: collectionTokenAddress,
+          },
+        });
+      }
+    },
+  },
+
+  components: {},
+};
 </script>

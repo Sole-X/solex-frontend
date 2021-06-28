@@ -27,10 +27,7 @@
     "Edit": "수정",
     "CopyUrl": "URL 복사",
     "CopySuccess": "복사가 완료되었습니다.<br/>원하는 곳에 붙여넣기하세요(Ctrl + v).",
-    "Item": [
-      "아이템",
-      "아이템"
-    ],
+    "Item": ["아이템", "아이템"],
     "Complete": "완료",
     "Success": "성공",
     "Currency": "통화",
@@ -53,10 +50,7 @@
     "None": "없음",
     "Optional": "선택사항",
     "Confirm": "확인",
-    "Asset": [
-      "자산",
-      "자산"
-    ],
+    "Asset": ["자산", "자산"],
     "Save": "저장",
     "State": "상태",
     "Coin": "코인",
@@ -69,12 +63,7 @@
     "Withdraw": "출금",
     "Owner": "소유자",
     "SearchPlaceholder": "아이템 / 컬렉션 / 계정 / 퍼블리셔로 검색",
-    "SearchItems": [
-      "아이템",
-      "컬렉션",
-      "계정",
-      "퍼블리셔"
-    ],
+    "SearchItems": ["아이템", "컬렉션", "계정", "퍼블리셔"],
     "Language": "KOR",
     "TermModalTitle": "Sole-X 약관동의",
     "TermModalInput": "Sole-X 이용약관과 개인정보처리방침에 동의합니다.",
@@ -304,29 +293,15 @@
     "FilterCurrencies": "통화",
     "FilterPrice": "가격",
     "FilterPublisher": "퍼블리셔",
-    "FilterStatusItems": [
-      "판매",
-      "경매",
-      "판매 종료",
-      "프로모션"
-    ],
+    "FilterStatusItems": ["판매", "경매", "판매 종료", "프로모션"],
     "FilterStatusSales": "판매",
     "FilterStatusAuctions": "경매",
     "FilterStatusSolditems": "판매 종료",
     "FilterStatusPromotion": "프로모션",
-    "FilterBlockchainItems": [
-      "이더리움",
-      "클레이튼"
-    ],
+    "FilterBlockchainItems": ["이더리움", "클레이튼"],
     "FilterBlockchainEthereum": "이더리움",
     "FilterBlockchainKlaytn": "클레이튼",
-    "FilterCategoriesItems": [
-      "이더리움",
-      "클레이튼",
-      "예술",
-      "수집품",
-      "기타"
-    ],
+    "FilterCategoriesItems": ["이더리움", "클레이튼", "예술", "수집품", "기타"],
     "FilterCategoriesEthereum": "이더리움",
     "FilterCategoriesKlaytn": "클레이튼",
     "FilterCategoriesArt": "예술",
@@ -339,10 +314,7 @@
     "ErrorMessage2": "{token} 잔액이 부족합니다.",
     "ErrorMessage3": "내 입찰가는 시작가 또는 현재 입찰가보다 10% 이상 더 높아야 합니다.",
     "ErrorMessage4": "내 경매 입찰가는 즉시구매가보다 낮아야 합니다.",
-    "LabelOnOffs": [
-      "중",
-      "종료"
-    ],
+    "LabelOnOffs": ["중", "종료"],
     "Bids0": "시작가",
     "Bids1": "현재 입찰가",
     "NotEnoughToken": "{symbol} 잔액이 부족합니다.",
@@ -470,10 +442,7 @@
     "TitleTransferNftToken": "토큰 ID"
   },
   "Explorer": {
-    "RankingMenu": [
-      "순위",
-      "순위"
-    ],
+    "RankingMenu": ["순위", "순위"],
     "RankingMenuDescription": "6개의 성과 지표를 바탕으로 각 NFT 컬렉션의 성과를 측정합니다",
     "ActivityMenu": "활동",
     "ActivityMenuDescription": "Sole-X 에서 발생하는 모든 거래 내역을 확인하실 수 있습니다.",
@@ -526,24 +495,11 @@
     "Claimable": "청구 가능",
     "DayLeft": "일 남음",
     "TableCoinTokens": "",
-    "TableTypes": [
-      "스테이킹",
-      "언스테이킹",
-      "청구",
-      "보상"
-    ],
-    "TableStates": [
-      "완료",
-      "청구 가능",
-      "일 남음",
-      "진행 중"
-    ],
+    "TableTypes": ["스테이킹", "언스테이킹", "청구", "보상"],
+    "TableStates": ["완료", "청구 가능", "일 남음", "진행 중"],
     "TitleStake": "{token} 스테이킹하기",
     "TitleUnstake": "{token} 언스테이킹하기",
-    "AmountStakes": [
-      "스테이킹 수량",
-      "언스테이킹 수량"
-    ],
+    "AmountStakes": ["스테이킹 수량", "언스테이킹 수량"],
     "NoDataTitle": "표시할 데이터가 없습니다.",
     "NoDataDesc": "내 활동이 없습니다.",
     "AmountErrorInfo": "금액을 낮춰 다시 시도해주세요."

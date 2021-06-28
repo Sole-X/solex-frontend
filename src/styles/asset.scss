@@ -1,6 +1,5 @@
 @import './head';
 
-
 .asset-item-card__list {
   display: flex;
   flex-wrap: wrap;
@@ -14,7 +13,8 @@
   width: 220px;
   position: relative;
 
-  &:hover, &:active {
+  &:hover,
+  &:active {
     .asset-item-card__modal {
       opacity: 1;
 
@@ -41,7 +41,7 @@
       size: contain;
       position: center;
     }
-    background-image: url($public_path + "/img/logo/default-logo-no-text.svg");
+    background-image: url($public_path + '/img/logo/default-logo-no-text.svg');
     background-size: 60px;
 
     .asset-item-card__thumbnail__head {
@@ -152,7 +152,7 @@
         @include vertical-flex-end;
         padding: 12px;
 
-        >div {
+        > div {
           width: 100%;
         }
 
@@ -223,7 +223,7 @@
     width: 100%;
     padding: 120px 0;
 
-    >div {
+    > div {
       text-align: center;
     }
 
@@ -305,7 +305,6 @@
           height: 24px;
           border: 1px solid $melange_gray;
           margin-right: 4px;
-
 
           &:hover {
             svg {
@@ -471,12 +470,12 @@
               margin-bottom: 0;
             }
 
-            >div:nth-child(1) {
+            > div:nth-child(1) {
               width: 150px;
               color: $gen_gray;
             }
 
-            >div:nth-child(2) {
+            > div:nth-child(2) {
               width: calc(100% - 150px);
               color: $gen_lightblack;
             }
@@ -488,12 +487,12 @@
             align-items: flex-start;
             border-top: 1px solid $melange_gray;
 
-            >div:nth-child(1) {
+            > div:nth-child(1) {
               font-size: 16px;
               padding-top: 5px;
             }
 
-            >div:nth-child(2) {
+            > div:nth-child(2) {
               text-align: right;
 
               p:nth-child(1) {
@@ -540,11 +539,11 @@
           .asset-form__price {
             @include vertical-align-flex;
 
-            >div:nth-child(1) {
+            > div:nth-child(1) {
               margin-bottom: 0;
             }
 
-            >div:nth-child(2) {
+            > div:nth-child(2) {
               font-size: 12px;
               margin-left: auto;
             }
@@ -578,7 +577,6 @@
           }
 
           span {
-
           }
 
           button {
@@ -594,7 +592,7 @@
               background: {
                 position: center;
                 color: $primary_color;
-                image: url($public_path + "/img/icon/ic-check-wh.svg");
+                image: url($public_path + '/img/icon/ic-check-wh.svg');
               }
               border-color: $primary_color;
             }
@@ -649,7 +647,7 @@
       }
 
       .asset-item__profile__time {
-        >div:nth-child(2) {
+        > div:nth-child(2) {
           strong {
             font-size: 16px;
             font-weight: 500;
@@ -832,7 +830,6 @@
           }
 
           path.fill {
-
           }
         }
 
@@ -972,7 +969,8 @@
   }
 
   .asset-item__history {
-    .asset-item__history__thead, .asset-item__history__row {
+    .asset-item__history__thead,
+    .asset-item__history__row {
       @include vertical-align-flex;
       padding: 0 10px;
     }
@@ -1050,8 +1048,6 @@
       border-bottom: 1px solid #d8d8d8;
     }
   }
-
-
 }
 
 .asset-item__request__more {
@@ -1119,7 +1115,7 @@
           margin-bottom: 0;
         }
 
-        >span {
+        > span {
           font: {
             size: 12px;
           }
@@ -1284,7 +1280,9 @@
         margin-right: 0;
       }
 
-      &:hover, &:active, &.asset-form__currency__option--selected {
+      &:hover,
+      &:active,
+      &.asset-form__currency__option--selected {
         border-color: $primary_color;
       }
 
@@ -1537,11 +1535,9 @@
       align-items: center;
       padding: 5px 6px;
       .asset-item-card2-thumbnail-footer-left {
-
       }
 
       .asset-item-card2-thumbnail-footer-right {
-
       }
     }
   }
@@ -1649,7 +1645,8 @@
   }
 }
 
-.asset-item-card-my-page, .asset-item-card-home {
+.asset-item-card-my-page,
+.asset-item-card-home {
   cursor: pointer;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1667,36 +1664,43 @@
   //  transform: scale(0.93);
   //}
 
-  .asset-item-card-my-page-thumbnail, .asset-item-card-home-thumbnail {
+  .asset-item-card-my-page-thumbnail,
+  .asset-item-card-home-thumbnail {
     width: 220px;
     height: 180px;
     padding: 12px;
 
-    .asset-item-card-my-page-thumbnail-header, .asset-item-card-home-thumbnail-header {
+    .asset-item-card-my-page-thumbnail-header,
+    .asset-item-card-home-thumbnail-header {
       display: flex;
       justify-content: space-between;
 
-      .asset-item-card-my-page-thumbnail-header-left, .asset-item-card-home-thumbnail-header-left {
-        .asset-item-card-my-page-thumbnail-header-left-label, .asset-item-card-home-thumbnail-header-left-label, label {
+      .asset-item-card-my-page-thumbnail-header-left,
+      .asset-item-card-home-thumbnail-header-left {
+        .asset-item-card-my-page-thumbnail-header-left-label,
+        .asset-item-card-home-thumbnail-header-left-label,
+        label {
           font-size: 12px;
           padding: 3px 6px;
           border-radius: 3px;
         }
       }
 
-      .asset-item-card-my-page-thumbnail-header-right, .asset-item-card-home-thumbnail-header-right {
+      .asset-item-card-my-page-thumbnail-header-right,
+      .asset-item-card-home-thumbnail-header-right {
         display: inline-flex;
-
       }
     }
   }
 
-  .asset-item-card-my-page-info,.asset-item-card-home-info {
-    padding : 14px 0 0 0;
+  .asset-item-card-my-page-info,
+  .asset-item-card-home-info {
+    padding: 14px 0 0 0;
     width: 220px;
     height: 120px;
 
-    .asset-item-card-my-page-info-token-address, .asset-item-card-home-info-token-address {
+    .asset-item-card-my-page-info-token-address,
+    .asset-item-card-home-info-token-address {
       color: $gen_gray;
       font-size: 12px;
       margin-bottom: 4px;
@@ -1705,7 +1709,8 @@
       text-overflow: ellipsis;
     }
 
-    .asset-item-card-my-page-info-title, .asset-item-card-home-info-title {
+    .asset-item-card-my-page-info-title,
+    .asset-item-card-home-info-title {
       font-size: 16px;
       color: #666666;
       margin-bottom: 16px;
@@ -1736,11 +1741,9 @@
       font-size: 12px;
 
       span:nth-child(1) {
-
       }
 
       span:nth-child(2) {
-
       }
 
       span:nth-child(3) {
@@ -1760,8 +1763,6 @@
         margin: 0 10px;
         background-color: #b2b2b2;
       }
-
-
     }
   }
 

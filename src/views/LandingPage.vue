@@ -1,20 +1,14 @@
 <template>
   <div class="landing-page">
     <header class="landing-page__header">
-      <button
-        :class="$bem('common-submit-button', '', ['outline-primary'])"
-        @click="handleConnectWallet()"
-      >
-        <strong>{{ $t("General.ConnectWallet") }}</strong>
+      <button :class="$bem('common-submit-button', '', ['outline-primary'])" @click="handleConnectWallet()">
+        <strong>{{ $t('General.ConnectWallet') }}</strong>
       </button>
     </header>
 
     <div class="landing-page__body">
       <section :class="$bem('landing-page__section', ['graphic'])">
-        <img
-          :src="$static.getFileURL('img/article/article-home-cloud-bg.jpg')"
-          alt="background of home"
-        />
+        <img :src="$static.getFileURL('img/article/article-home-cloud-bg.jpg')" alt="background of home" />
       </section>
 
       <section :class="$bem('landing-page__section', ['description'])">
@@ -25,18 +19,18 @@
             </div>
 
             <h1>
-              <strong>{{ $t("General.LandingPageTitle") }}</strong>
+              <strong>{{ $t('General.LandingPageTitle') }}</strong>
             </h1>
 
             <p>
-              {{ $t("General.LandingPageDescription")[0] }}
+              {{ $t('General.LandingPageDescription')[0] }}
               <br />
-              {{ $t("General.LandingPageDescription")[1] }}
+              {{ $t('General.LandingPageDescription')[1] }}
             </p>
 
             <router-link :to="{ path: '/home' }">
               <button :class="$bem('common-submit-button', '', ['primary'])">
-                <strong>{{ $t("General.LandingPageSubmit") }}</strong>
+                <strong>{{ $t('General.LandingPageSubmit') }}</strong>
               </button>
             </router-link>
           </div>
@@ -50,7 +44,7 @@
 let $t, component;
 
 export default {
-  name: "LandingPage",
+  name: 'LandingPage',
   created() {
     component = this;
     $t = this.$t.bind(this);
@@ -71,7 +65,7 @@ export default {
   methods: {
     handleConnectWallet() {
       this.showModal({
-        component: "SelectWalletModal",
+        component: 'SelectWalletModal',
       });
     },
   },

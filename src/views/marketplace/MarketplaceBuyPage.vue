@@ -21,7 +21,7 @@
     <div class="marketplace-sell-items" ref="buyItemsContainer">
       <header class="marketplace-sell-items-header">
         <div class="marketplace-sell-items-header-top">
-          {{ $t('Market.ResultNum', {total: total}) }}
+          {{ $t('Market.ResultNum', { total: total }) }}
         </div>
         <div class="marketplace-sell-items-header-bottom">
           <div class="marketplace-sell-items-header-bottom-select">
@@ -30,10 +30,18 @@
             </div>
             <div class="marketplace-sell-items-header-bottom-select-options" ref="selectOption" v-show="showSelectBox">
               <ul>
-                <li data-value='DATE' data-appear='Market.OrderByNewest' @click="optionClicked">{{ $t('Market.OrderByNewest') }}</li>
-                <li data-value='POP' data-appear='Market.OrderByPopular' @click="optionClicked">{{ $t('Market.OrderByPopular') }}</li>
-                <li data-value='PRICE~' data-appear='Market.OrderByLowestPrice' @click="optionClicked">{{ $t('Market.OrderByLowestPrice') }}</li>
-                <li data-value='PRICE' data-appear='Market.OrderByHighestPrice' @click="optionClicked">{{ $t('Market.OrderByHighestPrice') }}</li>
+                <li data-value="DATE" data-appear="Market.OrderByNewest" @click="optionClicked">
+                  {{ $t('Market.OrderByNewest') }}
+                </li>
+                <li data-value="POP" data-appear="Market.OrderByPopular" @click="optionClicked">
+                  {{ $t('Market.OrderByPopular') }}
+                </li>
+                <li data-value="PRICE~" data-appear="Market.OrderByLowestPrice" @click="optionClicked">
+                  {{ $t('Market.OrderByLowestPrice') }}
+                </li>
+                <li data-value="PRICE" data-appear="Market.OrderByHighestPrice" @click="optionClicked">
+                  {{ $t('Market.OrderByHighestPrice') }}
+                </li>
               </ul>
             </div>
           </div>
@@ -50,11 +58,11 @@
       <main class="marketplace-sell-items-contents">
         <template v-if="getDataLoaded">
           <asset-item-card-market-place
-              class="marketplace-sell-items-contents-image"
-              v-for="item in items"
-              :item="item"
-              :key="item.primaryKey"
-              :type="'buy'"
+            class="marketplace-sell-items-contents-image"
+            v-for="item in items"
+            :item="item"
+            :key="item.primaryKey"
+            :type="'buy'"
           />
         </template>
         <template v-else>
@@ -70,13 +78,13 @@
 
 <script>
 import AssetItemCardMarketPlace from '@/components/asset/item/AssetItemCardMarketPlace';
-import MarketplaceFilterMarketPlace from "@/components/market/MarketplaceFilterMarketPlace";
-import MarketplaceMixin from "@/mixins/marketplace/MarketplaceMixin";
-import MainFooter from '@/components/menu/MainFooter'
+import MarketplaceFilterMarketPlace from '@/components/market/MarketplaceFilterMarketPlace';
+import MarketplaceMixin from '@/mixins/marketplace/MarketplaceMixin';
+import MainFooter from '@/components/menu/MainFooter';
 import { mapGetters } from 'vuex';
-import axios from "axios";
+import axios from 'axios';
 
-let $t, self
+let $t, self;
 let scrollEvent;
 let io;
 
@@ -86,11 +94,11 @@ export default {
   mixins: [MarketplaceMixin],
 
   created() {
-    self = this
-    $t = this.$t.bind(this)
+    self = this;
+    $t = this.$t.bind(this);
 
-    io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
+    io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.intersectionRatio > 0) {
           if (entry.target.hasChildNodes()) {
             const elem = entry.target.childNodes[0];
@@ -103,7 +111,7 @@ export default {
         } else {
           // in current, no action.
         }
-      })
+      });
     });
   },
 
@@ -125,7 +133,7 @@ export default {
       if (!this.$refs.selectBox.contains(event.target) && !this.$refs.selectOption.contains(event.target)) {
         this.showSelectBox = false;
       }
-    }
+    };
     window.addEventListener('scroll', this.scrollEvent);
     window.addEventListener('click', this.clickEvent);
   },
@@ -150,27 +158,23 @@ export default {
       items: [],
       order: {
         section: 'order',
-        value: 'POP'
+        value: 'POP',
       },
       curStatus: [],
       showSelectBox: false,
       selectedOption: () => $t('Market.SelectOrder'),
-    }
+    };
   },
 
   computed: {
-    ...mapGetters([
-        'getItems',
-    ]),
+    ...mapGetters(['getItems']),
 
-    getDataLoaded () {
+    getDataLoaded() {
       return this.dataLoaded;
-    }
+    },
   },
 
-  watch: {
-
-  },
+  watch: {},
 
   methods: {
     async initPage() {
@@ -233,8 +237,8 @@ export default {
       const sortBy = {
         section: 'order',
         value,
-        appear: () => ''
-      }
+        appear: () => '',
+      };
       this.order = sortBy;
     },
 
@@ -245,20 +249,19 @@ export default {
     },
 
     registerClicked(event) {
-
       this.$router.push({
         path: `/asset/make-offer/normal`,
         query: {
-          type: 'buy'
-        }
-      })
+          type: 'buy',
+        },
+      });
     },
 
     imageLazyLoading() {
       const imageElemList = document.querySelectorAll('.marketplace-sell-items-contents-image');
       imageElemList.forEach((elem) => {
         io.observe(elem);
-      })
+      });
     },
 
     selectBoxClicked() {
@@ -271,13 +274,13 @@ export default {
       this.showSelectBox = false;
       this.selectedOption = () => $t(appear);
       this.orderChanged(new Event('change'), value);
-    }
+    },
   },
 
   components: {
     AssetItemCardMarketPlace,
     MarketplaceFilterMarketPlace,
-    MainFooter
-  }
-}
+    MainFooter,
+  },
+};
 </script>

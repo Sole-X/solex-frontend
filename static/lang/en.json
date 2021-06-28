@@ -27,10 +27,7 @@
     "Edit": "Edit",
     "CopyUrl": "Copy URL",
     "CopySuccess": "Copied!</br/>Press Ctrl + V to use it.",
-    "Item": [
-      "Item",
-      "Items"
-    ],
+    "Item": ["Item", "Items"],
     "Complete": "Complete",
     "Success": "Success",
     "Currency": "Currency",
@@ -53,10 +50,7 @@
     "None": "None",
     "Optional": "Optional",
     "Confirm": "Confirm",
-    "Asset": [
-      "Asset",
-      "Assets"
-    ],
+    "Asset": ["Asset", "Assets"],
     "Save": "Save",
     "State": "State",
     "Coin": "Coin",
@@ -69,12 +63,7 @@
     "Withdraw": "Withdraw",
     "Owner": "Owner",
     "SearchPlaceholder": "Search by Item / Collection / Account / Publisher",
-    "SearchItems": [
-      "Items",
-      "Collections",
-      "Accounts",
-      "Publisher"
-    ],
+    "SearchItems": ["Items", "Collections", "Accounts", "Publisher"],
     "Language": "ENG",
     "TermModalTitle": "Sole-X Terms of Service",
     "TermModalInput": "I agree to the Sole-X Terms of Service and Privacy Policy",
@@ -304,29 +293,15 @@
     "FilterCurrencies": "CURRENCIES",
     "FilterPrice": "PRICE",
     "FilterPublisher": "PUBLISHER",
-    "FilterStatusItems": [
-      "SALES",
-      "AUCTIONS",
-      "SOLD ITEMS",
-      "PROMOTION"
-    ],
+    "FilterStatusItems": ["SALES", "AUCTIONS", "SOLD ITEMS", "PROMOTION"],
     "FilterStatusSales": "SALES",
     "FilterStatusAuctions": "AUCTIONS",
     "FilterStatusSolditems": "SOLD ITEMS",
     "FilterStatusPromotion": "PROMOTION",
-    "FilterBlockchainItems": [
-      "ETHEREUM",
-      "KLAYTN"
-    ],
+    "FilterBlockchainItems": ["ETHEREUM", "KLAYTN"],
     "FilterBlockchainEthereum": "ETHEREUM",
     "FilterBlockchainKlaytn": "KLAYTN",
-    "FilterCategoriesItems": [
-      "ETHEREUM",
-      "KLAYTN",
-      "ART",
-      "COLLECTIBLES",
-      "ETC"
-    ],
+    "FilterCategoriesItems": ["ETHEREUM", "KLAYTN", "ART", "COLLECTIBLES", "ETC"],
     "FilterCategoriesEthereum": "ETHEREUM",
     "FilterCategoriesKlaytn": "KLAYTN",
     "FilterCategoriesArt": "ART",
@@ -339,10 +314,7 @@
     "ErrorMessage2": "You don't have enough {token}.",
     "ErrorMessage3": "Your bid must be at least 10% higher than the starting price or current bid.",
     "ErrorMessage4": "Your bid must be lower than the Buy It Now price.",
-    "LabelOnOffs": [
-      "ON",
-      "OFF"
-    ],
+    "LabelOnOffs": ["ON", "OFF"],
     "Bids0": "Starting Bid",
     "Bids1": "Current Bid",
     "NotEnoughToken": "You don't have enough {symbol}",
@@ -470,10 +442,7 @@
     "TitleTransferNftToken": "Token ID"
   },
   "Explorer": {
-    "RankingMenu": [
-      "Ranking",
-      "Rank"
-    ],
+    "RankingMenu": ["Ranking", "Rank"],
     "RankingMenuDescription": "The ranking table is based on six performance indicators that measure a collection of NFT's Performance",
     "ActivityMenu": "Activity",
     "ActivityMenuDescription": "Search and view all transaction history in Sole-X",
@@ -526,24 +495,11 @@
     "Claimable": "CLAIMABLE",
     "DayLeft": "DAY(S) LEFT",
     "TableCoinTokens": "",
-    "TableTypes": [
-      "Staking",
-      "Unstaking",
-      "Claim",
-      "Reward"
-    ],
-    "TableStates": [
-      "COMPLETE",
-      "CLAIMABLE",
-      "DAY(S) LEFT",
-      "IN PROGRESS"
-    ],
+    "TableTypes": ["Staking", "Unstaking", "Claim", "Reward"],
+    "TableStates": ["COMPLETE", "CLAIMABLE", "DAY(S) LEFT", "IN PROGRESS"],
     "TitleStake": "Stake {token}",
     "TitleUnstake": "Unstake {token}",
-    "AmountStakes": [
-      "Amount to Stake",
-      "Amount to Unstake"
-    ],
+    "AmountStakes": ["Amount to Stake", "Amount to Unstake"],
     "NoDataTitle": "No Data to Display.",
     "NoDataDesc": "No records in your activity yet.",
     "AmountErrorInfo": "Enter a lower amount and try again."

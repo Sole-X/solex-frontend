@@ -5,42 +5,34 @@
 </template>
 
 <script>
-let $t, self
-import MainConnectWallet from "@/components/MainConnectWallet";
+let $t, self;
+import MainConnectWallet from '@/components/MainConnectWallet';
 
 export default {
   name: '',
 
   created() {
-    self = this
-    $t = this.$t.bind(this)
+    self = this;
+    $t = this.$t.bind(this);
   },
 
   mounted() {
     this.$eventBus.$on('walletConnected', this.handleWalletConnected);
   },
 
-  updated() {
-
-  },
+  updated() {},
 
   beforeDestroy() {
     this.$eventBus.$off('walletConnected', this.handleWalletConnected);
   },
 
   data() {
-    return {
-
-    }
+    return {};
   },
 
-  computed: {
+  computed: {},
 
-  },
-
-  watch: {
-
-  },
+  watch: {},
 
   methods: {
     handleWalletConnected() {
@@ -49,17 +41,17 @@ export default {
       }
       this.$http.post('setAgreement', {
         body: {
-          status: 'TRUE'
+          status: 'TRUE',
         },
         urlParams: {
-          accountAddr: this.getUserInfo.address
-        }
+          accountAddr: this.getUserInfo.address,
+        },
       });
-    }
+    },
   },
 
   components: {
-    MainConnectWallet
-  }
-}
+    MainConnectWallet,
+  },
+};
 </script>

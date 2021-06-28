@@ -1,19 +1,19 @@
 export default [
   {
     name: 'SELL',
-    isNft: true
+    isNft: true,
   },
   {
     name: 'BUY',
-    isNft: true
+    isNft: true,
   },
   {
     name: 'AUCTION',
-    isNft: true
+    isNft: true,
   },
   {
     name: 'NEGO',
-    isNft: true
+    isNft: true,
   },
   {
     name: 'BID',
@@ -21,10 +21,10 @@ export default [
   },
   {
     name: 'NFT',
-    isNft: true
+    isNft: true,
   },
   {
     name: 'TOKEN',
-    isNft: false
-  }
-]
+    isNft: false,
+  },
+];

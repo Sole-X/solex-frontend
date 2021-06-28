@@ -4,8 +4,8 @@
 
     <article class="gen-modal__content gen-modal__sub-title">
       <div>
-        <h4>{{$t('General.ConnectWalletModalTitle')}}</h4>
-        <div class="gen-modal__desc">{{$t('General.ConnectWalletModalTitle')}}</div>
+        <h4>{{ $t('General.ConnectWalletModalTitle') }}</h4>
+        <div class="gen-modal__desc">{{ $t('General.ConnectWalletModalTitle') }}</div>
       </div>
     </article>
 
@@ -18,10 +18,10 @@
       >
         <img :src="service.icon" :alt="service.name" />
         <h6>
-          <strong>{{service.name}}</strong>
+          <strong>{{ service.name }}</strong>
         </h6>
         <span>
-          {{service.chain}}
+          {{ service.chain }}
         </span>
       </div>
     </article>
@@ -29,57 +29,53 @@
 </template>
 
 <script>
-  import UserWalletMixin from '@/mixins/user/UserWalletMixin'
+import UserWalletMixin from '@/mixins/user/UserWalletMixin';
 
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'SelectWalletModal',
-    mixins: [UserWalletMixin],
-    props: {
-      data: Object,
-      close: Function
+export default {
+  name: 'SelectWalletModal',
+  mixins: [UserWalletMixin],
+  props: {
+    data: Object,
+    close: Function,
+  },
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
+
+  mounted() {},
+
+  beforeDestroy() {},
+
+  data() {
+    return {};
+  },
+
+  computed: {
+    getAvailableService() {
+      return this.$_UserWalletMixin_getAvailableService();
     },
-    created() {
-      component = this
-      $t = this.$t.bind(this)
-    },
+  },
 
-    mounted() {
+  watch: {},
 
-    },
+  methods: {
+    async handleSelectService(service) {
+      const res = await this.$_UserWalletMixin_handleConnect(service);
 
-    beforeDestroy() {
-
-    },
-
-    data() {
-      return {}
-    },
-
-    computed: {
-      getAvailableService() {
-        return this.$_UserWalletMixin_getAvailableService()
+      if (!res.success) {
+        return;
       }
+
+      this.close();
+      this.$router.push({
+        path: '/home',
+      });
     },
+  },
 
-    watch: {},
-
-    methods: {
-      async handleSelectService(service) {
-        const res = await this.$_UserWalletMixin_handleConnect(service)
-
-        if(!res.success) {
-          return
-        }
-
-        this.close()
-        this.$router.push({
-          path: '/home'
-        })
-      }
-    },
-
-    components: {}
-  }
+  components: {},
+};
 </script>

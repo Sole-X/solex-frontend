@@ -1,9 +1,5 @@
 export default {
-    eng: {
+  eng: {},
 
-    },
-
-    kor: {
-
-    }
-}
+  kor: {},
+};

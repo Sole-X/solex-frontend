@@ -1,4 +1,4 @@
-@import "./head";
+@import './head';
 
 .market-home-page {
   height: 100%;
@@ -114,26 +114,22 @@
 
       &--all {
         .marketplace__category__icon {
-          background-image: url($public_path+"/img/icon/ic-main-category-all.svg");
+          background-image: url($public_path + '/img/icon/ic-main-category-all.svg');
         }
 
         &:hover,
         &:active {
-          background-image: linear-gradient(
-            344deg,
-            $secondary_color 15%,
-            #00b2e3
-          );
+          background-image: linear-gradient(344deg, $secondary_color 15%, #00b2e3);
 
           .marketplace__category__icon {
-            background-image: url($public_path+"/img/icon/ic-main-category-all-wh.svg");
+            background-image: url($public_path + '/img/icon/ic-main-category-all-wh.svg');
           }
         }
       }
 
       &--ethereum {
         .marketplace__category__icon {
-          background-image: url($public_path+"/img/icon/ic-chain-ethereum.svg");
+          background-image: url($public_path + '/img/icon/ic-chain-ethereum.svg');
         }
 
         &:hover,
@@ -141,14 +137,14 @@
           background-image: linear-gradient(114deg, #454a75, #656ac6 100%);
 
           .marketplace__category__icon {
-            background-image: url($public_path+"/img/icon/ic-chain-ethereum-wh.svg");
+            background-image: url($public_path + '/img/icon/ic-chain-ethereum-wh.svg');
           }
         }
       }
 
       &--klaytn {
         .marketplace__category__icon {
-          background-image: url($public_path+"/img/icon/ic-chain-klaytn.svg");
+          background-image: url($public_path + '/img/icon/ic-chain-klaytn.svg');
         }
 
         &:hover,
@@ -156,14 +152,14 @@
           background-image: linear-gradient(294deg, #a39481, #6f6558);
 
           .marketplace__category__icon {
-            background-image: url($public_path+"/img/icon/ic-chain-klaytn-wh.svg");
+            background-image: url($public_path + '/img/icon/ic-chain-klaytn-wh.svg');
           }
         }
       }
 
       &--art {
         .marketplace__category__icon {
-          background-image: url($public_path+"/img/icon/ic-main-category-art.svg");
+          background-image: url($public_path + '/img/icon/ic-main-category-art.svg');
         }
 
         &:hover,
@@ -171,14 +167,14 @@
           background-image: linear-gradient(294deg, #eb9083 100%, #e78091 0%);
 
           .marketplace__category__icon {
-            background-image: url($public_path+"/img/icon/ic-main-category-art-wh.svg");
+            background-image: url($public_path + '/img/icon/ic-main-category-art-wh.svg');
           }
         }
       }
 
       &--game {
         .marketplace__category__icon {
-          background-image: url($public_path+"/img/icon/ic-main-category-game.svg");
+          background-image: url($public_path + '/img/icon/ic-main-category-game.svg');
         }
 
         &:hover,
@@ -186,7 +182,7 @@
           background-image: linear-gradient(114deg, #231f20, #525366);
 
           .marketplace__category__icon {
-            background-image: url($public_path+"/img/icon/ic-main-category-game-wh.svg");
+            background-image: url($public_path + '/img/icon/ic-main-category-game-wh.svg');
           }
         }
       }
@@ -730,8 +726,7 @@
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
-          background: url($public_path+"/img/icon/ic-select-arrow.svg")
-            no-repeat 92% 50%;
+          background: url($public_path + '/img/icon/ic-select-arrow.svg') no-repeat 92% 50%;
         }
 
         .marketplace-filter-popover-price-input-section {
@@ -856,8 +851,7 @@
           width: 160px;
           height: 32px;
           border: solid 1px #e8e8e8;
-          background: url($public_path+"/img/icon/ic-select-arrow.svg")
-            no-repeat 90% 50%;
+          background: url($public_path + '/img/icon/ic-select-arrow.svg') no-repeat 90% 50%;
 
           .marketplace-sell-items-header-bottom-select-box {
             display: flex;
@@ -894,8 +888,7 @@
           -webkit-appearance: none;
           -moz-appearance: none;
           appearance: none;
-          background: url($public_path+"/img/icon/ic-select-arrow.svg")
-            no-repeat 85% 50%;
+          background: url($public_path + '/img/icon/ic-select-arrow.svg') no-repeat 85% 50%;
         }
 
         button {
@@ -904,8 +897,7 @@
           height: 40px;
           background: $primary_color;
           border: 1px solid #0097e3;
-          box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-            rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
           outline: none;
           transition: ease-in-out 1s, background-color 1s;
 
@@ -961,7 +953,7 @@
       }
 
       &::after {
-        content: "";
+        content: '';
         width: 220px;
       }
     }
@@ -978,7 +970,7 @@
     min-width: 1200px;
     height: 320px;
     margin: 0 auto 60px auto;
-    background-image: url($public_path + "/img/article/article-market-collection.png");
+    background-image: url($public_path + '/img/article/article-market-collection.png');
     background-size: cover;
 
     .collection-page-banner-main {

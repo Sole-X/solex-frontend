@@ -5,8 +5,37 @@
   background-repeat: no-repeat !important;
 }
 
-body, html, div, h1, h2, h3, h4, h5, h6, ul, li, ol, dl, dt, dd, p, hr, button, input, form, fieldset,table, caption, th, td,
-header, nav, section, article, aside, footer {
+body,
+html,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+li,
+ol,
+dl,
+dt,
+dd,
+p,
+hr,
+button,
+input,
+form,
+fieldset,
+table,
+caption,
+th,
+td,
+header,
+nav,
+section,
+article,
+aside,
+footer {
   margin: 0;
   padding: 0;
   // font-family: museo-sans, 'SpoqaHanSans', 'MuseoSans', 'JSDongkang', 'Roboto', sans-serif;
@@ -18,26 +47,39 @@ header, nav, section, article, aside, footer {
   color: $gen_black;
 }
 
-html, body{
+html,
+body {
   width: 100%;
   height: 100%;
 }
 
-html, body {
+html,
+body {
   background-color: #fff;
 }
 
-header, nav, section, article, aside, footer {
+header,
+nav,
+section,
+article,
+aside,
+footer {
   display: block;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-size: inherit;
   font-weight: normal;
 }
 
-ol, ul {
-  list-style: none
+ol,
+ul {
+  list-style: none;
 }
 
 img {
@@ -45,21 +87,23 @@ img {
   vertical-align: top;
 }
 
-span > img, h6 > img {
+span > img,
+h6 > img {
   cursor: pointer;
   vertical-align: middle;
 }
 
-input::-ms-clear, input::-ms-reveal {
+input::-ms-clear,
+input::-ms-reveal {
   display: none !important;
 }
 
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield !important;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
   margin: 0;
   -webkit-appearance: none;
 }
@@ -69,25 +113,30 @@ table {
   border-collapse: collapse;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: none;
   text-align: left;
 }
 
-th, label {
-  font-weight:normal;
+th,
+label {
+  font-weight: normal;
 }
 
 address {
-  font-style:normal;
+  font-style: normal;
 }
 
-button, input {
+button,
+input {
   border: none;
   background: none;
 }
 
-button:focus, input:focus {
+button:focus,
+input:focus {
   outline: none;
 }
 
@@ -101,7 +150,8 @@ a {
   text-decoration: none;
 
   &.underline {
-    &:hover, &:active {
+    &:hover,
+    &:active {
       text-decoration: underline;
     }
   }
@@ -167,7 +217,8 @@ textarea {
 .carousel-arrow {
   position: relative;
 
-  .swiper-button-prev, .swiper-button-next {
+  .swiper-button-prev,
+  .swiper-button-next {
     height: 28px;
     top: calc(50% - 28px);
 
@@ -176,7 +227,8 @@ textarea {
       color: $melange_gray;
     }
 
-    &:hover, &:active {
+    &:hover,
+    &:active {
       &::after {
         color: $primary_color;
       }
@@ -220,7 +272,8 @@ textarea {
         font-size: 12px;
         @include square(100%);
 
-        &:disabled, &::placeholder {
+        &:disabled,
+        &::placeholder {
           font-weight: 300;
           color: #c1c5cc;
         }
@@ -233,7 +286,9 @@ textarea {
     }
   }
 
-  &--dirty, &:hover, &:active {
+  &--dirty,
+  &:hover,
+  &:active {
     border-color: $primary_color;
   }
 }
@@ -258,20 +313,22 @@ textarea {
   .common-pager__button__prev {
     @include square(10px);
     margin-right: 20px;
-    background-image: url($public_path + "/img/icon/ic-page-prev-off.svg");
+    background-image: url($public_path + '/img/icon/ic-page-prev-off.svg');
 
-    &:hover, &:active {
-      background-image: url($public_path + "/img/icon/ic-page-prev-on.svg");
+    &:hover,
+    &:active {
+      background-image: url($public_path + '/img/icon/ic-page-prev-on.svg');
     }
   }
 
   .common-pager__button__next {
     @include square(10px);
     margin-left: 20px;
-    background-image: url($public_path + "/img/icon/ic-page-next-off.svg");
+    background-image: url($public_path + '/img/icon/ic-page-next-off.svg');
 
-    &:hover, &:active {
-      background-image: url($public_path + "/img/icon/ic-page-next-on.svg");
+    &:hover,
+    &:active {
+      background-image: url($public_path + '/img/icon/ic-page-next-on.svg');
     }
   }
 
@@ -279,10 +336,11 @@ textarea {
     width: 14px;
     height: 10px;
     margin-right: 15px;
-    background-image: url($public_path + "/img/icon/ic-page-first-off.svg");
+    background-image: url($public_path + '/img/icon/ic-page-first-off.svg');
 
-    &:hover, &:active {
-      background-image: url($public_path + "/img/icon/ic-page-first-on.svg");
+    &:hover,
+    &:active {
+      background-image: url($public_path + '/img/icon/ic-page-first-on.svg');
     }
   }
 
@@ -290,10 +348,11 @@ textarea {
     width: 14px;
     height: 10px;
     margin-left: 15px;
-    background-image: url($public_path + "/img/icon/ic-page-last-off.svg");
+    background-image: url($public_path + '/img/icon/ic-page-last-off.svg');
 
-    &:hover, &:active {
-      background-image: url($public_path + "/img/icon/ic-page-last-on.svg");
+    &:hover,
+    &:active {
+      background-image: url($public_path + '/img/icon/ic-page-last-on.svg');
     }
   }
 }

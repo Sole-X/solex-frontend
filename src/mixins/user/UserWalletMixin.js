@@ -1,4 +1,4 @@
-import { mapActions } from 'vuex'
+import { mapActions } from 'vuex';
 let keyEvent;
 
 export default {
@@ -15,11 +15,11 @@ export default {
           const num = this.command[i];
           if (i === 0 || i === 1) {
             if (num !== 75) flag = false;
-          } else if (i===2) {
+          } else if (i === 2) {
             if (num !== 76) flag = false;
-          } else if (i===3) {
+          } else if (i === 3) {
             if (num !== 73) flag = false;
-          } else if (i===4) {
+          } else if (i === 4) {
             if (num !== 80) flag = false;
           }
         }
@@ -29,7 +29,7 @@ export default {
           this.isAvailConnectKlip = false;
         }
       }
-    }
+    };
     window.addEventListener('keyup', keyEvent);
   },
 
@@ -41,15 +41,11 @@ export default {
     return {
       command: [],
       isAvailConnectKlip: false,
-    }
+    };
   },
 
   methods: {
-    ...mapActions([
-        'login',
-        'logout',
-        'showModal'
-    ]),
+    ...mapActions(['login', 'logout', 'showModal']),
 
     async $_UserWalletMixin_handleConnect(service) {
       if (!this.isAvailConnectKlip) {
@@ -58,8 +54,8 @@ export default {
         }
       }
 
-      if(this.getUserInfo.address) {
-        return
+      if (this.getUserInfo.address) {
+        return;
       }
 
       if (!window.localStorage.getItem(service.name) || window.localStorage.getItem(service.name) === 'false')
@@ -70,49 +66,47 @@ export default {
           window.localStorage.setItem('wallet', 'connected');
           this.$_UserWalletMixin_handleConnect(service);
           this.$eventBus.$off('connectWalletTermsModalProceed');
-        })
+        });
 
         this.showModal({
           component: 'ConnectWalletTermsModal',
-          params: {
-
-          }
-        })
+          params: {},
+        });
 
         return;
       }
 
       const res = await this.login({
         chain: service.chain.toUpperCase(),
-        service: service.type
-      })
+        service: service.type,
+      });
 
-      const $t = this.$t.bind(this)
+      const $t = this.$t.bind(this);
 
-      if(!res.success) {
+      if (!res.success) {
         this.showAlert({
           title: $t('General.ConnectWalletFailTitle'),
           content: $t('General.ConnectWalletFailDescription', {
             service: service.name,
-            link: this.$wallet.getInstallURL()
+            link: this.$wallet.getInstallURL(),
           }),
           confirm: {
             cancel: {
-              text: $t('General.Close')
+              text: $t('General.Close'),
             },
             accept: {
               text: $t('General.Retry'),
               callback: () => {
-                return this.$_UserWalletMixin_handleConnect(service)
-              }
-            }
-          }
-        })
+                return this.$_UserWalletMixin_handleConnect(service);
+              },
+            },
+          },
+        });
       } else {
         this.$eventBus.$emit('walletConnected');
       }
 
-      return res
+      return res;
     },
 
     async $_UserWalletMixin_handleDisconnect(service) {
@@ -126,26 +120,26 @@ export default {
           name: 'Metamask',
           chain: 'Ethereum',
           icon: this.$static.getFileURL('img/logo/logo-metamask.svg'),
-          className: "select-wallet__option option-metamask",
-          appear: 'Ethereum'
+          className: 'select-wallet__option option-metamask',
+          appear: 'Ethereum',
         },
         {
           type: 'kaikas',
           name: 'Kaikas',
           chain: 'klaytn',
           icon: this.$static.getFileURL('img/logo/logo-kaikas.svg'),
-          className: "select-wallet__option option-kaikas",
-          appear: 'Klaytn'
+          className: 'select-wallet__option option-kaikas',
+          appear: 'Klaytn',
         },
         {
           type: 'klip',
           name: 'Klip',
           chain: 'klaytn',
           icon: this.$static.getFileURL('img/logo/logo-klip.svg'),
-          className: "select-wallet__option option-klip",
-          appear: 'Klaytn'
+          className: 'select-wallet__option option-klip',
+          appear: 'Klaytn',
         },
-      ]
-    }
-  }
-}
+      ];
+    },
+  },
+};

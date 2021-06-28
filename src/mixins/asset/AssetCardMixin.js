@@ -14,7 +14,7 @@ export default {
       if (image) {
         return {
           backgroundImage: `url(${image})`,
-          backgroundSize: "contain",
+          backgroundSize: 'contain',
         };
       }
     },
@@ -24,12 +24,12 @@ export default {
         return {};
       }
 
-      let image = "";
+      let image = '';
 
-      const res = await this.$http.get("collectItem", {
+      const res = await this.$http.get('collectItem', {
         urlQuery: {
-          tokenAddr: info.tokenAddress || "",
-          tokenIds: info.tokenId || "",
+          tokenAddr: info.tokenAddress || '',
+          tokenIds: info.tokenId || '',
         },
       });
 
@@ -40,7 +40,7 @@ export default {
             const d2 = d1[info.tokenId];
             if (d2) {
               const metadata = d2.desc;
-              image = metadata ? metadata.image : "";
+              image = metadata ? metadata.image : '';
             }
           }
         }
@@ -48,7 +48,7 @@ export default {
 
       return {
         backgroundImage: `url(${image})`,
-        backgroundSize: "contain",
+        backgroundSize: 'contain',
       };
     },
   },

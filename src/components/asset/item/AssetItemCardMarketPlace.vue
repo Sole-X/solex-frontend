@@ -2,60 +2,57 @@
   <div class="asset-item-card2" @click="itemClicked">
     <template v-if="!isLoading">
       <div
-          class="asset-item-card2-thumbnail"
-          :style="{
-            'background-image': `url(${isImageLazyloading ? $static.getFileURL('img/thumbnail/thumb-lazyloading.svg') : getItemImgSrc})`,
-            'background-size': 'contain'
-          }"
-          :data-imgsrc="getItemImgSrc"
+        class="asset-item-card2-thumbnail"
+        :style="{
+          'background-image': `url(${
+            isImageLazyloading ? $static.getFileURL('img/thumbnail/thumb-lazyloading.svg') : getItemImgSrc
+          })`,
+          'background-size': 'contain',
+        }"
+        :data-imgsrc="getItemImgSrc"
       >
         <div class="asset-item-card2-thumbnail-header">
           <div class="asset-item-card2-thumbnail-header-left">
             <div v-if="type === 'sell'">
-              <div v-if="isSell" :style="{'background-color': '#edf3fc', 'color': '#66a1ff'}">
+              <div v-if="isSell" :style="{ 'background-color': '#edf3fc', color: '#66a1ff' }">
                 {{ getItemOnOff === 'on' ? $t('Market.LabelSaleOn') : $t('Market.LabelSaleOff') }}
               </div>
-              <div v-else-if="isAuction" :style="{'background-color': '#faf7f2', 'color': '#e66d16'}">
+              <div v-else-if="isAuction" :style="{ 'background-color': '#faf7f2', color: '#e66d16' }">
                 {{ getItemOnOff === 'on' ? $t('Market.LabelAuctionOn') : $t('Market.LabelAuctionOff') }}
               </div>
             </div>
             <div v-else-if="type === 'buy'">
-              <div :style="{'background-color': '#edf3fc', 'color': '#6B7F99'}">
+              <div :style="{ 'background-color': '#edf3fc', color: '#6B7F99' }">
                 {{ getItemOnOff === 'on' ? $t('Market.LabelBuyOn') : $t('Market.LabelBuyOff') }}
               </div>
             </div>
             <div v-else-if="type === 'home'">
-              <div v-if="isBuy" :style="{'background-color': '#edf3fc', 'color': '#6B7F99'}">
+              <div v-if="isBuy" :style="{ 'background-color': '#edf3fc', color: '#6B7F99' }">
                 {{ getItemOnOff === 'on' ? $t('Market.LabelBuyOn') : $t('Market.LabelBuyOff') }}
               </div>
-              <div v-if="isSell" :style="{'background-color': '#edf3fc', 'color': '#66a1ff'}">
+              <div v-if="isSell" :style="{ 'background-color': '#edf3fc', color: '#66a1ff' }">
                 {{ getItemOnOff === 'on' ? $t('Market.LabelSaleOn') : $t('Market.LabelSaleOff') }}
               </div>
-              <div v-if="isAuction" :style="{'background-color': '#faf7f2', 'color': '#e66d16'}">
+              <div v-if="isAuction" :style="{ 'background-color': '#faf7f2', color: '#e66d16' }">
                 {{ getItemOnOff === 'on' ? $t('Market.LabelAuctionOn') : $t('Market.LabelAuctionOff') }}
               </div>
             </div>
           </div>
           <div class="asset-item-card2-thumbnail-header-right">
             <div class="asset-item-card2-thumbnail-header-right-chain">
-              <img v-if="getPlatform === 1" :src="$static.getFileURL('img/icon/ic-chain-ethereum.svg')">
-              <img v-if="getPlatform === 2" :src="$static.getFileURL('img/icon/ic-chain-klaytn.svg')">
+              <img v-if="getPlatform === 1" :src="$static.getFileURL('img/icon/ic-chain-ethereum.svg')" />
+              <img v-if="getPlatform === 2" :src="$static.getFileURL('img/icon/ic-chain-klaytn.svg')" />
             </div>
             <div v-if="options.showHeart" class="asset-item-card2-thumbnail-header-right-heart" @click="heartClicked">
-              <img v-if="isHeart" :src="$static.getFileURL('img/icon/ic-heart-asset-on.svg')">
-              <img v-else :src="$static.getFileURL('img/icon/ic-heart-asset-off.svg')">
+              <img v-if="isHeart" :src="$static.getFileURL('img/icon/ic-heart-asset-on.svg')" />
+              <img v-else :src="$static.getFileURL('img/icon/ic-heart-asset-off.svg')" />
             </div>
           </div>
         </div>
         <footer class="asset-item-card2-thumbnail-footer">
-          <section class="asset-item-card2-thumbnail-footer-left">
-
-          </section>
+          <section class="asset-item-card2-thumbnail-footer-left"></section>
           <section class="asset-item-card2-thumbnail-footer-right">
-            <img
-                v-if="hasVideo(this.item)"
-                :src="$static.getFileURL('img/icon/ic-play-video.svg')"
-            />
+            <img v-if="hasVideo(this.item)" :src="$static.getFileURL('img/icon/ic-play-video.svg')" />
           </section>
         </footer>
       </div>
@@ -71,7 +68,8 @@
             <span>{{ getCurrency.symbol }}</span>
           </div>
           <div class="asset-item-card2-description-footer-usd">
-            $ {{ getItemUsdPrice | addComma }}<div class="item-card-dot" v-if="type==='sell'"></div>
+            $ {{ getItemUsdPrice | addComma }}
+            <div class="item-card-dot" v-if="type === 'sell'"></div>
             <span v-if="getParticipation !== null">{{ getParticipation }} {{ getParticipationString }}</span>
           </div>
         </div>
@@ -80,14 +78,13 @@
 
     <template v-else>
       <div
-          class="asset-item-card2-thumbnail loading"
-          :style="{
-            'background-image': `url(${$static.getFileURL('img/thumbnail/thumb-lazyloading.svg')})`,
-            'background-size': 'contain',
-          }"
-          :data-imgsrc="getItemImgSrc"
-      >
-      </div>
+        class="asset-item-card2-thumbnail loading"
+        :style="{
+          'background-image': `url(${$static.getFileURL('img/thumbnail/thumb-lazyloading.svg')})`,
+          'background-size': 'contain',
+        }"
+        :data-imgsrc="getItemImgSrc"
+      ></div>
       <div class="asset-item-card2-description loading">
         <div class="asset-item-card2-description-header">
           <div class="asset-item-card2-description-header-token"></div>
@@ -113,27 +110,27 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
-let $t, self
+let $t, self;
 
 export default {
   name: 'AssetItemCardMarketPlace',
   props: {
     item: {
-      type: Object
+      type: Object,
     },
     type: {
-      type: String
+      type: String,
     },
-    page : {
-      type: String
+    page: {
+      type: String,
     },
     info: {
       type: Object,
       default() {
         return {
-          currencyInfo: {}
-        }
-      }
+          currencyInfo: {},
+        };
+      },
     },
     options: {
       type: Object,
@@ -141,42 +138,35 @@ export default {
         return {
           showLabel: true,
           showChain: true,
-          showHeart: true
-        }
-      }
+          showHeart: true,
+        };
+      },
     },
     status: {
-      type: String
+      type: String,
     },
   },
 
   created() {
-    self = this
-    $t = this.$t.bind(this)
+    self = this;
+    $t = this.$t.bind(this);
   },
 
-  mounted() {
+  mounted() {},
 
-  },
-
-  beforeDestroy() {
-
-  },
+  beforeDestroy() {},
 
   data() {
     return {
-      isHeart: this.item.like
-    }
+      isHeart: this.item.like,
+    };
   },
 
   computed: {
-    ...mapGetters([
-      'getSupportCurrency',
-      'getSupportNft'
-    ]),
+    ...mapGetters(['getSupportCurrency', 'getSupportNft']),
 
     getItemPrice() {
-      let basePrice = "0";
+      let basePrice = '0';
 
       if (this.type === 'buy') {
         basePrice = this.item.basePrice;
@@ -193,7 +183,7 @@ export default {
     },
 
     getItemUsdPrice() {
-      let usdPrice = "0.00";
+      let usdPrice = '0.00';
 
       if (this.type === 'buy') {
         const price = this.getItemPrice;
@@ -217,7 +207,7 @@ export default {
       const itemCurrencyAddress = this.item ? this.item.currency : null;
 
       if (itemCurrencyAddress) {
-        const itemCurrency = _.find(supportCurrency, row => {
+        const itemCurrency = _.find(supportCurrency, (row) => {
           if (this.$wallet.isSameAddress(row.tokenAddress, itemCurrencyAddress)) return true;
           return false;
         });
@@ -228,8 +218,8 @@ export default {
       return {
         decimal: 18,
         symbol: 'Symbol',
-        toFiat: () => '0'
-      }
+        toFiat: () => '0',
+      };
     },
 
     isImageLazyloading() {
@@ -301,12 +291,12 @@ export default {
     getPlatform() {
       let platform = 0;
       let tokenAddress = this.item.tokenAddress;
-      const supportNft = _.find(this.getSupportNft, row => {
+      const supportNft = _.find(this.getSupportNft, (row) => {
         if (this.$wallet.isSameAddress(row.tokenAddress, tokenAddress)) return true;
         return false;
-      })
+      });
       if (supportNft) {
-        if (supportNft.platform === 'KLAY') platform = 2
+        if (supportNft.platform === 'KLAY') platform = 2;
         else platform = 1;
       }
 
@@ -411,17 +401,13 @@ export default {
     isLoading() {
       if (this.status === 'idle' || this.status === 'pending') return true;
       return false;
-    }
+    },
   },
 
-  watch: {
-
-  },
+  watch: {},
 
   methods: {
-    ...mapActions([
-      'toggleNft'
-    ]),
+    ...mapActions(['toggleNft']),
 
     heartClicked(event) {
       event.preventDefault();
@@ -432,8 +418,8 @@ export default {
 
       return this.toggleNft({
         type: this.isHeart ? 'on' : 'off',
-        tradeId: tradeId
-      })
+        tradeId: tradeId,
+      });
     },
 
     itemClicked() {
@@ -441,16 +427,16 @@ export default {
         return;
       }
 
-      const { type, item } = this
+      const { type, item } = this;
 
       this.$router.push({
         path: `/asset/item/${item.tokenAddress}/${item.tokenId}`,
         query: {
           type,
           tradeId: item.id,
-          like: this.item.like
-        }
-      })
+          like: this.item.like,
+        },
+      });
     },
 
     hasVideo(item) {
@@ -461,8 +447,6 @@ export default {
     },
   },
 
-  components: {
-
-  }
-}
+  components: {},
+};
 </script>

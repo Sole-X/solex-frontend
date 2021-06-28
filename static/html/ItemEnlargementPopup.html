@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title></title>
-        <style type="text/css">
-            #popupContainer {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100vw;
-                height: 100vh;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="popupContainer">
-            <img id="popupImg" src="">
-        </div>
-    </body>
-    <script>
-        const imgElem = document.querySelector('#popupImg');
-        imgElem.src = getUrlQuery().img;
+  <head>
+    <title></title>
+    <style type="text/css">
+      #popupContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="popupContainer">
+      <img id="popupImg" src="" />
+    </div>
+  </body>
+  <script>
+    const imgElem = document.querySelector('#popupImg');
+    imgElem.src = getUrlQuery().img;
 
-        function getUrlQuery() {
-            let query = {};
-            window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { query[key] = value; });
-            return query;
-        }
-    </script>
+    function getUrlQuery() {
+      let query = {};
+      window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (str, key, value) {
+        query[key] = value;
+      });
+      return query;
+    }
+  </script>
 </html>

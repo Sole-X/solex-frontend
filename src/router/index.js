@@ -1,43 +1,43 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-import LandingPage from '@/views/LandingPage.vue'
-import MarketHomePage from '@/views/MarketHomePage'
+import LandingPage from '@/views/LandingPage.vue';
+import MarketHomePage from '@/views/MarketHomePage';
 
 import MarketplaceBuyPage from '@/views/marketplace/MarketplaceBuyPage';
 import MarketplaceSellPage from '@/views/marketplace/MarketplaceSellPage';
 import CollectionPage from '@/views/marketplace/CollectionPage';
 
-import AssetItemPage from '@/views/asset/item/AssetItemPage'
-import AssetItemDescriptionPage from '@/views/asset/item/AssetItemDescriptionPage'
-import AssetItemCollectionPage from '@/views/asset/item/AssetItemCollectionPage'
-import AssetItemChainPage from '@/views/asset/item/AssetItemChainPage'
-import AssetItemHistoryPage from '@/views/asset/item/AssetItemHistoryPage'
+import AssetItemPage from '@/views/asset/item/AssetItemPage';
+import AssetItemDescriptionPage from '@/views/asset/item/AssetItemDescriptionPage';
+import AssetItemCollectionPage from '@/views/asset/item/AssetItemCollectionPage';
+import AssetItemChainPage from '@/views/asset/item/AssetItemChainPage';
+import AssetItemHistoryPage from '@/views/asset/item/AssetItemHistoryPage';
 
-import AssetFormMakeOfferPage from '@/views/asset/form/AssetFormMakeOfferPage'
-import AssetFormNegoPage from '@/views/asset/form/AssetFormNegoPage'
-import AssetFormBidPage from '@/views/asset/form/AssetFormBidPage'
+import AssetFormMakeOfferPage from '@/views/asset/form/AssetFormMakeOfferPage';
+import AssetFormNegoPage from '@/views/asset/form/AssetFormNegoPage';
+import AssetFormBidPage from '@/views/asset/form/AssetFormBidPage';
 
-import UserPage from '@/views/user/UserPage'
-import UserDetailMyInfoPage from '@/views/user/detail/UserDetailMyInfoPage'
-import UserDetailMyItemPage from '@/views/user/detail/UserDetailMyItemPage'
-import UserDetailAssetPage from '@/views/user/detail/UserDetailAssetPage'
-import UserDetailHistoryPage from '@/views/user/detail/UserDetailHistoryPage'
-import UserDetailWatchlistPage from '@/views/user/detail/UserDetailWatchlistPage'
+import UserPage from '@/views/user/UserPage';
+import UserDetailMyInfoPage from '@/views/user/detail/UserDetailMyInfoPage';
+import UserDetailMyItemPage from '@/views/user/detail/UserDetailMyItemPage';
+import UserDetailAssetPage from '@/views/user/detail/UserDetailAssetPage';
+import UserDetailHistoryPage from '@/views/user/detail/UserDetailHistoryPage';
+import UserDetailWatchlistPage from '@/views/user/detail/UserDetailWatchlistPage';
 
-import ExplorerPage from '@/views/explorer/ExplorerPage'
-import ExplorerMainHistoryPage from '@/views/explorer/main/ExplorerMainHistoryPage'
-import ExplorerMainRakingPage from '@/views/explorer/main/ExplorerMainRakingPage'
+import ExplorerPage from '@/views/explorer/ExplorerPage';
+import ExplorerMainHistoryPage from '@/views/explorer/main/ExplorerMainHistoryPage';
+import ExplorerMainRakingPage from '@/views/explorer/main/ExplorerMainRakingPage';
 
-import StakingPage from '@/views/staking/StakingPage'
-import StakingTrixPage from '@/views/staking/detail/StakingTrixPage'
-import StakingMyActivityPage from '@/views/staking/detail/StakingMyActivityPage'
+import StakingPage from '@/views/staking/StakingPage';
+import StakingTrixPage from '@/views/staking/detail/StakingTrixPage';
+import StakingMyActivityPage from '@/views/staking/detail/StakingMyActivityPage';
 
-import RequestSuccessPage from '@/views/RequestSuccessPage'
+import RequestSuccessPage from '@/views/RequestSuccessPage';
 
-import CustomerPrivacyPolicyPage from '@/views/customer/CustomerPrivacyPolicyPage'
-import CustomerUsageTermsPage from '@/views/customer/CustomerUsageTermsPage'
-import CustomerFaqPage from '@/views/customer/CustomerFaqPage'
+import CustomerPrivacyPolicyPage from '@/views/customer/CustomerPrivacyPolicyPage';
+import CustomerUsageTermsPage from '@/views/customer/CustomerUsageTermsPage';
+import CustomerFaqPage from '@/views/customer/CustomerFaqPage';
 
 import CustomerFaqMostPopularPage from '@/views/customer/faq/CustomerFaqMostPopularPage';
 import CustomerFaqGeneralPage from '@/views/customer/faq/CustomerFaqGeneralPage';
@@ -52,14 +52,14 @@ import CustomerFaqSearchPage from '@/views/customer/faq/CustomerFaqSearchPage';
 import CustomerPrivacyPolicy202102 from '@/views/customer/privacyPolicy/CustomerPrivacyPolicy202102';
 import CustomerPrivacyPolicy202103 from '@/views/customer/privacyPolicy/CustomerPrivacyPolicy202103';
 
-import CustomerUsageTerms202102 from '@/views/customer/usageTerms/CustomerUsageTerms202102'
-import CustomerUsageTerms202103 from '@/views/customer/usageTerms/CustomerUsageTerms202103'
+import CustomerUsageTerms202102 from '@/views/customer/usageTerms/CustomerUsageTerms202102';
+import CustomerUsageTerms202103 from '@/views/customer/usageTerms/CustomerUsageTerms202103';
 
 import WalletConnectPage from '@/views/wallet/WalletConnectPage';
 
 import RenderPage from '@/views/render/RenderPage';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const indexPageRoute = {
   path: '/',
@@ -67,38 +67,38 @@ const indexPageRoute = {
   component: LandingPage,
   meta: {
     hideNav: true,
-    hideFooter: true
-  }
-}
+    hideFooter: true,
+  },
+};
 
 const routes = [
   {
     path: '*',
-    redirect: indexPageRoute
+    redirect: indexPageRoute,
   },
   {
-    ...indexPageRoute
+    ...indexPageRoute,
   },
   {
     path: '/home',
     name: 'MarketHomePage',
-    component: MarketHomePage
+    component: MarketHomePage,
   },
   {
     path: '/buy',
     name: 'MarketBuyPage',
     component: MarketplaceBuyPage,
     meta: {
-      hideFooter: true
-    }
+      hideFooter: true,
+    },
   },
   {
     path: '/sell',
     name: 'MarketSellPage',
     component: MarketplaceSellPage,
     meta: {
-      hideFooter: true
-    }
+      hideFooter: true,
+    },
   },
   {
     path: '/collection',
@@ -106,7 +106,7 @@ const routes = [
     component: CollectionPage,
     meta: {
       maxWidth: '1220px',
-    }
+    },
   },
   {
     path: '/asset/item/:tokenAddress/:tokenId',
@@ -119,8 +119,8 @@ const routes = [
         component: AssetItemDescriptionPage,
         meta: {
           tab: 'description',
-          savedPosition: true
-        }
+          savedPosition: true,
+        },
       },
       {
         path: 'collection',
@@ -128,8 +128,8 @@ const routes = [
         component: AssetItemCollectionPage,
         meta: {
           tab: 'collection',
-          savedPosition: true
-        }
+          savedPosition: true,
+        },
       },
       {
         path: 'chain',
@@ -137,8 +137,8 @@ const routes = [
         component: AssetItemChainPage,
         meta: {
           tab: 'chain',
-          savedPosition: true
-        }
+          savedPosition: true,
+        },
       },
       {
         path: 'history',
@@ -146,41 +146,41 @@ const routes = [
         component: AssetItemHistoryPage,
         meta: {
           tab: 'history',
-          savedPosition: true
-        }
-      }
-    ]
+          savedPosition: true,
+        },
+      },
+    ],
   },
   {
     path: '/asset/make-offer/:howTo',
     name: 'AssetFormMakeOfferPage',
     component: AssetFormMakeOfferPage,
     meta: {
-      needLogin: true
-    }
+      needLogin: true,
+    },
   },
   {
     path: '/asset/bid/:tokenAddress/:tokenId',
     name: 'AssetFormBidPage',
     component: AssetFormBidPage,
     meta: {
-      needLogin: true
-    }
+      needLogin: true,
+    },
   },
   {
     path: '/asset/negotiation/:tokenAddress/:tokenId',
     name: 'AssetFormNegoPage',
     component: AssetFormNegoPage,
     meta: {
-      needLogin: true
-    }
+      needLogin: true,
+    },
   },
   {
     path: '/user',
     name: 'UserPage',
     component: UserPage,
     meta: {
-      needLogin: true
+      needLogin: true,
     },
     children: [
       {
@@ -189,8 +189,8 @@ const routes = [
         component: UserDetailMyInfoPage,
         meta: {
           tab: 'info',
-          needLogin: true
-        }
+          needLogin: true,
+        },
       },
       {
         path: 'item',
@@ -198,8 +198,8 @@ const routes = [
         component: UserDetailMyItemPage,
         meta: {
           tab: 'item',
-          needLogin: true
-        }
+          needLogin: true,
+        },
       },
       {
         path: 'asset',
@@ -207,8 +207,8 @@ const routes = [
         component: UserDetailAssetPage,
         meta: {
           tab: 'asset',
-          needLogin: true
-        }
+          needLogin: true,
+        },
       },
       {
         path: 'history',
@@ -216,8 +216,8 @@ const routes = [
         component: UserDetailHistoryPage,
         meta: {
           tab: 'history',
-          needLogin: true
-        }
+          needLogin: true,
+        },
       },
       {
         path: 'watchlist',
@@ -225,17 +225,17 @@ const routes = [
         component: UserDetailWatchlistPage,
         meta: {
           tab: 'watchlist',
-          needLogin: true
-        }
-      }
-    ]
+          needLogin: true,
+        },
+      },
+    ],
   },
   {
     path: '/explorer',
     name: 'ExplorerPage',
     component: ExplorerPage,
     meta: {
-      hideFooter: true
+      hideFooter: true,
     },
     children: [
       {
@@ -244,8 +244,8 @@ const routes = [
         component: ExplorerMainHistoryPage,
         meta: {
           tab: 'history',
-          hideFooter: true
-        }
+          hideFooter: true,
+        },
       },
       {
         path: 'ranking',
@@ -253,10 +253,10 @@ const routes = [
         component: ExplorerMainRakingPage,
         meta: {
           tab: 'ranking',
-          hideFooter: true
-        }
-      }
-    ]
+          hideFooter: true,
+        },
+      },
+    ],
   },
   {
     path: '/staking',
@@ -264,7 +264,7 @@ const routes = [
     component: StakingPage,
     meta: {
       hideFooter: true,
-      needLogin: true
+      needLogin: true,
     },
     children: [
       {
@@ -274,8 +274,8 @@ const routes = [
         meta: {
           tab: 'trix',
           hideFooter: true,
-          needLogin: true
-        }
+          needLogin: true,
+        },
       },
       {
         path: 'activity',
@@ -284,15 +284,15 @@ const routes = [
         meta: {
           tab: 'activity',
           hideFooter: true,
-          needLogin: true
-        }
-      }
-    ]
+          needLogin: true,
+        },
+      },
+    ],
   },
   {
     path: '/request/complete',
     name: 'RequestSuccessPage',
-    component: RequestSuccessPage
+    component: RequestSuccessPage,
   },
   {
     path: '/customer/privacy-policy',
@@ -302,14 +302,14 @@ const routes = [
       {
         path: '202102',
         name: 'CustomerPrivacyPolicy202102',
-        component: CustomerPrivacyPolicy202102
+        component: CustomerPrivacyPolicy202102,
       },
       {
         path: '202103',
         name: 'CustomerPrivacyPolicy202103',
-        component: CustomerPrivacyPolicy202103
+        component: CustomerPrivacyPolicy202103,
       },
-    ]
+    ],
   },
   {
     path: '/customer/usage-terms',
@@ -319,14 +319,14 @@ const routes = [
       {
         path: '202102',
         name: 'CustomerUsageTerms202102',
-        component: CustomerUsageTerms202102
+        component: CustomerUsageTerms202102,
       },
       {
         path: '202103',
         name: 'CustomerUsageTerms202103',
-        component: CustomerUsageTerms202103
-      }
-    ]
+        component: CustomerUsageTerms202103,
+      },
+    ],
   },
   {
     path: '/customer/faq',
@@ -336,75 +336,75 @@ const routes = [
       {
         path: 'popular',
         name: 'CustomerFaqMostPopularPage',
-        component: CustomerFaqMostPopularPage
+        component: CustomerFaqMostPopularPage,
       },
       {
         path: 'general',
         name: 'CustomerFaqGeneralPage',
-        component: CustomerFaqGeneralPage
+        component: CustomerFaqGeneralPage,
       },
       {
         path: 'sale',
         name: 'CustomerFaqSellSalePage',
-        component: CustomerFaqSellSalePage
+        component: CustomerFaqSellSalePage,
       },
       {
         path: 'auction',
         name: 'CustomerFaqSellAuctionPage',
-        component: CustomerFaqSellAuctionPage
+        component: CustomerFaqSellAuctionPage,
       },
       {
         path: 'buy',
         name: 'CustomerFaqBuyPage',
-        component: CustomerFaqBuyPage
+        component: CustomerFaqBuyPage,
       },
       {
         path: 'staking',
         name: 'CustomerFaqStakingPage',
-        component: CustomerFaqStakingPage
+        component: CustomerFaqStakingPage,
       },
       {
         path: 'account',
         name: 'CustomerFaqAccountPage',
-        component: CustomerFaqAccountPage
+        component: CustomerFaqAccountPage,
       },
       {
         path: 'additional',
         name: 'CustomerFaqAdditionalSupportPage',
-        component: CustomerFaqAdditionalSupportPage
+        component: CustomerFaqAdditionalSupportPage,
       },
       {
         path: 'search',
         name: 'CustomerFaqSearchPage',
-        component: CustomerFaqSearchPage
-      }
-    ]
+        component: CustomerFaqSearchPage,
+      },
+    ],
   },
   {
     path: '/wallet/connect',
     name: 'WalletConnectPage',
-    component: WalletConnectPage
+    component: WalletConnectPage,
   },
   {
     path: '/render',
     name: 'RenderPage',
-    component: RenderPage
+    component: RenderPage,
   },
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   routes,
   scrollBehavior(to, from, savedPosition) {
-    if(to.meta.savedPosition) {
-      return
+    if (to.meta.savedPosition) {
+      return;
     }
 
     return {
       x: 0,
-      y: 0
-    }
-  }
-})
+      y: 0,
+    };
+  },
+});
 
-export default router
+export default router;

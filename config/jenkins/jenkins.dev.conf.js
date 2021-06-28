@@ -1,9 +1,7 @@
-const path = require('path')
-const merge = require('webpack-merge')
+const path = require('path');
+const merge = require('webpack-merge');
 
-const jenkinsBase = require('./jenkins.base.conf')
-const baseWebpackPlugin = require('../webpack.base.conf')
+const jenkinsBase = require('./jenkins.base.conf');
+const baseWebpackPlugin = require('../webpack.base.conf');
 
-module.exports = merge(baseWebpackPlugin, jenkinsBase, {
-
-})
+module.exports = merge(baseWebpackPlugin, jenkinsBase, {});

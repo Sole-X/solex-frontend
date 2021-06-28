@@ -11,8 +11,8 @@
 
           <article>
             <div>
-              <h1 class="market-home__tips__article__title">{{tip.title}}</h1>
-              <p class="market-home__tips__article__description">{{tip.article}}</p>
+              <h1 class="market-home__tips__article__title">{{ tip.title }}</h1>
+              <p class="market-home__tips__article__description">{{ tip.article }}</p>
             </div>
           </article>
         </section>
@@ -24,77 +24,73 @@
 </template>
 
 <script>
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'MarketplaceMainTips',
-    created() {
-      component = this
-      $t = this.$t.bind(this)
+export default {
+  name: 'MarketplaceMainTips',
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
+
+  mounted() {},
+
+  beforeDestroy() {},
+
+  data() {
+    return {
+      swiperOptions: {
+        autoplay: {
+          delay: 5000,
+        },
+        pagination: {
+          type: 'bullets',
+          clickable: true,
+          el: '.swiper-pagination',
+        },
+        allowTouchMove: false,
+      },
+    };
+  },
+
+  computed: {
+    getMainTips() {
+      const { getFileURL } = this.$static;
+
+      return [
+        {
+          title: $t('Market.MarketHomeTips1Title'),
+          article: $t('Market.MarketHomeTips1Article'),
+          image: getFileURL('img/article/article-main-tips-1.svg'),
+        },
+        {
+          title: $t('Market.MarketHomeTips2')[0],
+          article: $t('Market.MarketHomeTips2')[1],
+          image: getFileURL('img/article/article-main-tips-2.svg'),
+        },
+        {
+          title: $t('Market.MarketHomeTips3')[0],
+          article: $t('Market.MarketHomeTips3')[1],
+          image: getFileURL('img/article/article-main-tips-3.svg'),
+        },
+        {
+          title: $t('Market.MarketHomeTips4')[0],
+          article: $t('Market.MarketHomeTips4')[1],
+          image: getFileURL('img/article/article-main-tips-4.svg'),
+        },
+        {
+          title: $t('Market.MarketHomeTips5')[0],
+          article: $t('Market.MarketHomeTips5')[1],
+          image: getFileURL('img/article/article-main-tips-5.svg'),
+        },
+      ];
     },
+  },
 
-    mounted() {
+  watch: {},
 
-    },
+  methods: {},
 
-    beforeDestroy() {
-
-    },
-
-    data() {
-      return {
-        swiperOptions: {
-          autoplay: {
-            delay: 5000
-          },
-          pagination: {
-            type: 'bullets',
-            clickable: true,
-            el: '.swiper-pagination'
-          },
-          allowTouchMove: false
-        }
-      }
-    },
-
-    computed: {
-      getMainTips() {
-        const { getFileURL } = this.$static
-
-        return [
-          {
-            title: $t('Market.MarketHomeTips1Title'),
-            article: $t('Market.MarketHomeTips1Article'),
-            image: getFileURL('img/article/article-main-tips-1.svg')
-          },
-          {
-            title: $t('Market.MarketHomeTips2')[0],
-            article: $t('Market.MarketHomeTips2')[1],
-            image: getFileURL('img/article/article-main-tips-2.svg')
-          },
-          {
-            title: $t('Market.MarketHomeTips3')[0],
-            article: $t('Market.MarketHomeTips3')[1],
-            image: getFileURL('img/article/article-main-tips-3.svg')
-          },
-          {
-            title: $t('Market.MarketHomeTips4')[0],
-            article: $t('Market.MarketHomeTips4')[1],
-            image: getFileURL('img/article/article-main-tips-4.svg')
-          },
-          {
-            title: $t('Market.MarketHomeTips5')[0],
-            article: $t('Market.MarketHomeTips5')[1],
-            image: getFileURL('img/article/article-main-tips-5.svg')
-          },
-        ]
-      }
-    },
-
-    watch: {},
-
-    methods: {},
-
-    components: {}
-  }
+  components: {},
+};
 </script>

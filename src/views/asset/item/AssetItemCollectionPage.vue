@@ -7,17 +7,22 @@
 
       <article class="asset-item__collection__description">
         <h5>
-          <strong>{{info.collectionName || '-'}}</strong>
+          <strong>{{ info.collectionName || '-' }}</strong>
         </h5>
         <p>
-          {{  }}
+          {{}}
         </p>
       </article>
     </section>
     <section class="asset-item__collection">
       <article class="asset-item__collection__description">
         <div class="asset-item__collection__description__links">
-          <button class="asset-item__collection__description__link" v-for="option in getItemExternalLinks" :key="option.type" @click="handleClickExternalLink(option)">
+          <button
+            class="asset-item__collection__description__link"
+            v-for="option in getItemExternalLinks"
+            :key="option.type"
+            @click="handleClickExternalLink(option)"
+          >
             <img :src="option.image" :alt="option.type" @click="option.onclick" />
           </button>
         </div>
@@ -27,87 +32,83 @@
 </template>
 
 <script>
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'AssetItemCollectionPage',
-    props: {
-      info: Object,
-      history: Object
-    },
-    created() {
-      component = this
-      $t = this.$t.bind(this)
-    },
+export default {
+  name: 'AssetItemCollectionPage',
+  props: {
+    info: Object,
+    history: Object,
+  },
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
 
-    mounted() {
+  mounted() {},
 
-    },
+  beforeDestroy() {},
 
-    beforeDestroy() {
+  data() {
+    return {};
+  },
 
-    },
+  computed: {
+    getItemExternalLinks() {
+      const { getFileURL } = this.$static;
 
-    data() {
-      return {}
-    },
-
-    computed: {
-      getItemExternalLinks() {
-        const { getFileURL } = this.$static
-
-        return [
-          {
-            type: 'link',
-            image: getFileURL('img/icon/ic-copy-wh.svg'),
-            onclick: () => {
-              // TODO: Link to collection url
-            }
+      return [
+        {
+          type: 'link',
+          image: getFileURL('img/icon/ic-copy-wh.svg'),
+          onclick: () => {
+            // TODO: Link to collection url
           },
-          {
-            type: 'website',
-            image: getFileURL('img/icon/ic-website-wh.svg'),
-            onclick: () => {
-              // TODO: Link to website
-            }
+        },
+        {
+          type: 'website',
+          image: getFileURL('img/icon/ic-website-wh.svg'),
+          onclick: () => {
+            // TODO: Link to website
           },
-          {
-            type: 'discord',
-            image: getFileURL('img/icon/ic-sns-discord-wh.svg'),
-            onclick: () => {
-              // TODO: Link to triumphx's discord channel. (about this collection.)
-            }
+        },
+        {
+          type: 'discord',
+          image: getFileURL('img/icon/ic-sns-discord-wh.svg'),
+          onclick: () => {
+            // TODO: Link to triumphx's discord channel. (about this collection.)
           },
-          {
-            type: 'medium',
-            image: getFileURL('img/icon/ic-medium-collection.svg'),
-            onclick: () => {
-              // TODO: Link to tirumphx's Medium post. (about this collection.)
-            }
+        },
+        {
+          type: 'medium',
+          image: getFileURL('img/icon/ic-medium-collection.svg'),
+          onclick: () => {
+            // TODO: Link to tirumphx's Medium post. (about this collection.)
           },
-          {
-            type: 'twitter',
-            image: getFileURL('img/icon/ic-sns-twitter-wh.svg'),
-            onclick: () => {
-              // TODO: Link to triumphx's twitter message. (about this collection.)
-            }
-          }
-        ]
+        },
+        {
+          type: 'twitter',
+          image: getFileURL('img/icon/ic-sns-twitter-wh.svg'),
+          onclick: () => {
+            // TODO: Link to triumphx's twitter message. (about this collection.)
+          },
+        },
+      ];
+    },
+  },
+
+  watch: {},
+
+  methods: {
+    handleClickExternalLink(option) {
+      if (!option.url) {
+        return;
       }
+
+      window.open(option.url);
     },
+  },
 
-    watch: {},
-
-    methods: {
-      handleClickExternalLink(option) {
-        if(!option.url) {
-          return
-        }
-
-        window.open(option.url)
-      }
-    },
-
-    components: {}
-  }
+  components: {},
+};
 </script>

@@ -18,81 +18,73 @@
 
     <article v-else :class="$bem('gen-modal__submit', ['confirm'], '')">
       <button :class="$bem('common-submit-button', '', ['cancel'])" @click="closeButtonClicked">
-        {{data.confirm.cancel.text}}
+        {{ data.confirm.cancel.text }}
       </button>
 
       <button :class="$bem('common-submit-button', '', ['primary'])" @click="handleConfirm()">
-        {{data.confirm.accept.text}}
+        {{ data.confirm.accept.text }}
       </button>
     </article>
   </section>
 </template>
 
 <script>
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'DialogModal',
-    props: {
-      data: Object,
-      close: Function
-    },
-    created() {
-      component = this
-      $t = this.$t.bind(this)
-    },
+export default {
+  name: 'DialogModal',
+  props: {
+    data: Object,
+    close: Function,
+  },
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
 
-    mounted() {
+  mounted() {},
 
-    },
+  beforeDestroy() {},
 
-    beforeDestroy() {
+  data() {
+    return {};
+  },
 
-    },
-
-    data() {
-      return {
-
+  computed: {
+    getType() {
+      switch (this.data.type) {
+        case 'nameCheck':
+          return 'nameCheck';
+        default:
+          return null;
       }
     },
+  },
 
-    computed: {
-      getType() {
-        switch (this.data.type) {
-          case 'nameCheck':
-            return 'nameCheck';
-          default:
-            return null;
-        }
+  watch: {},
+
+  methods: {
+    handleConfirm() {
+      const { accept } = this.data.confirm;
+
+      if (!accept) {
+        return false;
       }
+
+      accept.callback && accept.callback();
+      this.close();
+
+      return true;
     },
 
-    watch: {
-
+    closeButtonClicked() {
+      setTimeout(() => {
+        this.$eventBus.$emit('retrievedAsset');
+      }, 500);
+      this.close();
     },
+  },
 
-    methods: {
-      handleConfirm() {
-        const { accept } = this.data.confirm
-
-        if(!accept) {
-          return false
-        }
-
-        accept.callback && accept.callback()
-        this.close()
-
-        return true
-      },
-
-      closeButtonClicked() {
-        setTimeout(() => {
-          this.$eventBus.$emit('retrievedAsset');
-        }, 500);
-        this.close();
-      }
-    },
-
-    components: {}
-  }
+  components: {},
+};
 </script>

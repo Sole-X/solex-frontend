@@ -1,7 +1,7 @@
 <template>
   <article class="play-video-modal">
     <header class="play-video-modal-header">
-      <img :src="$static.getFileURL('img/icon/ic-close-gray.svg')" @click="() => close()"/>
+      <img :src="$static.getFileURL('img/icon/ic-close-gray.svg')" @click="() => close()" />
     </header>
     <video controls autoplay loop>
       <source :src="data.videoUrl" />
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-let $t, self
+let $t, self;
 
 export default {
   name: 'PlayVideoModal',
@@ -20,42 +20,28 @@ export default {
 
   props: {
     data: Object,
-    close: Function
+    close: Function,
   },
 
   created() {
-    self = this
-    $t = this.$t.bind(this)
+    self = this;
+    $t = this.$t.bind(this);
   },
 
-  mounted() {
+  mounted() {},
 
-  },
-
-  beforeDestroy() {
-
-  },
+  beforeDestroy() {},
 
   data() {
-    return {
-
-    }
+    return {};
   },
 
-  computed: {
+  computed: {},
 
-  },
+  watch: {},
 
-  watch: {
+  methods: {},
 
-  },
-
-  methods: {
-
-  },
-
-  components: {
-
-  }
-}
+  components: {},
+};
 </script>

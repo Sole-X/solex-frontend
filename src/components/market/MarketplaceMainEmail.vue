@@ -13,7 +13,9 @@
         <section class="market-home-email-input">
           <div v-if="didSubmit === 'idle'" class="market-home-email-input-container idle">
             <input type="email" v-model="email" placeholder="Email address" @keyup.enter="submitButtonClicked" />
-            <button :class="'btn' + (isAvailableEmail(email) ? '' : '-disabled')" @click="submitButtonClicked">SUBMIT</button>
+            <button :class="'btn' + (isAvailableEmail(email) ? '' : '-disabled')" @click="submitButtonClicked">
+              SUBMIT
+            </button>
           </div>
           <div v-else-if="didSubmit === 'pending'" class="pending">
             <common-loader />
@@ -26,11 +28,10 @@
     </section>
     <div class="market-home-email-container-area" />
   </div>
-
 </template>
 
 <script>
-let $t, self
+let $t, self;
 
 export default {
   name: 'MarketplaceMainEmail',
@@ -40,32 +41,24 @@ export default {
   props: [],
 
   created() {
-    self = this
-    $t = this.$t.bind(this)
+    self = this;
+    $t = this.$t.bind(this);
   },
 
-  mounted() {
+  mounted() {},
 
-  },
-
-  beforeDestroy() {
-
-  },
+  beforeDestroy() {},
 
   data() {
     return {
       email: '',
       didSubmit: 'idle',
-    }
+    };
   },
 
-  computed: {
+  computed: {},
 
-  },
-
-  watch: {
-
-  },
+  watch: {},
 
   methods: {
     async submitButtonClicked() {
@@ -77,8 +70,8 @@ export default {
         const result = await this.$http.post('setNewLetterEmail', {
           body: {
             email: this.email,
-          }
-        })
+          },
+        });
 
         if (result.success) {
           // TODO: 성공했을 때의 동작.
@@ -92,20 +85,17 @@ export default {
       }
     },
 
-    isAvailableEmail (str) {
+    isAvailableEmail(str) {
       const reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 
       if (!reg_email.test(str)) {
         return false;
-      }
-      else {
+      } else {
         return true;
       }
-    }
+    },
   },
 
-  components: {
-
-  }
-}
+  components: {},
+};
 </script>

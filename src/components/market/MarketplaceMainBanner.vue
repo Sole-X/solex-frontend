@@ -29,7 +29,7 @@
 let $t, self;
 
 export default {
-  name: "MarketplaceMainBanner",
+  name: 'MarketplaceMainBanner',
   created() {
     self = this;
     $t = this.$t.bind(this);
@@ -47,31 +47,27 @@ export default {
     getBannerList() {
       return [
         {
-          title: "Phoenix Valley",
-          description: [
-            "The freedom and healing of",
-            "colors within the horse",
-          ],
-          link:
-            "https://medium.sole-x.io/sole-x-cross-chain-nft-marketplace-9a958cebe59e",
+          title: 'Phoenix Valley',
+          description: ['The freedom and healing of', 'colors within the horse'],
+          link: 'https://medium.sole-x.io/sole-x-cross-chain-nft-marketplace-9a958cebe59e',
           img: {
-            src: "img/article/article-market-home-banner-launch.jpg",
+            src: 'img/article/article-market-home-banner-launch.jpg',
           },
         },
         {
-          title: "K Museum Contemporary Art",
-          description: ["We Create, Present,", "And Do Magic"],
-          link: "https://www.enftee.com",
+          title: 'K Museum Contemporary Art',
+          description: ['We Create, Present,', 'And Do Magic'],
+          link: 'https://www.enftee.com',
           img: {
-            src: "img/article/article-market-home-banner-enftee.jpg",
+            src: 'img/article/article-market-home-banner-enftee.jpg',
           },
         },
         {
-          title: "TOPNFT.WORLD",
-          description: ["NFT Awards", "Since NFT Deserves fun"],
-          link: "https://www.topnft.world",
+          title: 'TOPNFT.WORLD',
+          description: ['NFT Awards', 'Since NFT Deserves fun'],
+          link: 'https://www.topnft.world',
           img: {
-            src: "img/article/article-market-home-banner-topnft.jpg",
+            src: 'img/article/article-market-home-banner-topnft.jpg',
           },
         },
       ];

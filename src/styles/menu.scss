@@ -1,4 +1,4 @@
-@import "./head";
+@import './head';
 
 .main-menu {
   min-width: 1080px;
@@ -162,7 +162,7 @@
       color: $gen_gray;
       background: {
         position: right center;
-        image: url($public_path+"/img/icon/ic-chevron-bottom-gray.svg");
+        image: url($public_path + '/img/icon/ic-chevron-bottom-gray.svg');
       }
     }
 
@@ -191,7 +191,7 @@
         color: $gen_black;
         background: {
           position: right center;
-          image: url($public_path+"/img/icon/ic-chevron-bottom-black.svg");
+          image: url($public_path + '/img/icon/ic-chevron-bottom-black.svg');
         }
       }
     }
@@ -428,7 +428,7 @@
       }
 
       &::after {
-        content: " ";
+        content: ' ';
         width: 100%;
         height: 4px;
         top: 0;

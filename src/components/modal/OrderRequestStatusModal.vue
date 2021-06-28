@@ -17,45 +17,56 @@
       </div>
       <div v-else></div>
       <div class="order-request-status-modal__header-right">
-        <img @click="() => close()" :src="$static.getFileURL('img/icon/ic-close-gray.svg')" >
+        <img @click="() => close()" :src="$static.getFileURL('img/icon/ic-close-gray.svg')" />
       </div>
     </header>
 
     <article class="gen-modal__content order-request-status-modal__table">
       <div class="order-request-status-modal__thead">
-        <div :class="$bem('order-request-status-modal__tcol', '', [col.type])" v-for="col in getTableHeaders" :key="col.type">
-          {{col.text}}
+        <div
+          :class="$bem('order-request-status-modal__tcol', '', [col.type])"
+          v-for="col in getTableHeaders"
+          :key="col.type"
+        >
+          {{ col.text }}
         </div>
       </div>
 
       <div class="order-request-status-modal__tbody">
         <div class="order-request-status-modal__trow" v-for="(request, i) in getRequestList" :key="request.id">
           <div :class="$bem('order-request-status-modal__tcol', '', ['id'])">
-            {{i + 1}}
+            {{ i + 1 }}
           </div>
 
           <div :class="$bem('order-request-status-modal__tcol', '', ['bidder'])">
-            {{getMaskedAddress(request.account || request.accountAddress)}}
+            {{ getMaskedAddress(request.account || request.accountAddress) }}
           </div>
 
           <div :class="$bem('order-request-status-modal__tcol', '', ['amount'])">
-            {{$bn.toMaxUnit(request.price || request.negoPrice, getCurrencyInfo(request).decimal, 4) | addComma}} {{getCurrencyInfo(request).symbol}}
+            {{ $bn.toMaxUnit(request.price || request.negoPrice, getCurrencyInfo(request).decimal, 4) | addComma }}
+            {{ getCurrencyInfo(request).symbol }}
           </div>
 
           <div :class="$bem('order-request-status-modal__tcol', '', ['date'])">
-            {{$date.formatDate(request.createdAt, 'ymd/hms')}}
+            {{ $date.formatDate(request.createdAt, 'ymd/hms') }}
           </div>
 
           <div v-if="isMakerModal" :class="$bem('order-request-status-modal__tcol', '', ['actions'])">
             <div v-if="request.status === 5 || request.status === 3 || request.status === 8"></div>
             <div v-else-if="request.status === 7"></div>
             <div v-else>
-              <button :class="$bem('order-request-status-modal__tcol', '', ['accept'])" @click="handleAcceptRequest(request)">
-                {{$t('General.Accept')}}
+              <button
+                :class="$bem('order-request-status-modal__tcol', '', ['accept'])"
+                @click="handleAcceptRequest(request)"
+              >
+                {{ $t('General.Accept') }}
               </button>
 
-              <button :class="$bem('order-request-status-modal__tcol', '', ['decline'])" @click="handleDeclineRequest(request)">
-                {{$t('General.Decline')}}
+              <button
+                :class="$bem('order-request-status-modal__tcol', '', ['decline'])"
+                @click="handleDeclineRequest(request)"
+              >
+                {{ $t('General.Decline') }}
               </button>
             </div>
           </div>
@@ -66,139 +77,127 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex';
 
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'OrderRequestStatusModal',
-    props: {
-      data: Object,
-      close: Function
-    },
-    created() {
-      component = this
-      $t = this.$t.bind(this)
-    },
+export default {
+  name: 'OrderRequestStatusModal',
+  props: {
+    data: Object,
+    close: Function,
+  },
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
 
-    mounted() {
+  mounted() {},
 
-    },
+  beforeDestroy() {},
 
-    beforeDestroy() {
+  data() {
+    return {};
+  },
 
-    },
+  computed: {
+    ...mapGetters(['getMaskedAddress', 'getSupportCurrency']),
 
-    data() {
-      return {}
-    },
+    getModalTitle() {},
 
-    computed: {
-      ...mapGetters([
-        'getMaskedAddress',
-          'getSupportCurrency'
-      ]),
+    getTableHeaders() {
+      const result = [
+        {
+          type: 'id',
+          text: $t('General.Number'),
+        },
+        {
+          type: 'bidder',
+          text: $t('Market.Bidder'),
+        },
+        {
+          type: 'amount',
+          text: $t('General.Amount'),
+        },
+        {
+          type: 'date',
+          text: `${$t('General.Date')} (*GMT)`,
+        },
+      ];
 
-      getModalTitle() {
-
-      },
-
-      getTableHeaders() {
-        const result = [
-          {
-            type: 'id',
-            text: $t('General.Number')
-          },
-          {
-            type: 'bidder',
-            text: $t('Market.Bidder')
-          },
-          {
-            type: 'amount',
-            text: $t('General.Amount')
-          },
-          {
-            type: 'date',
-            text: `${$t('General.Date')} (*GMT)`
-          }
-        ]
-
-        if(this.isMakerModal) {
-          result.push({
-            type: 'actions',
-            text: ''
-          })
-        }
-
-        return result
-      },
-
-      // Sell Negotiation 모달인데, 내가 해당 아이템의 주인(=Sell 주문 Maker)인 경우
-      isMakerModal() {
-        const { type, item } = this.data
-
-        return type === 1 && item.isMyWriting
-      },
-
-      getRequestList() {
-        return this.data.requestList;
-      },
-
-      getBasePrice() {
-        let basePrice = '0';
-        if (this.data.item && this.data.item.auction)
-          basePrice = this.data.item.auction.basePrice;
-
-        return this.$bn.toMaxUnit(basePrice, this.data.item.currencyInfo.decimal, 4);
+      if (this.isMakerModal) {
+        result.push({
+          type: 'actions',
+          text: '',
+        });
       }
+
+      return result;
     },
 
-    watch: {},
+    // Sell Negotiation 모달인데, 내가 해당 아이템의 주인(=Sell 주문 Maker)인 경우
+    isMakerModal() {
+      const { type, item } = this.data;
 
-    methods: {
-      ...mapActions([
-        'acceptNegotiation'
-      ]),
+      return type === 1 && item.isMyWriting;
+    },
 
-      async handleAcceptRequest(request) {
-        const { item } = this.data
-        const res = await this.acceptNegotiation({
-          tradeId: item.tradeId,
-          negoMaker: request.accountAddress
-        })
+    getRequestList() {
+      return this.data.requestList;
+    },
 
-        if(!res.success) {
-          return
-        }
+    getBasePrice() {
+      let basePrice = '0';
+      if (this.data.item && this.data.item.auction) basePrice = this.data.item.auction.basePrice;
 
-        return this.close()
-      },
+      return this.$bn.toMaxUnit(basePrice, this.data.item.currencyInfo.decimal, 4);
+    },
+  },
 
-      handleDeclineRequest(request) {
-        this.close()
-        this.showModal({
-          component: 'DeclineNegoModal',
-          params: {
-            item: this.data.item,
-            negoInfo: request
-          }
-        })
-      },
+  watch: {},
 
-      getCurrencyInfo(request) {
-        const supportCurrencies = this.getSupportCurrency;
-        const currency = _.find(supportCurrencies, row => {
-          if (row.tokenAddress === request.currency) return true;
-          return false;
-        })
-        if (currency) return currency;
-        return {
-          decimal: 18,
-          symbol: ''
-        };
+  methods: {
+    ...mapActions(['acceptNegotiation']),
+
+    async handleAcceptRequest(request) {
+      const { item } = this.data;
+      const res = await this.acceptNegotiation({
+        tradeId: item.tradeId,
+        negoMaker: request.accountAddress,
+      });
+
+      if (!res.success) {
+        return;
       }
+
+      return this.close();
     },
 
-    components: {}
-  }
+    handleDeclineRequest(request) {
+      this.close();
+      this.showModal({
+        component: 'DeclineNegoModal',
+        params: {
+          item: this.data.item,
+          negoInfo: request,
+        },
+      });
+    },
+
+    getCurrencyInfo(request) {
+      const supportCurrencies = this.getSupportCurrency;
+      const currency = _.find(supportCurrencies, (row) => {
+        if (row.tokenAddress === request.currency) return true;
+        return false;
+      });
+      if (currency) return currency;
+      return {
+        decimal: 18,
+        symbol: '',
+      };
+    },
+  },
+
+  components: {},
+};
 </script>

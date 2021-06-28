@@ -1,29 +1,29 @@
 <template>
   <article class="asset-item-card-my-page" @click="handleItemClicked">
     <section
-        class="asset-item-card-my-page-thumbnail"
-        :style="{
-          'background-image': `url(${getItemImgSrc})`,
-          'background-size': 'contain',
-          'background-position': 'center center',
-          'background-color': '#fafbfc'
-        }"
+      class="asset-item-card-my-page-thumbnail"
+      :style="{
+        'background-image': `url(${getItemImgSrc})`,
+        'background-size': 'contain',
+        'background-position': 'center center',
+        'background-color': '#fafbfc',
+      }"
     >
       <header class="asset-item-card-my-page-thumbnail-header">
         <div class="asset-item-card-my-page-thumbnail-header-left">
-          <label v-if="getItemType === 'buy'" :style="{'background-color': '#edf3fc', 'color': '#6B7F99'}">
+          <label v-if="getItemType === 'buy'" :style="{ 'background-color': '#edf3fc', color: '#6B7F99' }">
             {{ getItemOnOff === 'on' ? $t('Market.LabelBuyOn') : $t('Market.LabelBuyOff') }}
           </label>
-          <label v-else-if="getItemType === 'sell'" :style="{'background-color': '#edf3fc', 'color': '#66a1ff'}">
+          <label v-else-if="getItemType === 'sell'" :style="{ 'background-color': '#edf3fc', color: '#66a1ff' }">
             {{ getItemOnOff === 'on' ? $t('Market.LabelSaleOn') : $t('Market.LabelSaleOff') }}
           </label>
-          <label v-else-if="getItemType === 'auction'" :style="{'background-color': '#faf7f2', 'color': '#e66d16'}">
+          <label v-else-if="getItemType === 'auction'" :style="{ 'background-color': '#faf7f2', color: '#e66d16' }">
             {{ getItemOnOff === 'on' ? $t('Market.LabelAuctionOn') : $t('Market.LabelAuctionOff') }}
           </label>
         </div>
         <div class="asset-item-card-my-page-thumbnail-header-right">
-          <img v-show="options.showChain" :src="getItemChainIcon" width="20px" :style="{marginRight: '8px'}">
-          <img v-show="options.showHeart" :src="getItemHeartIcon" width="20px" :style="{cursor: 'pointer'}">
+          <img v-show="options.showChain" :src="getItemChainIcon" width="20px" :style="{ marginRight: '8px' }" />
+          <img v-show="options.showHeart" :src="getItemHeartIcon" width="20px" :style="{ cursor: 'pointer' }" />
         </div>
       </header>
     </section>
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-let $t, self
+let $t, self;
 
 export default {
   name: 'AssetItemCardMyPage',
@@ -54,29 +54,25 @@ export default {
         return {
           showLabel: true,
           showChain: true,
-          showHeart: false
-        }
-      }
-    }
+          showHeart: false,
+        };
+      },
+    },
   },
 
   created() {
-    self = this
-    $t = this.$t.bind(this)
+    self = this;
+    $t = this.$t.bind(this);
   },
 
-  mounted() {
+  mounted() {},
 
-  },
-
-  beforeDestroy() {
-
-  },
+  beforeDestroy() {},
 
   data() {
     return {
-      isHeart: this.item.like
-    }
+      isHeart: this.item.like,
+    };
   },
 
   computed: {
@@ -153,12 +149,10 @@ export default {
       } else if (!!this.item.auction) {
         return 'auction';
       }
-    }
+    },
   },
 
-  watch: {
-
-  },
+  watch: {},
 
   methods: {
     handleItemClicked(event) {
@@ -172,18 +166,15 @@ export default {
           query: {
             type: this.getItemType,
             tradeId: tradeId,
-            like: this.item.like
-          }
-        })
+            like: this.item.like,
+          },
+        });
       } else if (tokenAddress && tokenId && !tradeId) {
         // TODO : deposit으로 가게 함.
       }
-
-    }
+    },
   },
 
-  components: {
-
-  }
-}
+  components: {},
+};
 </script>

@@ -1,54 +1,42 @@
 <template>
   <select @change="orderChanged" ref="orderOptions">
-    <option value='DATE'>{{ $t('Market.OrderByNewest') }}</option>
-    <option value='POP'>{{ $t('Market.OrderByPopular') }}</option>
+    <option value="DATE">{{ $t('Market.OrderByNewest') }}</option>
+    <option value="POP">{{ $t('Market.OrderByPopular') }}</option>
     <option value="DATE+">{{ $t('Market.OrderByOldest') }}</option>
-    <option value='PRICE+'>{{ $t('Market.OrderByLowestPrice') }}</option>
-    <option value='PRICE'>{{ $t('Market.OrderByHighestPrice') }}</option>
-    <option value='PARTICIPANT+'>{{ $t('Market.OrderByLowestBid') }}</option>
-    <option value='PARTICIPANT'>{{ $t('Market.OrderByHighestBid') }}</option>
-    <option value='EXPIRE'>{{ $t('Market.OrderByExpiringSoon') }}</option>
+    <option value="PRICE+">{{ $t('Market.OrderByLowestPrice') }}</option>
+    <option value="PRICE">{{ $t('Market.OrderByHighestPrice') }}</option>
+    <option value="PARTICIPANT+">{{ $t('Market.OrderByLowestBid') }}</option>
+    <option value="PARTICIPANT">{{ $t('Market.OrderByHighestBid') }}</option>
+    <option value="EXPIRE">{{ $t('Market.OrderByExpiringSoon') }}</option>
   </select>
 </template>
 
 <script>
-let $t, self
+let $t, self;
 
 export default {
   name: 'MarketplaceOrder',
 
   mixins: [],
 
-  props: [
-      ''
-  ],
+  props: [''],
 
   created() {
-    self = this
-    $t = this.$t.bind(this)
+    self = this;
+    $t = this.$t.bind(this);
   },
 
-  mounted() {
+  mounted() {},
 
-  },
-
-  beforeDestroy() {
-
-  },
+  beforeDestroy() {},
 
   data() {
-    return {
-
-    }
+    return {};
   },
 
-  computed: {
+  computed: {},
 
-  },
-
-  watch: {
-
-  },
+  watch: {},
 
   methods: {
     orderChanged(event, val) {
@@ -80,14 +68,12 @@ export default {
       const sortBy = {
         section: 'order',
         value,
-        appear: () => ''
-      }
+        appear: () => '',
+      };
       this.order = sortBy;
     },
   },
 
-  components: {
-
-  }
-}
+  components: {},
+};
 </script>

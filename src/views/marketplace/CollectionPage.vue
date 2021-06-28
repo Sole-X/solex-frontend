@@ -5,13 +5,14 @@
         {{ $route.query.collection || '' }}
         <img v-if="isWhitelist" :src="$static.getFileURL('img/icon/ic-whitelist-badge.svg')" />
       </div>
-      <div class="collection-page-banner-sub">{{ $route.query.collection || '' }} is ...
+      <div class="collection-page-banner-sub">
+        {{ $route.query.collection || '' }} is ...
         {{ $t('General.LandingPageDescription')[0] }}
         {{ $t('General.LandingPageDescription')[1] }}
       </div>
       <div class="collection-page-banner-icons">
         <div class="collection-page-banner-icons-icon" v-for="icon in getBannerIcons">
-          <img :src="icon.image">
+          <img :src="icon.image" />
         </div>
       </div>
     </section>
@@ -28,15 +29,13 @@
     </section>
     <section class="collection-page-items">
       <header class="collection-page-items-header">
-        <div class="collection-page-items-header-title">
-          Recently Listed
-        </div>
+        <div class="collection-page-items-header-title">Recently Listed</div>
         <div class="collection-page-items-header-more" @click="recentlyMoreClicked">
           <span>전체보기</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8" viewBox="0 0 6 8">
             <g fill="none" fill-rule="evenodd" stroke-linecap="round">
               <g stroke="#C1C5CC" stroke-width="2">
-                <path d="M67 7L67 11 63 11" transform="translate(-1316 -1156) translate(1252 1151) rotate(-45 65 9)"/>
+                <path d="M67 7L67 11 63 11" transform="translate(-1316 -1156) translate(1252 1151) rotate(-45 65 9)" />
               </g>
             </g>
           </svg>
@@ -44,26 +43,24 @@
       </header>
       <main class="collection-page-items-main">
         <asset-item-card-market-place
-            class="collection-page-items-main-item"
-            v-for="item in getRecentlyItems()"
-            :item="item"
-            :key="item.id"
-            :type="'sell'"
-            :status="items.recently.status"
+          class="collection-page-items-main-item"
+          v-for="item in getRecentlyItems()"
+          :item="item"
+          :key="item.id"
+          :type="'sell'"
+          :status="items.recently.status"
         />
       </main>
     </section>
     <section class="collection-page-items">
       <header class="collection-page-items-header">
-        <div class="collection-page-items-header-title">
-          On Sale
-        </div>
+        <div class="collection-page-items-header-title">On Sale</div>
         <div class="collection-page-items-header-more" @click="onSaleMoreClicked">
           <span>전체보기</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8" viewBox="0 0 6 8">
             <g fill="none" fill-rule="evenodd" stroke-linecap="round">
               <g stroke="#C1C5CC" stroke-width="2">
-                <path d="M67 7L67 11 63 11" transform="translate(-1316 -1156) translate(1252 1151) rotate(-45 65 9)"/>
+                <path d="M67 7L67 11 63 11" transform="translate(-1316 -1156) translate(1252 1151) rotate(-45 65 9)" />
               </g>
             </g>
           </svg>
@@ -71,26 +68,24 @@
       </header>
       <main class="collection-page-items-main">
         <asset-item-card-market-place
-            class="collection-page-items-main-item"
-            v-for="item in getOnSaleItems()"
-            :item="item"
-            :key="item.id"
-            :type="'sell'"
-            :status="items.onSale.status"
+          class="collection-page-items-main-item"
+          v-for="item in getOnSaleItems()"
+          :item="item"
+          :key="item.id"
+          :type="'sell'"
+          :status="items.onSale.status"
         />
       </main>
     </section>
     <section class="collection-page-items">
       <header class="collection-page-items-header">
-        <div class="collection-page-items-header-title">
-          On Auction
-        </div>
+        <div class="collection-page-items-header-title">On Auction</div>
         <div class="collection-page-items-header-more" @click="onAuctionMoreClicked">
           <span>전체보기</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="6" height="8" viewBox="0 0 6 8">
             <g fill="none" fill-rule="evenodd" stroke-linecap="round">
               <g stroke="#C1C5CC" stroke-width="2">
-                <path d="M67 7L67 11 63 11" transform="translate(-1316 -1156) translate(1252 1151) rotate(-45 65 9)"/>
+                <path d="M67 7L67 11 63 11" transform="translate(-1316 -1156) translate(1252 1151) rotate(-45 65 9)" />
               </g>
             </g>
           </svg>
@@ -98,12 +93,12 @@
       </header>
       <main class="collection-page-items-main">
         <asset-item-card-market-place
-            class="collection-page-items-main-item"
-            v-for="item in getOnAuctionItems()"
-            :item="item"
-            :key="item.id"
-            :type="'sell'"
-            :status="items.onAuction.status"
+          class="collection-page-items-main-item"
+          v-for="item in getOnAuctionItems()"
+          :item="item"
+          :key="item.id"
+          :type="'sell'"
+          :status="items.onAuction.status"
         />
       </main>
     </section>
@@ -113,7 +108,7 @@
 <script>
 import AssetItemCardMarketPlace from '@/components/asset/item/AssetItemCardMarketPlace';
 import { mapGetters } from 'vuex';
-let $t, self
+let $t, self;
 let io;
 
 export default {
@@ -124,12 +119,12 @@ export default {
   props: [],
 
   created() {
-    self = this
-    $t = this.$t.bind(this)
+    self = this;
+    $t = this.$t.bind(this);
 
     // 이미지 스크롤에 따른 레이지 로딩을 위해.
-    io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
+    io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.intersectionRatio > 0) {
           if (entry.target.hasChildNodes()) {
             const elem = entry.target.childNodes[0];
@@ -142,7 +137,7 @@ export default {
         } else {
           // in current, no action.
         }
-      })
+      });
     });
   },
 
@@ -151,14 +146,12 @@ export default {
   },
 
   updated() {
-    if (this.items.recently.list.length > 0 ) {
+    if (this.items.recently.list.length > 0) {
       this.imageLazyLoading();
     }
   },
 
-  beforeDestroy() {
-
-  },
+  beforeDestroy() {},
 
   data() {
     return {
@@ -182,15 +175,13 @@ export default {
         onAuction: {
           status: 'idle',
           list: [],
-        }
-      }
-    }
+        },
+      },
+    };
   },
 
   computed: {
-    ...mapGetters([
-        'getSupportNft'
-    ]),
+    ...mapGetters(['getSupportNft']),
 
     getBannerIcons() {
       const { getFileURL } = this.$static;
@@ -200,48 +191,48 @@ export default {
           image: getFileURL('img/icon/ic-copy-wh.svg'),
           onclick: () => {
             // TODO: Link to collection url
-          }
+          },
         },
         {
           name: 'website',
           image: getFileURL('img/icon/ic-website-wh.svg'),
           onclick: () => {
             // TODO: Link to website
-          }
+          },
         },
         {
           name: 'discord',
           image: getFileURL('img/icon/ic-sns-discord-wh.svg'),
           onclick: () => {
             // TODO: Link to triumphx's discord channel. (about this collection.)
-          }
+          },
         },
         {
           name: 'medium',
           image: getFileURL('img/icon/ic-medium-collection.svg'),
           onclick: () => {
             // TODO: Link to tirumphx's Medium post. (about this collection.)
-          }
+          },
         },
         {
           name: 'twitter',
           image: getFileURL('img/icon/ic-sns-twitter-wh.svg'),
           onclick: () => {
             // TODO: Link to triumphx's twitter message. (about this collection.)
-          }
+          },
         },
       ];
     },
 
     isWhitelist() {
-      const collection = _.find(this.getSupportNft, nft => {
+      const collection = _.find(this.getSupportNft, (nft) => {
         if (this.$wallet.isSameAddress(nft.tokenAddress, this.$route.query.collectionAddress)) return true;
         return false;
       });
 
       if (collection) return true;
       return false;
-    }
+    },
   },
 
   watch: {
@@ -303,8 +294,8 @@ export default {
       try {
         result = await this.$http.get('getCollectionInfo', {
           urlParams: {
-            collectionAddr: collectionAddress
-          }
+            collectionAddr: collectionAddress,
+          },
         });
       } catch (e) {
         this.amount.status = 'idle';
@@ -327,8 +318,8 @@ export default {
         result = await this.$http.get('getLatestNft', {
           urlQuery: {
             collection: collectionAddress,
-            limit: 5
-          }
+            limit: 5,
+          },
         });
       } catch (e) {
         this.items.recently.status = 'idle';
@@ -350,7 +341,7 @@ export default {
             limit: 5,
             status: 'SELL',
             lifeStatus: 'START',
-          }
+          },
         });
       } catch (e) {
         this.items.onSale.status = 'idle';
@@ -372,7 +363,7 @@ export default {
             limit: 5,
             status: 'AUCTION',
             lifeStatus: 'START',
-          }
+          },
         });
       } catch (e) {
         this.items.onAuction.status = 'idle';
@@ -384,7 +375,6 @@ export default {
       } else {
         this.items.onAuction.status = 'idle';
       }
-
     },
 
     getBalanceItems() {
@@ -412,7 +402,7 @@ export default {
             value: '-',
             name: 'Volume Traded',
           },
-        ]
+        ];
       }
 
       const amount = {
@@ -421,7 +411,7 @@ export default {
         owners: this.amount.owners,
         averagePrice: this.amount.averagePrice,
         volumeTraded: this.amount.volumeTraded,
-      }
+      };
 
       for (const key in amount) {
         const value = String(amount[key]);
@@ -465,7 +455,7 @@ export default {
           value: amount.volumeTraded,
           name: 'Volume Traded',
         },
-      ]
+      ];
     },
 
     getRecentlyItems() {
@@ -486,7 +476,7 @@ export default {
           {
             id: 'recently5',
           },
-        ]
+        ];
       }
       return this.items.recently.list;
     },
@@ -509,7 +499,7 @@ export default {
           {
             id: 'onSale5',
           },
-        ]
+        ];
       }
       return this.items.onSale.list;
     },
@@ -532,7 +522,7 @@ export default {
           {
             id: 'onAuction5',
           },
-        ]
+        ];
       }
       return this.items.onAuction.list;
     },
@@ -541,7 +531,7 @@ export default {
       const imageElemList = document.querySelectorAll('.asset-item-card2');
       imageElemList.forEach((elem) => {
         io.observe(elem);
-      })
+      });
     },
 
     recentlyMoreClicked() {
@@ -549,8 +539,8 @@ export default {
         path: '/sell',
         query: {
           collections: this.$route.query.collection,
-        }
-      })
+        },
+      });
     },
 
     onSaleMoreClicked() {
@@ -559,8 +549,8 @@ export default {
         query: {
           collections: this.$route.query.collection,
           status: 'SALES',
-        }
-      })
+        },
+      });
     },
 
     onAuctionMoreClicked() {
@@ -569,13 +559,13 @@ export default {
         query: {
           collections: this.$route.query.collection,
           status: 'AUCTIONS',
-        }
-      })
+        },
+      });
     },
   },
 
   components: {
-    AssetItemCardMarketPlace
-  }
-}
+    AssetItemCardMarketPlace,
+  },
+};
 </script>

@@ -8,53 +8,49 @@
 </template>
 
 <script>
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'CommonLoader',
-    props: {
-      size: {
-        type: Number,
-        default() {
-          return 48
-        }
+export default {
+  name: 'CommonLoader',
+  props: {
+    size: {
+      type: Number,
+      default() {
+        return 48;
       },
-      color: String
     },
-    created() {
-      component = this
-      $t = this.$t.bind(this)
-    },
+    color: String,
+  },
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
 
-    mounted() {
+  mounted() {},
 
-    },
+  beforeDestroy() {},
 
-    beforeDestroy() {
+  data() {
+    return {};
+  },
 
-    },
+  computed: {
+    getLoaderClasses() {
+      const { color, size } = this;
+      const result = [size];
 
-    data() {
-      return {}
-    },
-
-    computed: {
-      getLoaderClasses() {
-        const { color, size } = this
-        const result = [size]
-
-        if(color) {
-          result.push(color)
-        }
-
-        return result
+      if (color) {
+        result.push(color);
       }
+
+      return result;
     },
+  },
 
-    watch: {},
+  watch: {},
 
-    methods: {},
+  methods: {},
 
-    components: {}
-  }
+  components: {},
+};
 </script>

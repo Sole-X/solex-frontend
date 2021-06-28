@@ -1,9 +1,7 @@
 <template>
   <div class="klip-login-modal">
     <div class="klip-login-modal__header">
-      <div class="klip-login-modal__header__title">
-        Scan to Connect
-      </div>
+      <div class="klip-login-modal__header__title">Scan to Connect</div>
     </div>
 
     <div class="klip-login-modal__content">
@@ -14,7 +12,7 @@
       </section>
       <section>
         <div class="klip-login-modal__content__logo">
-          <img :src="$static.getFileURL('img/logo/logo-klip.svg')" width="40px">
+          <img :src="$static.getFileURL('img/logo/logo-klip.svg')" width="40px" />
         </div>
         <div class="klip-login-modal__content__explain">
           QR코드 리더기 혹은 카카오톡 앱 > 더보기 > 우측 상단의 스캔 아이콘을 눌러 QR코드를 스캔해 주세요.
@@ -25,9 +23,9 @@
 </template>
 
 <script>
-import Store from "@/store";
+import Store from '@/store';
 
-let $t, self
+let $t, self;
 import { mapGetters, mapActions } from 'vuex';
 import QRCode from 'qrcode';
 
@@ -36,12 +34,12 @@ export default {
 
   props: {
     data: Object,
-    close: Function
+    close: Function,
   },
 
   created() {
-    self = this
-    $t = this.$t.bind(this)
+    self = this;
+    $t = this.$t.bind(this);
   },
 
   mounted() {
@@ -60,8 +58,7 @@ export default {
         QRCode.toCanvas(canvas, webStr, (err) => {
           if (err) console.error(err);
           // Log('success');
-        })
-
+        });
       }
     })();
   },
@@ -71,38 +68,27 @@ export default {
   },
 
   data() {
-    return {
-
-    }
+    return {};
   },
 
   computed: {
-    ...mapGetters([
-        'getRequestKey',
-        'getIsAccessing'
-    ])
+    ...mapGetters(['getRequestKey', 'getIsAccessing']),
   },
 
   watch: {
-    getRequestKey: function (newVal, oldVal) {
-
-    },
+    getRequestKey: function (newVal, oldVal) {},
 
     getIsAccessing: function (newVal, oldVal) {
       if (newVal === false) {
         this.close();
       }
-    }
+    },
   },
 
   methods: {
-    ...mapActions([
-        'closeModal'
-    ])
+    ...mapActions(['closeModal']),
   },
 
-  components: {
-
-  }
-}
+  components: {},
+};
 </script>

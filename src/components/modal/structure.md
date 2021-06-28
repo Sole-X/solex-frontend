@@ -1,9 +1,11 @@
 # components/modal
 
 ### component func.
+
     파일 이름으로 유추 가능.
 
 ### modal list
+
 1. AboutMyOfferModal.vue
 2. BaseModal.vue
 3. CheckoutModal.vue

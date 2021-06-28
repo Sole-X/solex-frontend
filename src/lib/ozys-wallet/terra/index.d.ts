@@ -1,1 +1,1 @@
-export declare const name = "Terra";
+export declare const name = 'Terra';

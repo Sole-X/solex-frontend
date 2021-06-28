@@ -1,13 +1,14 @@
 @import './head';
 
 #modals-container {
-  >div {
+  > div {
     @include full-fixed;
     @include center-align-flex;
     z-index: 999 !important;
     background: $gen_modal_bg;
 
-    .vm--overlay, .vm--modal {
+    .vm--overlay,
+    .vm--modal {
       width: 100% !important;
       height: 100% !important;
       top: 0 !important;
@@ -108,7 +109,7 @@
   .gen-modal__form {
     @include center-align-flex;
 
-    >div {
+    > div {
       width: 100%;
     }
 
@@ -231,11 +232,12 @@
   position: absolute;
   background: {
     position: center;
-    image: url($public_path + "/img/icon/ic-modal-close.svg");
+    image: url($public_path + '/img/icon/ic-modal-close.svg');
   }
 
-  &:hover, &:active {
-    background-image: url($public_path + "/img/icon/ic-modal-close-hover.svg");
+  &:hover,
+  &:active {
+    background-image: url($public_path + '/img/icon/ic-modal-close-hover.svg');
   }
 }
 
@@ -256,7 +258,7 @@
     height: 90px;
     align-items: flex-start;
 
-    >div {
+    > div {
       width: 100%;
       text-align: center;
     }
@@ -282,7 +284,8 @@
       margin-right: 0;
     }
 
-    &:hover, &:active {
+    &:hover,
+    &:active {
       border-color: $primary_color;
       transition: all 0.2s ease-out;
     }
@@ -445,7 +448,6 @@
     div.order-request-status-modal__header-left {
       span {
         &:nth-child(1) {
-
         }
 
         &:nth-child(2) {
@@ -526,7 +528,7 @@
         }
 
         &--actions {
-          >div {
+          > div {
             @include square(100%);
             @include center-align-flex;
 
@@ -683,7 +685,6 @@
           color: #00b2e4;
         }
 
-
         &__fiat {
           color: $gen_gray;
         }
@@ -768,7 +769,8 @@
     height: 48px;
   }
 
-  .gen-modal__submit, .gen-modal__submit-wrap {
+  .gen-modal__submit,
+  .gen-modal__submit-wrap {
     width: calc(100% - 50px);
     left: 25px;
   }
@@ -782,7 +784,7 @@
     margin-bottom: 40px;
     width: 100%;
 
-    .share-content__option__nouse{
+    .share-content__option__nouse {
       cursor: not-allowed;
       background: #dee3eb;
     }
@@ -1061,12 +1063,13 @@
       }
     }
 
-    &--balance, &--token {
+    &--balance,
+    &--token {
       .reserve-input-modal__form__input {
         padding: 0px 16px;
         justify-content: flex-start;
 
-        >span:nth-child(2) {
+        > span:nth-child(2) {
           margin-left: 4px;
         }
       }
@@ -1149,7 +1152,7 @@
     .reserve-input-modal__agree-terms__check {
       @include vertical-align-flex;
 
-      >div {
+      > div {
         @include full-circle(16px);
         @include center-align-flex;
         background: #fafbfc;
@@ -1266,7 +1269,7 @@
       font-size: 20px;
       font-weight: 500;
       color: #333333;
-      margin-bottom: 10px
+      margin-bottom: 10px;
     }
   }
 
@@ -1468,7 +1471,7 @@
   height: 90vh;
   max-width: 960px;
   max-height: 960px;
-  margin : 0 8%;
+  margin: 0 8%;
 
   .play-video-modal-header {
     display: flex;

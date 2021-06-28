@@ -2,7 +2,6 @@
 
 @import 'head';
 
-
 .common-loader {
   @include center-align-flex;
 
@@ -18,7 +17,7 @@
     animation: common-loader__spinner 1.2s linear infinite;
   }
   .common-loader__spinner div:after {
-    content: " ";
+    content: ' ';
     display: block;
     position: absolute;
     top: 2px;

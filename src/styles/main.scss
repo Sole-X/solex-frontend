@@ -104,7 +104,8 @@
             font-weight: bold;
           }
 
-          p:nth-child(1), p:nth-child(2) {
+          p:nth-child(1),
+          p:nth-child(2) {
             color: $gen_black;
           }
 

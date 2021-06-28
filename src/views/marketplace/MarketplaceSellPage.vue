@@ -22,7 +22,7 @@
     <div class="marketplace-sell-items" ref="sellItemsContainer">
       <header class="marketplace-sell-items-header">
         <div class="marketplace-sell-items-header-top">
-          {{ $t('Market.ResultNum', {total: total}) }}
+          {{ $t('Market.ResultNum', { total: total }) }}
         </div>
         <div class="marketplace-sell-items-header-bottom">
           <div class="marketplace-sell-items-header-bottom-select">
@@ -31,29 +31,67 @@
             </div>
             <div class="marketplace-sell-items-header-bottom-select-options" ref="selectOption" v-show="showSelectBox">
               <ul v-if="(!isSellCurStatus && !isAuctionCurStatus) || (isSellCurStatus && isAuctionCurStatus)">
-                <li data-value='DATE' data-appear='Market.OrderByNewest' @click="optionClicked">{{ $t('Market.OrderByNewest') }}</li>
-                <li data-value='POP' data-appear='Market.OrderByPopular' @click="optionClicked">{{ $t('Market.OrderByPopular') }}</li>
-                <li data-value="DATE~" data-appear='Market.OrderByOldest' @click="optionClicked">{{ $t('Market.OrderByOldest') }}</li>
-                <li data-value='PRICE~' data-appear='Market.OrderByLowestPrice' @click="optionClicked">{{ $t('Market.OrderByLowestPrice') }}</li>
-                <li data-value='PRICE' data-appear='Market.OrderByHighestPrice' @click="optionClicked">{{ $t('Market.OrderByHighestPrice') }}</li>
-                <li data-value='PARTICIPANT~' data-appear='Market.OrderByLowestBid' @click="optionClicked">{{ $t('Market.OrderByLowestBid') }}</li>
-                <li data-value='PARTICIPANT' data-appear='Market.OrderByHighestBid' @click="optionClicked">{{ $t('Market.OrderByHighestBid') }}</li>
-                <li data-value='EXPIRE' data-appear='Market.OrderByExpiringSoon' @click="optionClicked">{{ $t('Market.OrderByExpiringSoon') }}</li>
+                <li data-value="DATE" data-appear="Market.OrderByNewest" @click="optionClicked">
+                  {{ $t('Market.OrderByNewest') }}
+                </li>
+                <li data-value="POP" data-appear="Market.OrderByPopular" @click="optionClicked">
+                  {{ $t('Market.OrderByPopular') }}
+                </li>
+                <li data-value="DATE~" data-appear="Market.OrderByOldest" @click="optionClicked">
+                  {{ $t('Market.OrderByOldest') }}
+                </li>
+                <li data-value="PRICE~" data-appear="Market.OrderByLowestPrice" @click="optionClicked">
+                  {{ $t('Market.OrderByLowestPrice') }}
+                </li>
+                <li data-value="PRICE" data-appear="Market.OrderByHighestPrice" @click="optionClicked">
+                  {{ $t('Market.OrderByHighestPrice') }}
+                </li>
+                <li data-value="PARTICIPANT~" data-appear="Market.OrderByLowestBid" @click="optionClicked">
+                  {{ $t('Market.OrderByLowestBid') }}
+                </li>
+                <li data-value="PARTICIPANT" data-appear="Market.OrderByHighestBid" @click="optionClicked">
+                  {{ $t('Market.OrderByHighestBid') }}
+                </li>
+                <li data-value="EXPIRE" data-appear="Market.OrderByExpiringSoon" @click="optionClicked">
+                  {{ $t('Market.OrderByExpiringSoon') }}
+                </li>
               </ul>
               <ul v-else-if="isSellCurStatus">
-                <li data-value='DATE' data-appear='Market.OrderByNewest' @click="optionClicked">{{ $t('Market.OrderByNewest') }}</li>
-                <li data-value='POP' data-appear='Market.OrderByPopular' @click="optionClicked">{{ $t('Market.OrderByPopular') }}</li>
-                <li data-value='PRICE~' data-appear='Market.OrderByLowestPrice' @click="optionClicked">{{ $t('Market.OrderByLowestPrice') }}</li>
-                <li data-value='PRICE' data-appear='Market.OrderByHighestPrice' @click="optionClicked">{{ $t('Market.OrderByHighestPrice') }}</li>
+                <li data-value="DATE" data-appear="Market.OrderByNewest" @click="optionClicked">
+                  {{ $t('Market.OrderByNewest') }}
+                </li>
+                <li data-value="POP" data-appear="Market.OrderByPopular" @click="optionClicked">
+                  {{ $t('Market.OrderByPopular') }}
+                </li>
+                <li data-value="PRICE~" data-appear="Market.OrderByLowestPrice" @click="optionClicked">
+                  {{ $t('Market.OrderByLowestPrice') }}
+                </li>
+                <li data-value="PRICE" data-appear="Market.OrderByHighestPrice" @click="optionClicked">
+                  {{ $t('Market.OrderByHighestPrice') }}
+                </li>
               </ul>
               <ul v-else-if="isAuctionCurStatus">
-                <li data-value='DATE' data-appear='Market.OrderByNewest' @click="optionClicked">{{ $t('Market.OrderByNewest') }}</li>
-                <li data-value='POP' data-appear='Market.OrderByPopular' @click="optionClicked">{{ $t('Market.OrderByPopular') }}</li>
-                <li data-value='PRICE~' data-appear='Market.OrderByLowestPrice' @click="optionClicked">{{ $t('Market.OrderByLowestPrice') }}</li>
-                <li data-value='PRICE' data-appear='Market.OrderByHighestPrice' @click="optionClicked">{{ $t('Market.OrderByHighestPrice') }}</li>
-                <li data-value='PARTICIPANT~' data-appear='Market.OrderByLowestBid' @click="optionClicked">{{ $t('Market.OrderByLowestBid') }}</li>
-                <li data-value='PARTICIPANT' data-appear='Market.OrderByHighestBid' @click="optionClicked">{{ $t('Market.OrderByHighestBid') }}</li>
-                <li data-value='EXPIRE' data-appear='Market.OrderByExpiringSoon' @click="optionClicked">{{ $t('Market.OrderByExpiringSoon') }}</li>
+                <li data-value="DATE" data-appear="Market.OrderByNewest" @click="optionClicked">
+                  {{ $t('Market.OrderByNewest') }}
+                </li>
+                <li data-value="POP" data-appear="Market.OrderByPopular" @click="optionClicked">
+                  {{ $t('Market.OrderByPopular') }}
+                </li>
+                <li data-value="PRICE~" data-appear="Market.OrderByLowestPrice" @click="optionClicked">
+                  {{ $t('Market.OrderByLowestPrice') }}
+                </li>
+                <li data-value="PRICE" data-appear="Market.OrderByHighestPrice" @click="optionClicked">
+                  {{ $t('Market.OrderByHighestPrice') }}
+                </li>
+                <li data-value="PARTICIPANT~" data-appear="Market.OrderByLowestBid" @click="optionClicked">
+                  {{ $t('Market.OrderByLowestBid') }}
+                </li>
+                <li data-value="PARTICIPANT" data-appear="Market.OrderByHighestBid" @click="optionClicked">
+                  {{ $t('Market.OrderByHighestBid') }}
+                </li>
+                <li data-value="EXPIRE" data-appear="Market.OrderByExpiringSoon" @click="optionClicked">
+                  {{ $t('Market.OrderByExpiringSoon') }}
+                </li>
               </ul>
             </div>
           </div>
@@ -70,11 +108,11 @@
       <main class="marketplace-sell-items-contents">
         <template v-if="getDataLoaded">
           <asset-item-card-market-place
-              class="marketplace-sell-items-contents-image"
-              v-for="item in items"
-              :item="item"
-              :key="item.primaryKey"
-              :type="'sell'"
+            class="marketplace-sell-items-contents-image"
+            v-for="item in items"
+            :item="item"
+            :key="item.primaryKey"
+            :type="'sell'"
           />
         </template>
         <template v-else>
@@ -91,12 +129,12 @@
 <script>
 import AssetItemCardMarketPlace from '@/components/asset/item/AssetItemCardMarketPlace';
 import MarketplaceFilterMarketPlace from '@/components/market/MarketplaceFilterMarketPlace';
-import MarketplaceMixin from "@/mixins/marketplace/MarketplaceMixin";
-import MainFooter from '@/components/menu/MainFooter'
+import MarketplaceMixin from '@/mixins/marketplace/MarketplaceMixin';
+import MainFooter from '@/components/menu/MainFooter';
 import { mapGetters } from 'vuex';
-import axios from "axios";
+import axios from 'axios';
 
-let $t, self
+let $t, self;
 let scrollEvent, clickEvent;
 let io;
 
@@ -106,11 +144,11 @@ export default {
   mixins: [MarketplaceMixin],
 
   created() {
-    self = this
-    $t = this.$t.bind(this)
+    self = this;
+    $t = this.$t.bind(this);
 
-    io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
+    io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
         if (entry.intersectionRatio > 0) {
           if (entry.target.hasChildNodes()) {
             const elem = entry.target.childNodes[0];
@@ -123,30 +161,29 @@ export default {
         } else {
           // in current, no action.
         }
-      })
+      });
     });
-
   },
 
   mounted() {
     this.initPage();
 
     this.scrollEvent = _.debounce(() => {
-        const height = this.getWindowInfo.height;
-        const scrollTop = this.getWindowInfo.scrollTop;
-        if (this.$refs['marketplace-sell']) {
-          const marketplaceSellHeight = this.$refs['marketplace-sell'].offsetHeight;
+      const height = this.getWindowInfo.height;
+      const scrollTop = this.getWindowInfo.scrollTop;
+      if (this.$refs['marketplace-sell']) {
+        const marketplaceSellHeight = this.$refs['marketplace-sell'].offsetHeight;
 
-          if (height + scrollTop >= marketplaceSellHeight - 160) {
-            this.moreClicked();
-          }
+        if (height + scrollTop >= marketplaceSellHeight - 160) {
+          this.moreClicked();
         }
-      }, 50);
+      }
+    }, 50);
     this.clickEvent = (event) => {
       if (!this.$refs.selectBox.contains(event.target) && !this.$refs.selectOption.contains(event.target)) {
         this.showSelectBox = false;
       }
-    }
+    };
     window.addEventListener('scroll', this.scrollEvent);
     window.addEventListener('click', this.clickEvent);
   },
@@ -171,18 +208,16 @@ export default {
       items: [],
       order: {
         section: 'order',
-        value: 'POP'
+        value: 'POP',
       },
       curStatus: [],
       selectedOption: () => $t('Market.SelectOrder'),
-      showSelectBox: false
-    }
+      showSelectBox: false,
+    };
   },
 
   computed: {
-    ...mapGetters([
-        'getItems',
-    ]),
+    ...mapGetters(['getItems']),
 
     getDataLoaded() {
       return this.dataLoaded;
@@ -208,12 +243,10 @@ export default {
         }
       }
       return flag;
-    }
+    },
   },
 
-  watch: {
-
-  },
+  watch: {},
 
   methods: {
     async initPage() {
@@ -288,8 +321,8 @@ export default {
       const sortBy = {
         section: 'order',
         value,
-        appear: () => ''
-      }
+        appear: () => '',
+      };
       this.order = sortBy;
     },
 
@@ -307,7 +340,7 @@ export default {
       const imageElemList = document.querySelectorAll('.marketplace-sell-items-contents-image');
       imageElemList.forEach((elem) => {
         io.observe(elem);
-      })
+      });
     },
 
     selectBoxClicked() {
@@ -331,7 +364,7 @@ export default {
   components: {
     AssetItemCardMarketPlace,
     MarketplaceFilterMarketPlace,
-    MainFooter
-  }
-}
+    MainFooter,
+  },
+};
 </script>

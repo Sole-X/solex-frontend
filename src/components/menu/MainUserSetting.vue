@@ -7,7 +7,7 @@
 
       <div class="main-user-setting__header__info">
         <div class="main-user-setting__header__info__address">
-          <p>{{getMaskedAddress(getUserInfo.address)}}</p>
+          <p>{{ getMaskedAddress(getUserInfo.address) }}</p>
           <button v-clipboard:copy="getUserInfo.address" v-clipboard:success="$_GlobalValueMixin_showCopyTooltip">
             <img :src="$static.getFileURL('img/icon/ic-copy-gray.svg')" />
           </button>
@@ -26,7 +26,7 @@
       <ul>
         <li v-for="menu in getMainMenu" :key="menu.path">
           <router-link :to="{ path: menu.path }">
-            <span>{{menu.title}}</span>
+            <span>{{ menu.title }}</span>
             <img :src="$static.getFileURL('img/icon/ic-chevron-right-gray.svg')" alt="chevron to right" class="v-m" />
           </router-link>
         </li>
@@ -42,104 +42,99 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
-  import axios from "axios";
+import { mapActions, mapGetters } from 'vuex';
+import axios from 'axios';
 
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'MainUserSetting',
-    created() {
-      component = this
-      $t = this.$t.bind(this)
+export default {
+  name: 'MainUserSetting',
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
+
+  mounted() {
+    this.getUserProfileImageSrc;
+  },
+
+  beforeDestroy() {},
+
+  data() {
+    return {};
+  },
+
+  computed: {
+    ...mapGetters(['getMaskedAddress']),
+
+    getMainMenu() {
+      return [
+        {
+          title: this.$t('UserPage.MyInfo'),
+          path: '/user/info',
+        },
+        {
+          title: this.$t('UserPage.MyItems'),
+          path: '/user/item',
+        },
+        {
+          title: this.$t('UserPage.MyAssets'),
+          path: '/user/asset',
+        },
+        {
+          title: this.$t('UserPage.MyActivity'),
+          path: '/user/history',
+        },
+        {
+          title: this.$t('UserPage.MyWatchlist'),
+          path: '/user/watchlist',
+        },
+      ];
     },
 
-    mounted() {
-      this.getUserProfileImageSrc;
-    },
+    getUserProfileImageSrc() {
+      const baseURL = process.env.VUE_APP_API_ENDPOINT;
+      const userAddress = this.getUserInfo.address;
+      if (userAddress) {
+        const pathURL = `images/${userAddress}.png`;
+        const targetURL = `${baseURL}/${pathURL}`;
 
-    beforeDestroy() {
-
-    },
-
-    data() {
-      return {
-
-      }
-    },
-
-    computed: {
-      ...mapGetters([
-          'getMaskedAddress'
-      ]),
-
-      getMainMenu() {
-        return [
-          {
-            title: this.$t('UserPage.MyInfo'),
-            path: '/user/info'
-          },
-          {
-            title: this.$t('UserPage.MyItems'),
-            path: '/user/item'
-          },
-          {
-            title: this.$t('UserPage.MyAssets'),
-            path: '/user/asset'
-          },
-          {
-            title: this.$t('UserPage.MyActivity'),
-            path: '/user/history'
-          },
-          {
-            title: this.$t('UserPage.MyWatchlist'),
-            path: '/user/watchlist'
-          }
-        ]
-      },
-
-      getUserProfileImageSrc() {
-        const baseURL = process.env.VUE_APP_API_ENDPOINT;
-        const userAddress = this.getUserInfo.address;
-        if (userAddress) {
-          const pathURL = `images/${userAddress}.png`;
-          const targetURL = `${baseURL}/${pathURL}`;
-
-          axios.get(targetURL).then(res => {
-            this.$refs.profile_image.src = targetURL
-          }).catch(res => {
-            this.$refs.profile_image.src = this.$static.getFileURL('img/icon/ic-profile-default.svg');
+        axios
+          .get(targetURL)
+          .then((res) => {
+            this.$refs.profile_image.src = targetURL;
           })
-        }
-      },
-
-      isShowSetting() {
-        let isKlip = null;
-
-        if (this.$wallet.getWallet().platform && this.$wallet.getWallet().platform.wallet) {
-          isKlip = this.$wallet.getWallet().platform.wallet.name === 'klip';
-        }
-
-        if (isKlip) {
-          return false;
-        }
-        return true;
+          .catch((res) => {
+            this.$refs.profile_image.src = this.$static.getFileURL('img/icon/ic-profile-default.svg');
+          });
       }
     },
 
-    watch: {},
+    isShowSetting() {
+      let isKlip = null;
 
-    methods: {
-      ...mapActions([
-        'logout'
-      ]),
+      if (this.$wallet.getWallet().platform && this.$wallet.getWallet().platform.wallet) {
+        isKlip = this.$wallet.getWallet().platform.wallet.name === 'klip';
+      }
 
-      async handleLogout() {
-        await this.logout()
-        this.$emit('onClose')
-      },
+      if (isKlip) {
+        return false;
+      }
+      return true;
     },
+  },
 
-    components: {}
-  }
+  watch: {},
+
+  methods: {
+    ...mapActions(['logout']),
+
+    async handleLogout() {
+      await this.logout();
+      this.$emit('onClose');
+    },
+  },
+
+  components: {},
+};
 </script>

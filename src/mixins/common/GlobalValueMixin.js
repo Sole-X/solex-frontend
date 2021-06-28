@@ -1,4 +1,4 @@
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   computed: {
@@ -8,27 +8,24 @@ export default {
       'getPlatformInfo',
       'getLoadingStatus',
       'getUserInfo',
-      'getChainInfo'
+      'getChainInfo',
     ]),
 
     $_GlobalValueMixin_showRouterView() {
-      return this.$route.path === '/' || Boolean(this.getUserInfo.address)
-    }
+      return this.$route.path === '/' || Boolean(this.getUserInfo.address);
+    },
   },
 
   methods: {
-    ...mapActions([
-      'showModal',
-      'showAlert'
-    ]),
+    ...mapActions(['showModal', 'showAlert']),
 
     $_GlobalValueMixin_showCopyTooltip() {
       this.showModal({
         component: 'DialogModal',
         params: {
-          content: this.$t('General.CopySuccess')
-        }
-      })
-    }
-  }
-}
+          content: this.$t('General.CopySuccess'),
+        },
+      });
+    },
+  },
+};

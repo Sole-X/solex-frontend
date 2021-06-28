@@ -17,57 +17,51 @@
 </template>
 
 <script>
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'CustomerUsageTermsPage',
+export default {
+  name: 'CustomerUsageTermsPage',
 
-    created() {
-      component = this
-      $t = this.$t.bind(this)
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
+
+  mounted() {
+    this.$router.replace(`/customer/usage-terms/${this.version}`);
+  },
+
+  beforeDestroy() {},
+
+  data() {
+    return {
+      version: '202102',
+    };
+  },
+
+  computed: {
+    getVersions() {
+      return [
+        {
+          value: 'Mar 1, 2021',
+          version: '202102',
+        },
+        {
+          value: 'Feb 1, 2021',
+          version: '202103',
+        },
+      ];
     },
+  },
 
-    mounted() {
-      this.$router.replace(`/customer/usage-terms/${this.version}`);
+  watch: {
+    version: function (newVal, oldVal) {
+      this.$router.replace(`/customer/usage-terms/${newVal}`);
     },
+  },
 
-    beforeDestroy() {
+  methods: {},
 
-    },
-
-    data() {
-      return {
-        version: '202102'
-      }
-    },
-
-    computed: {
-      getVersions() {
-        return [
-          {
-            value: 'Mar 1, 2021',
-            version: '202102',
-          },{
-            value: 'Feb 1, 2021',
-            version: '202103'
-          }
-        ]
-      }
-    },
-
-    watch: {
-      version: function (newVal, oldVal) {
-        this.$router.replace(`/customer/usage-terms/${newVal}`);
-      }
-    },
-
-    methods: {
-
-    },
-
-    components: {
-
-    }
-  }
+  components: {},
+};
 </script>
-

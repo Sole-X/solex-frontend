@@ -1,37 +1,31 @@
 <template>
-  <section class="asset-item-card skeleton-ui">
-
-  </section>
+  <section class="asset-item-card skeleton-ui"></section>
 </template>
 
 <script>
-  let $t, component
+let $t, component;
 
-  export default {
-    name: 'SkeletonAssetItemCard',
-    created() {
-      component = this
-      $t = this.$t.bind(this)
-    },
+export default {
+  name: 'SkeletonAssetItemCard',
+  created() {
+    component = this;
+    $t = this.$t.bind(this);
+  },
 
-    mounted() {
+  mounted() {},
 
-    },
+  beforeDestroy() {},
 
-    beforeDestroy() {
+  data() {
+    return {};
+  },
 
-    },
+  computed: {},
 
-    data() {
-      return {}
-    },
+  watch: {},
 
-    computed: {},
+  methods: {},
 
-    watch: {},
-
-    methods: {},
-
-    components: {}
-  }
+  components: {},
+};
 </script>

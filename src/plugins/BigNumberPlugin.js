@@ -1,33 +1,24 @@
-import BN from 'bignumber.js'
+import BN from 'bignumber.js';
 
 BN.config({
-  EXPONENTIAL_AT: [-100, 100]
-})
+  EXPONENTIAL_AT: [-100, 100],
+});
 
 export default class BigNumberUtil {
   constructor() {
-    if(!(this instanceof BigNumberUtil)) {
+    if (!(this instanceof BigNumberUtil)) {
       return new BigNumberUtil();
     }
 
-    this.methodList = [
-      'toBN',
-      'addBN',
-      'subBN',
-      'mulBN',
-      'modBN',
-      'divBN',
-      'toMinUnit',
-      'toMaxUnit'
-    ];
+    this.methodList = ['toBN', 'addBN', 'subBN', 'mulBN', 'modBN', 'divBN', 'toMinUnit', 'toMaxUnit'];
   }
 
   toBN(number) {
     const result = new BN(number);
 
     // 초기화 시에 메소드 리스트 추가하기
-    if(this.methodList) {
-      for(const method of this.methodList) {
+    if (this.methodList) {
+      for (const method of this.methodList) {
         result[method] = this[method];
       }
 
@@ -38,11 +29,11 @@ export default class BigNumberUtil {
   }
 
   addBN(num1, num2) {
-    if(!BN.isBigNumber(num1)) {
+    if (!BN.isBigNumber(num1)) {
       num1 = this.toBN(num1);
     }
 
-    if(num2 !== undefined) {
+    if (num2 !== undefined) {
       num2 = this.toBN(num2);
     } else {
       num2 = num1;
@@ -53,11 +44,11 @@ export default class BigNumberUtil {
   }
 
   subBN(num1, num2) {
-    if(!BN.isBigNumber(num1)) {
+    if (!BN.isBigNumber(num1)) {
       num1 = this.toBN(num1);
     }
 
-    if(num2 !== undefined) {
+    if (num2 !== undefined) {
       num2 = this.toBN(num2);
     } else {
       num2 = num1;
@@ -68,11 +59,11 @@ export default class BigNumberUtil {
   }
 
   mulBN(num1, num2) {
-    if(!BN.isBigNumber(num1)) {
+    if (!BN.isBigNumber(num1)) {
       num1 = this.toBN(num1);
     }
 
-    if(num2 !== undefined) {
+    if (num2 !== undefined) {
       num2 = this.toBN(num2);
     } else {
       num2 = num1;
@@ -82,19 +73,20 @@ export default class BigNumberUtil {
     return this.toBN(num1.multipliedBy(num2));
   }
 
-  divBN(num1, num2) { // TODO : over 18
-    if(!BN.isBigNumber(num1)) {
+  divBN(num1, num2) {
+    // TODO : over 18
+    if (!BN.isBigNumber(num1)) {
       num1 = this.toBN(num1);
     }
 
-    if(num2 !== undefined) {
+    if (num2 !== undefined) {
       num2 = this.toBN(num2);
     } else {
       num2 = num1;
       num1 = this;
     }
 
-    if(num1.toString() === '0' || num2.toString() === '0') {
+    if (num1.toString() === '0' || num2.toString() === '0') {
       return this.toBN('0');
     }
 
@@ -102,11 +94,11 @@ export default class BigNumberUtil {
   }
 
   modBN(num1, num2) {
-    if(!BN.isBigNumber(num1)) {
+    if (!BN.isBigNumber(num1)) {
       num1 = this.toBN(num1);
     }
 
-    if(num2 !== undefined) {
+    if (num2 !== undefined) {
       num2 = this.toBN(num2);
     } else {
       num2 = num1;
@@ -118,20 +110,20 @@ export default class BigNumberUtil {
 
   // 자연수 > 컨트랙트 상 단위
   toMinUnit(v, d) {
-    if(v !== 0 && !v) {
+    if (v !== 0 && !v) {
       return '0';
     }
 
-    if(d === undefined) {
+    if (d === undefined) {
       d = v;
       v = this;
     }
 
-    if(!BN.isBigNumber(v)) {
+    if (!BN.isBigNumber(v)) {
       v = this.toBN(v);
     }
 
-    if(d !== 0) {
+    if (d !== 0) {
       d = this.toBN(10).pow(d);
     }
 
@@ -140,20 +132,20 @@ export default class BigNumberUtil {
 
   // 컨트랙트 상 단위 > 자연수
   toMaxUnit(v, d, p = 6) {
-    if(v !== 0 && !v) {
+    if (v !== 0 && !v) {
       return '0';
     }
 
-    if(d === undefined) {
+    if (d === undefined) {
       d = v;
       v = this;
     }
 
-    if(!BN.isBigNumber(v)) {
+    if (!BN.isBigNumber(v)) {
       v = this.toBN(v);
     }
 
-    if(d !== 0) {
+    if (d !== 0) {
       d = this.toBN(10).pow(d);
     }
 

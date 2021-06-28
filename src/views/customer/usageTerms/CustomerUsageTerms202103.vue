@@ -1,9 +1,5 @@
 <template>
-  <div>
-    This is a page just for routing.
-  </div>
+  <div>This is a page just for routing.</div>
 </template>
 
-<script>
-
-</script>
+<script></script>

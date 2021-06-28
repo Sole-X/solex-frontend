@@ -1,21 +1,21 @@
 const getDefaultState = () => {
   return {
-    txQueue: []
-  }
-}
+    txQueue: [],
+  };
+};
 
 export default {
   state() {
-    return getDefaultState()
+    return getDefaultState();
   },
   mutations: {
     SET_TX_QUEUE(state, payload) {
-      state.txQueue = payload
-    }
+      state.txQueue = payload;
+    },
   },
   getters: {
     getTxQueue(state) {
-      return state.txQueue
-    }
-  }
-}
+      return state.txQueue;
+    },
+  },
+};

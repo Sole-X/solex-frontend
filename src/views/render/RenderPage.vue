@@ -1,7 +1,5 @@
 <template>
-  <div>
-    render...
-  </div>
+  <div>render...</div>
 </template>
 
 <script>
@@ -14,6 +12,6 @@ export default {
 
       this.$router.replace(fromPath || '/home');
     }
-  }
-}
+  },
+};
 </script>

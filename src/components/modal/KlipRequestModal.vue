@@ -1,20 +1,18 @@
 <template>
   <div class="klip-request-modal">
     <header class="klip-request-modal-header">
-      <img :src="$static.getFileURL('img/icon/ic-close-gray.svg')" width="15px" @click="() => close()">
+      <img :src="$static.getFileURL('img/icon/ic-close-gray.svg')" width="15px" @click="() => close()" />
     </header>
     <main class="klip-request-modal-main">
       <div class="klip-request-modal-main-top">
-        <div class="klip-request-modal-main-top-title">
-          Scan to Request
-        </div>
+        <div class="klip-request-modal-main-top-title">Scan to Request</div>
       </div>
       <div class="klip-request-modal-main-bottom">
         <div class="klip-request-modal-main-bottom-qr">
-          <canvas id=klip-login-modal__content-QR-image></canvas>
+          <canvas id="klip-login-modal__content-QR-image"></canvas>
         </div>
         <div class="klip-request-modal-main-bottom-info">
-          <img :src="$static.getFileURL('img/logo/logo-klip.svg')" >
+          <img :src="$static.getFileURL('img/logo/logo-klip.svg')" />
           <div class="klip-request-modal-main-bottom-info-desc">
             QR코드 리더기 혹은 카카오톡 앱 > 더보기 > 우측상단의 스캔 아이콘을 눌러 QR코드를 스캔해 주세요.
           </div>
@@ -25,7 +23,7 @@
 </template>
 
 <script>
-let $t, self
+let $t, self;
 import { mapGetters, mapActions } from 'vuex';
 import QRCode from 'qrcode';
 
@@ -36,35 +34,27 @@ export default {
 
   props: {
     data: Object,
-    close: Function
+    close: Function,
   },
 
   created() {
-    self = this
-    $t = this.$t.bind(this)
+    self = this;
+    $t = this.$t.bind(this);
   },
 
   mounted() {
     this.initPage();
   },
 
-  beforeDestroy() {
-
-  },
+  beforeDestroy() {},
 
   data() {
-    return {
-
-    }
+    return {};
   },
 
-  computed: {
+  computed: {},
 
-  },
-
-  watch: {
-
-  },
+  watch: {},
 
   methods: {
     initPage() {
@@ -83,15 +73,12 @@ export default {
           QRCode.toCanvas(canvas, webStr, (err) => {
             if (err) console.error(err);
             // Log('success');
-          })
-
+          });
         }
       })();
-    }
+    },
   },
 
-  components: {
-
-  }
-}
+  components: {},
+};
 </script>

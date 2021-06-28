@@ -1,61 +1,61 @@
-import Store from '@/store'
+import Store from '@/store';
 
 const getDate = () => {
-  return Store.$app.$date
-}
+  return Store.$app.$date;
+};
 
 const getFileURL = () => {
-  return Store.$app.$static.getFileURL
-}
+  return Store.$app.$static.getFileURL;
+};
 
 export class NftInfo {
   constructor(props = {}) {
-    this.createdAt = props.createdAt || 'now'
-    this.ownerAddress = props.ownerAddress || ''
-    this.platform = props.platform || 0
-    this.price = props.price || '0'
-    this.status = props.status || 0
-    this.tokenAddress = props.tokenAddress || ''
-    this.tokenId = props.tokenId || '0'
-    this.tokenUri = props.tokenUri || ''
+    this.createdAt = props.createdAt || 'now';
+    this.ownerAddress = props.ownerAddress || '';
+    this.platform = props.platform || 0;
+    this.price = props.price || '0';
+    this.status = props.status || 0;
+    this.tokenAddress = props.tokenAddress || '';
+    this.tokenId = props.tokenId || '0';
+    this.tokenUri = props.tokenUri || '';
     this.tokenName = props.tokenName || '';
-    this.tradeId = props.tradeId || ''
+    this.tradeId = props.tradeId || '';
     this.type = props.type || 0;
-    this.updatedAt = props.updatedAt || 'now'
-    this.isCollected = props.isCollected ?? true
-    this.like = props.like || false
+    this.updatedAt = props.updatedAt || 'now';
+    this.isCollected = props.isCollected ?? true;
+    this.like = props.like || false;
     this.metadata = props.desc || {
       name: '',
       description: '',
       animationUrl: null,
       image: '',
-      tokenUri: ''
-    }
-    this.nftInfo = props.nftInfo || {}
+      tokenUri: '',
+    };
+    this.nftInfo = props.nftInfo || {};
 
     // 이 값이 true로 넘어온다면 buy, sell, auction 등 기본 설정하지 않기
-    if(!props.isDetail) {
-      this.buy = props.buy
-      this.sell = props.sell
-      this.auction = props.auction
-      this.exchange = this.buy || this.sell
+    if (!props.isDetail) {
+      this.buy = props.buy;
+      this.sell = props.sell;
+      this.auction = props.auction;
+      this.exchange = this.buy || this.sell;
     }
   }
 
   get id() {
-    return `${this.platform}:${this.tokenAddress}:${this.tokenId}:${this.tradeId}`
+    return `${this.platform}:${this.tokenAddress}:${this.tokenId}:${this.tradeId}`;
   }
 
   get isDeposited() {
-    return this.status === 1
+    return this.status === 1;
   }
 
   get isInWallet() {
-    return this.status === 0
+    return this.status === 0;
   }
 
   get isOnWithdraw() {
-    return this.status === 7
+    return this.status === 7;
   }
 
   get isOnTrade() {
@@ -79,50 +79,50 @@ export class NftInfo {
   }
 
   get isLiked() {
-    if(this.isExchange) {
-      return this.exchange.liked
+    if (this.isExchange) {
+      return this.exchange.liked;
     }
 
-    if(this.isAuction) {
-      return this.auction.liked
+    if (this.isAuction) {
+      return this.auction.liked;
     }
 
-    if(this.isBuy) {
+    if (this.isBuy) {
       return this.buy.liked;
     }
 
-    return false
+    return false;
   }
 
   get chainIcon() {
     if (this.nftInfo.platform === 'ETH') {
-      return getFileURL()('img/icon/ic-token-eth.svg')
+      return getFileURL()('img/icon/ic-token-eth.svg');
     }
 
     if (this.nftInfo.platform === 'KLAY') {
-      return getFileURL()('img/icon/ic-token-klay.svg')
+      return getFileURL()('img/icon/ic-token-klay.svg');
     }
 
-    return ''
+    return '';
   }
 
   get chainName() {
     if (this.nftInfo.platform === 'ETH') {
-      return 'Ethereum'
+      return 'Ethereum';
     }
 
     if (this.nftInfo.platform === 'KLAY') {
-      return 'Klaytn'
+      return 'Klaytn';
     }
 
-    return ''
+    return '';
   }
 
   get itemName() {
-    return this.metadata.name || this.tokenId
+    return this.metadata.name || this.tokenId;
   }
 
   get collectionName() {
-    return this.nftInfo?.name ?? `${this.tokenAddress.slice(0, 8) }...`
+    return this.nftInfo?.name ?? `${this.tokenAddress.slice(0, 8)}...`;
   }
 }

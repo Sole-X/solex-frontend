@@ -2,7 +2,7 @@
   <div class="staking-activity-no-data-page">
     <section class="staking-activity-no-data-page__main">
       <div class="staking-activity-no-data-page__main-image-container">
-        <img :src="$static.getFileURL('img/icon/ic-info-black.svg')" width=40px alt="alert" />
+        <img :src="$static.getFileURL('img/icon/ic-info-black.svg')" width="40px" alt="alert" />
       </div>
       <span class="no_items_found">{{ $t('Staking.NoDataTitle') }}</span>
       <div class="staking-activity-no-data-page__main-wallet" v-if="walletConnection">
@@ -18,48 +18,34 @@
 </template>
 
 <script>
-let $t, component
+let $t, component;
 
 export default {
   name: 'StakingMyActivityNoData',
 
-  props: {
-
-  },
+  props: {},
 
   created() {
-    component = this
-    $t = this.$t.bind(this)
+    component = this;
+    $t = this.$t.bind(this);
   },
 
-  mounted() {
+  mounted() {},
 
-  },
-
-  beforeDestroy() {
-
-  },
+  beforeDestroy() {},
 
   data() {
     return {
-      walletConnection: true
-    }
+      walletConnection: true,
+    };
   },
 
-  computed: {
+  computed: {},
 
-  },
+  watch: {},
 
-  watch: {
+  methods: {},
 
-  },
-
-  methods: {
-
-  },
-
-  components: {
-
-  }
-}
+  components: {},
+};
 </script>

@@ -1,238 +1,239 @@
-export default { // TODO : method, params, query 등에 대한 검증
+export default {
+  // TODO : method, params, query 등에 대한 검증
   searchNft: {
     methods: ['GET'],
     path: '/v1/nfts',
     requiredParam: ['page', 'status'],
-    requiredQuery: []
+    requiredQuery: [],
   },
   likeNft: {
     methods: ['POST'],
     path: '/v1/nfts/like',
     requiredBody: ['accountAddr', 'tokenId'],
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   unlikeNft: {
     methods: ['POST'],
     path: '/v1/nfts/unlike',
     requiredBody: ['accountAddr', 'tokenId'],
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getLatestNft: {
     methods: ['GET'],
     path: '/v1/nfts/',
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getPopularNft: {
     methods: ['GET'],
     path: '/v1/nfts/mostLike',
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getItemDetail: {
     methods: ['GET'],
     path: '/v1/nfts/:tokenAddress/:tokenId',
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getWritingDetailBuy: {
     methods: ['GET'],
     path: '/v1/buys/:tradeId',
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getWritingDetailSale: {
     methods: ['GET'],
     path: '/v1/sale/:tradeId',
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   addItemReadLog: {
     methods: ['POST'],
     path: '/v1/nfts/recentView',
     requiredParam: ['accountAddr', 'tokenAddr', 'tokenId'],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getAuctionDetail: {
     methods: ['GET'],
     path: '/v1/auctions/:auctionId',
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getUserInfo: {
     methods: ['GET'],
     path: '/v1/account/:user',
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getUserDeposited: {
     methods: ['GET'],
     path: '/v1/account/:user/totalBalance',
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getRecentViewOfUser: {
     methods: ['GET'],
     path: '/v1/nfts/recentView/:user',
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getLikedItemsOfUser: {
     methods: ['GET'],
     path: '/v1/nfts/like/:user',
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getUserItems: {
     methods: ['GET'],
     path: '/v1/account/:user/nfts',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getUserActivities: {
     methods: ['GET'],
     path: '/v1/account/:user/activites',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   sendSignedMessageTx: {
     methods: ['POST'],
     path: '/v1/sign/send',
     requiredParams: ['hash', 'msg', 'hashType', 'signHash', 'cate'],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getBuyOrder: {
     methods: ['GET'],
     path: '/v1/buys/:offerId',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getSellOrder: {
     methods: ['GET'],
     path: '/v1/sells/:offerId',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getBuyOrders: {
     methods: ['GET'],
     path: '/v1/buys',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getSellOrders: {
     methods: ['GET'],
     path: '/v1/sells',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getMyTotalBalance: {
     methods: ['GET'],
     path: '/v1/account/:accountAddr/totalBalance',
     requiredParams: ['accountAddr'],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getAuctionOrders: {
     methods: ['GET'],
     path: '/v1/auctions',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   declineNego: {
     methods: ['POST'],
     path: '/v1/sells/:sellId/declineNego/:negoId',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getAllActivities: {
     methods: ['GET'],
     path: '/v1/explorer/activity',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getAllRanks: {
     methods: ['GET'],
     path: '/v1/explorer/rank',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   login: {
     methods: ['POST'],
     path: '/v1/users/login',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getWhitelistTokens: {
     methods: ['GET'],
     path: '/v1/common/token/whitelist',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   reportItem: {
     methods: ['POST'],
     path: '/v1/common/report',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   modifyUserInfo: {
     methods: ['POST'],
     path: '/v1/account/:user/profile',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   checkUsernameRegex: {
     methods: ['GET'],
     path: '/v1/common/nameCheck/:username',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getRecentViewOfAll: {
     methods: ['GET'],
     path: '/v1/nfts/recentView',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getItemHistory: {
     methods: ['GET'],
     path: '/v1/nfts/:tokenAddress/:tokenId/history',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getSideInfo: {
     methods: ['GET'],
     path: '/v1/common/sideInfo',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getAccountStaking: {
     methods: ['GET'],
     path: '/v1/account/:accountAddress/staking',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   setAgreement: {
     methods: ['POST'],
     path: '/v1/account/:accountAddr/agreement',
     requiredParams: ['accountAddr'],
-    requiredQuery: []
+    requiredQuery: [],
   },
   collectItem: {
     methods: ['GET'],
     path: '/v1/nfts/metadata',
     requiredParams: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   setNewLetterEmail: {
     methods: ['POST'],
     path: '/v1/common/newsletter',
     requiredParam: [],
-    requiredQuery: []
+    requiredQuery: [],
   },
   getCollectionInfo: {
     methods: ['GET'],
     path: '/v1/nfts/:collectionAddr',
     requiredParam: ['collectionAddr'],
-    requiredQuery: []
+    requiredQuery: [],
   },
-}
+};

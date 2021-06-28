@@ -4,7 +4,11 @@ Not supports in Firefox and IE */
 
 $width: 13.5;
 
-body, section, article, aside, div {
+body,
+section,
+article,
+aside,
+div {
   &::-webkit-scrollbar {
     width: #{$width}px;
     background-color: #fff;
@@ -19,7 +23,7 @@ body, section, article, aside, div {
   &::-webkit-scrollbar-thumb {
     background-color: #babac0;
     border-radius: #{$width}px;
-     border: #{$width / 4}px solid #fff;
+    border: #{$width / 4}px solid #fff;
   }
 
   /* set button(top and bottom of the scrollbar) */

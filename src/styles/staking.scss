@@ -78,7 +78,9 @@
         overflow: hidden;
         font-weight: 700;
 
-        >a, >button, >div {
+        > a,
+        > button,
+        > div {
           @include square(100%);
           @include center-align-flex;
         }
@@ -202,7 +204,7 @@
                 font-size: 24px;
               }
               span:first-child::after {
-                content: ' '
+                content: ' ';
               }
               span:last-child {
                 font-size: 16px;
@@ -213,7 +215,7 @@
               color: $gen_gray;
 
               span::after {
-                content: ' '
+                content: ' ';
               }
             }
           }
@@ -246,7 +248,9 @@
       white-space: nowrap;
       overflow-x: auto;
 
-      &::-webkit-scrollbar-track {background-color: #fafbfc;}
+      &::-webkit-scrollbar-track {
+        background-color: #fafbfc;
+      }
 
       .staking-trix-balance-item {
         display: inline-block;
@@ -292,14 +296,12 @@
               }
 
               span:first-child::after {
-                content: ' '
+                content: ' ';
               }
             }
 
             .common-loader {
-
               .common-loader__spinner {
-
               }
             }
           }
@@ -378,13 +380,12 @@
               font-size: 16px;
             }
             span::after {
-              content: ' '
+              content: ' ';
             }
           }
         }
 
-        div.right{
-
+        div.right {
         }
       }
     }
@@ -464,7 +465,6 @@
       }
 
       .staking-activity__table__col {
-
       }
 
       button {
@@ -515,7 +515,6 @@
       color: $gen_gray;
     }
     staking-activity-no-data-page__main-wallet {
-
       text-align: center;
       button {
         margin-top: 40px;

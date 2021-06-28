@@ -1,22 +1,10 @@
 <template>
   <section class="market-home__featured">
     <swiper :options="swiperOptions">
-      <swiper-slide
-        v-for="(banner, i) in getBannerList"
-        :key="i"
-        :style="banner.slideStyle"
-      >
-        <a
-          :href="banner.link"
-          :target="banner.link.startsWith('http') ? '_blank' : ''"
-          rel="noreferrer nofollow"
-        >
+      <swiper-slide v-for="(banner, i) in getBannerList" :key="i" :style="banner.slideStyle">
+        <a :href="banner.link" :target="banner.link.startsWith('http') ? '_blank' : ''" rel="noreferrer nofollow">
           <!-- <router-link :to="{ path: banner.link }"> -->
-          <div
-            class="market-home__featured__default"
-            :style="banner.contentStyle"
-            :class="banner.classes || []"
-          >
+          <div class="market-home__featured__default" :style="banner.contentStyle" :class="banner.classes || []">
             <!-- <h1 v-html="banner.title"></h1>
           <p v-html="banner.desc"></p> -->
 
@@ -39,7 +27,7 @@
 let $t, component;
 
 export default {
-  name: "MarketplaceMainFeatured",
+  name: 'MarketplaceMainFeatured',
   created() {
     component = this;
     $t = this.$t.bind(this);
@@ -53,9 +41,9 @@ export default {
     return {
       swiperOptions: {
         pagination: {
-          type: "bullets",
+          type: 'bullets',
           clickable: true,
-          el: ".swiper-pagination",
+          el: '.swiper-pagination',
         },
         allowTouchMove: false,
         loop: true,
@@ -96,16 +84,14 @@ export default {
         //   },
         // },
         {
-          title: $t("Market.TopFeatured1Title"),
-          desc: $t("Market.TopFeatured1Desc"),
+          title: $t('Market.TopFeatured1Title'),
+          desc: $t('Market.TopFeatured1Desc'),
           slideStyle: {
-            backgroundColor: "#efefef",
+            backgroundColor: '#efefef',
           },
-          link: "https://www.sole-x.io/sell?search=KJM",
+          link: 'https://www.sole-x.io/sell?search=KJM',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL(
-              "img/article/article-market-home-top-kjm.jpg"
-            )}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-kjm.jpg')}`,
           },
         },
         // {
@@ -123,16 +109,14 @@ export default {
         //   },
         // },
         {
-          title: $t("Market.TopFeatured1Title"),
-          desc: $t("Market.TopFeatured1Desc"),
+          title: $t('Market.TopFeatured1Title'),
+          desc: $t('Market.TopFeatured1Desc'),
           slideStyle: {
-            backgroundColor: "#202020",
+            backgroundColor: '#202020',
           },
-          link: "/sell?search=Phoenix",
+          link: '/sell?search=Phoenix',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL(
-              "img/article/article-market-home-top-1.jpg"
-            )}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-1.jpg')}`,
           },
         },
         // {
@@ -162,16 +146,14 @@ export default {
         //   },
         // },
         {
-          title: $t("Market.TopFeatured1Title"),
-          desc: $t("Market.TopFeatured1Desc"),
+          title: $t('Market.TopFeatured1Title'),
+          desc: $t('Market.TopFeatured1Desc'),
           slideStyle: {
-            backgroundColor: "#202342",
+            backgroundColor: '#202342',
           },
-          link: "https://topnft.world/",
+          link: 'https://topnft.world/',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL(
-              "img/article/article-market-home-top-4.jpg"
-            )}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-4.jpg')}`,
           },
         },
         // {
