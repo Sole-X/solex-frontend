@@ -105,7 +105,7 @@ export default {
           return 'MUZIKTIGER';
         } else if (['614', '616', '618', '619'].includes(info.tokenId)) {
           return 'RosaFantasy';
-        } else if (['621', '624', '625'].includes(info.tokenId)) {
+        } else if (['621', '624', '625','640', '641', '642', '643'].includes(info.tokenId)) {
           return 'HANJUNGSUN';
         } else if (['629', '630', '631'].includes(info.tokenId)) {
           return 'NOONI';
@@ -161,7 +161,7 @@ export default {
       } else if (publisherName == 'YEMIKIM') {
         const targetURL = 'https://www.instagram.com/yemikim_official/';
         window.open(targetURL, `publisher ${targetURL}`);
-      }
+      } 
     },
   },
 
