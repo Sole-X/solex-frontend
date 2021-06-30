@@ -47,11 +47,11 @@ export default {
     getBannerList() {
       return [
         {
-          title: 'Phoenix Valley',
-          description: ['The freedom and healing of', 'colors within the horse'],
-          link: 'https://medium.sole-x.io/sole-x-cross-chain-nft-marketplace-9a958cebe59e',
+          title: 'TRIX Airdrop Event',
+          description: ['for 1 million', 'TriumphX and Sole-x Users'],
+          link: 'https://medium.sole-x.io/trix-airdrop-event-81529de03bed',
           img: {
-            src: 'img/article/article-market-home-banner-launch.jpg',
+            src: 'img/article/Trix-Airdrop-Event.jpg',
           },
         },
         {
