@@ -111,6 +111,8 @@ export default {
           return 'NOONI';
         } else if (['632', '633', '634', '635'].includes(info.tokenId)) {
           return 'YEMIKIM';
+        } else if (['646', '650', '651', '652', '653'].includes(info.tokenId)) {
+          return 'YOO LI';
         }
       }
       return 'Unknown';
@@ -153,13 +155,16 @@ export default {
         const targetURL = 'https://enftee.medium.com/rosafantasys-cyborg-the-beginning-4ba5850e0b11';
         window.open(targetURL, `publisher ${targetURL}`);
       } else if (publisherName == 'HANJUNGSUN') {
-        const targetURL = 'https://enftee.medium.com/hanjungsun-apartment-series-with-triumphx-5e1f5e09a825';
+        const targetURL = 'https://www.instagram.com/hanjungsunart/';
         window.open(targetURL, `publisher ${targetURL}`);
       } else if (publisherName == 'NOONI') {
         const targetURL = 'https://enftee.medium.com/nooni-artist-first-nft-with-triumphx-5c1cf7db2037';
         window.open(targetURL, `publisher ${targetURL}`);
       } else if (publisherName == 'YEMIKIM') {
         const targetURL = 'https://www.instagram.com/yemikim_official/';
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == 'YOO LI') {
+        const targetURL = 'https://www.instagram.com/artist_yooli/';
         window.open(targetURL, `publisher ${targetURL}`);
       } 
     },
