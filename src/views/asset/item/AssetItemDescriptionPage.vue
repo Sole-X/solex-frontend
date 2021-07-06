@@ -113,6 +113,8 @@ export default {
           return 'YEMIKIM';
         } else if (['646', '650', '651', '652', '653'].includes(info.tokenId)) {
           return 'YOO LI';
+        } else if (['654', '655', '656', '657', '658', '659'].includes(info.tokenId)) {
+          return 'Bella Bang';
         }
       }
       return 'Unknown';
