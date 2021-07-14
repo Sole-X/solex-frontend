@@ -44,7 +44,7 @@
 
     <div class="main-footer__others">
       <div class="main-footer__links">
-        <a class="underline" href="" target="_blank" rel="noopener noreferrer">
+        <a class="underline" href="mailto:contact@sole-x.io" rel="noopener noreferrer">
           {{ $t("General.FooterContactUs") }}
         </a>
 

@@ -1259,13 +1259,13 @@ export default {
             {
                 title: 'I would like to list our collection on Sole-X.',
                 description: [
-                    'For companies or organizations that wish to be listed collections, please contact our <a href="mailto:cs@triumph.x" target="_top">customer service</a>.'
+                    'For companies or organizations that wish to be listed collections, please contact our <a href="mailto:contact@sole-x.io" target="_top">customer service</a>.'
                 ]
             },
             {
                 title: 'How to contact customer support?',
                 description: [
-                    'Sole-X is committed to providing better customer service. Please contact our <a href="mailto:cs@triumph.x" target="_top">customer service</a>. We will\n' +
+                    'Sole-X is committed to providing better customer service. Please contact our <a href="mailto:contact@sole-x.io" target="_top">customer service</a>. We will\n' +
                     'gladly answer your questions.'
                 ]
             },
@@ -1335,13 +1335,13 @@ export default {
             {
                 title: '저희 컬렉션을 Sole-X에 상장하고 싶어요.',
                 description: [
-                    '상장을 원하시는 회사 혹은 단체는 <a href="mailto:cs@triumph.x" target="_top">고객센터</a>로 문의 부탁드립니다.'
+                    '상장을 원하시는 회사 혹은 단체는 <a href="mailto:contact@sole-x.io" target="_top">고객센터</a>로 문의 부탁드립니다.'
                 ]
             },
             {
                 title: 'Sole-X 고객센터에 연락하는 방법을 알려주세요.',
                 description: [
-                    'Sole-X는 더욱 나은 고객 서비스 제공을 위해 최선을 다하고 있습니다. <a href="mailto:cs@triumph.x" target="_top">고객센터</a>로 문의 주시면 정성껏\n' +
+                    'Sole-X는 더욱 나은 고객 서비스 제공을 위해 최선을 다하고 있습니다. <a href="mailto:contact@sole-x.io" target="_top">고객센터</a>로 문의 주시면 정성껏\n' +
                     '답변 드리도록 하겠습니다.'
                 ]
             },

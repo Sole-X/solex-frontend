@@ -931,6 +931,14 @@
       h5 {
         font-size: 16px;
         margin-bottom: 10px;
+
+        strong {
+          cursor: pointer;
+
+          &:hover {
+            color: $primary_color;
+          }
+        }
       }
 
       .asset-item__collection__description__links {
