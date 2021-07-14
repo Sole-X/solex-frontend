@@ -111,8 +111,8 @@ export default {
           return 'NOONI';
         } else if (['632', '633', '634', '635'].includes(info.tokenId)) {
           return 'YEMIKIM';
-        } else if (['646', '650', '651', '652', '653'].includes(info.tokenId)) {
-          return 'YOO LI';
+        } else if (['646', '650', '651', '652', '653', '661', '663', '665'].includes(info.tokenId)) {
+          return 'YOOLI';
         } else if (['654', '655', '656', '657', '658', '659'].includes(info.tokenId)) {
           return 'Bella Bang';
         }
@@ -165,7 +165,7 @@ export default {
       } else if (publisherName == 'YEMIKIM') {
         const targetURL = 'https://www.instagram.com/yemikim_official/';
         window.open(targetURL, `publisher ${targetURL}`);
-      } else if (publisherName == 'YOO LI') {
+      } else if (publisherName == 'YOOLI') {
         const targetURL = 'https://www.instagram.com/artist_yooli/';
         window.open(targetURL, `publisher ${targetURL}`);
       } 
