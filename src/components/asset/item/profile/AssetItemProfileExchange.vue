@@ -245,12 +245,13 @@ export default {
 
     getUsdPrice() {
       let usdPrice = this.info.usdPrice;
-
-      const currency = this.getCurrency;
+      
+      const currency = this.info.currencyInfo;
       if (currency.symbol !== 'Symbol') {
         usdPrice = currency.toFiat(this.getItemPrice);
       }
-      return usdPrice.dprec(4);
+      //return usdPrice.dprec(4);
+      return usdPrice;
     },
 
     getCurrency() {
@@ -269,6 +270,7 @@ export default {
       return {
         decimal: 18,
         symbol: 'Symbol',
+        toFiat: () => '0',
       };
     },
   },
