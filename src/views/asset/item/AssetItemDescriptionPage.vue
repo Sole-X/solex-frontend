@@ -87,7 +87,9 @@ export default {
             '667',
             '669',
             '671',
-            '673'
+            '673',
+            '675',
+            '677'
           ].includes(info.tokenId)
         ) {
           return 'KJM';
