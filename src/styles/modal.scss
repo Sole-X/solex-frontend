@@ -85,6 +85,10 @@
       font-size: 20px;
       text-align: center;
 
+      @media screen and (max-width:760px){
+        font-size: 18px;
+      }
+
       span {
         font-size: 20px;
         color: $primary_color;
@@ -249,6 +253,10 @@
   .gen-modal__content {
     padding: 0 50px;
     text-align: center;
+
+    @media screen and (max-width:760px){
+      padding: 0 15px;
+    }
 
     .gen-modal__desc {
       color: $gen_lightblack;
