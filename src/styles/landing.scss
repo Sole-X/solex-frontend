@@ -21,6 +21,10 @@
       font-size: 16px;
       margin-left: auto;
       padding: 10px 16px;
+
+      @media screen and (max-width:760px){
+        display: none;
+      }
     }
   }
 
@@ -31,6 +35,10 @@
 
   .landing-page__section {
     width: 50%;
+
+    @media screen and (max-width:760px){
+      width: 100% !important;
+    }
   }
 
   .landing-page__section__graphic {
@@ -38,6 +46,9 @@
 
     img {
       width: 100%;
+    }
+    @media screen and (max-width:760px){
+      display: none;
     }
   }
 
@@ -49,16 +60,34 @@
       padding-left: 80px;
       @include vertical-align-flex;
 
+      @media screen and (max-width:760px){
+        padding-left: 0px;
+        padding: 5%;
+        margin-top: -10px;
+      }
+
       img {
-        //width: 128px;
         width: 148px;
         margin-bottom: 95px;
+
+        @media screen and (max-width:760px){
+          margin-bottom: 65px;
+          width: 130px;
+        }
       }
 
       h1 {
         width: 540px;
         font-size: 40px;
         margin-bottom: 30px;
+
+        @media screen and (max-width:760px){
+          font-size: 28px;
+          letter-spacing: -0.05em;
+          width:100%;
+          max-width: 400px;
+          margin-bottom: 22px;
+        }
       }
 
       p {
@@ -70,11 +99,27 @@
         }
         color: $gen_lightblack;
         margin-bottom: 40px;
+
+        @media screen and (max-width:760px){
+          width: 100%;
+          font-size: 14px;
+          max-width: 470px;
+
+          br{display: none;}
+        }
       }
 
       button {
         font-size: 16px;
         padding: 10px 23px;
+
+        @media screen and (max-width:760px){
+          padding: 0px;
+          width: 100%;
+          max-width: 300px;
+          height: 50px;
+          margin-bottom: 10px;
+        }
       }
     }
   }

@@ -42,6 +42,14 @@
   }
 }
 
+.common-submit-button.none{
+  display: none;
+
+  @media screen and (max-width:760px){
+    display: block;
+  }
+}
+
 .swiper-container {
   .swiper-pagination-bullet {
     cursor: pointer;
