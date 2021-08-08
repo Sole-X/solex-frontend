@@ -2,7 +2,9 @@
   <div id="app">
     <div :class="$bem('main-menu', '', getMenuClass)" v-if="showMainNav">
       <main-header />
+      <div class="m-menu-button" @click="slideMenuOpen()"></div>
       <main-nav />
+      <main-slide-menu />
     </div>
 
     <main :class="!showMainNav ? 'home' : ''">
@@ -42,6 +44,7 @@
 import { mapActions, mapGetters } from 'vuex';
 import SocketMixin from '@/mixins/SocketMixin';
 import MainHeader from '@/components/menu/MainHeader';
+import MainSlideMenu from '@/components/menu/MainSlideMenu';
 import MainFooter from '@/components/menu/MainFooter';
 import MainNav from '@/components/menu/MainNav';
 import MainConnectWallet from '@/components/MainConnectWallet';
@@ -123,10 +126,20 @@ export default {
         scrollLeft: window.scrollX,
       });
     },
+    slideMenuOpen() {
+      const mainSlideMenu = document.getElementById("mainSlideMenu");
+  
+      if( mainSlideMenu.style.display == "block" ) {
+        mainSlideMenu.style.display = "none"
+      } else {
+        mainSlideMenu.style.display = "block"
+      }
+    }
   },
   components: {
     MainNav,
     MainHeader,
+    MainSlideMenu,
     MainFooter,
     MainConnectWallet,
   },

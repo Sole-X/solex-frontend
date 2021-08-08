@@ -188,6 +188,10 @@ textarea {
   min-height: 100vh;
   padding-top: 150px;
   position: relative;
+
+  @media (max-width: 1200px) {
+    padding: 0;
+  }
 }
 
 .text-black {
