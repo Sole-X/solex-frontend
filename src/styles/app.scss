@@ -176,11 +176,16 @@ textarea {
 }
 
 #app > main {
+  position: relative;
   width: 100%;
   // min-width: 1200px;
 
   &.home .router-view {
     padding-top: 0;
+  }
+
+  @media (max-width: 1200px) {
+    padding-top: 44px;
   }
 }
 

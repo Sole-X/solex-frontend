@@ -576,8 +576,16 @@
     overflow-y: auto;
     overflow-x: hidden;
     align-self: flex-start;
+    background: #fff;
     border-right: 1px solid #f2f2f2;
     border-bottom: 1px solid #f2f2f2;
+
+    @media (max-width: 1200px) {
+      position: relative;
+      top: 0;
+      width: 100%;
+      height: calc(100% - 50px);
+    }
   }
 
   .marketplace-filter {
@@ -585,6 +593,10 @@
 
     .filter-by {
       margin-bottom: -40px;
+
+      @media (max-width: 1200px) {
+        margin-bottom: 0;
+      }
     }
 
     .marketplace-filter-item {
@@ -825,6 +837,48 @@
           }
         }
       }
+
+      @media (max-width: 1200px) {
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      width: 100%;
+    }
+  }
+  
+  .market-filter-area {
+    display: none;
+    overflow: hidden;
+    position: fixed;
+    width:100%;
+    height: calc(100% - 44px);
+    z-index: 300;
+
+    .market-filter-controller {
+      display: flex;
+      justify-content: space-between;
+      padding: 11px 20px 12px;
+      height: 50px;
+      background: #ececec;
+  
+  
+      .title {
+        font-size: 16px;
+        font-weight: 500;
+        vertical-align: middle;
+      }
+  
+      .icon-close {
+        margin-top: 6px;
+        vertical-align: middle;
+        cursor: pointer;
+      }
+  
+      @media (max-width: 1200px) {
+        
+      }
     }
   }
 
@@ -957,6 +1011,10 @@
         width: 220px;
       }
     }
+  }
+
+  @media (max-width: 1200px) {
+    display: block;
   }
 }
 

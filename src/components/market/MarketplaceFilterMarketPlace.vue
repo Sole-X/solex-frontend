@@ -1,431 +1,440 @@
 <template>
-  <div class="marketplace-filter-wrapper">
-    <div class="marketplace-filter">
-      <!-- filter by -->
-      <section
-        class="marketplace-filter-item filter-by"
-        id="market-sell-filter-by"
-        v-show="filterby && getNumOfFilterBy > 0 && sections.includes('filterBy')"
-      >
-        <div class="marketplace-filter-item-top">
-          <div class="marketplace-filter-title">
-            {{ $t('Market.SelectedFilter') }}
-          </div>
-          <div class="marketplace-filter-reset">
-            <div class="marketplace-filter-reset-button" @click="resetClicked">
-              {{ $t('Market.FilterReset') }}
+  <div class="market-filter-area">
+    <section class="market-filter-controller" id="market-filter-controller">
+      <div class="title">필터</div>
+      <div class="icon-close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/>
+        </svg>
+      </div>
+    </section>
+    <div class="marketplace-filter-wrapper">
+      <div class="marketplace-filter">
+        <!-- filter by -->
+        <section
+          class="marketplace-filter-item filter-by"
+          id="market-sell-filter-by"
+          v-show="filterby && getNumOfFilterBy > 0 && sections.includes('filterBy')"
+        >
+          <div class="marketplace-filter-item-top">
+            <div class="marketplace-filter-title">
+              {{ $t('Market.SelectedFilter') }}
             </div>
-            <img :src="$static.getFileURL('img/icon/ic-refresh-gray.svg')" @click="resetClicked" />
+            <div class="marketplace-filter-reset">
+              <div class="marketplace-filter-reset-button" @click="resetClicked">
+                {{ $t('Market.FilterReset') }}
+              </div>
+              <img :src="$static.getFileURL('img/icon/ic-refresh-gray.svg')" @click="resetClicked" />
+            </div>
           </div>
-        </div>
-        <div class="marketplace-filter-popover" ref="filterby">
-          <div
-            class="marketplace-filter-popover-filterby"
-            v-for="item in filterby"
-            v-show="item.section !== 'order'"
-            :data-obj="JSON.stringify(item)"
-          >
-            <div :data-item="JSON.stringify(item)">
-              {{ item.appear && item.appear() }}
+          <div class="marketplace-filter-popover" ref="filterby">
+            <div
+              class="marketplace-filter-popover-filterby"
+              v-for="item in filterby"
+              v-show="item.section !== 'order'"
+              :data-obj="JSON.stringify(item)"
+            >
+              <div :data-item="JSON.stringify(item)">
+                {{ item.appear && item.appear() }}
+              </div>
+              <img
+                :src="$static.getFileURL('img/icon/ic-close-gray.svg')"
+                :data-item="JSON.stringify(item)"
+                @click="filterCloseClicked"
+              />
+            </div>
+          </div>
+        </section>
+        
+        <!-- status -->
+        <section class="marketplace-filter-item" id="market-sell-status" v-show="this.sections.includes('status')">
+          <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'status')">
+            <div class="marketplace-filter-title">
+              {{ $t('Market.FilterStatus') }}
             </div>
             <img
-              :src="$static.getFileURL('img/icon/ic-close-gray.svg')"
-              :data-item="JSON.stringify(item)"
-              @click="filterCloseClicked"
+              class="marketplace-filter-item-top-chevron"
+              v-if="!itemsShows.status"
+              :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
+            />
+            <img
+              class="marketplace-filter-item-top-chevron"
+              v-else
+              :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
             />
           </div>
-        </div>
-      </section>
-
-      <!-- status -->
-      <section class="marketplace-filter-item" id="market-sell-status" v-show="this.sections.includes('status')">
-        <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'status')">
-          <div class="marketplace-filter-title">
-            {{ $t('Market.FilterStatus') }}
-          </div>
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-if="!itemsShows.status"
-            :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
-          />
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-else
-            :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
-          />
-        </div>
-        <div
-          class="marketplace-filter-popover"
-          :style="{
-            height: itemsShows.status ? itemsHeights['status'] + 'px' : '0px',
-          }"
-        >
-          <div ref="status">
-            <div class="marketplace-filter-popover-item" v-if="page !== 'buy'">
-              <div
-                class="marketplace-filter-popover-item-title"
-                :data-obj="JSON.stringify({ section: 'status', value: 'SALES' })"
-              >
-                <div class="red-dot disabled"></div>
+          <div
+            class="marketplace-filter-popover"
+            :style="{
+              height: itemsShows.status ? itemsHeights['status'] + 'px' : '0px',
+            }"
+          >
+            <div ref="status">
+              <div class="marketplace-filter-popover-item" v-if="page !== 'buy'">
                 <div
-                  class="item-value"
-                  @click="(event) => statusClicked(event, 'SALES')"
+                  class="marketplace-filter-popover-item-title"
                   :data-obj="JSON.stringify({ section: 'status', value: 'SALES' })"
                 >
-                  {{ $t('Market.FilterStatusItems')[0] }}
+                  <div class="red-dot disabled"></div>
+                  <div
+                    class="item-value"
+                    @click="(event) => statusClicked(event, 'SALES')"
+                    :data-obj="JSON.stringify({ section: 'status', value: 'SALES' })"
+                  >
+                    {{ $t('Market.FilterStatusItems')[0] }}
+                  </div>
                 </div>
+                <div class="item-value">{{ nftCnt.nftCntSell || 0 }}</div>
               </div>
-              <div class="item-value">{{ nftCnt.nftCntSell || 0 }}</div>
-            </div>
-            <div class="marketplace-filter-popover-item" v-if="page !== 'buy'">
-              <div
-                class="marketplace-filter-popover-item-title"
-                :data-obj="JSON.stringify({ section: 'status', value: 'AUCTIONS' })"
-              >
-                <div class="red-dot disabled"></div>
+              <div class="marketplace-filter-popover-item" v-if="page !== 'buy'">
                 <div
-                  class="item-value"
-                  @click="(event) => statusClicked(event, 'AUCTIONS')"
+                  class="marketplace-filter-popover-item-title"
                   :data-obj="JSON.stringify({ section: 'status', value: 'AUCTIONS' })"
                 >
-                  {{ $t('Market.FilterStatusItems')[1] }}
+                  <div class="red-dot disabled"></div>
+                  <div
+                    class="item-value"
+                    @click="(event) => statusClicked(event, 'AUCTIONS')"
+                    :data-obj="JSON.stringify({ section: 'status', value: 'AUCTIONS' })"
+                  >
+                    {{ $t('Market.FilterStatusItems')[1] }}
+                  </div>
                 </div>
+                <div class="item-value">{{ nftCnt.nftCntAuction || 0 }}</div>
               </div>
-              <div class="item-value">{{ nftCnt.nftCntAuction || 0 }}</div>
-            </div>
-            <div class="marketplace-filter-popover-item">
-              <div
-                class="marketplace-filter-popover-item-title"
-                :data-obj="JSON.stringify({ section: 'status', value: 'SOLDITEMS' })"
-              >
-                <div class="red-dot disabled"></div>
+              <div class="marketplace-filter-popover-item">
                 <div
-                  class="item-value"
-                  @click="(event) => statusClicked(event, 'SOLDITEMS')"
+                  class="marketplace-filter-popover-item-title"
                   :data-obj="JSON.stringify({ section: 'status', value: 'SOLDITEMS' })"
                 >
-                  {{ $t('Market.FilterStatusItems')[2] }}
+                  <div class="red-dot disabled"></div>
+                  <div
+                    class="item-value"
+                    @click="(event) => statusClicked(event, 'SOLDITEMS')"
+                    :data-obj="JSON.stringify({ section: 'status', value: 'SOLDITEMS' })"
+                  >
+                    {{ $t('Market.FilterStatusItems')[2] }}
+                  </div>
+                </div>
+                <div class="item-value">
+                  {{ page === 'buy' ? nftCnt.nftCntBuyDone : nftCnt.nftCntDone || 0 }}
                 </div>
               </div>
-              <div class="item-value">
-                {{ page === 'buy' ? nftCnt.nftCntBuyDone : nftCnt.nftCntDone || 0 }}
-              </div>
-            </div>
-            <div class="marketplace-filter-popover-item">
-              <div
-                class="marketplace-filter-popover-item-title"
-                :data-obj="JSON.stringify({ section: 'status', value: 'PROMOTION' })"
-              >
-                <div class="red-dot disabled"></div>
+              <div class="marketplace-filter-popover-item">
                 <div
-                  class="item-value"
-                  @click="(event) => statusClicked(event, 'PROMOTION')"
+                  class="marketplace-filter-popover-item-title"
                   :data-obj="JSON.stringify({ section: 'status', value: 'PROMOTION' })"
                 >
-                  {{ $t('Market.FilterStatusItems')[3] }}
+                  <div class="red-dot disabled"></div>
+                  <div
+                    class="item-value"
+                    @click="(event) => statusClicked(event, 'PROMOTION')"
+                    :data-obj="JSON.stringify({ section: 'status', value: 'PROMOTION' })"
+                  >
+                    {{ $t('Market.FilterStatusItems')[3] }}
+                  </div>
                 </div>
+                <div class="item-value">{{ nftCnt.nftCntPromotion || 0 }}</div>
               </div>
-              <div class="item-value">{{ nftCnt.nftCntPromotion || 0 }}</div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- blockchain -->
-      <section class="marketplace-filter-item" id="market-sell-blockchain">
-        <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'blockchain')">
-          <div class="marketplace-filter-title">
-            {{ $t('Market.FilterBlockchain') }}
-          </div>
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-if="!itemsShows.blockchain"
-            :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
-          />
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-else
-            :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
-          />
-        </div>
-        <div
-          class="marketplace-filter-popover"
-          :style="{
-            height: itemsShows.blockchain ? itemsHeights['blockchain'] + 'px' : '0',
-          }"
-        >
-          <div ref="blockchain">
-            <div class="marketplace-filter-popover-item">
-              <div
-                class="marketplace-filter-popover-item-title"
-                :data-obj="JSON.stringify({ section: 'blockchain', value: 'ETHEREUM' })"
-              >
-                <div class="red-dot disabled"></div>
-                <div class="item-value" @click="(event) => blockchainClicked(event, 'ETHEREUM')" data-value="ETHEREUM">
-                  {{ $t('Market.FilterBlockchainItems')[0] }}
-                </div>
-              </div>
-              <div class="item-value">{{ getNftCnt('CateETH') }}</div>
+        <!-- blockchain -->
+        <section class="marketplace-filter-item" id="market-sell-blockchain">
+          <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'blockchain')">
+            <div class="marketplace-filter-title">
+              {{ $t('Market.FilterBlockchain') }}
             </div>
-            <div class="marketplace-filter-popover-item">
-              <div
-                class="marketplace-filter-popover-item-title"
-                :data-obj="JSON.stringify({ section: 'blockchain', value: 'KLAYTN' })"
-              >
-                <div class="red-dot disabled"></div>
-                <div class="item-value" @click="(event) => blockchainClicked(event, 'KLAYTN')" data-value="KLAYTN">
-                  {{ $t('Market.FilterBlockchainItems')[1] }}
-                </div>
-              </div>
-              <div class="item-value">{{ getNftCnt('CateKLAY') }}</div>
-            </div>
+            <img
+              class="marketplace-filter-item-top-chevron"
+              v-if="!itemsShows.blockchain"
+              :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
+            />
+            <img
+              class="marketplace-filter-item-top-chevron"
+              v-else
+              :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
+            />
           </div>
-        </div>
-      </section>
-
-      <!-- categories -->
-      <!-- <section class="marketplace-filter-item" id="market-sell-categories" v-show="this.sections.includes('categories')">
-        <div class="marketplace-filter-item-top" @click="event => topClicked(event, 'categories')">
-          <div class="marketplace-filter-title">{{ $t('Market.FilterCategories') }}</div>
-          <img class="marketplace-filter-item-top-chevron" v-if="!itemsShows.categories" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
-          <img class="marketplace-filter-item-top-chevron" v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
-        </div>
-        <div
+          <div
             class="marketplace-filter-popover"
-            :style="{'height': itemsShows.categories ? itemsHeights['categories'] + 'px' : '0'}"
+            :style="{
+              height: itemsShows.blockchain ? itemsHeights['blockchain'] + 'px' : '0',
+            }"
+          >
+            <div ref="blockchain">
+              <div class="marketplace-filter-popover-item">
+                <div
+                  class="marketplace-filter-popover-item-title"
+                  :data-obj="JSON.stringify({ section: 'blockchain', value: 'ETHEREUM' })"
+                >
+                  <div class="red-dot disabled"></div>
+                  <div class="item-value" @click="(event) => blockchainClicked(event, 'ETHEREUM')" data-value="ETHEREUM">
+                    {{ $t('Market.FilterBlockchainItems')[0] }}
+                  </div>
+                </div>
+                <div class="item-value">{{ getNftCnt('CateETH') }}</div>
+              </div>
+              <div class="marketplace-filter-popover-item">
+                <div
+                  class="marketplace-filter-popover-item-title"
+                  :data-obj="JSON.stringify({ section: 'blockchain', value: 'KLAYTN' })"
+                >
+                  <div class="red-dot disabled"></div>
+                  <div class="item-value" @click="(event) => blockchainClicked(event, 'KLAYTN')" data-value="KLAYTN">
+                    {{ $t('Market.FilterBlockchainItems')[1] }}
+                  </div>
+                </div>
+                <div class="item-value">{{ getNftCnt('CateKLAY') }}</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- categories -->
+        <!-- <section class="marketplace-filter-item" id="market-sell-categories" v-show="this.sections.includes('categories')">
+          <div class="marketplace-filter-item-top" @click="event => topClicked(event, 'categories')">
+            <div class="marketplace-filter-title">{{ $t('Market.FilterCategories') }}</div>
+            <img class="marketplace-filter-item-top-chevron" v-if="!itemsShows.categories" :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')">
+            <img class="marketplace-filter-item-top-chevron" v-else :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')">
+          </div>
+          <div
+              class="marketplace-filter-popover"
+              :style="{'height': itemsShows.categories ? itemsHeights['categories'] + 'px' : '0'}"
+          >
+            <div ref="categories">
+              <div class="marketplace-filter-popover-item">
+                <div
+                    class="marketplace-filter-popover-item-title"
+                    :data-obj="JSON.stringify({section: 'categories', value: 'ART'})"
+                >
+                  <div class="red-dot disabled"></div>
+                  <div class="item-value" @click="(event) => categoriesClicked(event, 'ART')" data-value='ART'>{{ $t('Market.FilterCategoriesItems')[2] }}</div>
+                </div>
+                <div class="item-value">{{ getNftCnt('CateART') }}</div>
+              </div>
+              <div class="marketplace-filter-popover-item">
+                <div
+                    class="marketplace-filter-popover-item-title"
+                    :data-obj="JSON.stringify({section: 'categories', value: 'COLLECTIBLES'})"
+                >
+                  <div class="red-dot disabled"></div>
+                  <div class="item-value" @click="(event) => categoriesClicked(event, 'COLLECTIBLES')" data-value='COLLECTIBLES'>{{ $t('Market.FilterCategoriesItems')[3] }}</div>
+                </div>
+                <div class="item-value">{{ getNftCnt('CateCOLLECT') }}</div>
+              </div>
+              <div class="marketplace-filter-popover-item">
+                <div
+                    class="marketplace-filter-popover-item-title"
+                    :data-obj="JSON.stringify({section: 'categories', value: 'ETC'})"
+                >
+                  <div class="red-dot disabled"></div>
+                  <div class="item-value" @click="(event) => categoriesClicked(event, 'ETC')" data-value='ETC'>{{ $t('Market.FilterCategoriesItems')[4] }}</div>
+                </div>
+                <div class="item-value">{{ getNftCnt('CateETC') }}</div>
+              </div>
+            </div>
+          </div>
+        </section> -->
+
+        <!-- collections -->
+        <section
+          class="marketplace-filter-item"
+          id="market-sell-collections"
+          v-show="this.sections.includes('collections')"
         >
-          <div ref="categories">
-            <div class="marketplace-filter-popover-item">
-              <div
-                  class="marketplace-filter-popover-item-title"
-                  :data-obj="JSON.stringify({section: 'categories', value: 'ART'})"
-              >
-                <div class="red-dot disabled"></div>
-                <div class="item-value" @click="(event) => categoriesClicked(event, 'ART')" data-value='ART'>{{ $t('Market.FilterCategoriesItems')[2] }}</div>
-              </div>
-              <div class="item-value">{{ getNftCnt('CateART') }}</div>
+          <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'collections')">
+            <div class="marketplace-filter-title">
+              {{ $t('Market.FilterCollections') }}
             </div>
-            <div class="marketplace-filter-popover-item">
+            <img
+              class="marketplace-filter-item-top-chevron"
+              v-if="!itemsShows.collections"
+              :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
+            />
+            <img
+              class="marketplace-filter-item-top-chevron"
+              v-else
+              :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
+            />
+          </div>
+          <div class="marketplace-filter-popover" :style="{ height: itemsShows.collections ? '140px' : '0' }">
+            <div ref="collections">
               <div
-                  class="marketplace-filter-popover-item-title"
-                  :data-obj="JSON.stringify({section: 'categories', value: 'COLLECTIBLES'})"
+                v-for="(item, idx) in originalFilter.collections"
+                class="marketplace-filter-popover-collection disabled marketplace-filter-popover-item-title"
+                @click="(event) => collectionsClicked(event, item.name, item)"
+                :key="idx"
+                :data-sideinfo="nftCnt[`sellCollection${item.symbol}`]"
+                :data-obj="JSON.stringify({ section: 'collections', value: item.name })"
               >
-                <div class="red-dot disabled"></div>
-                <div class="item-value" @click="(event) => categoriesClicked(event, 'COLLECTIBLES')" data-value='COLLECTIBLES'>{{ $t('Market.FilterCategoriesItems')[3] }}</div>
+                {{ item.name }}
               </div>
-              <div class="item-value">{{ getNftCnt('CateCOLLECT') }}</div>
-            </div>
-            <div class="marketplace-filter-popover-item">
-              <div
-                  class="marketplace-filter-popover-item-title"
-                  :data-obj="JSON.stringify({section: 'categories', value: 'ETC'})"
-              >
-                <div class="red-dot disabled"></div>
-                <div class="item-value" @click="(event) => categoriesClicked(event, 'ETC')" data-value='ETC'>{{ $t('Market.FilterCategoriesItems')[4] }}</div>
-              </div>
-              <div class="item-value">{{ getNftCnt('CateETC') }}</div>
             </div>
           </div>
-        </div>
-      </section> -->
+        </section>
 
-      <!-- collections -->
-      <section
-        class="marketplace-filter-item"
-        id="market-sell-collections"
-        v-show="this.sections.includes('collections')"
-      >
-        <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'collections')">
-          <div class="marketplace-filter-title">
-            {{ $t('Market.FilterCollections') }}
+        <!-- currencies -->
+        <section
+          class="marketplace-filter-item"
+          id="market-sell-currencies"
+          v-show="this.sections.includes('currencies')"
+        >
+          <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'currencies')">
+            <div class="marketplace-filter-title">
+              {{ $t('Market.FilterCurrencies') }}
+            </div>
+            <img
+              class="marketplace-filter-item-top-chevron"
+              v-if="!itemsShows.currencies"
+              :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
+            />
+            <img
+              class="marketplace-filter-item-top-chevron"
+              v-else
+              :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
+            />
           </div>
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-if="!itemsShows.collections"
-            :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
-          />
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-else
-            :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
-          />
-        </div>
-        <div class="marketplace-filter-popover" :style="{ height: itemsShows.collections ? '140px' : '0' }">
-          <div ref="collections">
-            <div
-              v-for="(item, idx) in originalFilter.collections"
-              class="marketplace-filter-popover-collection disabled marketplace-filter-popover-item-title"
-              @click="(event) => collectionsClicked(event, item.name, item)"
-              :key="idx"
-              :data-sideinfo="nftCnt[`sellCollection${item.symbol}`]"
-              :data-obj="JSON.stringify({ section: 'collections', value: item.name })"
-            >
-              {{ item.name }}
+          <div class="marketplace-filter-popover" :style="{ height: itemsShows.currencies ? '150px' : '0' }">
+            <div ref="currencies">
+              <div class="marketplace-filter-popover-item" v-for="(item, idx) in this.originalFilter.currencies">
+                <div
+                  class="marketplace-filter-popover-item-title"
+                  :data-obj="
+                    JSON.stringify({
+                      section: 'currencies',
+                      value: item.name,
+                      symbol: item.symbol,
+                    })
+                  "
+                >
+                  <div class="red-dot disabled"></div>
+                  <div class="item-value" @click="(event) => currenciesClicked(event, item.name, item)">
+                    {{ item.symbol }}
+                  </div>
+                </div>
+                <div class="item-value">
+                  {{ getNftCnt(`Currency${item.symbol}`) }}
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- currencies -->
-      <section
-        class="marketplace-filter-item"
-        id="market-sell-currencies"
-        v-show="this.sections.includes('currencies')"
-      >
-        <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'currencies')">
-          <div class="marketplace-filter-title">
-            {{ $t('Market.FilterCurrencies') }}
+        <!-- price -->
+        <section class="marketplace-filter-item" id="market-sell-price" v-show="this.sections.includes('price')">
+          <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'price')">
+            <div class="marketplace-filter-title">
+              {{ $t('Market.FilterPrice') }}
+            </div>
+            <img
+              class="marketplace-filter-item-top-chevron"
+              v-if="!itemsShows.price"
+              :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
+            />
+            <img
+              class="marketplace-filter-item-top-chevron"
+              v-else
+              :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
+            />
           </div>
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-if="!itemsShows.currencies"
-            :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
-          />
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-else
-            :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
-          />
-        </div>
-        <div class="marketplace-filter-popover" :style="{ height: itemsShows.currencies ? '150px' : '0' }">
-          <div ref="currencies">
-            <div class="marketplace-filter-popover-item" v-for="(item, idx) in this.originalFilter.currencies">
-              <div
-                class="marketplace-filter-popover-item-title"
-                :data-obj="
-                  JSON.stringify({
-                    section: 'currencies',
-                    value: item.name,
-                    symbol: item.symbol,
-                  })
-                "
-              >
-                <div class="red-dot disabled"></div>
-                <div class="item-value" @click="(event) => currenciesClicked(event, item.name, item)">
+          <div
+            class="marketplace-filter-popover"
+            :style="{
+              height: itemsShows.price ? itemsHeights['price'] + 'px' : '0',
+            }"
+          >
+            <div ref="price">
+              <select name="currency" ref="price-select" @change="currencyInPriceChanged">
+                <option value="" selected disabled hidden>select currency</option>
+                <option v-for="(item, idx) in this.originalFilter.currencies" :value="item.symbol">
                   {{ item.symbol }}
+                </option>
+              </select>
+
+              <div
+                class="marketplace-filter-popover-item"
+                v-for="(item, idx) in this.originalFilter.price"
+                ref="priceItems"
+              >
+                <div
+                  class="marketplace-filter-popover-item-title"
+                  :data-obj="JSON.stringify({ section: 'price', ...item })"
+                >
+                  <div class="red-dot disabled"></div>
+                  <div class="item-value" @click="(event) => priceClicked(event, item.value, item)">
+                    {{ item.name }}
+                  </div>
                 </div>
               </div>
-              <div class="item-value">
-                {{ getNftCnt(`Currency${item.symbol}`) }}
-              </div>
+              <section class="marketplace-filter-popover-price-input-section">
+                <div class="marketplace-filter-popover-price-input-wrap">
+                  <input
+                    class="marketplace-filter-popover-price-input"
+                    type="number"
+                    placeholder="Min"
+                    ref="priceMin"
+                    @keyup="priceKeyUpped"
+                  />
+                </div>
+                <span class="marketplace-filter-popover-price-span">~</span>
+                <div class="marketplace-filter-popover-price-input-wrap">
+                  <input
+                    class="marketplace-filter-popover-price-input has-img"
+                    type="number"
+                    placeholder="Max"
+                    ref="priceMax"
+                    @keyup="priceKeyUpped"
+                  />
+                  <img :src="$static.getFileURL('img/icon/ic-search-gray.svg')" @click="priceSearchClicked" />
+                </div>
+              </section>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- price -->
-      <section class="marketplace-filter-item" id="market-sell-price" v-show="this.sections.includes('price')">
-        <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'price')">
-          <div class="marketplace-filter-title">
-            {{ $t('Market.FilterPrice') }}
+        <section class="marketplace-filter-item" id="market-sell-publisher" v-show="this.sections.includes('publisher')">
+          <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'publisher')">
+            <div class="marketplace-filter-title">
+              {{ $t('Market.FilterPublisher') }}
+            </div>
+            <img
+              class="marketplace-filter-item-top-chevron"
+              v-if="!itemsShows.publisher"
+              :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
+            />
+            <img
+              class="marketplace-filter-item-top-chevron"
+              v-else
+              :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
+            />
           </div>
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-if="!itemsShows.price"
-            :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
-          />
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-else
-            :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
-          />
-        </div>
-        <div
-          class="marketplace-filter-popover"
-          :style="{
-            height: itemsShows.price ? itemsHeights['price'] + 'px' : '0',
-          }"
-        >
-          <div ref="price">
-            <select name="currency" ref="price-select" @change="currencyInPriceChanged">
-              <option value="" selected disabled hidden>select currency</option>
-              <option v-for="(item, idx) in this.originalFilter.currencies" :value="item.symbol">
-                {{ item.symbol }}
-              </option>
-            </select>
-
-            <div
-              class="marketplace-filter-popover-item"
-              v-for="(item, idx) in this.originalFilter.price"
-              ref="priceItems"
-            >
-              <div
-                class="marketplace-filter-popover-item-title"
-                :data-obj="JSON.stringify({ section: 'price', ...item })"
-              >
-                <div class="red-dot disabled"></div>
-                <div class="item-value" @click="(event) => priceClicked(event, item.value, item)">
-                  {{ item.name }}
+          <div class="marketplace-filter-popover" :style="{ height: itemsShows.publisher ? '175px' : '0' }">
+            <div ref="publisher" class="marketplace-filter-popover-publisher">
+              <div class="marketplace-filter-popover-publisher-input-container">
+                <input
+                  type="text"
+                  class="marketplace-filter-popover-input"
+                  v-model="publisherInput"
+                  v-on:keyup.enter="publisherSubmitClicked"
+                />
+                <img :src="$static.getFileURL('img/icon/ic-search-gray.svg')" @click="publisherSubmitClicked" />
+              </div>
+              <div class="marketplace-filter-popover-publisher-list" ref="publisher-list">
+                <div
+                  class="marketplace-filter-popover-publisher-list-item disabled"
+                  v-for="item in getPublisherList()"
+                  @click="(event) => publisherClicked(event, item)"
+                  :data-name="item"
+                >
+                  <div class="red-dot" />
+                  <span>{{ item }}</span>
                 </div>
               </div>
             </div>
-            <section class="marketplace-filter-popover-price-input-section">
-              <div class="marketplace-filter-popover-price-input-wrap">
-                <input
-                  class="marketplace-filter-popover-price-input"
-                  type="number"
-                  placeholder="Min"
-                  ref="priceMin"
-                  @keyup="priceKeyUpped"
-                />
-              </div>
-              <span class="marketplace-filter-popover-price-span">~</span>
-              <div class="marketplace-filter-popover-price-input-wrap">
-                <input
-                  class="marketplace-filter-popover-price-input has-img"
-                  type="number"
-                  placeholder="Max"
-                  ref="priceMax"
-                  @keyup="priceKeyUpped"
-                />
-                <img :src="$static.getFileURL('img/icon/ic-search-gray.svg')" @click="priceSearchClicked" />
-              </div>
-            </section>
           </div>
-        </div>
-      </section>
-
-      <section class="marketplace-filter-item" id="market-sell-publisher" v-show="this.sections.includes('publisher')">
-        <div class="marketplace-filter-item-top" @click="(event) => topClicked(event, 'publisher')">
-          <div class="marketplace-filter-title">
-            {{ $t('Market.FilterPublisher') }}
-          </div>
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-if="!itemsShows.publisher"
-            :src="$static.getFileURL('img/icon/ic-chevron-bottom-faq.svg')"
-          />
-          <img
-            class="marketplace-filter-item-top-chevron"
-            v-else
-            :src="$static.getFileURL('img/icon/ic-chevron-top-faq.svg')"
-          />
-        </div>
-        <div class="marketplace-filter-popover" :style="{ height: itemsShows.publisher ? '175px' : '0' }">
-          <div ref="publisher" class="marketplace-filter-popover-publisher">
-            <div class="marketplace-filter-popover-publisher-input-container">
-              <input
-                type="text"
-                class="marketplace-filter-popover-input"
-                v-model="publisherInput"
-                v-on:keyup.enter="publisherSubmitClicked"
-              />
-              <img :src="$static.getFileURL('img/icon/ic-search-gray.svg')" @click="publisherSubmitClicked" />
-            </div>
-            <div class="marketplace-filter-popover-publisher-list" ref="publisher-list">
-              <div
-                class="marketplace-filter-popover-publisher-list-item disabled"
-                v-for="item in getPublisherList()"
-                @click="(event) => publisherClicked(event, item)"
-                :data-name="item"
-              >
-                <div class="red-dot" />
-                <span>{{ item }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   </div>
 </template>
