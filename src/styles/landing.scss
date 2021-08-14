@@ -31,6 +31,7 @@
   .landing-page__body {
     @include square(100%);
     display: flex;
+    height: auto !important;
   }
 
   .landing-page__section {
@@ -45,7 +46,7 @@
     @include center-align-flex;
 
     img {
-      width: 100%;
+      width: 88%;
     }
     @media screen and (max-width:760px){
       display: none;
@@ -53,11 +54,11 @@
   }
 
   .landing-page__section__description {
-    width: calc(100% - 640px);
+    // width: calc(100% - 640px);
 
     > article {
       height: 100%;
-      padding-left: 80px;
+      padding-left: 2%;
       @include vertical-align-flex;
 
       @media screen and (max-width:760px){
@@ -77,10 +78,16 @@
       }
 
       h1 {
-        width: 540px;
+        max-width: 540px;
         font-size: 40px;
         margin-bottom: 30px;
+        width: 100%;
 
+        @media screen and (min-width: 761px) and (max-width: 1200px){
+          font-size: 34px;
+          max-width: 380px;
+          margin-top: -50px;
+        }
         @media screen and (max-width:760px){
           font-size: 28px;
           letter-spacing: -0.05em;
@@ -88,10 +95,11 @@
           max-width: 400px;
           margin-bottom: 22px;
         }
+        
       }
 
       p {
-        width: 600px;
+        max-width: 600px;
         line-height: 24px;
         font: {
           size: 16px;
@@ -100,6 +108,10 @@
         color: $gen_lightblack;
         margin-bottom: 40px;
 
+        @media screen and (min-width: 761px) and (max-width: 1200px){
+          font-size: 14px;
+          padding-right: 40px;
+        }
         @media screen and (max-width:760px){
           width: 100%;
           font-size: 14px;

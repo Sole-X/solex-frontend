@@ -494,8 +494,10 @@
   }
 
   .main-connect-wallet__select {
-    width: 380px;
-    margin: 0 auto 80px auto;
+    max-width: 380px;
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto 60px auto;
   }
 
   .main-connect-wallet__warning {
