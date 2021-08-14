@@ -1,5 +1,12 @@
 <template>
   <section class="explorer-main-history-page">
+     <button class="btn-filter" @click="btnFilterOpen()">
+      <svg width="160px" height="40px" viewBox="0 0 160 40" class="border">
+        <polyline points="159,1 159,39 1,39 1,1 159,1" class="bg-line" />
+        <polyline points="159,1 159,39 1,39 1,1 159,1" class="hl-line" />
+      </svg>
+      <span>{{ $t('Market.FilterFilterBy') }}</span>
+    </button>
     <h1 class="explorer-main__title">
       <strong>{{ $t('Explorer.ActivityMenu') }}</strong>
     </h1>
@@ -273,6 +280,12 @@ export default {
       }
 
       return image;
+    },
+
+     btnFilterOpen() {
+      const mainPageSidebaArea = document.querySelector("#mainPageSidebar");
+
+      mainPageSidebaArea.style.left = 0;
     },
   },
 

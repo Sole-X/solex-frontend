@@ -2,7 +2,7 @@
   <div class="market-filter-area">
     <section class="market-filter-controller" id="market-filter-controller">
       <div class="title">{{ $t('Market.FilterFilterBy') }}</div>
-      <div class="icon-close" @click="marketFilterClose()">
+      <div class="icon-close" @click="btnFilterClose()">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/>
         </svg>
       </div>
@@ -1496,7 +1496,7 @@ export default {
       return this.pubs;
     },
 
-     marketFilterClose() {
+     btnFilterClose() {
       const marketFilterArea = document.querySelector(".market-filter-area");
 
       marketFilterArea.style.left = "-100%";

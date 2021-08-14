@@ -1,195 +1,204 @@
 <template>
-  <aside class="main-page__sidebar">
-    <div :class="$bem('main-page__filter', '', ['status'])" v-show="getSelectedFilter.length > 0">
-      <div class="main-page__filter__title">
-        <h5>
-          <strong>{{ $t('Market.SelectedFilter') }}</strong>
-        </h5>
-
-        <button class="main-page__filter__reset" @click="clearSearchFilter()">
-          {{ $t('Market.Reset') }}
-          <img :src="$static.getFileURL('img/icon/ic-refresh-gray.svg')" />
-        </button>
+  <aside class="main-page__sidebar" id="mainPageSidebar">
+    <section class="main-page-controller" id="main-page-controller">
+      <div class="title">{{ $t('Market.FilterFilterBy') }}</div>
+      <div class="icon-close" @click="mainFilterClose()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24"><path d="M23.954 21.03l-9.184-9.095 9.092-9.174-2.832-2.807-9.09 9.179-9.176-9.088-2.81 2.81 9.186 9.105-9.095 9.184 2.81 2.81 9.112-9.192 9.18 9.1z"/>
+        </svg>
       </div>
+    </section>
+    <section class="main-page-filter-wrapper">
+      <div :class="$bem('main-page__filter', '', ['status'])" v-show="getSelectedFilter.length > 0">
+        <div class="main-page__filter__title">
+          <h5>
+            <strong>{{ $t('Market.SelectedFilter') }}</strong>
+          </h5>
 
-      <div class="main-page__selected-filter">
-        <button
-          v-for="selected in getSelectedFilter"
-          :key="`${selected.filter}-${selected.option}`"
-          @click="handleRemoveFilter(selected)"
-        >
-          <strong>{{ selected.option.toUpperCase() }}</strong>
-          <img :src="$static.getFileURL('img/icon/ic-close-gray.svg')" alt="X" class="v-m" />
-        </button>
-      </div>
-    </div>
+          <button class="main-page__filter__reset" @click="clearSearchFilter()">
+            {{ $t('Market.Reset') }}
+            <img :src="$static.getFileURL('img/icon/ic-refresh-gray.svg')" />
+          </button>
+        </div>
 
-    <div class="main-page__filter" v-if="showStatusFilter">
-      <div class="main-page__filter__title">
-        <h5>
-          <strong>{{ $t('Market.Status') }}</strong>
-        </h5>
-
-        <button></button>
-      </div>
-
-      <div class="main-page__filter__options">
-        <ul>
-          <li
-            v-for="(value, index) in getSearchFilter.status"
-            :key="value.name"
-            :class="value.flag ? 'selected' : ''"
-            @click="handleUpdateSearchFilter('status', { value, optionIndex: index })"
+        <div class="main-page__selected-filter">
+          <button
+            v-for="selected in getSelectedFilter"
+            :key="`${selected.filter}-${selected.option}`"
+            @click="handleRemoveFilter(selected)"
           >
-            <p>{{ $t(value.name) }}</p>
-            <p v-if="$route.name === 'AssetMainPage'">
-              {{ getTotalCount('status', value) }}
-            </p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="main-page__filter">
-      <div class="main-page__filter__title">
-        <h5>
-          <strong>{{ $t('Market.Blockchain') }}</strong>
-        </h5>
-        <button></button>
-      </div>
-      <div class="main-page__filter__options">
-        <ul>
-          <li
-            v-for="(value, index) in getSearchFilter.blockchain"
-            :key="value.name"
-            :class="value.flag ? 'selected' : ''"
-            @click="handleUpdateSearchFilter('blockchain', { value, optionIndex: index })"
-          >
-            <p>{{ $t(value.name) }}</p>
-            <p v-if="$route.name === 'AssetMainPage'">
-              {{ getTotalCount('blockchain', value) }}
-            </p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="main-page__filter">
-      <div class="main-page__filter__title">
-        <h5>
-          <strong>{{ $t('Market.Categories') }}</strong>
-        </h5>
-        <button></button>
-      </div>
-      <div class="main-page__filter__options">
-        <ul>
-          <li
-            v-for="(value, index) in getSearchFilter.category"
-            :key="value.name"
-            :class="value.flag ? 'selected' : ''"
-            @click="handleUpdateSearchFilter('category', { value, optionIndex: index })"
-          >
-            <p>{{ $t(value.name) }}</p>
-            <!-- TODO : Explorer -->
-            <p v-if="$route.name === 'AssetMainPage'">
-              {{ getTotalCount('category', value) }}
-            </p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="main-page__filter">
-      <div class="main-page__filter__title">
-        <h5>
-          <strong>{{ $t('Market.Collections') }}</strong>
-        </h5>
-
-        <button></button>
+            <strong>{{ selected.option.toUpperCase() }}</strong>
+            <img :src="$static.getFileURL('img/icon/ic-close-gray.svg')" alt="X" class="v-m" />
+          </button>
+        </div>
       </div>
 
-      <div class="main-page__filter__collection">
-        <button
-          v-for="(value, index) in getSearchFilter.collection"
-          :key="value.name"
-          :class="value.flag ? 'selected' : ''"
-          @click="handleUpdateSearchFilter('collection', { value, optionIndex: index })"
-        >
-          {{ value.name }}
-        </button>
-      </div>
-    </div>
+      <div class="main-page__filter" v-if="showStatusFilter">
+        <div class="main-page__filter__title">
+          <h5>
+            <strong>{{ $t('Market.Status') }}</strong>
+          </h5>
 
-    <div class="main-page__filter" v-if="isAboutNft">
-      <div class="main-page__filter__title">
-        <h5>
-          <strong>{{ $t('Market.Currencies') }}</strong>
-        </h5>
+          <button></button>
+        </div>
 
-        <button></button>
-      </div>
-
-      <div class="main-page__filter__options">
-        <ul>
-          <li
-            v-for="(value, index) in getSearchFilter.currency"
-            :key="value.name"
-            :class="value.flag ? 'selected' : ''"
-            @click="handleUpdateSearchFilter('currency', { value, optionIndex: index })"
-          >
-            <p>{{ value.name }}</p>
-            <!-- TODO : Explorer -->
-            <p v-if="$route.name === 'AssetMainPage'">
-              {{ getTotalCount('currency', value) }}
-            </p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="main-page__filter" v-if="isAboutNft">
-      <div class="main-page__filter__title">
-        <h5>
-          <strong>{{ $t('Market.Price') }}</strong>
-        </h5>
-      </div>
-
-      <div class="main-page__filter__price">
         <div class="main-page__filter__options">
           <ul>
             <li
-              v-for="(info, index) in getSearchFilter.price.preset"
-              :key="index"
-              :class="info.selected ? 'selected' : ''"
-              @click="handleUpdateSearchFilter('pricePreset', { value: info.selected, optionIndex: index })"
+              v-for="(value, index) in getSearchFilter.status"
+              :key="value.name"
+              :class="value.flag ? 'selected' : ''"
+              @click="handleUpdateSearchFilter('status', { value, optionIndex: index })"
             >
-              <span v-if="info.min === null"> ~ {{ info.max }} </span>
-
-              <span v-else-if="info.max === null"> {{ info.min }}+ </span>
-
-              <span v-else>{{ info.min }} ~ {{ info.max }}</span>
+              <p>{{ $t(value.name) }}</p>
+              <p v-if="$route.name === 'AssetMainPage'">
+                {{ getTotalCount('status', value) }}
+              </p>
             </li>
           </ul>
         </div>
+      </div>
 
-        <div class="main-page__filter__price__input">
-          <div class="main-page__filter__price__input__box">
-            <input type="text" v-model="customFilter.price.min" placeholder="min" />
+      <div class="main-page__filter">
+        <div class="main-page__filter__title">
+          <h5>
+            <strong>{{ $t('Market.Blockchain') }}</strong>
+          </h5>
+          <button></button>
+        </div>
+        <div class="main-page__filter__options">
+          <ul>
+            <li
+              v-for="(value, index) in getSearchFilter.blockchain"
+              :key="value.name"
+              :class="value.flag ? 'selected' : ''"
+              @click="handleUpdateSearchFilter('blockchain', { value, optionIndex: index })"
+            >
+              <p>{{ $t(value.name) }}</p>
+              <p v-if="$route.name === 'AssetMainPage'">
+                {{ getTotalCount('blockchain', value) }}
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="main-page__filter">
+        <div class="main-page__filter__title">
+          <h5>
+            <strong>{{ $t('Market.Categories') }}</strong>
+          </h5>
+          <button></button>
+        </div>
+        <div class="main-page__filter__options">
+          <ul>
+            <li
+              v-for="(value, index) in getSearchFilter.category"
+              :key="value.name"
+              :class="value.flag ? 'selected' : ''"
+              @click="handleUpdateSearchFilter('category', { value, optionIndex: index })"
+            >
+              <p>{{ $t(value.name) }}</p>
+              <!-- TODO : Explorer -->
+              <p v-if="$route.name === 'AssetMainPage'">
+                {{ getTotalCount('category', value) }}
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="main-page__filter">
+        <div class="main-page__filter__title">
+          <h5>
+            <strong>{{ $t('Market.Collections') }}</strong>
+          </h5>
+
+          <button></button>
+        </div>
+
+        <div class="main-page__filter__collection">
+          <button
+            v-for="(value, index) in getSearchFilter.collection"
+            :key="value.name"
+            :class="value.flag ? 'selected' : ''"
+            @click="handleUpdateSearchFilter('collection', { value, optionIndex: index })"
+          >
+            {{ value.name }}
+          </button>
+        </div>
+      </div>
+
+      <div class="main-page__filter" v-if="isAboutNft">
+        <div class="main-page__filter__title">
+          <h5>
+            <strong>{{ $t('Market.Currencies') }}</strong>
+          </h5>
+
+          <button></button>
+        </div>
+
+        <div class="main-page__filter__options">
+          <ul>
+            <li
+              v-for="(value, index) in getSearchFilter.currency"
+              :key="value.name"
+              :class="value.flag ? 'selected' : ''"
+              @click="handleUpdateSearchFilter('currency', { value, optionIndex: index })"
+            >
+              <p>{{ value.name }}</p>
+              <!-- TODO : Explorer -->
+              <p v-if="$route.name === 'AssetMainPage'">
+                {{ getTotalCount('currency', value) }}
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="main-page__filter" v-if="isAboutNft">
+        <div class="main-page__filter__title">
+          <h5>
+            <strong>{{ $t('Market.Price') }}</strong>
+          </h5>
+        </div>
+
+        <div class="main-page__filter__price">
+          <div class="main-page__filter__options">
+            <ul>
+              <li
+                v-for="(info, index) in getSearchFilter.price.preset"
+                :key="index"
+                :class="info.selected ? 'selected' : ''"
+                @click="handleUpdateSearchFilter('pricePreset', { value: info.selected, optionIndex: index })"
+              >
+                <span v-if="info.min === null"> ~ {{ info.max }} </span>
+
+                <span v-else-if="info.max === null"> {{ info.min }}+ </span>
+
+                <span v-else>{{ info.min }} ~ {{ info.max }}</span>
+              </li>
+            </ul>
           </div>
 
-          <div class="divider">
-            <strong>~</strong>
-          </div>
+          <div class="main-page__filter__price__input">
+            <div class="main-page__filter__price__input__box">
+              <input type="text" v-model="customFilter.price.min" placeholder="min" />
+            </div>
 
-          <div class="main-page__filter__price__input__box">
-            <input type="text" v-model="customFilter.price.max" placeholder="max" />
-            <button @click="handleSubmitCustomPrice()">
-              <img :src="$static.getFileURL('img/icon/ic-market-search-gray.svg')" />
-            </button>
+            <div class="divider">
+              <strong>~</strong>
+            </div>
+
+            <div class="main-page__filter__price__input__box">
+              <input type="text" v-model="customFilter.price.max" placeholder="max" />
+              <button @click="handleSubmitCustomPrice()">
+                <img :src="$static.getFileURL('img/icon/ic-market-search-gray.svg')" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   </aside>
 </template>
 
@@ -360,6 +369,12 @@ export default {
         value: this.customFilter.price,
         optionIndex: -1,
       });
+    },
+
+    mainFilterClose() {
+      const mainFilterArea = document.querySelector(".main-page__sidebar");
+
+      mainFilterArea.style.left = "-100%";
     },
   },
 

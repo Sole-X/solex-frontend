@@ -28,7 +28,6 @@
               {{ $t('General.LandingPageDescription')[1] }}
             </p>
 
-          <!--반응형 지갑 열기 버튼 추가-->
             <button :class="$bem('common-submit-button', '', ['outline-primary none'])" @click="handleConnectWallet()">
               <strong>{{ $t('General.ConnectWallet') }}</strong>
             </button>

@@ -104,7 +104,7 @@
             <span>{{ $t('Market.RegisterOffer') }}</span>
           </button>
 
-           <button class="btn-market-filter" @click="marketFilterOpen()">
+           <button class="btn-filter" @click="btnFilterOpen()">
             <svg width="160px" height="40px" viewBox="0 0 160 40" class="border">
               <polyline points="159,1 159,39 1,39 1,1 159,1" class="bg-line" />
               <polyline points="159,1 159,39 1,39 1,1 159,1" class="hl-line" />
@@ -368,7 +368,7 @@ export default {
       }
     },
 
-    marketFilterOpen() {
+    btnFilterOpen() {
       const marketFilterArea = document.querySelector(".market-filter-area");
 
       marketFilterArea.style.left = 0;

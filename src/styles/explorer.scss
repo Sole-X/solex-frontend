@@ -8,11 +8,23 @@
     max-width: 960px;
     margin: 0 auto;
   }
+
+  @media (max-width: 1200px) {
+    padding: 0;
+    width: 100%;
+    height: auto;
+  }
 }
 
 .explorer-main__title {
   font-size: 28px;
   margin-bottom: 10px;
+
+  @media (max-width: 1200px) {
+    margin: 1rem 0;
+    padding: 0 1rem;
+    text-align: center;
+  }
 }
 
 .explorer-main-history-page {
@@ -21,6 +33,10 @@
 
     .main-item-search__notice {
       width: calc(100% - 160px);
+
+      @media (max-width: 1200px) {
+        width:100%;
+      }
     }
 
     .main-item-search__filter {
@@ -72,10 +88,28 @@
 
     .main-item-search__notice {
       width: calc(100% - 160px);
+
+      @media (max-width: 1200px) {
+        width:100%;
+      }
     }
 
     .main-item-search__filter {
       width: 160px;
+
+      @media (max-width: 1200px) {
+        display: block;
+        width:100%;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      display: block;
+      margin: 1rem 0;
+      padding: 0 1rem;
+      width:100%;
+      text-align: center;
+      width:100%;
     }
   }
 
@@ -90,6 +124,11 @@
     h4 {
       font-size: 18px;
       margin-bottom: 30px;
+
+      @media (max-width: 1200px) {
+        padding: 0 1rem;
+        width:100%;
+      }
     }
 
     .explorer-main-ranking__list {
@@ -114,6 +153,10 @@
           background: #fff;
         }
       }
+    }
+
+    @media (max-width: 1200px) {
+      width:100%;
     }
   }
 
@@ -241,6 +284,10 @@
               border-radius: 3px;
               z-index: -1;
             }
+
+            @media (max-width: 1200px) {
+              position: initial;
+            }
           }
         }
       }
@@ -278,6 +325,61 @@
 
     * {
       font-size: 12px;
+    }
+  }
+}
+
+.btn-filter {
+  display: none;
+  position: relative;
+  width: 160px;
+  height: 40px;
+  background: $primary_color;
+  border: 1px solid #0097e3;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  outline: none;
+  transition: ease-in-out 1s, background-color 1s;
+
+  &:hover {
+    background-color: $primary_hover;
+    transition: 1s ease-in-out;
+
+    svg {
+      stroke-dashoffset: -400;
+    }
+  }
+
+  &:active {
+    background-color: $primary_active;
+  }
+
+  svg {
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    fill: none;
+    width: 100%;
+    stroke: $primary_hover;
+    stroke-dasharray: 150 400;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+  }
+
+  span {
+    color: #fff;
+    font-size: 14px;
+  }
+
+  @media (max-width: 1200px) {
+    position:  fixed;
+    right: 10px;
+    bottom: 10px;
+    width: calc(50% - 15px);
+
+    &.btn-filter {
+      display: block;
+      right: auto;
+      left: 10px;
     }
   }
 }

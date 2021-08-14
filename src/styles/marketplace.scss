@@ -979,7 +979,7 @@
             background-color: $primary_active;
           }
 
-          &.btn-market-filter { 
+          &.btn-filter { 
             display: none;
           }
 
@@ -987,6 +987,7 @@
             position: absolute;
             left: -1px;
             top: -1px;
+            width: 100%;
             fill: none;
             stroke: $primary_hover;
             stroke-dasharray: 150 400;
@@ -1005,7 +1006,7 @@
             bottom: 10px;
             width: calc(50% - 15px);
 
-            &.btn-market-filter {
+            &.btn-filter {
               display: block;
               right: auto;
               left: 10px;
@@ -1037,15 +1038,24 @@
         margin-left: 10px;
         margin-right: 10px;
 
+
         @media (max-width: 1200px) {
           margin: 1.25rem 0;
-          width: 100%;
+          padding: 0 1.25rem;
+          width: 33.3333%;
 
           .asset-item-card2-thumbnail,
           .asset-item-card2-description {
             width: 100%;
           }
-         }
+        }
+
+        @media (max-width: 760px) {
+          padding: 0;
+          width: 100%;
+
+          
+        }
       }
 
       .common-loader {
