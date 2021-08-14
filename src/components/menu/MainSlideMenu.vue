@@ -213,13 +213,9 @@ export default {
       let mainSlideMenuNavTabLength = mainSlideMenuNavTab.length;
 
       for( let i=0; i<mainSlideMenuNavTabLength; i++ ){
-        if( i == 2 ) {
-        }
+        if( i == 2 ) {}
         else {
-          mainSlideMenuNavTab[i].addEventListener("click", function(e){
-            e.stopPropagation();
-            mainSlideMenu.style.display = "none"
-          });
+          mainSlideMenu.style.display = "none"
         }
       }
     }

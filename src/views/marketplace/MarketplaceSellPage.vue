@@ -103,6 +103,14 @@
             </svg>
             <span>{{ $t('Market.RegisterOffer') }}</span>
           </button>
+
+           <button class="btn-market-filter" @click="marketFilterOpen()">
+            <svg width="160px" height="40px" viewBox="0 0 160 40" class="border">
+              <polyline points="159,1 159,39 1,39 1,1 159,1" class="bg-line" />
+              <polyline points="159,1 159,39 1,39 1,1 159,1" class="hl-line" />
+            </svg>
+            <span>{{ $t('Market.FilterFilterBy') }}</span>
+          </button>
         </div>
       </header>
       <main class="marketplace-sell-items-contents">
@@ -358,6 +366,12 @@ export default {
         const value = val;
         this.orderChanged(new Event('change'), value);
       }
+    },
+
+    marketFilterOpen() {
+      const marketFilterArea = document.querySelector(".market-filter-area");
+
+      marketFilterArea.style.left = 0;
     },
   },
 

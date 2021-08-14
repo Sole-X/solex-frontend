@@ -849,21 +849,9 @@
   }
   
   .market-filter-area {
-    display: none;
-    overflow: hidden;
-    position: fixed;
-    width:100%;
-    height: calc(100% - 44px);
-    z-index: 300;
-
     .market-filter-controller {
-      display: flex;
-      justify-content: space-between;
-      padding: 11px 20px 12px;
-      height: 50px;
-      background: #ececec;
-  
-  
+      display: none;
+      
       .title {
         font-size: 16px;
         font-weight: 500;
@@ -877,8 +865,23 @@
       }
   
       @media (max-width: 1200px) {
-        
+        display: flex;
+        justify-content: space-between;
+        padding: 11px 20px 12px;
+        height: 50px;
+        background: #ececec;
       }
+    }
+
+    @media (max-width: 1200px) {
+      position: fixed;
+      left: -100%;
+      width:100%;
+      display: block;
+      overflow: hidden;
+      height: calc(100% - 44px);
+      transition: all 0.3s;
+      z-index: 300;
     }
   }
 
@@ -892,6 +895,10 @@
       .marketplace-sell-items-header-top {
         color: #666666;
         margin-bottom: 2px;
+
+        @media (max-width: 1200px) {
+          width: 30%;
+        }
       }
 
       .marketplace-sell-items-header-bottom {
@@ -934,6 +941,10 @@
               }
             }
           }
+
+          @media (max-width: 1200px) {
+            width: 100%;
+          }
         }
 
         select {
@@ -968,6 +979,10 @@
             background-color: $primary_active;
           }
 
+          &.btn-market-filter { 
+            display: none;
+          }
+
           svg {
             position: absolute;
             left: -1px;
@@ -983,7 +998,32 @@
             color: #fff;
             font-size: 14px;
           }
+
+          @media (max-width: 1200px) {
+            position:  fixed;
+            right: 10px;
+            bottom: 10px;
+            width: calc(50% - 15px);
+
+            &.btn-market-filter {
+              display: block;
+              right: auto;
+              left: 10px;
+            }
+          }
         }
+
+        @media (max-width: 1200px) {
+          display: block;
+          margin-bottom: 0;
+          width: 70%;
+        }
+      }
+
+      @media (max-width: 1200px) {
+        display: flex;
+        padding: 0;
+        align-items: center;
       }
     }
 
@@ -996,6 +1036,16 @@
         margin-bottom: 40px;
         margin-left: 10px;
         margin-right: 10px;
+
+        @media (max-width: 1200px) {
+          margin: 1.25rem 0;
+          width: 100%;
+
+          .asset-item-card2-thumbnail,
+          .asset-item-card2-description {
+            width: 100%;
+          }
+         }
       }
 
       .common-loader {
@@ -1010,6 +1060,11 @@
         content: '';
         width: 220px;
       }
+    }
+
+    @media (max-width: 1200px) {
+     width: 100%;
+     padding: 10px;
     }
   }
 
