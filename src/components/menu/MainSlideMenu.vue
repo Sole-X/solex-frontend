@@ -7,24 +7,21 @@
             :class="$bem('main-nav__tab', '', isActiveMenu(tab) || isSelectedTab($route, tab) ? ['selected'] : '')"
             v-for="tab in getNavItems"
             :key="tab.path"
-            @click="slideMenuClose()"
           >
-            <span @click="handleClickLink(tab)">
+            <strong class="main-nav-title" @click="[handleClickLink(tab), slideMenuClose(tab, $event)]">
               {{ tab.title }}
-            </span>
+            </strong>
 
-            <ui-popover :ref="tab.type" class="main-nav__sub-path" v-if="tab.children">
-              <ul>
-                <li
-                  v-for="child in tab.children"
-                  :key="child.path"
-                  @click="handleClosePopover(tab)"
-                  :class="$bem('main-nav__sub-path__tab', '', $route.path === child.path ? ['selected'] : '')"
-                >
-                  <router-link :to="{ path: child.path }">{{ child.title }}</router-link>
-                </li>
-              </ul>
-            </ui-popover>
+            <ol class="main-nav-sub-list" :ref="tab.type" v-if="tab.children" style="display: none;">
+              <li
+                v-for="child in tab.children"
+                :key="child.path"
+                :class="$bem('li', '', $route.path === child.path ? ['selected'] : '')"
+                @click="mainSlideMenuClose()"
+              >
+                <router-link :to="{ path: child.path }">- {{ child.title }}</router-link>
+              </li>
+            </ol>
           </li>
         </ul>
       </div>
@@ -117,6 +114,16 @@ export default {
           type: 'staking',
           title: $t('General.StakingMenu'),
           path: '/staking/trix',
+          children: [
+            {
+              title: $t('Staking.TrixStaking'),
+              path: '/staking/trix',
+            },
+            {
+              title: $t('Staking.MyActivity'),
+              path: '/staking/activity',
+            },
+          ],
         },
         {
           type: 'userPage',
@@ -207,17 +214,22 @@ export default {
     handleConnectWallet() {
       this.$router.push('/wallet/connect');
     },
-    slideMenuClose() {
-      const mainSlideMenu = document.getElementById("mainSlideMenu");
-      const mainSlideMenuNavTab = document.querySelectorAll("#mainSlideMenu .main-nav__tab");
-      let mainSlideMenuNavTabLength = mainSlideMenuNavTab.length;
-
-      for( let i=0; i<mainSlideMenuNavTabLength; i++ ){
-        if( i == 2 ) {}
-        else {
-          mainSlideMenu.style.display = "none"
-        }
+    slideMenuClose(tab, event) {
+      //const _this = event.target;
+      const mainNavSubMenu = event.target.parentNode.childNodes[1];
+      
+      if ( tab.type == "explorer" || tab.type == "staking" ) {
+        if ( mainNavSubMenu.style.display == "none" ) {
+            mainNavSubMenu.style.display = "block"
+          }
+          else mainNavSubMenu.style.display = "none"
+      } else {
+        mainSlideMenu.style.display = "none"
       }
+    },
+    mainSlideMenuClose(){
+      const mainSlideMenu = document.getElementById("mainSlideMenu");
+      mainSlideMenu.style.display = "none"
     }
   },
 

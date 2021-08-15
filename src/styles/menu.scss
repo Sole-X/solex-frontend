@@ -242,7 +242,6 @@
 
   @media (max-width: 1200px) {
     align-items: center;
-    padding-left: 10px;
     width: 100%;
     height: auto;
   }
@@ -603,6 +602,34 @@
           border-bottom: $li-border-bottom-line;
           font-size: $li-font-size;
           font-weight: $li-font-weight;
+
+          .main-nav-sub-list {
+            padding: 10px;
+            width: 100%;
+            transition: all 0.3s;
+
+            .li {
+              display: block;
+              padding: 10px 0;
+              width: 100%;
+              height: auto;
+              color: $gen_gray;
+              font-size: 14px;
+              font-weight: 500;
+
+              a {
+                display: block;
+                width: inherit;
+                height: inherit;
+                color: inherit;
+              }
+            }
+          }
+
+          .main-nav-title {
+            display: block;
+            width: 100%;
+          }
         }
       }
 
