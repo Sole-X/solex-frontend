@@ -10,6 +10,11 @@
     height: 320px;
     margin-bottom: 60px;
 
+    @media screen and (max-width:760px){
+      height: 180px;
+      margin-bottom: 40px;
+    }
+
     .swiper-container {
       @include square(100%);
 
@@ -205,6 +210,15 @@
   .market-home__collection {
     margin-bottom: 80px;
 
+    @media screen and (min-width: 761px) and (max-width: 1200px){
+      padding: 20px;
+    }
+    
+    @media screen and (max-width:760px){
+      padding: 10px;
+      margin-bottom: 60px;
+    }
+
     &:last-child {
       margin-bottom: 0;
     }
@@ -220,6 +234,10 @@
       h2 {
         font-weight: bold;
         font-size: 20px;
+        
+        @media screen and (max-width:760px){
+          font-size: 18px;
+        }
       }
 
       button {
@@ -259,6 +277,12 @@
 
       .swiper-slide {
         width: 220px !important;
+
+        @media screen and (max-width:760px){
+          width: 100% !important;
+          background: #fafbfc;
+          padding: 10px;
+        }
       }
 
       .swiper-button-prev,
@@ -292,14 +316,23 @@
   .market-home__tips {
     width: 100%;
     height: 240px;
-    margin-bottom: 82px;
+    margin-bottom: 80px;
     border: solid 1px #dee3eb;
+    
+    @media screen and (max-width:760px){
+      height: auto;
+    }
 
     .swiper-container {
       @include square(100%);
 
       .swiper-slide {
         display: flex;
+
+        @media screen and (max-width:760px){
+         flex-direction: column;
+        }
+
       }
 
       .swiper-pagination-bullets {
@@ -308,6 +341,18 @@
         left: initial;
         bottom: initial;
         text-align: right;
+
+        @media screen and (min-width: 761px) and (max-width: 1200px){
+          text-align: left;
+          left: 120px;
+          top: 190px;
+        }
+        @media screen and (max-width:760px){
+          top: 175px;
+          right: 0px;
+          justify-content: center;
+          display: flex;
+        }
       }
 
       .swiper-pagination-bullet {
@@ -325,6 +370,13 @@
 
     .market-home__tips__graphic {
       width: 464px;
+      
+      @media screen and (max-width:760px){
+        margin: 0 auto;
+        max-width: 320px;
+        width: 100%;
+        padding-top: 30px;
+      }
 
       img {
         @include square(100%);
@@ -335,21 +387,43 @@
       width: calc(100% - 480px);
       padding: 40px;
 
+      @media screen and (min-width: 761px) and (max-width: 1200px){
+        width: calc(100% - 280px);
+        padding: 15px;
+      }
+      @media screen and (max-width:760px){
+        width: 100%;
+        padding: 30px;
+      }
+
       > h5 {
         font-weight: bold;
         font-size: 16px;
         color: $primary_color;
+
+        @media screen and (min-width: 761px) and (max-width: 1200px){
+          margin-top: 15px;
+        }
       }
 
       > article {
         height: calc(100% - 20px);
         @include vertical-flex-end;
+
+        @media screen and (min-width: 761px) and (max-width: 1200px){
+          height: auto;
+        }
       }
 
       .market-home__tips__article__title {
         font-size: 20px;
         font-weight: bold;
         margin-bottom: 20px;
+
+        @media screen and (max-width:760px){
+          font-size: 16px;
+          margin-bottom: 10px;
+        }
       }
 
       .market-home__tips__article__description {
@@ -368,6 +442,15 @@
       justify-content: space-between;
       width: 100%;
       height: 200px;
+
+      @media screen and (max-width:760px){
+        justify-content: center;
+        max-width: 320px;
+        height: 600px;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        width: 100%;
+      }
 
       .market-home__banner__item {
         display: flex;
@@ -502,7 +585,7 @@
     left: 0;
     background-color: $primary_color;
     width: 100vw;
-    min-width: 1200px;
+    // min-width: 1200px;
     height: 200px;
 
     .market-home-email {
@@ -515,16 +598,32 @@
       height: 200px;
       background-color: $primary_color;
 
+      @media screen and (max-width:1200px){
+        flex-direction: column;
+        justify-content: space-around;
+      }
+
+
       .market-home-email-title {
         .market-home-email-title-main {
           color: #fff;
           font-size: 20px;
           font-weight: bold;
           margin-bottom: 20px;
+
+          @media screen and (max-width:760px){
+            font-size: 16px;
+            text-align: center;
+          }
         }
 
         .market-home-email-title-sub {
           color: #fff;
+
+          @media screen and (max-width:760px){
+            max-width: 280px;
+            text-align: center;
+          }
         }
       }
 
@@ -535,10 +634,16 @@
         width: 440px;
         height: 45px;
 
+        @media screen and (max-width:760px){
+          max-width: 320px;
+          // margin: 0 auto;
+        }
+
         .market-home-email-input-container {
           display: flex;
           width: 100%;
           height: 100%;
+          padding: 0px 10px;
 
           input {
             flex: 1;

@@ -1651,6 +1651,11 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
+  @media screen and (max-width:760px){
+    max-width: 220px;
+    margin: 0 auto;
+  }
+
   //transform: scale(0.94);
   //transition: transform 0.1s, box-shadow 0.1s;
   //
@@ -1697,7 +1702,7 @@
   .asset-item-card-home-info {
     padding: 14px 0 0 0;
     width: 220px;
-    height: 120px;
+    // height: 120px;
 
     .asset-item-card-my-page-info-token-address,
     .asset-item-card-home-info-token-address {
