@@ -479,7 +479,14 @@
 }
 
 .main-connect-wallet {
-  padding-top: 210px;
+  padding-top: 200px;
+
+  @media screen and (min-width: 761px) and (max-width: 1200px){
+    padding-top: 150px;
+  }
+  @media screen and (max-width:760px){
+    padding-top: 100px;
+  }
 
   .main-connect-wallet__title {
     width: 100%;
