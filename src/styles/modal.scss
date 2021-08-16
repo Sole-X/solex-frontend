@@ -74,6 +74,11 @@
       font-size: 20px;
       font-weight: bold;
     }
+
+    @media (max-width: 1200px) {
+      overflow: auto;
+      padding: 1rem;
+    }
   }
 
   .gen-modal__sub-title {
@@ -225,6 +230,11 @@
       border-radius: 2px;
       background: $melange_gray;
       cursor: not-allowed;
+    }
+
+    @media (max-width: 1200px) {
+      bottom: 1.5rem;
+      padding: 0;
     }
   }
 }
@@ -1015,6 +1025,10 @@
 
   .gen-modal__title {
     margin-bottom: 40px;
+
+    @media (max-width: 1200px) {
+      margin-bottom: 0;
+    }
   }
 
   .reserve-input-modal__form {
@@ -1147,6 +1161,10 @@
         }
       }
     }
+
+    @media (max-width: 1200px) {
+      height: 40px;
+    }
   }
 
   .reserve-input-modal__agree-terms {
@@ -1180,6 +1198,13 @@
         cursor: pointer;
       }
     }
+  }
+
+  @media (max-width: 1200px) {
+    position: fixed;
+    width: calc(100% - 1rem);
+    min-height: auto;
+    height: calc(100% - 1rem);
   }
 }
 

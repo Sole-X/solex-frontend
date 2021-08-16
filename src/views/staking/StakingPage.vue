@@ -10,37 +10,57 @@
         </p>
         <div class="staking-page__staking-container">
           <div class="staking-page__staking-container__item">
-            <span class="staking-page__staking-container__item-title">{{ getTranslateValue('TotalSupply') }}</span>
-            <span class="staking-page__staking-container__item-description">{{ getTotalSupply | addComma }}</span>
-            <span class="staking-page__staking-container__item-description">TRIX</span>
+            <section class="container__item">
+              <span class="staking-page__staking-container__item-title">{{ getTranslateValue('TotalSupply') }}</span>
+            </section>
+            <section class="container__item right">
+              <span class="staking-page__staking-container__item-description">{{ getTotalSupply | addComma }}</span>
+              <span class="staking-page__staking-container__item-description">TRIX</span>
+            </section>
           </div>
           <div class="staking-page__staking-container__dot" />
           <div class="staking-page__staking-container__item">
-            <span class="staking-page__staking-container__item-title">{{ getTranslateValue('TotalStaked') }}</span>
-            <span class="staking-page__staking-container__item-description">{{ getTotalStaked | addComma }}</span>
-            <span class="staking-page__staking-container__item-description">TRIX</span>
+            <section class="container__item">
+              <span class="staking-page__staking-container__item-title">{{ getTranslateValue('TotalStaked') }}</span>
+            </section>
+            <section class="container__item right">
+              <span class="staking-page__staking-container__item-description">{{ getTotalStaked | addComma }}</span>
+              <span class="staking-page__staking-container__item-description">TRIX</span>
+            </section>
           </div>
           <div class="staking-page__staking-container__dot" />
           <div class="staking-page__staking-container__item">
-            <span class="staking-page__staking-container__item-title">{{
-              getTranslateValue('RewardsDistributed')
-            }}</span>
-            <span class="staking-page__staking-container__item-description">{{
-              getRewardsDistributed | addComma
-            }}</span>
-            <span class="staking-page__staking-container__item-description">USD</span>
+            <section class="container__item">
+               <span class="staking-page__staking-container__item-title">{{
+                getTranslateValue('RewardsDistributed')
+              }}</span>
+            </section>
+            <section class="container__item right">
+              <span class="staking-page__staking-container__item-description">{{
+                getRewardsDistributed | addComma
+              }}</span>
+              <span class="staking-page__staking-container__item-description">USD</span>
+            </section>
           </div>
           <div class="staking-page__staking-container__dot" />
           <div class="staking-page__staking-container__item">
-            <span class="staking-page__staking-container__item-title">{{ getTranslateValue('TriumphxPrice') }}</span>
-            <span class="staking-page__staking-container__item-description">{{ getTrixPrice | addComma }}</span>
-            <span class="staking-page__staking-container__item-description">USD</span>
+            <section class="container__item">
+              <span class="staking-page__staking-container__item-title">{{ getTranslateValue('TriumphxPrice') }}</span>
+            </section>
+            <section class="container__item right">
+              <span class="staking-page__staking-container__item-description">{{ getTrixPrice | addComma }}</span>
+              <span class="staking-page__staking-container__item-description">USD</span>
+            </section>
           </div>
           <div class="staking-page__staking-container__dot" />
           <div class="staking-page__staking-container__item">
-            <span class="staking-page__staking-container__item-title">{{ getTranslateValue('UnstakingPeriod') }}</span>
-            <span class="staking-page__staking-container__item-description">{{ getUnstakingPeriod | addComma }}</span>
-            <span class="staking-page__staking-container__item-description">h</span>
+            <section class="container__item">
+              <span class="staking-page__staking-container__item-title">{{ getTranslateValue('UnstakingPeriod') }}</span>
+            </section>
+            <section class="container__item right">
+              <span class="staking-page__staking-container__item-description">{{ getUnstakingPeriod | addComma }}</span>
+              <span class="staking-page__staking-container__item-description">h</span>
+            </section>
           </div>
         </div>
       </div>

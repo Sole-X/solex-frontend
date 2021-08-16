@@ -9,12 +9,22 @@
     font-size: 28px;
     margin-bottom: 10px;
     font-weight: bold;
+
+    @media (max-width: 1200px) {
+      text-align: center;
+    }
   }
 
   .staking__description {
     font-size: 14px;
     font-weight: 500;
     color: #999999;
+
+    @media (max-width: 1200px) {
+      padding: 0 10px;
+      word-break: keep-all;
+      text-align: center;
+    }
   }
 
   .staking-page__staking-container {
@@ -36,10 +46,15 @@
       margin: 0 10px;
       background-color: #c1c5cc;
       border-radius: 4px;
+      
+      @media (max-width: 1200px) {
+        display: none;
+      }
     }
     .staking-page__staking-container__item {
       display: flex;
       align-items: center;
+
       .staking-page__staking-container__item-title {
         margin: 0 10px 0 0;
         font-size: 12px;
@@ -55,6 +70,21 @@
       span:last-child {
         margin-left: 5px;
       }
+
+      @media (max-width: 1200px) {
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+        padding: 1rem;
+        width: 100%;
+        background: $melange_white;
+        border: $gen_border;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      flex-direction: column;
+      padding: 1rem;
+      width: 100%;
     }
   }
 
@@ -114,6 +144,20 @@
           }
         }
       }
+    }
+
+    @media (max-width: 1200px) {
+      display: none;
+      margin-top: 30px;
+    }
+  }
+
+  .staking-page__detail {
+    display: none;
+
+    @media (max-width: 1200px) {
+      display: block;
+      margin-top: 30px;
     }
   }
 }
@@ -228,12 +272,27 @@
               left: -9px;
             }
           }
+
+          @media (max-width: 1200px) {
+           margin: 1rem 0;
+          }
         }
 
         .common-submit-button {
           width: 100%;
           height: 40px;
         }
+
+        @media (max-width: 1200px) {
+          margin-bottom: 0.5rem;
+          padding: 1.5rem;
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 1200px) {
+        flex-direction: column;
+        height: auto;
       }
     }
   }
@@ -313,10 +372,20 @@
             margin: 10px 0;
           }
         }
+
+        @media (max-width: 1200px) {
+          display: block;
+          margin-bottom: 0.5rem;
+          width: 100%;
+        }
       }
 
       .staking-trix-balance-item::after {
         margin-right: 13px;
+      }
+
+      @media (max-width: 1200px) {
+        min-height: auto;
       }
     }
     .staking-trix-balance-footer {
@@ -343,8 +412,25 @@
       button {
         padding: 16px 40px;
         margin-top: 20px;
+
+        @media (max-width: 1200px) {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: 1200px) {
+        flex-direction:column;
       }
     }
+
+    @media (max-width: 1200px) {
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    padding: 0 1rem;
+    width: 100%;
   }
 }
 

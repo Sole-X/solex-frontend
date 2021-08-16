@@ -1,5 +1,6 @@
 <template>
   <div class="staking-trix-page">
+    <h1 class="staking__title">{{ $t('Staking.TrixStaking') }}</h1>
     <section class="staking-trix-amount">
       <div class="staking-trix-amount-container">
         <div class="staking-trix-amount-item">
