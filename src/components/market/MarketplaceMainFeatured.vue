@@ -1,10 +1,10 @@
 <template>
-  <section class="market-home__featured">
+  <section class="">
     <swiper :options="swiperOptions">
       <swiper-slide v-for="(banner, i) in getBannerList" :key="i" :style="banner.slideStyle">
         <a :href="banner.link" :target="banner.link.startsWith('http') ? '_blank' : ''" rel="noreferrer nofollow">
           <!-- <router-link :to="{ path: banner.link }"> -->
-          <div class="market-home__featured__default" :style="banner.contentStyle" :class="banner.classes || []">
+          <div class="__default" :style="banner.contentStyle" :class="banner.classes || []">
             <!-- <h1 v-html="banner.title"></h1>
           <p v-html="banner.desc"></p> -->
 
