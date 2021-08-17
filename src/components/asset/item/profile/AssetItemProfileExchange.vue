@@ -77,7 +77,7 @@
           </div>
         </li>
 
-        <li>
+        <li class="phone-moblie">
           <div>{{ $t('Market.AcceptedCurrency') }}</div>
           <div class="asset-item__profile__pay">
             <div

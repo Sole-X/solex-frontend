@@ -281,18 +281,43 @@
   max-width: 1080px;
   margin: 0 auto;
   padding-top: 195px;
+  // overflow: hidden;
+
+  @media screen and (min-width: 761px) and (max-width: 1200px){
+    padding-top: 40px;
+    padding: 20px;
+  }
+  @media screen and (max-width:760px){
+    padding-top: 30px;
+    padding: 15px;
+  }
 
   .asset-page__header {
     display: flex;
     margin-bottom: 58px;
 
+    @media screen and (min-width: 761px) and (max-width: 1200px){
+      margin-bottom: 30px;
+    }
+    @media screen and (max-width:760px){
+      margin-bottom: 10px;
+    }
+
     .asset-page__category {
       width: 50%;
+
+      @media screen and (max-width:760px){
+        display: none;
+      }
     }
 
     .asset-page__link {
       width: 50%;
       display: flex;
+
+      @media screen and (max-width:760px){
+        display: contents;
+      }
 
       .asset-page__link__share {
         margin-left: auto;
@@ -337,10 +362,21 @@
     display: flex;
     margin-bottom: 80px;
 
+    @media screen and (max-width:760px){
+      margin-bottom: 40px;
+      flex-direction: column;
+    }
+
     .asset-item__thumbnail {
       @include square(400px);
       background: #fafbfc;
       position: relative;
+
+      @media screen and (max-width:760px){
+        width: 100%;
+        margin-bottom: 20px;
+      }
+
       background: {
         size: contain;
         position: center;
@@ -385,6 +421,10 @@
     .asset-item__profile__wrap {
       width: calc(100% - 400px);
 
+      @media screen and (max-width:760px){
+        width: 100%;
+      }
+
       .common-loader {
         height: 400px;
       }
@@ -394,6 +434,14 @@
       width: 100%;
       padding-left: 80px;
       position: relative;
+
+      @media screen and (min-width: 761px) and (max-width: 1200px){
+        padding-left: 30px;
+      }
+      @media screen and (max-width:760px){
+        padding-left: 0px;
+        padding: 5px;
+      }
 
       .asset-item__profile__ended {
         width: calc(100% - 80px);
@@ -418,6 +466,10 @@
           font-size: 28px;
           margin-bottom: 10px;
           font-weight: 500;
+
+          @media screen and (max-width:760px){
+            font-size: 20px;
+          }
         }
 
         .asset-item__profile__collection {
@@ -427,6 +479,7 @@
           h6 {
             cursor: pointer;
             color: $gen_lightblack;
+            line-height: 28px;
 
             &:hover {
               color: $primary_color;
@@ -461,7 +514,12 @@
           &:last-child {
             padding-bottom: 0;
           }
+          li.phone-moblie{
 
+            .asset-item__profile__pay{
+              justify-content: flex-end;
+            }       
+          }
           li {
             @include vertical-align-flex;
             margin-bottom: 15px;
@@ -478,6 +536,13 @@
             > div:nth-child(2) {
               width: calc(100% - 150px);
               color: $gen_lightblack;
+
+              @media screen and (min-width: 761px) and (max-width: 1200px){
+                width: calc(100% - 30px);
+              }
+              @media screen and (max-width:760px){
+                width: 100%;
+              }
             }
           }
 
@@ -500,9 +565,17 @@
                 font-size: 24px;
                 margin-bottom: 7px;
 
+                @media screen and (max-width:760px){
+                  font-size: 18px;
+                }
+
                 strong {
                   color: $gen_black;
                   font-size: 28px;
+
+                  @media screen and (max-width:760px){
+                    font-size: 22px;
+                  }
                 }
               }
 
@@ -572,6 +645,10 @@
           color: $gen_lightblack;
           margin-right: 25px;
 
+          @media screen and (max-width:1200px){
+            margin-right: 10px;
+          }
+
           &:last-child {
             margin-right: 0;
           }
@@ -585,6 +662,10 @@
             margin-right: 10px;
             vertical-align: middle;
             cursor: default;
+
+            @media screen and (max-width:1200px){
+              margin-right: 2px;
+            }
           }
 
           &--selected {
@@ -684,9 +765,14 @@
   .asset-item__hypen-row {
     @include vertical-align-flex;
 
+    @media screen and (max-width:760px){
+      display: contents;
+    }
+
     .asset-item__hypen-row__label {
       width: 90px;
       color: $gen_gray;
+      padding-right: 5px;
     }
 
     span.divider {
@@ -698,6 +784,11 @@
     .asset-item__hypen-row__value {
       display: inline;
       padding-left: 20px;
+
+      @media screen and (max-width:1200px){
+        padding-left: 0px;
+        word-break: break-word;
+      }
 
       &.writer-copy:hover {
         cursor: pointer;
@@ -741,6 +832,12 @@
 
     .swiper-slide {
       width: 220px !important;
+
+      @media screen and (max-width:760px){
+        width: 100% !important;
+        background: #fafbfc;
+        padding: 10px;
+      }
     }
 
     .common-loader {
@@ -753,6 +850,10 @@
     position: relative;
     padding-right: 280px;
     border-top: 2px solid #231f20;
+
+    @media screen and (max-width:760px){
+      padding-right: 0px;
+    }
 
     .asset-item__chart {
       margin-bottom: 65px;
@@ -890,11 +991,19 @@
       width: 100%;
       max-width: 800px;
       padding: 40px 0;
+
+      @media screen and (max-width:760px){
+        padding: 20px 0;
+      }
     }
 
     .asset-item__floating {
       padding-bottom: 20px;
       border: 1px solid $melange_gray;
+
+      @media screen and (max-width:760px){
+        display: none;
+      }
     }
   }
 
@@ -906,6 +1015,12 @@
 
   .asset-item__collection {
     display: flex;
+    text-align: center;
+
+    @media screen and (max-width:760px){
+      justify-content: center;
+      flex-direction: column;
+    }
 
     .asset-item__collection__thumbnail {
       display: flex;
@@ -916,6 +1031,11 @@
       background: #fafbfc;
       margin-right: 20px;
 
+      @media screen and (max-width:760px){
+        margin-right: 0px;
+        margin: 0px auto 10px;
+      }
+
       img {
         max-width: 100%;
         max-height: 100%;
@@ -925,6 +1045,10 @@
     .asset-item__collection__description {
       width: calc(100% - 200px);
 
+      @media screen and (max-width:760px){
+        width: 100%;
+      }
+
       h5 {
         font-size: 16px;
         margin-bottom: 10px;
@@ -933,6 +1057,10 @@
       .asset-item__collection__description__links {
         display: flex;
         margin-top: 30px;
+
+        @media screen and (max-width:760px){
+          justify-content: center;
+        }
 
         .asset-item__collection__description__link {
           @include full-circle(48px);
@@ -1452,6 +1580,10 @@
   cursor: pointer;
   width: 220px;
   height: 300px;
+
+  @media screen and (max-width:760px){
+    margin: 0 auto;
+  }
 
   //transform: scale(0.94);
   //transition: transform 0.1s, box-shadow 0.1s;

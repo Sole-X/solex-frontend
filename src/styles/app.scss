@@ -200,6 +200,8 @@ textarea {
 
   @media (max-width: 1200px) {
     padding: 0;
+    min-height: auto;
+    margin-bottom: 100px;
   }
 }
 
@@ -254,10 +256,20 @@ textarea {
 
   .swiper-button-prev {
     left: -40px;
+
+    @media screen and (max-width:1200px){
+      left:0;
+      top: 50%;
+    }
   }
 
   .swiper-button-next {
     right: -40px;
+
+    @media screen and (max-width:1200px){
+      right:0;
+      top: 50%;
+    }
   }
 }
 
