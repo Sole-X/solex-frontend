@@ -7,11 +7,9 @@
 
       <article class="asset-item__collection__description">
         <h5>
-          <strong>{{ info.collectionName || '-' }}</strong>
+          <strong @click="collectionClicked">{{ info.collectionName || '-' }}</strong>
         </h5>
-        <p>
-          {{}}
-        </p>
+        <p>{{}}</p>
       </article>
     </section>
     <section class="asset-item__collection">
@@ -106,6 +104,21 @@ export default {
       }
 
       window.open(option.url);
+    },
+
+    collectionClicked() {
+      const collectionName = this.info.collectionName;
+      const collectionTokenAddress = this.info.tokenAddress;
+
+      if (collectionName && collectionTokenAddress) {
+        this.$router.push({
+          path: '/collection',
+          query: {
+            collection: collectionName,
+            collectionAddress: collectionTokenAddress,
+          },
+        });
+      }
     },
   },
 

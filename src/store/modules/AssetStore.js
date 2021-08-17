@@ -80,18 +80,47 @@ export default {
         urlQuery.buyId = query.tradeId;
       }
 
-      const getItemDetail = await this.$app.$http.get('getItemDetail', {
-        urlParams: {
-          tokenAddress: params.tokenAddress,
-          tokenId: params.tokenId,
-        },
-        urlQuery,
-      });
+      let getItemDetail = null;
+      let res = null;
+      try {
+        getItemDetail = await this.$app.$http.get('getItemDetail', {
+          urlParams: {
+            tokenAddress: params.tokenAddress,
+            tokenId: params.tokenId,
+          },
+          urlQuery,
+        });
+        getItemDetail = { success: false };
+      } catch (e) {
+        res = await this.$app.$http.get('collectItem', {
+          urlQuery: {
+            tokenAddr: params.tokenAddress || '',
+            tokenIds: params.tokenId || '',
+          },
+        });
+        const { tokenAddress, tokenId } = params;
+        getItemDetail = { success: res.success };
+        getItemDetail.info = res['info']['nfts'][tokenAddress][tokenId];
+      }
+
+      const { success } = getItemDetail;
+      if (!success) {
+        res = await this.$app.$http.get('collectItem', {
+          urlQuery: {
+            tokenAddr: params.tokenAddress || '',
+            tokenIds: params.tokenId || '',
+          },
+        });
+        const { tokenAddress, tokenId } = params;
+        getItemDetail = { success: res.success };
+        getItemDetail.info = res['info']['nfts'][tokenAddress][tokenId];
+      }
 
       const defaultInfo = {
         tokenAddress: params.tokenAddress,
         tokenId: params.tokenId,
       };
+
       const newState = new AssetItemDetail(
         getItemDetail.success
           ? {
