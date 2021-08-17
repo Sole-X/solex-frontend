@@ -249,3 +249,11 @@
     }
   }
 }
+
+.p-dis-none {
+  @media (min-width: 1200px) { display: none !important; }
+}
+
+.m-dis-none {
+  @media (max-width: 1200px) { display: none !important; }
+}

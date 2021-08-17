@@ -7,13 +7,16 @@
     <section v-else class="user-info-page">
       <article class="user-info__summary">
         <div class="user-info__summary__title">
-          <h1>
+          <h1 class="m-dis-none">
             <strong>{{ $t('UserPage.TotalBalance') }}</strong>
           </h1>
-          <button v-clipboard:copy="getUserInfo.address" v-clipboard:success="$_GlobalValueMixin_showCopyTooltip">
+          <button class="m-dis-none" v-clipboard:copy="getUserInfo.address" v-clipboard:success="$_GlobalValueMixin_showCopyTooltip">
             {{ getMaskedAddress(getUserInfo.address) }}
             <img :src="$static.getFileURL('img/icon/ic-copy-gray.svg')" alt="copy" />
           </button>
+          <router-link v-if="isShowSetting" :to="{ query: { mode: 'profile' } }" class="icon-user-set p-dis-none">
+            <button class="user-setting-link"></button>
+          </router-link>
         </div>
 
         <div class="user-info__summary__user">
@@ -25,134 +28,150 @@
             <div class="user-info__summary__user__name-user">
               {{ getUserInfo.username || getMaskedAddress(getUserInfo.address) || 'No activity' }}
             </div>
-            <router-link v-if="isShowSetting" :to="{ query: { mode: 'profile' } }">
+            <router-link v-if="isShowSetting" :to="{ query: { mode: 'profile' } }" class="m-dis-none">
               <button class="user-setting-link"></button>
             </router-link>
           </div>
+          <div>
+            <button class="user-masked-address p-dis-none" v-clipboard:copy="getUserInfo.address" v-clipboard:success="$_GlobalValueMixin_showCopyTooltip">
+              {{ getMaskedAddress(getUserInfo.address) }}
+              <img :src="$static.getFileURL('img/icon/ic-copy-gray.svg')" alt="copy" />
+            </button>
+          </div>
         </div>
+        
+        <article class="user-info__featured user-info__items p-dis-none">
+          <div class="user-info__featured__head">
+            <h4>
+              <strong>{{ $t('UserPage.TotalBalance') }}</strong>
+            </h4>
+            <div class="arrow-right"></div>
+          </div>
+          <div class="user-info__summary__balance">
+            <user-info-balance :type="0" :supportCurrency="[...getSupportCurrency].slice(0, 5)">
+              <div slot="itemInfo" :class="$bem('user-info-balance__token', '', ['nft'])">
+                <div class="user-info-balance__icon">
+                  <img :src="$static.getFileURL(`img/logo/default-logo-wh.svg`)" alt="nfts" />
+                </div>
 
-        <div class="user-info__summary__balance">
-          <user-info-balance :type="0" :supportCurrency="[...getSupportCurrency].slice(0, 5)">
-            <div slot="itemInfo" :class="$bem('user-info-balance__token', '', ['nft'])">
-              <div class="user-info-balance__icon">
-                <img :src="$static.getFileURL(`img/logo/default-logo-wh.svg`)" alt="nfts" />
+                <div :class="$bem('user-info-balance__info', '', ['overflow'])">
+                  <h6 class="text-gray">
+                    {{ $t('General.Item')[1] }}
+                  </h6>
+                  <p>
+                    <strong>{{ getUserBalance.nft.length }}</strong>
+                  </p>
+                </div>
               </div>
-
-              <div :class="$bem('user-info-balance__info', '', ['overflow'])">
-                <h6 class="text-gray">
-                  {{ $t('General.Item')[1] }}
-                </h6>
-                <p>
-                  <strong>{{ getUserBalance.nft.length }}</strong>
-                </p>
-              </div>
-            </div>
-          </user-info-balance>
-        </div>
+            </user-info-balance>
+          </div>
+        </article>
       </article>
 
-      <article class="user-info__featured user-info__items">
-        <div class="user-info__featured__head">
-          <h4>
-            <strong>{{ $t('UserPage.MyItems') }}</strong>
-          </h4>
-          <div class="arrow-right"></div>
-        </div>
+      <div class="user-info-list-wrap">
+        <article class="user-info__featured user-info__items">
+          <div class="user-info__featured__head">
+            <h4>
+              <strong>{{ $t('UserPage.MyItems') }}</strong>
+            </h4>
+            <div class="arrow-right"></div>
+          </div>
 
-        <div class="user-info__featured__body carousel-arrow">
-          <user-info-featured-filter
-            :filters="getMyItemFilters"
-            :selected="selectedTab.item"
-            :onSelect="handleSelectItemFilter"
-          />
+          <div class="user-info__featured__body carousel-arrow">
+            <user-info-featured-filter
+              :filters="getMyItemFilters"
+              :selected="selectedTab.item"
+              :onSelect="handleSelectItemFilter"
+            />
 
-          <swiper :options="swiperOptions">
-            <swiper-slide v-for="item in getSelectedItems" :key="item.id">
-              <asset-item-card-my-page :item="item" />
-            </swiper-slide>
-          </swiper>
+            <swiper :options="swiperOptions">
+              <swiper-slide v-for="item in getSelectedItems" :key="item.id">
+                <asset-item-card-my-page :item="item" />
+              </swiper-slide>
+            </swiper>
 
-          <button class="swiper-button-prev" />
-          <button class="swiper-button-next" />
-        </div>
-      </article>
+            <button class="swiper-button-prev" />
+            <button class="swiper-button-next" />
+          </div>
+        </article>
 
-      <article class="user-info__featured user-info__items">
-        <div class="user-info__featured__head">
-          <h4>
-            <strong>{{ $t('UserPage.MyAssets') }}</strong>
-          </h4>
-          <div class="arrow-right"></div>
-        </div>
+        <article class="user-info__featured user-info__items">
+          <div class="user-info__featured__head">
+            <h4>
+              <strong>{{ $t('UserPage.MyAssets') }}</strong>
+            </h4>
+            <div class="arrow-right"></div>
+          </div>
 
-        <div class="user-info__featured__body">
-          <user-info-featured-filter
-            :filters="getMyBalanceFilters"
-            :selected="selectedTab.asset"
-            :onSelect="handleSelectAssetFilter"
-          />
-          <user-info-balance :type="selectedTab.asset.id - 1" :supportCurrency="getSelectedCurrency" />
-        </div>
-      </article>
+          <div class="user-info__featured__body">
+            <user-info-featured-filter
+              :filters="getMyBalanceFilters"
+              :selected="selectedTab.asset"
+              :onSelect="handleSelectAssetFilter"
+            />
+            <user-info-balance :type="selectedTab.asset.id - 1" :supportCurrency="getSelectedCurrency" />
+          </div>
+        </article>
 
-      <article class="user-info__featured user-info__items">
-        <div class="user-info__featured__head">
-          <h4>
-            <strong>{{ $t('UserPage.MyActivity') }}</strong>
-          </h4>
-          <div class="arrow-right"></div>
-        </div>
+        <article class="user-info__featured user-info__items">
+          <div class="user-info__featured__head">
+            <h4>
+              <strong>{{ $t('UserPage.MyActivity') }}</strong>
+            </h4>
+            <div class="arrow-right"></div>
+          </div>
 
-        <div class="user-info__featured__body carousel-arrow">
-          <user-info-featured-filter
-            :filters="getMyActivityFilters"
-            :selected="selectedTab.activity"
-            :onSelect="handleSelectActivityFilter"
-          />
+          <div class="user-info__featured__body carousel-arrow">
+            <user-info-featured-filter
+              :filters="getMyActivityFilters"
+              :selected="selectedTab.activity"
+              :onSelect="handleSelectActivityFilter"
+            />
 
-          <user-history-item-table v-if="selectedTab.activity.id === 1" :list="getUserActivities.nft.list" />
-          <user-history-asset-table v-if="selectedTab.activity.id === 2" :list="getUserActivities.currency.list" />
-        </div>
-      </article>
+            <user-history-item-table v-if="selectedTab.activity.id === 1" :list="getUserActivities.nft.list" />
+            <user-history-asset-table v-if="selectedTab.activity.id === 2" :list="getUserActivities.currency.list" />
+          </div>
+        </article>
 
-      <article class="user-info__featured user-info__items">
-        <div class="user-info__featured__head">
-          <h4>
-            <strong>{{ $t('UserPage.MyWatchlist') }}</strong>
-          </h4>
-          <div class="arrow-right"></div>
-        </div>
+        <article class="user-info__featured user-info__items">
+          <div class="user-info__featured__head">
+            <h4>
+              <strong>{{ $t('UserPage.MyWatchlist') }}</strong>
+            </h4>
+            <div class="arrow-right"></div>
+          </div>
 
-        <div class="user-info__featured__body carousel-arrow">
-          <user-info-featured-filter
-            :filters="getMyWatchlistFilters"
-            :selected="selectedTab.watchlist"
-            :onSelect="handleSelectWatchlistFilter"
-          />
+          <div class="user-info__featured__body carousel-arrow">
+            <user-info-featured-filter
+              :filters="getMyWatchlistFilters"
+              :selected="selectedTab.watchlist"
+              :onSelect="handleSelectWatchlistFilter"
+            />
 
-          <swiper :options="swiperOptions">
-            <swiper-slide v-for="item in getSelectedWatchlist" :key="item.id">
-              <!--<asset-item-card :info="item" :options="{ showChain: false, showHeart: false }" />-->
-              <asset-item-card-my-page :item="item" />
-            </swiper-slide>
-            <div class="swiper-button-prev" slot="button-prev" />
-            <div class="swiper-button-next" slot="button-next" />
-          </swiper>
-        </div>
-      </article>
+            <swiper :options="swiperOptions">
+              <swiper-slide v-for="item in getSelectedWatchlist" :key="item.id">
+                <!--<asset-item-card :info="item" :options="{ showChain: false, showHeart: false }" />-->
+                <asset-item-card-my-page :item="item" />
+              </swiper-slide>
+              <div class="swiper-button-prev" slot="button-prev" />
+              <div class="swiper-button-next" slot="button-next" />
+            </swiper>
+          </div>
+        </article>
 
-      <article class="user-info__banner" @click="handleBannerLink()">
-        <div class="user-info__banner__description">
-          <h4>
-            <strong>{{ $t('UserPage.OurSnsBannerTitle') }}</strong>
-          </h4>
-          <p v-html="$t('UserPage.OurSnsBannerDescription')" />
-        </div>
+        <article class="user-info__banner" @click="handleBannerLink()">
+          <div class="user-info__banner__description">
+            <h4>
+              <strong>{{ $t('UserPage.OurSnsBannerTitle') }}</strong>
+            </h4>
+            <p v-html="$t('UserPage.OurSnsBannerDescription')" />
+          </div>
 
-        <button class="user-info__banner__link">
-          <strong>{{ $t('UserPage.OurSnsBannerSubmit') }}</strong>
-        </button>
-      </article>
+          <button class="user-info__banner__link">
+            <strong>{{ $t('UserPage.OurSnsBannerSubmit') }}</strong>
+          </button>
+        </article>
+      </div>
     </section>
   </div>
 </template>
