@@ -40,8 +40,8 @@
           </div>
         </div>
         
-        <article class="user-info__featured user-info__items p-dis-none">
-          <div class="user-info__featured__head">
+        <article class="user-info__featured user-info__items">
+          <div class="user-info__featured__head p-dis-none">
             <h4>
               <strong>{{ $t('UserPage.TotalBalance') }}</strong>
             </h4>

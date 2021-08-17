@@ -113,7 +113,7 @@ export default {
         {
           type: 'staking',
           title: $t('General.StakingMenu'),
-          path: '/staking/trix',
+          path: '/staking',
           children: [
             {
               title: $t('Staking.TrixStaking'),
@@ -128,7 +128,29 @@ export default {
         {
           type: 'userPage',
           title: $t('General.UserMenu'),
-          path: '/user/info',
+          path: '/user',
+          children: [
+            {
+              title: $t('UserPage.MyInfo'),
+              path: '/user/info',
+            },
+            {
+              title: $t('UserPage.MyItems'),
+              path: '/user/item',
+            },
+            {
+              title: $t('UserPage.MyAssets'),
+              path: '/user/asset',
+            },
+            {
+              title: $t('UserPage.MyActivity'),
+              path: '/user/history',
+            },
+            {
+              title: $t('UserPage.MyWatchlist'),
+              path: '/user/watchlist',
+            },
+          ],
         },
       ];
     },
@@ -217,8 +239,10 @@ export default {
     slideMenuClose(tab, event) {
       //const _this = event.target;
       const mainNavSubMenu = event.target.parentNode.childNodes[1];
+
+      console.log(tab.type)
       
-      if ( tab.type == "explorer" || tab.type == "staking" ) {
+      if ( tab.type == "explorer" || tab.type == "staking" || tab.type == "userPage" ) {
         if ( mainNavSubMenu.style.display == "none" ) {
             mainNavSubMenu.style.display = "block"
           }

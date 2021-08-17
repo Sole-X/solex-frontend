@@ -582,11 +582,12 @@
   $li-font-weight: 500;
 
   display: none;
+  overflow: auto;
   position: fixed;
   top: $menu-top-position;
   left: 0;
   width: 100%;
-  height: auto;
+  height: calc(100% - 44px);
   background: #fafbfc;
   transition: width 0.2s;
 
