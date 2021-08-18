@@ -240,8 +240,6 @@ export default {
       //const _this = event.target;
       const mainNavSubMenu = event.target.parentNode.childNodes[1];
 
-      console.log(tab.type)
-      
       if ( tab.type == "explorer" || tab.type == "staking" || tab.type == "userPage" ) {
         if ( mainNavSubMenu.style.display == "none" ) {
             mainNavSubMenu.style.display = "block"

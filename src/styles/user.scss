@@ -77,6 +77,11 @@
         margin-right: auto;
       }
 
+      h2 {
+        font-size: 18px;
+        margin-right: auto;
+      }
+
       .user-info__summary__icon {
         @include full-circle(24px);
         background: $primary_color;
@@ -99,7 +104,7 @@
 
         .icon-user-set {
           position: absolute;
-          top: 0;
+          top: 5px;
           right: 0;
           border: none;
 

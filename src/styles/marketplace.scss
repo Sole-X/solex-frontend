@@ -588,6 +588,7 @@
     position: absolute;
     left: 0;
     background-color: $primary_color;
+    padding: 0 2rem;
     width: 100vw;
     // min-width: 1200px;
     height: 200px;
@@ -685,6 +686,10 @@
           font-weight: bold;
         }
       }
+    }
+
+    @media (max-width: 1200px) {
+      padding: 0 10px;
     }
   }
 }

@@ -10,6 +10,9 @@
           <h1 class="m-dis-none">
             <strong>{{ $t('UserPage.TotalBalance') }}</strong>
           </h1>
+          <h2 class="p-dis-none">
+            <strong>{{ $t('UserPage.MyInfo') }}</strong>
+          </h2>
           <button class="m-dis-none" v-clipboard:copy="getUserInfo.address" v-clipboard:success="$_GlobalValueMixin_showCopyTooltip">
             {{ getMaskedAddress(getUserInfo.address) }}
             <img :src="$static.getFileURL('img/icon/ic-copy-gray.svg')" alt="copy" />
