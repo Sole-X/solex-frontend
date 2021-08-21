@@ -48,6 +48,10 @@
       width: 100%;
       @include vertical-align-flex;
     }
+
+    @media (max-width: 1200px) {
+      height: 120px;
+    }
   }
 
   .asset-item-card__type {

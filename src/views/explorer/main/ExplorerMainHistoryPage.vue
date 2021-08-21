@@ -28,84 +28,85 @@
       </div>
     </section>
 
-    <section class="explorer-main__table">
-      <div class="explorer-main__table__head">
-        <div :class="$bem('explorer-main__table__col', '', [col.type])" v-for="(col, i) in getTableCols" :key="i">
-          <span class="text-gray">{{ col.title }}</span>
-        </div>
-      </div>
-
-      <div v-if="getLoadingStatus.getAllActivities">
-        <common-loader />
-      </div>
-
-      <!-- TODO : nickname -->
-      <div v-else class="explorer-main__table__body">
-        <div v-for="activity in getAllActivities.list" :key="activity.id" class="explorer-main__table__row">
-          <div :class="$bem('explorer-main__table__col', '', ['event'])">
-            {{ activity.typeStr }}
-          </div>
-
-          <div :class="$bem('explorer-main__table__col', '', ['token'])">
-            <div class="explorer-main__table__col__icon" @click="tokenClicked(activity)">
-              <img :src="getItemImg(activity)" style="max-width: 100%; max-height: 100%" />
-            </div>
-            <div class="explorer-main__table__col__token-name">
-              <p>
-                <span @click="tokenClicked(activity)">{{ activity.tokenInfo.name }}</span>
-              </p>
-              <p v-if="activity.tokenId">
-                <span @click="tokenClicked(activity)">#{{ activity.tokenId }}</span>
-              </p>
-            </div>
-          </div>
-
-          <div :class="$bem('explorer-main__table__col', '', ['price'])">
-            {{ $bn.toMaxUnit(activity.amount, activity.currencyInfo.decimal, 4) | addComma }}
-            {{ activity.currencyInfo.symbol }}
-          </div>
-
-          <div :class="$bem('explorer-main__table__col', '', ['user'])">
-            <div
-              :style="{
-                'background-image': `url(${getItemFromProfile(activity)})`,
-                'background-size': 'contain',
-                'background-position': 'center center',
-              }"
-            />
-            <div>
-              <span v-clipboard:copy="activity.fromAddress">{{ getItemFromAccount(activity) }}</span>
-            </div>
-          </div>
-
-          <div :class="$bem('explorer-main__table__col', '', ['user'])">
-            <div
-              :style="{
-                'background-image': `url(${getItemToProfile(activity)})`,
-                'background-size': 'contain',
-                'background-position': 'center center',
-              }"
-            />
-            <div>
-              <span v-clipboard:copy="activity.toAddress">{{ getItemToAccount(activity) }}</span>
-            </div>
-          </div>
-
-          <div :class="$bem('explorer-main__table__col', '', ['time'])">
-            {{ $date.getFromNow(activity.createdAt) }}
-            <a :href="$wallet.getTxUrl(activity.txHash)" target="_blank" rel="noopener noreferrer">
-              <img class="v-m" :src="$static.getFileURL('img/icon/ic-link-pointer-blue.svg')" alt="pointer" />
-            </a>
+    <div class="explorer-main__table_wrap">
+      <section class="explorer-main__table">
+        <div class="explorer-main__table__head">
+          <div :class="$bem('explorer-main__table__col', '', [col.type])" v-for="(col, i) in getTableCols" :key="i">
+            <span class="text-gray">{{ col.title }}</span>
           </div>
         </div>
 
-        <common-pager
-          :pageList="getPageList"
-          :pageInfo="getAllActivities"
-          @onMovePage="(value) => $emit('onMovePage', value)"
-        />
-      </div>
-    </section>
+        <div v-if="getLoadingStatus.getAllActivities">
+          <common-loader />
+        </div>
+
+        <!-- TODO : nickname -->
+        <div v-else class="explorer-main__table__body">
+          <div v-for="activity in getAllActivities.list" :key="activity.id" class="explorer-main__table__row">
+            <div :class="$bem('explorer-main__table__col', '', ['event'])">
+              {{ activity.typeStr }}
+            </div>
+
+            <div :class="$bem('explorer-main__table__col', '', ['token'])">
+              <div class="explorer-main__table__col__icon" @click="tokenClicked(activity)">
+                <img :src="getItemImg(activity)" style="max-width: 100%; max-height: 100%" />
+              </div>
+              <div class="explorer-main__table__col__token-name">
+                <p>
+                  <span @click="tokenClicked(activity)">{{ activity.tokenInfo.name }}</span>
+                </p>
+                <p v-if="activity.tokenId">
+                  <span @click="tokenClicked(activity)">#{{ activity.tokenId }}</span>
+                </p>
+              </div>
+            </div>
+
+            <div :class="$bem('explorer-main__table__col', '', ['price'])">
+              {{ $bn.toMaxUnit(activity.amount, activity.currencyInfo.decimal, 4) | addComma }}
+              {{ activity.currencyInfo.symbol }}
+            </div>
+
+            <div :class="$bem('explorer-main__table__col', '', ['user'])">
+              <div
+                :style="{
+                  'background-image': `url(${getItemFromProfile(activity)})`,
+                  'background-size': 'contain',
+                  'background-position': 'center center',
+                }"
+              />
+              <div>
+                <span v-clipboard:copy="activity.fromAddress">{{ getItemFromAccount(activity) }}</span>
+              </div>
+            </div>
+
+            <div :class="$bem('explorer-main__table__col', '', ['user'])">
+              <div
+                :style="{
+                  'background-image': `url(${getItemToProfile(activity)})`,
+                  'background-size': 'contain',
+                  'background-position': 'center center',
+                }"
+              />
+              <div>
+                <span v-clipboard:copy="activity.toAddress">{{ getItemToAccount(activity) }}</span>
+              </div>
+            </div>
+
+            <div :class="$bem('explorer-main__table__col', '', ['time'])">
+              {{ $date.getFromNow(activity.createdAt) }}
+              <a :href="$wallet.getTxUrl(activity.txHash)" target="_blank" rel="noopener noreferrer">
+                <img class="v-m" :src="$static.getFileURL('img/icon/ic-link-pointer-blue.svg')" alt="pointer" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <common-pager
+      :pageList="getPageList"
+      :pageInfo="getAllActivities"
+      @onMovePage="(value) => $emit('onMovePage', value)"
+    />
   </section>
 </template>
 

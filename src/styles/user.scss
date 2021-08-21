@@ -940,7 +940,18 @@
   }
 }
 
+.user-history__table_wrap {
+  overflow: auto;
+  width:100%;
+
+  ~ .common-pager {
+    padding: 0 10px;
+  }
+}
+
 .user-history__table {
+  min-width: 960px;
+  
   .user-history__thead {
     width: 100%;
     height: 20px;
