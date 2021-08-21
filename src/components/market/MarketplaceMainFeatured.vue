@@ -156,6 +156,39 @@ export default {
             backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-4.jpg')}`,
           },
         },
+        {
+          title: $t('Market.TopFeatured1Title'),
+          desc: $t('Market.TopFeatured1Desc'),
+          slideStyle: {
+            backgroundColor: '#c9c2b0',
+          },
+          link: '/sell?search=shhan',
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-SHHAN.jpg')}`,
+          },
+        },
+        {
+          title: $t('Market.TopFeatured1Title'),
+          desc: $t('Market.TopFeatured1Desc'),
+          slideStyle: {
+            backgroundColor: '#323b42',
+          },
+          link: '/sell?search=Xu',
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-Xu.jpg')}`,
+          },
+        },
+        {
+          title: $t('Market.TopFeatured1Title'),
+          desc: $t('Market.TopFeatured1Desc'),
+          slideStyle: {
+            backgroundColor: '#e2ddda',
+          },
+          link: '/sell?search=tripleA',
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-tripleA.jpg')}`,
+          },
+        },
         // {
         //   title: $t("Market.TopFeatured1Title"),
         //   desc: $t("Market.TopFeatured1Desc"),

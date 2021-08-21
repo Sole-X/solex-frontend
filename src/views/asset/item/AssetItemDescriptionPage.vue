@@ -109,7 +109,7 @@ export default {
           return 'Chanchitos';
         } else if (['606', '607', '608', '609', '610'].includes(info.tokenId)) {
           return 'MUZIKTIGER';
-        } else if (['614', '616', '618', '619'].includes(info.tokenId)) {
+        } else if (['614', '616', '618', '619', '716', '718', '720'].includes(info.tokenId)) {
           return 'RosaFantasy';
         } else if (['621', '624', '625','640', '641', '642', '643'].includes(info.tokenId)) {
           return 'HANJUNGSUN';
@@ -121,6 +121,12 @@ export default {
           return 'YOOLI';
         } else if (['654', '655', '656', '657', '658', '659'].includes(info.tokenId)) {
           return 'Bella Bang';
+        } else if (['734', '736', '738'].includes(info.tokenId)) {
+          return 'SHHAN';
+        } else if (['740', '744', '746'].includes(info.tokenId)) {
+          return 'Xu:';
+        } else if (['749', '765', '761', '763','753','751','755','757','759','766','767','768','769'].includes(info.tokenId)) {
+          return 'tripleA';
         }
       }
       return 'Unknown';
@@ -174,7 +180,16 @@ export default {
       } else if (publisherName == 'YOOLI') {
         const targetURL = 'https://www.instagram.com/artist_yooli/';
         window.open(targetURL, `publisher ${targetURL}`);
-      } 
+      } else if (publisherName == 'SHHAN') {
+        const targetURL = 'https://instagram.com/shhan1211';
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == 'Xu:') {
+        const targetURL = 'https://sole-x.io/sell?search=xu%3A';
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == 'tripleA') {
+        const targetURL = 'https://enftee.medium.com/new-series-presented-by-triplea-author-with-triumphx-70799a9f1850';
+        window.open(targetURL, `publisher ${targetURL}`);
+      }
     },
   },
 
