@@ -18,14 +18,8 @@
       </ul>
     </nav>
 
-    <div class="asset-item__detail__body m-dis-none">
+    <div class="asset-item__detail__body">
       <router-view :info="info" :history="history" />
-    </div>
-    <div class="asset-item__detail__body p-dis-none">
-      <asset-item-description-page />
-    </div>
-    <div class="asset-item__detail__body p-dis-none">
-      <asset-item-collection-page />
     </div>
 
     <asset-item-floating :info="info">
@@ -54,9 +48,6 @@
 import AssetItemFloating from '@/components/asset/item/AssetItemFloating';
 import AssetItemDetailChart from '@/components/asset/item/detail/AssetItemDetailChart';
 import GlobalValueMixin from '@/mixins/common/GlobalValueMixin';
-
-import AssetItemDescriptionPage from '@/views/asset/item/AssetItemDescriptionPage';
-import AssetItemCollectionPage from '@/views/asset/item/AssetItemCollectionPage';
 
 let $t, component;
 
