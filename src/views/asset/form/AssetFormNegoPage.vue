@@ -25,6 +25,10 @@
         <p>{{ getItemInfo.collectionName }} {{ getItemInfo.itemName }}</p>
       </div>
 
+      <div class="asset-form__image">
+        <img :src="getItemInfo.metadata.image" />
+      </div>
+
       <div class="asset-form__row">
         <div class="asset-form__row__label">
           <h5>{{ $t('General.Currency') }}</h5>
@@ -89,9 +93,20 @@
           </div>
         </div>
       </div>
+
+      <div class="asset-form__button">
+        <div slot="submit" class="asset-item__floating__submit">
+          <button
+            :class="$bem('common-submit-button', '', [isActiveForm ? 'primary' : 'disabled'])"
+            @click="handleMakeNegotiation()"
+          >
+            {{ $t('Market.NegoNow') }}
+          </button>
+        </div>
+      </div>
     </section>
 
-    <aside class="asset-form__aside">
+    <aside class="asset-form__aside m-dis-none">
       <asset-item-floating :note="getNegotiationNote" :info="getItemInfo">
         <div slot="submit" class="asset-item__floating__submit">
           <button

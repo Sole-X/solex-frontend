@@ -22,7 +22,7 @@
 }
 
 .main-header {
-  $m-logo-size: 62px;
+  $m-logo-size: 30px;
   margin-top: 4px;
   width: 100%;
   height: 90px;
@@ -48,7 +48,8 @@
       width: $m-logo-size;
 
       a, img {
-        width: inherit;
+        margin-top: -1px;
+        width: 90%;
         height: auto;
       }
     }
@@ -127,7 +128,8 @@
   }
 
   @media (max-width: 1200px) {
-    margin-right: 8px;
+    margin-top: 0;
+    margin-right: 10px;
     width: $m-logo-size;
     height: auto;
   }
@@ -242,6 +244,7 @@
 
   @media (max-width: 1200px) {
     align-items: center;
+    margin-left: 8px;
     width: 100%;
     height: auto;
   }
@@ -643,6 +646,24 @@
           .main-nav-title {
             display: block;
             width: 100%;
+
+            &.uni {
+              position: relative;
+              &::after {
+                display: inline-block;
+                position: absolute;
+                top: -4px; 
+                right: 0.5rem;
+                bottom: 0;
+                margin: auto;
+                width: 8px;
+                height: 8px;
+                border-right: 2px solid $gen_lightblack;
+                border-bottom: 2px solid $gen_lightblack;
+                transform: rotate(45deg);
+                content: "";
+              }
+            }
           }
         }
       }

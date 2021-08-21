@@ -31,6 +31,10 @@
         <p>{{ getItemInfo.collectionName }} {{ getItemInfo.itemName }}</p>
       </div>
 
+      <div class="asset-form__image">
+        <img :src="getItemInfo.metadata.image" />
+      </div>
+
       <!-- 경매 -->
       <div v-if="isWithBid">
         <div class="asset-form__row">
@@ -333,9 +337,20 @@
           </div>
         </div>
       </div>
+
+      <div class="asset-form__button">
+        <div slot="submit" class="asset-item__floating__submit">
+          <button
+            :class="$bem('common-submit-button', '', [isActiveForm ? 'primary' : 'disabled'])"
+            @click="handleMakeOffer()"
+          >
+            {{ isModify ? $t('Market.ModifyNow') : $t('Market.RegisterNow') }}
+          </button>
+        </div>
+      </div>
     </section>
 
-    <aside class="asset-form__aside">
+    <aside class="asset-form__aside m-dis-none">
       <asset-item-floating :note="getRegisterNote" :info="getItemInfo">
         <div slot="submit" class="asset-item__floating__submit">
           <button

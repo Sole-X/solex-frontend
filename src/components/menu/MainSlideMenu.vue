@@ -70,7 +70,11 @@ export default {
     $t = this.$t.bind(this);
   },
 
-  mounted() {},
+  mounted() {
+    $('.main-nav__tab').find('.main-nav-sub-list').each(function(){
+     $(this).parent().find('.main-nav-title').addClass('uni');
+    });
+  },
 
   beforeDestroy() {},
 
@@ -210,7 +214,7 @@ export default {
 
     isActiveMenu(menu) {
       const { path, name, query } = this.$route;
-
+  
       return path.startsWith(menu.path);
     },
 
@@ -244,7 +248,9 @@ export default {
         if ( mainNavSubMenu.style.display == "none" ) {
             mainNavSubMenu.style.display = "block"
           }
-          else mainNavSubMenu.style.display = "none"
+        else mainNavSubMenu.style.display = "none"
+
+
       } else {
         mainSlideMenu.style.display = "none"
       }

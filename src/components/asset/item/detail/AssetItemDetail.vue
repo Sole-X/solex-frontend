@@ -18,7 +18,7 @@
       </ul>
     </nav>
 
-    <div class="asset-item__detail__body">
+    <div class="asset-item__detail__body ">
       <router-view :info="info" :history="history" />
     </div>
 

@@ -3,7 +3,8 @@
     <div>
       <div class="main-header__title">
         <router-link :to="{ path: '/home' }">
-          <img :src="$static.getFileURL('img/logo/default-logo.jpg')" />
+          <img :src="$static.getFileURL('img/logo/default-logo.jpg')" class="m-dis-none" />
+          <img :src="$static.getFileURL('img/logo/solx_M_logo.svg')" class="p-dis-none"/>
         </router-link>
       </div>
 
