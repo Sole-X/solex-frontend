@@ -48,6 +48,10 @@
       width: 100%;
       @include vertical-align-flex;
     }
+
+    @media (max-width: 1200px) {
+      height: 120px;
+    }
   }
 
   .asset-item-card__type {
@@ -273,6 +277,10 @@
       color: $secondary_color;
       font-weight: 700;
     }
+  }
+
+  @media (max-width: 1200px) {
+    display: none;
   }
 }
 
@@ -1289,6 +1297,10 @@
   .asset-form__body {
     width: 100%;
     max-width: 512px;
+
+    @media (max-width: 1200px) {
+      max-width: 100%;
+    }
   }
 
   .asset-form__title {
@@ -1299,12 +1311,42 @@
 
     h1 {
       font-size: 28px;
+
+      @media (max-width: 1200px) {
+        font-size: 18px;
+      }
     }
 
     p {
       font-size: 16px;
       margin-left: 30px;
       color: $primary_color;
+
+      @media (max-width: 1200px) {
+        margin-top: 4px;
+        margin-left: 0;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .asset-form__image {
+    display: none;
+
+    @media (max-width: 1200px) {
+      display: block;
+      margin-bottom: 1rem;
+      height: 200px;
+
+      img {
+        height: inherit;
+      }
     }
   }
 
@@ -1365,6 +1407,11 @@
         }
       }
     }
+
+
+    @media (max-width: 1200px) {
+      margin-bottom: 2.5rem;
+    }
   }
 
   .asset-form__row__label {
@@ -1391,6 +1438,39 @@
         weight: 300;
       }
       color: $gen_gray;
+
+      @media (max-width: 1200px) {
+        margin-top: 4px;
+      }
+    }
+
+    .asset-form__row__label__in {
+      display: flex;
+    }
+
+    @media (max-width: 1200px) {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+  }
+
+  .asset-form__button {
+    display: none;
+
+    @media (max-width: 1200px) {
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      padding: 10px;
+      width: 100%;
+
+      button {
+        padding: 1rem 0.5rem;
+        width: 100%;
+      }
     }
   }
 
@@ -1505,6 +1585,10 @@
         }
       }
     }
+  }
+
+  @media (max-width: 1200px) {
+    padding: 1rem;
   }
 }
 

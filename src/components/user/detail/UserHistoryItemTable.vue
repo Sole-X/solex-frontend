@@ -1,96 +1,98 @@
 <template>
-  <div :class="$bem('user-history__table', '', ['item'])">
-    <div class="user-history__thead">
-      <div
-        class="text-gray"
-        v-for="col in getItemTableHeads"
-        :key="col.type"
-        :class="$bem('user-history__col', '', [col.type])"
-      >
-        {{ col.name }}
-      </div>
-    </div>
-
-    <!-- TODO : API, 주문 있는 경우 해당 정보 로딩하기 -->
-    <div class="user-history__tbody">
-      <div class="user-history__row" v-for="row in list" :key="row.id">
-        <div :class="$bem('user-history__col', '', ['date'])">
-          {{ $date.formatDate(row.createdAt, 'fff') }}
-        </div>
-
-        <div :class="$bem('user-history__col', '', ['event'])">
-          {{ row.eventToString }}
-        </div>
-
-        <div :class="$bem('user-history__col', '', ['nft'])">
-          <div
-            class="user-history__nft__thumbnail"
-            :style="{
-              'background-image': `url('${getImageUrl(row)}')`,
-              'background-size': 'contain',
-              'background-position': 'center center',
-            }"
-            @click="(event) => handleItemClicked(event, row)"
-          ></div>
-
-          <div class="user-history__nft__detail">
-            <p class="user-history__nft__detail__item">
-              {{ row.tokenId }}
-            </p>
-            <p class="user-history__nft__detail__collection text-gray">
-              {{ getMaskedAddress(row.tokenAddress) }}
-            </p>
-            <p class="user-history__nft__detail__owner">
-              Owner : <span>{{ getMaskedAddress(row.nftInfo.ownerAddress) }}</span>
-            </p>
-          </div>
-        </div>
-
-        <div :class="$bem('user-history__col', '', ['price'])">
-          <p>{{ getAmount(row) }}</p>
-          <p>$ {{ getUsdPrice(row) }}</p>
-        </div>
-
-        <div :class="$bem('user-history__col', '', ['hash'])">
-          <a :href="$wallet.getTxUrl(row.txHash, 'KLAYTN')" target="_blank" rel="noopener noreferrer">
-            {{ getMaskedAddress(row.txHash) }}
-          </a>
-        </div>
-
-        <div :class="$bem('user-history__col', '', ['state'])">
-          <div class="state-complete" v-if="getEventState(row) === 'success'">
-            {{ $t('General.Success') }}
-          </div>
-
-          <div class="state-fail" v-else-if="getEventState(row) === 'cancel'">
-            {{ $t('General.Cancel') }}
-          </div>
-
-          <div
-            class="state-fail state-reject"
-            v-else-if="getEventState(row) === 'reject' || getEventState(row) === 'fail'"
-          >
-            {{ $t('General.Fail') }}
-            <button class="text-lightblack" @click="handleShowDetail(row)">
-              {{ $t('General.ShowDetail') }}
-            </button>
-          </div>
-
-          <div class="state-complete" v-else-if="getEventState(row) === 'complete'">
-            {{ $t('General.Complete') }}
-          </div>
-
-          <div class="state-progress" v-else-if="getEventState(row) === 'progress'">
-            {{ $t('General.InProgress') }}
-          </div>
-
-          <div v-else>
-            {{ row.eventState }}
-          </div>
+  <section class="user-history__table_wrap"> 
+    <div :class="$bem('user-history__table', '', ['item'])">
+      <div class="user-history__thead">
+        <div
+          class="text-gray"
+          v-for="col in getItemTableHeads"
+          :key="col.type"
+          :class="$bem('user-history__col', '', [col.type])"
+        >
+          {{ col.name }}
         </div>
       </div>
+
+      <!-- TODO : API, 주문 있는 경우 해당 정보 로딩하기 -->
+      <div class="user-history__tbody">
+        <div class="user-history__row" v-for="row in list" :key="row.id">
+          <div :class="$bem('user-history__col', '', ['date'])">
+            {{ $date.formatDate(row.createdAt, 'fff') }}
+          </div>
+
+          <div :class="$bem('user-history__col', '', ['event'])">
+            {{ row.eventToString }}
+          </div>
+
+          <div :class="$bem('user-history__col', '', ['nft'])">
+            <div
+              class="user-history__nft__thumbnail"
+              :style="{
+                'background-image': `url('${getImageUrl(row)}')`,
+                'background-size': 'contain',
+                'background-position': 'center center',
+              }"
+              @click="(event) => handleItemClicked(event, row)"
+            ></div>
+
+            <div class="user-history__nft__detail">
+              <p class="user-history__nft__detail__item">
+                {{ row.tokenId }}
+              </p>
+              <p class="user-history__nft__detail__collection text-gray">
+                {{ getMaskedAddress(row.tokenAddress) }}
+              </p>
+              <p class="user-history__nft__detail__owner">
+                Owner : <span>{{ getMaskedAddress(row.nftInfo.ownerAddress) }}</span>
+              </p>
+            </div>
+          </div>
+
+          <div :class="$bem('user-history__col', '', ['price'])">
+            <p>{{ getAmount(row) }}</p>
+            <p>$ {{ getUsdPrice(row) }}</p>
+          </div>
+
+          <div :class="$bem('user-history__col', '', ['hash'])">
+            <a :href="$wallet.getTxUrl(row.txHash, 'KLAYTN')" target="_blank" rel="noopener noreferrer">
+              {{ getMaskedAddress(row.txHash) }}
+            </a>
+          </div>
+
+          <div :class="$bem('user-history__col', '', ['state'])">
+            <div class="state-complete" v-if="getEventState(row) === 'success'">
+              {{ $t('General.Success') }}
+            </div>
+
+            <div class="state-fail" v-else-if="getEventState(row) === 'cancel'">
+              {{ $t('General.Cancel') }}
+            </div>
+
+            <div
+              class="state-fail state-reject"
+              v-else-if="getEventState(row) === 'reject' || getEventState(row) === 'fail'"
+            >
+              {{ $t('General.Fail') }}
+              <button class="text-lightblack" @click="handleShowDetail(row)">
+                {{ $t('General.ShowDetail') }}
+              </button>
+            </div>
+
+            <div class="state-complete" v-else-if="getEventState(row) === 'complete'">
+              {{ $t('General.Complete') }}
+            </div>
+
+            <div class="state-progress" v-else-if="getEventState(row) === 'progress'">
+              {{ $t('General.InProgress') }}
+            </div>
+
+            <div v-else>
+              {{ row.eventState }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

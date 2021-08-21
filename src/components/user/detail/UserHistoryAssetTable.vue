@@ -1,62 +1,64 @@
 <template>
-  <div :class="$bem('user-history__table', '', ['asset'])">
-    <div class="user-history__thead">
-      <div
-        class="text-gray"
-        v-for="(col, i) in getAssetTableHeads"
-        :key="i"
-        :class="$bem('user-history__col', '', [col.type])"
-      >
-        {{ col.name }}
-      </div>
-    </div>
-
-    <div class="user-history__tbody">
-      <div class="user-history__row" v-for="row in list" :key="row.id">
-        <div :class="$bem('user-history__col', '', ['date'])">
-          {{ $date.formatDate(row.updatedAt, 'fff') }}
-        </div>
-
-        <div :class="$bem('user-history__col', '', ['event'])">
-          {{ row.eventToString }}
-        </div>
-
-        <div :class="$bem('user-history__col', '', ['token'])">
-          {{ row.currencyInfo.symbol }}
-        </div>
-
-        <div :class="$bem('user-history__col', '', ['amount'])">
-          {{ $bn.toMaxUnit(row.amount, row.currencyInfo.decimal, 4) | addComma }}
-        </div>
-
-        <div :class="$bem('user-history__col', '', ['address'])">
-          <a :href="$wallet.getAccountUrl(row.fromAddress)" target="_blank" rel="noopener noreferrer">
-            {{ getMaskedAddress(row.fromAddressForAsset) }}
-          </a>
-        </div>
-
-        <div :class="$bem('user-history__col', '', ['address'])">
-          <a :href="$wallet.getAccountUrl(row.toAddress)" target="_blank" rel="noopener noreferrer">
-            {{ getMaskedAddress(row.toAddressForAsset) }}
-          </a>
-        </div>
-
-        <div :class="$bem('user-history__col', '', ['state', getClassNameOfEventState(row)])">
-          <div v-if="row.eventState === 'fail'">
-            {{ $t('General.Fail') }} <button class="text-lightblack" @click="handleShowDetails(row)">Details</button>
-          </div>
-
-          <div v-else-if="row.isProgress">
-            {{ $t('General.InProgress') }}
-          </div>
-
-          <div v-else>
-            {{ $t('General.Complete') }}
-          </div>
+  <section class="user-history__table_wrap">
+    <div :class="$bem('user-history__table', '', ['asset'])">
+      <div class="user-history__thead">
+        <div
+          class="text-gray"
+          v-for="(col, i) in getAssetTableHeads"
+          :key="i"
+          :class="$bem('user-history__col', '', [col.type])"
+        >
+          {{ col.name }}
         </div>
       </div>
+
+      <div class="user-history__tbody">
+        <div class="user-history__row" v-for="row in list" :key="row.id">
+          <div :class="$bem('user-history__col', '', ['date'])">
+            {{ $date.formatDate(row.updatedAt, 'fff') }}
+          </div>
+
+          <div :class="$bem('user-history__col', '', ['event'])">
+            {{ row.eventToString }}
+          </div>
+
+          <div :class="$bem('user-history__col', '', ['token'])">
+            {{ row.currencyInfo.symbol }}
+          </div>
+
+          <div :class="$bem('user-history__col', '', ['amount'])">
+            {{ $bn.toMaxUnit(row.amount, row.currencyInfo.decimal, 4) | addComma }}
+          </div>
+
+          <div :class="$bem('user-history__col', '', ['address'])">
+            <a :href="$wallet.getAccountUrl(row.fromAddress)" target="_blank" rel="noopener noreferrer">
+              {{ getMaskedAddress(row.fromAddressForAsset) }}
+            </a>
+          </div>
+
+          <div :class="$bem('user-history__col', '', ['address'])">
+            <a :href="$wallet.getAccountUrl(row.toAddress)" target="_blank" rel="noopener noreferrer">
+              {{ getMaskedAddress(row.toAddressForAsset) }}
+            </a>
+          </div>
+
+          <div :class="$bem('user-history__col', '', ['state', getClassNameOfEventState(row)])">
+            <div v-if="row.eventState === 'fail'">
+              {{ $t('General.Fail') }} <button class="text-lightblack" @click="handleShowDetails(row)">Details</button>
+            </div>
+
+            <div v-else-if="row.isProgress">
+              {{ $t('General.InProgress') }}
+            </div>
+
+            <div v-else>
+              {{ $t('General.Complete') }}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

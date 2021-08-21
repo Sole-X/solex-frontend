@@ -25,17 +25,23 @@
         <p>{{ getItemInfo.collectionName }} {{ getItemInfo.itemName }}</p>
       </div>
 
+      <div class="asset-form__image">
+        <img :src="getItemInfo.metadata.image" />
+      </div>
+
       <div class="asset-form__row">
         <div class="asset-form__row__label">
-          <h5>{{ getBidsLength() === 0 ? $t('Market.Bids0') : $t('Market.Bids1') }}</h5>
-          <button class="asset-item__request__more" @click="$_AssetAuctionMixin_openBidStatusModal(getItemInfo)">
-            <img
-              :src="
-                $static.getFileURL(`img/icon/ic-message-${getItemInfo.auction.bids.length > 0 ? 'black' : 'gray'}.svg`)
-              "
-            />
-            <span v-html="$t('Market.BidCount', { total: getItemInfo.auction.bids.length })" />
-          </button>
+          <div class="asset-form__row__label__in">
+            <h5>{{ getBidsLength() === 0 ? $t('Market.Bids0') : $t('Market.Bids1') }}</h5>
+            <button class="asset-item__request__more" @click="$_AssetAuctionMixin_openBidStatusModal(getItemInfo)">
+              <img
+                :src="
+                  $static.getFileURL(`img/icon/ic-message-${getItemInfo.auction.bids.length > 0 ? 'black' : 'gray'}.svg`)
+                "
+              />
+              <span v-html="$t('Market.BidCount', { total: getItemInfo.auction.bids.length })" />
+            </button>
+          </div>
           <span class="asset-form__row__label__sub">
             {{ $t('Market.DoNegoCheckStatus') }}
           </span>
@@ -116,9 +122,20 @@
           </div>
         </div>
       </div>
+
+      <div class="asset-form__button">
+        <div slot="submit" class="asset-item__floating__submit">
+          <button
+            :class="$bem('common-submit-button', '', [isActiveForm ? 'primary' : 'disabled'])"
+            @click="handleMakeBid()"
+          >
+            {{ $t('Market.BidNow') }}
+          </button>
+        </div>
+      </div>
     </section>
 
-    <aside class="asset-form__aside">
+    <aside class="asset-form__aside m-dis-none">
       <asset-item-floating :note="getBidNote" :info="getItemInfo">
         <div slot="submit" class="asset-item__floating__submit">
           <button

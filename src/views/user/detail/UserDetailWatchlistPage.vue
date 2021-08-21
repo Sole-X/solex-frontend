@@ -1,5 +1,5 @@
 <template>
-  <section class="user-watchlist-page">
+  <section class="user-watchlist-page user-item-page">
     <article class="user-detail__title">
       <h1>
         <strong>{{ $t('UserPage.MyWatchlist') }}</strong>

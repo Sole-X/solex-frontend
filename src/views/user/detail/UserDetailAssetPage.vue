@@ -25,34 +25,39 @@
             v-show="isAvailToken(currency)"
             :key="currency.symbol"
           >
-            <div class="user-asset__col__icon">
-              <img :src="$static.getFileURL(`img/icon/ic-token-${currency.symbol.toLowerCase()}.svg`)" alt="eth" />
-            </div>
+            <section class="user-asset__col__wrap">
+              <article class="user-asset__row__wrap">
+                  <div class="user-asset__col__icon">
+                  <img :src="$static.getFileURL(`img/icon/ic-token-${currency.symbol.toLowerCase()}.svg`)" alt="eth" />
+                </div>
 
-            <div class="user-asset__col__name">
-              <p>
-                <strong>{{ currency.symbol }}</strong>
-              </p>
-              <p class="text-gray">{{ currency.name }}</p>
-            </div>
+                <div class="user-asset__col__name">
+                  <p>
+                    <strong>{{ currency.symbol }}</strong>
+                  </p>
+                  <p class="text-gray">{{ currency.name }}</p>
+                </div>
+              </article>
+              <article class="user-asset__row__wrap">
+                <div class="user-asset__in-wallet__link">
+                  <a :href="$wallet.getTokenUrl(currency.currentAddress)" target="_blank" rel="noopener noreferrer">
+                    {{ getMaskedAddress(currency.currentAddress) }}
+                    <img :src="$static.getFileURL('img/icon/ic-link-pointer-blue.svg')" alt="pointer" class="v-m" />
+                  </a>
+                </div>
 
-            <div class="user-asset__in-wallet__link">
-              <a :href="$wallet.getTokenUrl(currency.currentAddress)" target="_blank" rel="noopener noreferrer">
-                {{ getMaskedAddress(currency.currentAddress) }}
-                <img :src="$static.getFileURL('img/icon/ic-link-pointer-blue.svg')" alt="pointer" class="v-m" />
-              </a>
-            </div>
+                <div class="user-asset__col__balance">
+                  <p>
+                    <strong>{{ currency.decBalance.dprec(4) | addComma }}</strong>
+                    <span>{{ currency.symbol }}</span>
+                  </p>
 
-            <div class="user-asset__col__balance">
-              <p>
-                <strong>{{ currency.decBalance.dprec(4) | addComma }}</strong>
-                <span>{{ currency.symbol }}</span>
-              </p>
-
-              <p class="text-gray">
-                <strong>{{ currency.toFiat(currency.decBalance).dprec(4) | addComma }} USD</strong>
-              </p>
-            </div>
+                  <p class="text-gray">
+                    <strong>{{ currency.toFiat(currency.decBalance).dprec(4) | addComma }} USD</strong>
+                  </p>
+                </div>
+              </article>
+            </section>
 
             <div class="user-asset__in-wallet__action">
               <button
@@ -90,46 +95,51 @@
             v-if="true || currency.tokenAddr[getChainInfo.chain] !== ''"
             :key="currency.symbol"
           >
-            <div class="user-asset__col__icon">
-              <img
-                :src="$static.getFileURL(`img/icon/ic-token-${(currency.tokenInfo.symbol || '').toLowerCase()}.svg`)"
-                alt="eth"
-              />
-            </div>
+            <section class="user-asset__col__wrap">
+              <article class="user-asset__row__wrap">
+                <div class="user-asset__col__icon">
+                  <img
+                    :src="$static.getFileURL(`img/icon/ic-token-${(currency.tokenInfo.symbol || '').toLowerCase()}.svg`)"
+                    alt="eth"
+                  />
+                </div>
 
-            <div class="user-asset__col__name">
-              <p>
-                <strong>{{ currency.tokenInfo.symbol }}</strong>
-              </p>
-              <p class="text-gray">{{ currency.tokenInfo.name }}</p>
-            </div>
+                <div class="user-asset__col__name">
+                  <p>
+                    <strong>{{ currency.tokenInfo.symbol }}</strong>
+                  </p>
+                  <p class="text-gray">{{ currency.tokenInfo.name }}</p>
+                </div>
+              </article>
+              <article class="user-asset__row__wrap"> 
+                <div class="user-asset__in-wallet__link">
+                  <a
+                    :href="$wallet.getTokenUrl(currency.tokenInfo.addressToReserve, getChainInfo.chain)"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {{ getMaskedAddress(currency.tokenInfo.addressToReserve) }}
+                    <img :src="$static.getFileURL('img/icon/ic-link-pointer-blue.svg')" alt="pointer" class="v-m" />
+                  </a>
+                </div>
 
-            <div class="user-asset__in-wallet__link">
-              <a
-                :href="$wallet.getTokenUrl(currency.tokenInfo.addressToReserve, getChainInfo.chain)"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {{ getMaskedAddress(currency.tokenInfo.addressToReserve) }}
-                <img :src="$static.getFileURL('img/icon/ic-link-pointer-blue.svg')" alt="pointer" class="v-m" />
-              </a>
-            </div>
+                <div class="user-asset__col__balance">
+                  <p>
+                    <strong>{{ currency.getDecAmount(currency.depositAmount).dprec(4) | addComma }}</strong>
+                    <span>{{ currency.tokenInfo.symbol }}</span>
+                  </p>
 
-            <div class="user-asset__col__balance">
-              <p>
-                <strong>{{ currency.getDecAmount(currency.depositAmount).dprec(4) | addComma }}</strong>
-                <span>{{ currency.tokenInfo.symbol }}</span>
-              </p>
-
-              <p class="text-gray">
-                <strong
-                  >{{
-                    currency.tokenInfo.toFiat(currency.getDecAmount(currency.depositAmount)).dprec(4) | addComma
-                  }}
-                  USD</strong
-                >
-              </p>
-            </div>
+                  <p class="text-gray">
+                    <strong
+                      >{{
+                        currency.tokenInfo.toFiat(currency.getDecAmount(currency.depositAmount)).dprec(4) | addComma
+                      }}
+                      USD</strong
+                    >
+                  </p>
+                </div>
+              </article>
+            </section>
 
             <div class="user-asset__in-wallet__action">
               <button

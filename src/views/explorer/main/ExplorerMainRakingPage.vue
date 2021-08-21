@@ -66,73 +66,75 @@
         </div>
       </section>
 
-      <section class="explorer-main__table">
-        <div class="explorer-main__table__head">
-          <div :class="$bem('explorer-main__table__col', '', [col.type])" v-for="(col, i) in getTableCols" :key="i">
-            <span class="text-gray">{{ col.title }}</span>
-            <div class="explorer-main__table__sort">
-              <button>
-                <img
-                  :src="
-                    $static.getFileURL(
-                      `img/icon/ic-triangle-top-${sortStatus[col.sortType] === 'asc' ? 'on' : 'off'}.svg`,
-                    )
-                  "
-                  alt="triangle to top"
-                  @click="updateSortStatus(col.sortType, 'asc')"
-                />
-              </button>
-              <button>
-                <img
-                  :src="
-                    $static.getFileURL(
-                      `img/icon/ic-triangle-bottom-${sortStatus[col.sortType] === 'desc' ? 'on' : 'off'}.svg`,
-                    )
-                  "
-                  alt="triangle to bottom"
-                  @click="updateSortStatus(col.sortType, 'desc')"
-                />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="explorer-main__table__body">
-          <div v-for="(rank, i) in getSortedList" :key="rank.tokenAddress" class="explorer-main__table__row">
-            <div :class="$bem('explorer-main__table__col', '', ['rank'])">
-              {{ i + 1 }}
-            </div>
-
-            <div :class="$bem('explorer-main__table__col', '', ['token'])">
-              <div></div>
-              <div class="explorer-rank-token">
-                <span class="explorer-rank-token-name" :data-text="getCollectionName(rank.tokenAddress)">
-                  {{
-                    getCollectionName(rank.tokenAddress).slice(0, 16) +
-                    (getCollectionName(rank.tokenAddress).length > 16 ? '...' : '')
-                  }}
-                </span>
+      <div class="explorer-main__table_wrap">
+        <section class="explorer-main__table">
+          <div class="explorer-main__table__head">
+            <div :class="$bem('explorer-main__table__col', '', [col.type])" v-for="(col, i) in getTableCols" :key="i">
+              <span class="text-gray">{{ col.title }}</span>
+              <div class="explorer-main__table__sort">
+                <button>
+                  <img
+                    :src="
+                      $static.getFileURL(
+                        `img/icon/ic-triangle-top-${sortStatus[col.sortType] === 'asc' ? 'on' : 'off'}.svg`,
+                      )
+                    "
+                    alt="triangle to top"
+                    @click="updateSortStatus(col.sortType, 'asc')"
+                  />
+                </button>
+                <button>
+                  <img
+                    :src="
+                      $static.getFileURL(
+                        `img/icon/ic-triangle-bottom-${sortStatus[col.sortType] === 'desc' ? 'on' : 'off'}.svg`,
+                      )
+                    "
+                    alt="triangle to bottom"
+                    @click="updateSortStatus(col.sortType, 'desc')"
+                  />
+                </button>
               </div>
             </div>
+          </div>
 
-            <div :class="$bem('explorer-main__table__col', '', ['volume'])">{{ rank.total | addComma }} USD</div>
+          <div class="explorer-main__table__body">
+            <div v-for="(rank, i) in getSortedList" :key="rank.tokenAddress" class="explorer-main__table__row">
+              <div :class="$bem('explorer-main__table__col', '', ['rank'])">
+                {{ i + 1 }}
+              </div>
 
-            <div :class="$bem('explorer-main__table__col', '', ['volume'])">{{ rank.week | addComma }} USD</div>
+              <div :class="$bem('explorer-main__table__col', '', ['token'])">
+                <div></div>
+                <div class="explorer-rank-token">
+                  <span class="explorer-rank-token-name" :data-text="getCollectionName(rank.tokenAddress)">
+                    {{
+                      getCollectionName(rank.tokenAddress).slice(0, 16) +
+                      (getCollectionName(rank.tokenAddress).length > 16 ? '...' : '')
+                    }}
+                  </span>
+                </div>
+              </div>
 
-            <div :class="$bem('explorer-main__table__col', '', ['change'])">{{ rank.change }}%</div>
+              <div :class="$bem('explorer-main__table__col', '', ['volume'])">{{ rank.total | addComma }} USD</div>
 
-            <div :class="$bem('explorer-main__table__col', '', ['price'])">{{ rank.avgPrice | addComma }} USD</div>
+              <div :class="$bem('explorer-main__table__col', '', ['volume'])">{{ rank.week | addComma }} USD</div>
 
-            <div :class="$bem('explorer-main__table__col', '', ['owner'])">
-              {{ rank.ownerCnt | addComma }}
-            </div>
+              <div :class="$bem('explorer-main__table__col', '', ['change'])">{{ rank.change }}%</div>
 
-            <div :class="$bem('explorer-main__table__col', '', ['asset'])">
-              {{ rank.nftCnt | addComma }}
+              <div :class="$bem('explorer-main__table__col', '', ['price'])">{{ rank.avgPrice | addComma }} USD</div>
+
+              <div :class="$bem('explorer-main__table__col', '', ['owner'])">
+                {{ rank.ownerCnt | addComma }}
+              </div>
+
+              <div :class="$bem('explorer-main__table__col', '', ['asset'])">
+                {{ rank.nftCnt | addComma }}
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   </section>
 </template>
