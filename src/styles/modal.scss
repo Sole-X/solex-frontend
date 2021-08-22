@@ -68,6 +68,16 @@
       * {
         margin: 10px auto;
       }
+
+      @media (max-width: 1200px) {
+        * {
+          margin:auto;
+        }
+
+        h4 {
+          margin-top: 10px;
+        }
+      }
     }
 
     h4 {
@@ -78,6 +88,13 @@
     @media (max-width: 1200px) {
       overflow: auto;
       padding: 1rem;
+      
+
+      .gen-modal__desc {
+        margin-top: 0.5rem;
+        text-align: center;
+        word-break: keep-all;
+      }
     }
   }
 
@@ -102,6 +119,11 @@
 
     strong {
       color: $gen_black;
+    }
+
+    @media (max-width: 1200px) {
+      padding: 1rem 1rem 0.5rem;
+      height: auto;
     }
   }
 
@@ -236,6 +258,13 @@
       bottom: 1.5rem;
       padding: 0;
     }
+  }
+
+  @media (max-width: 1200px) {
+    width: calc( 100% - 20px );
+    min-height: auto;
+    height: calc( 100% - 20px );
+    max-height: 720px;
   }
 }
 
@@ -682,6 +711,10 @@
           }
         }
       }
+
+      @media (max-width: 1200px) {
+        margin-top: 20px 0;
+      }
     }
 
     .checkout-modal__order__info__row {
@@ -691,6 +724,10 @@
       .checkout-modal__order__info__label {
         width: 30%;
         color: $gen_lightblack;
+
+        @media (max-width: 1200px) {
+          word-break: keep-all;
+        }
       }
 
       .checkout-modal__order__info__value {
@@ -702,6 +739,10 @@
           top: 4px;
           font-size: 12px;
           color: #00b2e4;
+
+          @media (max-width: 1200px) {
+            overflow-wrap: break-word;
+          }
         }
 
         &__fiat {
@@ -1029,6 +1070,10 @@
     @media (max-width: 1200px) {
       margin-bottom: 0;
     }
+  }
+
+  .checkout-modal__checkout {
+    overflow: auto;
   }
 
   .reserve-input-modal__form {
