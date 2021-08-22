@@ -4,6 +4,10 @@
   height: 100vh;
   position: relative;
 
+  @media screen and (max-width:760px){
+    height: auto;
+  }
+
   .landing-page__header {
     width: 100%;
     height: 90px;

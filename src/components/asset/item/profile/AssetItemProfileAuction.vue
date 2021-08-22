@@ -32,7 +32,7 @@
     </article>
 
     <article class="asset-item__profile__detail">
-      <ul>
+      <ul class="auction_detail_m">
         <li>
           <div>
             {{

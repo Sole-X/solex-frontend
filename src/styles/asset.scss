@@ -306,6 +306,7 @@
 
     @media screen and (min-width: 761px) and (max-width: 1200px){
       margin-bottom: 30px;
+      justify-content: flex-end;
     }
     @media screen and (max-width:760px){
       margin-bottom: 10px;
@@ -438,6 +439,29 @@
       }
     }
 
+    .asset-item__profile--auction .asset-item__profile__detail>ul>li{
+
+      @media screen and (max-width:1200px){
+        display: block !important;
+      }
+    }
+    .asset-item__profile--auction .asset-item__profile__detail ul.auction_detail_m{
+      
+      li{
+        .asset-form__price{
+          @media screen and (max-width:1200px){
+            display: block !important;
+          }
+        }
+        .asset-item__profile__detail__bids{
+          @media screen and (max-width:1200px){
+            display: block !important;
+          }
+        }
+
+      }
+    }
+
     .asset-item__profile {
       width: 100%;
       padding-left: 80px;
@@ -461,6 +485,12 @@
         top: -40px;
         left: 80px;
         position: absolute;
+
+        @media screen and (max-width:1200px){
+          width: 100%;
+          margin-bottom: 5px;
+          position: initial;
+        }
 
         img {
           margin-right: 10px;
@@ -559,6 +589,7 @@
             padding-top: 20px;
             align-items: flex-start;
             border-top: 1px solid $melange_gray;
+            display: flex !important;
 
             > div:nth-child(1) {
               font-size: 16px;
@@ -607,6 +638,11 @@
 
             &__others {
               margin-left: auto;
+
+              @media screen and (max-width:1200px){
+                float: left;
+                margin: 5px 0px 20px;
+              }
 
               .asset-item__request__more {
                 width: 140px;
@@ -747,13 +783,21 @@
 
     .asset-item__profile--auction {
       .asset-item__profile__title {
-        margin-bottom: 77px;
+        margin-bottom: 72px;
+
+        @media screen and (max-width:760px){
+          margin-bottom: 45px;
+        }
       }
     }
 
     .asset-item__profile--sell {
       .asset-item__profile__title {
         margin-bottom: 72px;
+
+        @media screen and (max-width:760px){
+          margin-bottom: 45px;
+        }
       }
     }
 
@@ -859,12 +903,17 @@
     padding-right: 280px;
     border-top: 2px solid #231f20;
 
-    @media screen and (max-width:1200px){
+    @media screen and (max-width:760px){
       padding-right: 0px;
+      min-height: auto;
     }
 
     .asset-item__chart {
       margin-bottom: 65px;
+
+      @media screen and (max-width:760px){
+        margin-bottom: 35px;
+      }
 
       .asset-item__chart__header {
         display: flex;
@@ -872,15 +921,27 @@
 
         @media screen and (max-width:760px){
           display: block;
+          text-align: center;
+          padding: 20px 0px;
         }
 
         .asset-item__chart__header__title {
           display: flex;
 
+          @media screen and (max-width:760px){
+            justify-content: center;
+          }
+
           h4 {
             font-weight: 700;
             font-size: 20px;
             margin-right: 16px;
+
+            @media screen and (max-width:760px){
+              margin-right: 0px;
+              margin-bottom: 15px;
+              font-size: 18px;
+            }
           }
 
           .asset-item__chart__header__filter {
@@ -909,6 +970,10 @@
 
             img {
               margin-right: 8px;
+
+              @media screen and (max-width:760px){
+                margin-right: 0px;
+              }
             }
 
             &:last-child {
@@ -924,6 +989,10 @@
 
             strong {
               font-size: 20px;
+
+              @media screen and (max-width:760px){
+                font-size: 16px;
+              }
             }
           }
 
@@ -1028,7 +1097,7 @@
       padding-bottom: 20px;
       border: 1px solid $melange_gray;
 
-      @media screen and (max-width:1200px){
+      @media screen and (max-width:760px){
         display: none;
       }
     }
@@ -1037,6 +1106,11 @@
   .asset-item__description {
     .asset-item__hypen-row {
       margin-bottom: 20px;
+
+      @media screen and (max-width:760px){
+        margin-bottom: 10px;
+        display: block;
+      }
     }
   }
 

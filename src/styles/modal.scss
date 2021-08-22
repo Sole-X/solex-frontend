@@ -266,6 +266,10 @@
     height: calc( 100% - 20px );
     max-height: 720px;
   }
+
+  @media screen and (max-width:760px){
+    height: calc( 100% - 550px );
+  }
 }
 
 .gen-modal__close {
@@ -1339,6 +1343,11 @@
   height: 320px;
   background-color: white;
   padding: 40px 40px;
+
+  @media screen and (max-width:760px){
+    margin: 10px;
+    padding: 40px 20px;
+  }
 
   .klip-login-modal__header {
     margin: 0 auto 36px auto;

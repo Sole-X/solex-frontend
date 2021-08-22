@@ -608,6 +608,11 @@
   align-items: center;
   width: 100%;
   min-height: 50vh;
+
+  @media screen and (max-width:760px){
+    min-height: 30vh;
+  }
+
   .staking-activity-no-data-page__main {
     display: flex;
     flex-direction: column;
