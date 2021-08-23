@@ -263,7 +263,7 @@
   @media (max-width: 1200px) {
     width: calc( 100% - 20px );
     min-height: auto;
-    height: calc( 100% - 20px );
+    // height: calc( 100% - 20px );
     max-height: 720px;
   }
 
@@ -481,6 +481,10 @@
     width: 620px;
   }
 
+  @media screen and (max-width:760px){
+    height: calc( 100% - 200px );
+  }
+
   .gen-modal__title {
     margin-bottom: 40px;
   }
@@ -541,6 +545,10 @@
         width: 140px;
         text-align: right;
         padding-right: 20px;
+
+        @media screen and (max-width:760px){
+          padding-right: 0px;
+        }
       }
 
       &--actions {
@@ -847,6 +855,7 @@
     @include vertical-align-flex;
     margin-bottom: 40px;
     width: 100%;
+    justify-content: space-around;
 
     .share-content__option__nouse {
       cursor: not-allowed;
