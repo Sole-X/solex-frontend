@@ -4,7 +4,7 @@
       <div class="main-header__title">
         <router-link :to="{ path: '/home' }">
           <img :src="$static.getFileURL('img/logo/default-logo.jpg')" class="m-dis-none" />
-          <img :src="$static.getFileURL('img/logo/solx_M_logo.svg')" class="p-dis-none"/>
+          <img :src="$static.getFileURL('img/logo/solx_M_logo.svg')" class="p-dis-none" @click="mainSlideMenuClose()"/>
         </router-link>
       </div>
 
@@ -92,6 +92,11 @@ export default {
     handleConnectWallet() {
       this.$router.push('/wallet/connect');
     },
+
+    mainSlideMenuClose(){
+      const mainSlideMenu = document.getElementById("mainSlideMenu");
+      mainSlideMenu.style.display = "none"
+    }
   },
 
   components: {

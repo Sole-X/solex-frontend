@@ -33,7 +33,7 @@
         <main-user-setting @onClose="() => $refs.userSetting.close()" />
       </ui-popover>
     </div>
-    <div v-else class="main-header__wallet disabled" @click="handleConnectWallet">
+    <div v-else class="main-header__wallet disabled" @click="[handleConnectWallet(),  mainSlideMenuClose()]">
       <span v-if="$t('General.Language') === 'KOR'">지갑 연결</span>
       <span v-else>Connect Wallet</span>
     </div>
