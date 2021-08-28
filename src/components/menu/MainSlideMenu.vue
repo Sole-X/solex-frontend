@@ -26,7 +26,7 @@
         </ul>
       </div>
     </nav>
-    <div v-if="$_GlobalValueMixin_showRouterView" class="main-header__wallet">
+    <div v-if="$_GlobalValueMixin_showRouterView" class="main-header__wallet p-dis-none m-dis-none">
       <img :src="$static.getFileURL(`img/logo/logo-${getAccessType}.svg`)" :alt="getAccessType" />
 
       <ui-popover v-if="getUserInfo.address" ref="userSetting" class="main-user-setting-wrap">
