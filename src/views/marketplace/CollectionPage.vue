@@ -91,7 +91,7 @@
           </svg>
         </div>
       </header>
-      <main class="collection-page-items-main">
+      <main class="collection-page-items-main collection-on-auction">
         <asset-item-card-market-place
           class="collection-page-items-main-item"
           v-for="item in getOnAuctionItems()"

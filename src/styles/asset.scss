@@ -1764,10 +1764,15 @@
 .collection-page-items-main-item.asset-item-card2{
   margin-right: 10px !important;
 }
+
+.collection-on-auction .asset-item-card2{
+  margin: inherit;
+}
+
 .asset-item-card2 {
   cursor: pointer;
   width: 220px;
-  height: 300px;
+  height: 310px;
 
   @media screen and (max-width:760px){
     margin: 0 auto;
