@@ -127,6 +127,12 @@ export default {
           return 'Xu:';
         } else if (['749', '765', '761', '763','753','751','755','757','759','766','767','768','769'].includes(info.tokenId)) {
           return 'tripleA';
+        } else if (['853', '854', '855', '856', '857', '858'].includes(info.tokenId)) {
+          return 'C.One.C';
+        } else if (['859', '860', '861','862','863', '864'].includes(info.tokenId)) {
+          return 'KevinKang';
+        } else if (['865', '866', '867', '868', '869', '870'].includes(info.tokenId)) {
+          return 'TAG100';
         }
       }
       return 'Unknown';
@@ -188,6 +194,9 @@ export default {
         window.open(targetURL, `publisher ${targetURL}`);
       } else if (publisherName == 'tripleA') {
         const targetURL = 'https://enftee.medium.com/new-series-presented-by-triplea-author-with-triumphx-70799a9f1850';
+        window.open(targetURL, `publisher ${targetURL}`);
+      }  else if (publisherName == 'C.One.C' || publisherName == 'KevinKang' || publisherName == 'TAG100') {
+        const targetURL = 'https://www.instagram.com/sa.specialarts/';
         window.open(targetURL, `publisher ${targetURL}`);
       }
     },
