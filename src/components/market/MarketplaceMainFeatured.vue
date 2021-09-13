@@ -175,7 +175,7 @@ export default {
           },
           link: '/sell?search=shhan',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_MultiversePart1_1440_320.jpg')}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_Multiverse_Part1_1440_320.jpg')}`,
           },
         },
         {
