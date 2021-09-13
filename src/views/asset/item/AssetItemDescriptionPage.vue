@@ -133,6 +133,8 @@ export default {
           return 'KevinKang';
         } else if (['865', '866', '867', '868', '869', '870'].includes(info.tokenId)) {
           return 'TAG100';
+        } else if (['1108', '1109', '1110', '1111', '1112', '1113', '1114', '1115', '1116'].includes(info.tokenId)) {
+          return 'Byundaeyong';
         }
       }
       return 'Unknown';
@@ -195,8 +197,11 @@ export default {
       } else if (publisherName == 'tripleA') {
         const targetURL = 'https://enftee.medium.com/new-series-presented-by-triplea-author-with-triumphx-70799a9f1850';
         window.open(targetURL, `publisher ${targetURL}`);
-      }  else if (publisherName == 'C.One.C' || publisherName == 'KevinKang' || publisherName == 'TAG100') {
+      } else if (publisherName == 'C.One.C' || publisherName == 'KevinKang' || publisherName == 'TAG100') {
         const targetURL = 'https://www.instagram.com/sa.specialarts/';
+        window.open(targetURL, `publisher ${targetURL}`);
+      } else if (publisherName == 'Byundaeyong') {
+        const targetURL = 'https://www.instagram.com/byun_dae_yong/';
         window.open(targetURL, `publisher ${targetURL}`);
       }
     },
