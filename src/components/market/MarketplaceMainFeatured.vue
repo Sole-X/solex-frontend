@@ -87,6 +87,17 @@ export default {
           title: $t('Market.TopFeatured1Title'),
           desc: $t('Market.TopFeatured1Desc'),
           slideStyle: {
+            backgroundColor: '#F4E9E8',
+          },
+          link: 'https://sole-x.io/sell?search=Byundaeyong',
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_Byundaeyong_1440_320.jpg')}`,
+          },
+        },
+        {
+          title: $t('Market.TopFeatured1Title'),
+          desc: $t('Market.TopFeatured1Desc'),
+          slideStyle: {
             backgroundColor: '#efefef',
           },
           link: 'https://www.sole-x.io/sell?search=KJM',
@@ -164,7 +175,7 @@ export default {
           },
           link: '/sell?search=shhan',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-SHHAN.jpg')}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_MultiversePart1_1440_320.jpg')}`,
           },
         },
         {
@@ -175,7 +186,7 @@ export default {
           },
           link: '/sell?search=Xu',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-Xu.jpg')}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_Xu_Private_off_320.jpg')}`,
           },
         },
         {
@@ -186,7 +197,7 @@ export default {
           },
           link: '/sell?search=tripleA',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-tripleA.jpg')}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_tripleA_Deep_writing_1440_320.jpg')}`,
           },
         },
         // {
