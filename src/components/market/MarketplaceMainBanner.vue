@@ -47,11 +47,11 @@ export default {
     getBannerList() {
       return [
         {
-          title: 'TRIX Airdrop Event',
-          description: ['for 1 million', 'TriumphX and Sole-x Users'],
-          link: 'https://medium.sole-x.io/trix-airdrop-event-81529de03bed',
+          title: '1+1 NFT DROP EVENT',
+          description: ['1+1 NFT Drop Event', 'TriumphX and Sole-x Users'],
+          link: 'https://enftee.com/company/gallery_list.php?c1_idx=7',
           img: {
-            src: 'img/article/Trix-Airdrop-Event.jpg',
+            src: 'img/article/nft_drop_event.jpg',
           },
         },
         {
