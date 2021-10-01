@@ -49,9 +49,9 @@ export default {
         {
           title: '1+1 NFT DROP EVENT',
           description: ['1+1 NFT Drop Event', 'TriumphX and Sole-x Users'],
-          link: 'https://enftee.com/company/gallery_list.php?c1_idx=7',
+          link: 'https://opensea.io/collection/triumphx?locale=ko',
           img: {
-            src: 'img/article/nft_drop_event.jpg',
+            src: 'img/article/SoleX_OpenSea.jpg',
           },
         },
         {
@@ -59,7 +59,7 @@ export default {
           description: ['We Create, Present,', 'And Do Magic'],
           link: 'https://www.enftee.com',
           img: {
-            src: 'img/article/article-market-home-banner-enftee.jpg',
+            src: 'img/article/solex_ENFTEE_380x240.jpg',
           },
         },
         {

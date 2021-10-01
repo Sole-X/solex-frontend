@@ -87,22 +87,22 @@ export default {
           title: $t('Market.TopFeatured1Title'),
           desc: $t('Market.TopFeatured1Desc'),
           slideStyle: {
-            backgroundColor: '#F4E9E8',
+            backgroundColor: '#C5E6EF',
           },
-          link: 'https://sole-x.io/sell?search=Byundaeyong',
+          link: 'https://sole-x.io/sell?search=yooniverse',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_Byundaeyong_1440_320.jpg')}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/Solex_yooniverse_1st_Series_RUNRUNRUN_1440_320.jpg')}`,
           },
         },
         {
           title: $t('Market.TopFeatured1Title'),
           desc: $t('Market.TopFeatured1Desc'),
           slideStyle: {
-            backgroundColor: '#efefef',
+            backgroundColor: '#C7B7A8',
           },
-          link: 'https://www.sole-x.io/sell?search=KJM',
+          link: 'https://www.sole-x.io/sell?search=collective%20yuwol',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-kjm.jpg')}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/Solex_Collective_Yuwo_1440_320.jpg')}`,
           },
         },
         // {
@@ -123,11 +123,11 @@ export default {
           title: $t('Market.TopFeatured1Title'),
           desc: $t('Market.TopFeatured1Desc'),
           slideStyle: {
-            backgroundColor: '#202020',
+            backgroundColor: '#F3DAB2',
           },
-          link: '/sell?search=Phoenix',
+          link: '/sell?search=Namjeahyun',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-1.jpg')}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/Solex_Namjeahyun_Passage_1440_320.jpg')}`,
           },
         },
         // {
@@ -160,44 +160,33 @@ export default {
           title: $t('Market.TopFeatured1Title'),
           desc: $t('Market.TopFeatured1Desc'),
           slideStyle: {
-            backgroundColor: '#202342',
+            backgroundColor: '#DBE0E2',
           },
-          link: 'https://topnft.world/',
+          link: 'https://sole-x.io/sell?search=Enjo',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL('img/article/article-market-home-top-4.jpg')}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_enjo_fetish_1440_320.jpg')}`,
           },
         },
         {
           title: $t('Market.TopFeatured1Title'),
           desc: $t('Market.TopFeatured1Desc'),
           slideStyle: {
-            backgroundColor: '#c9c2b0',
+            backgroundColor: '#F5E9E9',
           },
-          link: '/sell?search=shhan',
+          link: 'https://sole-x.io/sell?search=Byundaeyong',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_Multiverse_Part1_1440_320.jpg')}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_Byundaeyong_1440_320.jpg')}`,
           },
         },
         {
           title: $t('Market.TopFeatured1Title'),
           desc: $t('Market.TopFeatured1Desc'),
           slideStyle: {
-            backgroundColor: '#323b42',
+            backgroundColor: '#5AA23F',
           },
-          link: '/sell?search=Xu',
+          link: 'https://sole-x.io/sell?search=C.One.C',
           contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_Xu_Private_off_320.jpg')}`,
-          },
-        },
-        {
-          title: $t('Market.TopFeatured1Title'),
-          desc: $t('Market.TopFeatured1Desc'),
-          slideStyle: {
-            backgroundColor: '#e2ddda',
-          },
-          link: '/sell?search=tripleA',
-          contentStyle: {
-            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_tripleA_Deep_writing_1440_320.jpg')}`,
+            backgroundImage: `url(${this.$static.getFileURL('img/article/solex_special_arts_1440_320.jpg')}`,
           },
         },
         // {
