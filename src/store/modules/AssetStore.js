@@ -456,7 +456,7 @@ export default {
         }
       }
 
-      let paramCate = chain === 'ETHEREUM' ? 'bridge' : 'token';
+      let paramCate = chain === 'ETHEREUM' ? 'tokenBridge' : 'token';
       if (payload.action === 'transfer') {
         paramCate = 'token';
       }
@@ -561,7 +561,7 @@ export default {
           return signResult
         }
 
-        let cate = chain === 'ETHEREUM' ? 'bridge' : 'token';
+        let cate = chain === 'ETHEREUM' ? 'nftBridge' : 'token';
         if (payload.action === 'transferNft') {
           cate = 'token';
         }
