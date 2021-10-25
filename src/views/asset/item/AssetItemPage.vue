@@ -128,7 +128,7 @@
       >
         <template v-if="loadingStatus"> </template>
         <template v-else>
-          <div class="asset-item__thumbnail__icon">
+          <div v-if="Boolean(getItemInfo.chainIcon)" class="asset-item__thumbnail__icon">
             <img :src="getItemInfo.chainIcon" alt="platform" />
           </div>
 
