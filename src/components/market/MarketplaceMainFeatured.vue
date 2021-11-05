@@ -70,19 +70,19 @@ export default {
         //     )}`,
         //   },
         // },
-        // {
-        //   title: $t("Market.TopFeatured1Title"),
-        //   desc: $t("Market.TopFeatured1Desc"),
-        //   slideStyle: {
-        //     backgroundColor: "#f4e4ee",
-        //   },
-        //   link: "https://sole-x.io/sell?search=phoenix",
-        //   contentStyle: {
-        //     backgroundImage: `url(${this.$static.getFileURL(
-        //       "img/article/article-market-home-top-phoenix-bloom.jpg"
-        //     )}`,
-        //   },
-        // },
+        {
+          title: $t("Market.TopFeatured1Title"),
+          desc: $t("Market.TopFeatured1Desc"),
+          slideStyle: {
+            backgroundColor: "#ECECEC",
+          },
+          link: "https://sole-x.io/sell?search=Jeon",
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL(
+              "img/article/Solex_ASYAAF_NFT_1st_Series.jpg"
+            )}`,
+          },
+        },
         {
           title: $t('Market.TopFeatured1Title'),
           desc: $t('Market.TopFeatured1Desc'),
