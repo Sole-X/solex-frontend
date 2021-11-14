@@ -69,7 +69,7 @@ export default {
         //       "img/article/article-market-home-top-rising-sun.jpg"
         //     )}`,
         //   },
-        // },
+        // },        
         {
           title: $t("Market.TopFeatured1Title"),
           desc: $t("Market.TopFeatured1Desc"),
@@ -80,6 +80,19 @@ export default {
           contentStyle: {
             backgroundImage: `url(${this.$static.getFileURL(
               "img/article/Solex_ASYAAF_NFT_1st_Series.jpg"
+            )}`,
+          },
+        },
+        {
+          title: $t("Market.TopFeatured1Title"),
+          desc: $t("Market.TopFeatured1Desc"),
+          slideStyle: {
+            backgroundColor: "#ECECEC",
+          },
+          link: "https://sole-x.io/sell?search=LyanHA",
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL(
+              "img/article/Solex_LyanHA_Dokkaebi_series_1440_320.jpg"
             )}`,
           },
         },
