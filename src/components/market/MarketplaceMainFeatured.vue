@@ -57,19 +57,19 @@ export default {
   computed: {
     getBannerList() {
       return [
-        // {
-        //   title: $t("Market.TopFeatured1Title"),
-        //   desc: $t("Market.TopFeatured1Desc"),
-        //   slideStyle: {
-        //     backgroundColor: "#efefef",
-        //   },
-        //   link: "https://sole-x.io/sell?search=dharma",
-        //   contentStyle: {
-        //     backgroundImage: `url(${this.$static.getFileURL(
-        //       "img/article/article-market-home-top-rising-sun.jpg"
-        //     )}`,
-        //   },
-        // },        
+        {
+          title: $t("Market.TopFeatured1Title"),
+          desc: $t("Market.TopFeatured1Desc"),
+          slideStyle: {
+            backgroundColor: "#B8D7AD",
+          },
+          link: "https://sole-x.io/sell?search=SohnSeohyun",
+          contentStyle: {
+            backgroundImage: `url(${this.$static.getFileURL(
+              "img/article/Solex_SohnSeohyun_Meditation_Garden_1440_320.jpg"
+            )}`,
+          },
+        },        
         {
           title: $t("Market.TopFeatured1Title"),
           desc: $t("Market.TopFeatured1Desc"),
