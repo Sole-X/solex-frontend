@@ -67,6 +67,7 @@
 
       <marketplace-main-email />
     </section>
+    <marketplace-popup />
   </div>
 </template>
 
@@ -77,6 +78,7 @@ import MarketplaceMainCollection from '@/components/market/MarketplaceMainCollec
 import MarketplaceMainTips from '@/components/market/MarketplaceMainTips';
 import MarketplaceMainBanner from '@/components/market/MarketplaceMainBanner';
 import MarketplaceMainEmail from '@/components/market/MarketplaceMainEmail';
+import MarketplacePopup from '@/components/market/MarketplacePopup';
 
 let $t, component;
 let io;
@@ -213,6 +215,7 @@ export default {
     MarketplaceMainCollection,
     MarketplaceMainBanner,
     MarketplaceMainEmail,
+    MarketplacePopup,
   },
 };
 </script>
